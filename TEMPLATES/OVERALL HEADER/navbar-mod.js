@@ -1,6 +1,6 @@
 (() => {
   const NAVBAR_SELECTOR = ".utpp-headerNavbar";
-  const GENERATED_SELECTOR = ".utpp-navGenerated";
+  const GENERATED_SELECTOR = ".utpp-navigBar";
 
   const labels = [
     {
