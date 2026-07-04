@@ -16,7 +16,6 @@
   padding: 0;
   margin: 0 -3px;
   font-size: 0;
-  position: fixed;
   top: 10px;
   right: calc(13px + var(--sidebar-offset, 0px));
   z-index: 999;
@@ -68,7 +67,7 @@
   --menuSize: 500px;
   width: var(--menuSize);
   position: fixed;
-  top: 0;
+  top: 50px;
   right: 0;
   height: 100%;
   display: flex;
