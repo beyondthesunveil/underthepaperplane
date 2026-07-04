@@ -1,16 +1,16 @@
-.utpp_navig a.mainmenu[href="/calendar"],
-.utpp_navig a.mainmenu[href$="/calendar"],
-.utpp_navig a.mainmenu[href="/groups"],
-.utpp_navig a.mainmenu[href$="/groups"],
-.utpp_navig a.mainmenu[href^="/search"],
-.utpp_navig a.mainmenu[href="/gallery/index.htm"],
-.utpp_navig a.mainmenu[href$="/gallery/index.htm"],
-.utpp_navig a.mainmenu[href="/images"],
-.utpp_navig a.mainmenu[href$="/images"],
-.utpp_navig a.mainmenu[href="/discover"],
-.utpp_navig a.mainmenu[href$="/discover"],
-.utpp_navig a.mainmenu[href="/faq"],
-.utpp_navig a.mainmenu[href$="/faq"] {
+.utpp-navigBar a.mainmenu[href="/calendar"],
+.utpp-navigBar a.mainmenu[href$="/calendar"],
+.utpp-navigBar a.mainmenu[href="/groups"],
+.utpp-navigBar a.mainmenu[href$="/groups"],
+.utpp-navigBar a.mainmenu[href^="/search"],
+.utpp-navigBar a.mainmenu[href="/gallery/index.htm"],
+.utpp-navigBar a.mainmenu[href$="/gallery/index.htm"],
+.utpp-navigBar a.mainmenu[href="/images"],
+.utpp-navigBar a.mainmenu[href$="/images"],
+.utpp-navigBar a.mainmenu[href="/discover"],
+.utpp-navigBar a.mainmenu[href$="/discover"],
+.utpp-navigBar a.mainmenu[href="/faq"],
+.utpp-navigBar a.mainmenu[href$="/faq"] {
   display: none !important;
 }
 
@@ -44,7 +44,7 @@
   padding: 0;
 }
 
-.utpp-navGenerated {
+.utpp-navigBar {
   flex: 1 1 auto;
   min-width: 0;
   display: flex;
@@ -52,7 +52,7 @@
   gap: 18px;
 }
 
-.utpp-navGenerated ul {
+.utpp-navigBar ul {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -113,11 +113,11 @@
   color: var(--th-cl-font);
 }
 
-.utpp-navGenerated a.mainmenu img {
+.utpp-navigBar a.mainmenu img {
   display: none !important;
 }
 
-.utpp-navGenerated a.mainmenu {
+.utpp-navigBar a.mainmenu {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -135,11 +135,11 @@
   transition: color var(--th-trans-fast);
 }
 
-.utpp-navGenerated a.mainmenu:hover {
+.utpp-navigBar a.mainmenu:hover {
   color: var(--th-cl-acc3);
 }
 
-.utpp-navGenerated a.mainmenu::after {
+.utpp-navigBar a.mainmenu::after {
   content: "";
   position: absolute;
   left: 50%;
@@ -152,11 +152,11 @@
   transition: width var(--th-trans-fast);
 }
 
-.utpp-navGenerated a.mainmenu:hover::after {
+.utpp-navigBar a.mainmenu:hover::after {
   width: 100%;
 }
 
-.utpp-navModules {
+.utpp-navigMod {
   flex: 0 0 auto;
   margin-left: auto;
   display: flex;
@@ -165,9 +165,9 @@
   gap: 9px;
 }
 
-.utpp-navModules > a,
-.utpp-navModules > button,
-.utpp-navModules > [data-theme-controls] > button {
+.utpp-navigMod > a,
+.utpp-navigMod > button,
+.utpp-navigMod > [data-theme-controls] > button {
   position: relative;
   width: 38px;
   height: 38px;
@@ -190,21 +190,21 @@
     box-shadow var(--th-trans-fast);
 }
 
-.utpp-navModules > a:hover,
-.utpp-navModules > button:hover,
-.utpp-navModules > [data-theme-controls] > button:hover {
+.utpp-navigMod > a:hover,
+.utpp-navigMod > button:hover,
+.utpp-navigMod > [data-theme-controls] > button:hover {
   transform: translateY(-2px);
   background: var(--th-grad-chip);
   box-shadow: 0 12px 24px var(--th-cl-shadowStrong);
 }
 
-.utpp-navModules #switcheroo {
+.utpp-navigMod #switcheroo {
   display: flex;
   align-items: center;
 }
 
-.utpp-navModules span[id$="-count"],
-.utpp-navModules span[id$="-badge"] {
+.utpp-navigMod span[id$="-count"],
+.utpp-navigMod span[id$="-badge"] {
   position: absolute;
   top: -4px;
   right: -4px;
@@ -222,21 +222,21 @@
     gap: 10px;
   }
 
-  .utpp-navGenerated,
-  .utpp-navGenerated ul,
-  .utpp-navModules {
+  .utpp-navigBar,
+  .utpp-navigBar ul,
+  .utpp-navigMod {
     width: 100%;
   }
 
-  .utpp-navGenerated {
+  .utpp-navigBar {
     flex-wrap: wrap;
   }
 
-  .utpp-navGenerated ul {
+  .utpp-navigBar ul {
     gap: 12px;
   }
 
-  .utpp-navModules {
+  .utpp-navigMod {
     margin-left: 0;
     justify-content: flex-end;
     flex-wrap: wrap;
