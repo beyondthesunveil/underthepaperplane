@@ -5,28 +5,22 @@
 #notiffi_button {
   cursor: pointer;
   background: var(--th-cl-panelAlt);
-  border-radius: var(--th-radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--th-cl-acc3);
   border: 1px solid var(--th-cl-bord);
-  width: 45px;
-  height: 45px;
-  padding: 0;
-  margin: 0 -3px;
-  font-size: 0;
-  top: 10px;
-  right: calc(13px + var(--sidebar-offset, 0px));
+  padding: 5px;
+  border-radius: 100%;
+  font-size: 0px;
   z-index: 999;
-  transition: right 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.2s ease;
+  transition: right 0.35s cubic-bezier(0.22, 1, 0.36, 1), transform 0.2s;
 }
 
 #notiffi_button::before {
   content: "";
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   background-color: var(--th-cl-font);
   mask-image: url("https://unpkg.com/lucide-static/icons/bell.svg");
   mask-size: contain;
