@@ -42,19 +42,17 @@
 }
 
 .utpp-navigBar {
-  flex: 1 1 auto;
-  min-width: 0;
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 4px;
 }
 
-.utpp-navigBar ul {
+/* .utpp-navigBar ul {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-}
+} */
 
 .utpp-navProfile {
   flex: 0 0 auto;
