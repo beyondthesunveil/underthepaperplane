@@ -1,18 +1,10 @@
 .switcheroo {
+  width:100%;
   color: var(--th-cl-font);
-}
-
-.switcheroo[direction="horizontal"] {
- width: 100%;
 }
 
 .switcheroo__squircles {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  list-style: none;
   gap: 20px;
 }
 
