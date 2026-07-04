@@ -26,14 +26,11 @@
   right: 0;
   z-index: 990;
   width: 100%;
-  min-height: 58px;
-  padding: 10px 30px;
+  max-height: 50px;
+  padding: 0 20px;
   display: flex;
-  align-items: center;
-  gap: 18px;
-  background: rgba(255, 250, 242, 0.94);
+  background: var(--th-cl-bord);
   border-bottom: 1px solid var(--th-cl-bord);
-  box-shadow: 0 12px 30px var(--th-cl-shadow);
   backdrop-filter: blur(10px);
 }
 
