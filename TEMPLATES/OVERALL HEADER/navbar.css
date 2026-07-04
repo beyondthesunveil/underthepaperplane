@@ -244,12 +244,12 @@
   }
 }
 
-.utpp-navGenerated a.mainmenu.utpp-activeLink {
+.utpp-navigBar a.mainmenu.utpp-activeLink {
   color: var(--th-cl-acc3);
   background: none !important;
 }
 
-.utpp-navGenerated a.mainmenu.utpp-activeLink::after {
+.utpp-navigBar a.mainmenu.utpp-activeLink::after {
   width: 100%;
   background: var(--th-grad-chip);
 }
