@@ -150,11 +150,43 @@
 
     addProfile(generated);
     renameNavbarLinks(generated);
+    setActiveNavbarLink(generated);
 
     if (window.lucide && typeof window.lucide.createIcons === "function") {
       window.lucide.createIcons();
     }
   };
+
+  const setActiveNavbarLink = (generated) => {
+  const currentPath = window.location.pathname.toLowerCase();
+
+  generated.querySelectorAll("a.mainmenu").forEach((link) => {
+    const href = link.getAttribute("href") || "";
+    let linkPath = href.toLowerCase();
+
+    try {
+      const url = new URL(href, window.location.origin);
+      linkPath = url.pathname.toLowerCase();
+    } catch (e) {}
+
+    const isActive =
+      linkPath === currentPath ||
+      (
+        currentPath.startsWith("/privmsg") &&
+        linkPath.startsWith("/privmsg")
+      ) ||
+      (
+        currentPath.startsWith("/profile") &&
+        linkPath.startsWith("/profile")
+      ) ||
+      (
+        currentPath.startsWith("/memberlist") &&
+        linkPath.startsWith("/memberlist")
+      );
+
+    link.classList.toggle("utpp-activeLink", isActive);
+  });
+};
 
   document.addEventListener("DOMContentLoaded", bootNavbar);
   window.addEventListener("load", bootNavbar);
