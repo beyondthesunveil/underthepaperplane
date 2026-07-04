@@ -76,15 +76,12 @@
 .utpp-headerNavbar.scrolled .utpp_navig {
   left: 50%;
   transform: translateX(-50%);
-
-  width: calc(100vw - 15px);
+  width: calc(100vw - 10px);
   max-width: none;
   margin: 0;
   padding: 10px 40px;
-
-  border-radius: 0 0 var(--th-radius-md) var(--th-radius-md);
+  border-radius: 0;
   background: rgba(255, 250, 242, 0.94);
-  box-shadow: 0 16px 38px var(--th-cl-shadowStrong);
 }
 
 .utpp-navLeft {
