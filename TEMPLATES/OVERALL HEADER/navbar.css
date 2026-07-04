@@ -132,6 +132,7 @@
 
 .utpp-navigBar a.mainmenu:hover {
   color: var(--th-cl-acc3);
+  background: none !important;
 }
 
 .utpp-navigBar a.mainmenu::after {
