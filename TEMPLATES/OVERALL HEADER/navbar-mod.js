@@ -17,7 +17,7 @@
         text === "membres"
     },
     {
-      label: "modifier son ID",
+      label: "modifier son profil",
       match: (href, text) =>
         href.startsWith("/profile") ||
         text === "profil"
@@ -29,7 +29,7 @@
         text === "messagerie"
     },
     {
-      label: "à la revoyure",
+      label: "à la revoyure (se déconnecter)",
       match: (href, text, rawHref) =>
         rawHref.includes("logout=1") ||
         text.includes("déconnexion") ||
