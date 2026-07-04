@@ -23,52 +23,102 @@
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   z-index: 990;
   width: 100%;
-}
-
-.utpp_navig {
-  width: min(980px, calc(100vw - 30px));
   min-height: 58px;
-  margin: 10px auto 0;
-  padding: 12px 18px;
+  padding: 10px 30px;
   display: flex;
   align-items: center;
   gap: 18px;
   background: rgba(255, 250, 242, 0.94);
-  border: 1px solid var(--th-cl-bord);
-  border-radius: var(--th-radius-lg);
+  border-bottom: 1px solid var(--th-cl-bord);
   box-shadow: 0 12px 30px var(--th-cl-shadow);
   backdrop-filter: blur(10px);
+}
+
+.utpp-headerNavbar ul,
+.utpp-headerNavbar li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .utpp-navGenerated {
   flex: 1 1 auto;
   min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
-.utpp-navGenerated,
 .utpp-navGenerated ul {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-  margin: 0;
-  padding: 0;
 }
 
-.utpp-navGenerated li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.utpp-navProfile {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--th-cl-font);
+  text-decoration: none;
+  font-family: var(--fst3);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.utpp-navProfile:hover {
+  color: var(--th-cl-acc3);
+}
+
+.utpp-navProfileAvatar {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--th-grad-chip);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 4px 12px var(--th-cl-shadow);
+}
+
+.utpp-navProfileAvatar img {
+  display: block !important;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.utpp-navProfileFallback {
+  font-size: 0.7rem;
+  color: var(--th-cl-font);
+}
+
+.utpp-navProfileBracket {
+  color: var(--th-cl-sub);
+}
+
+.utpp-navProfileName {
+  color: var(--th-cl-font);
 }
 
 .utpp-navGenerated a.mainmenu img {
   display: none !important;
 }
 
-.utpp-navGenerated a.mainmenu,
-.utpp-navGenerated a {
+.utpp-navGenerated a.mainmenu {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -85,25 +135,11 @@
   transition: color var(--th-trans-fast);
 }
 
-.utpp-navGenerated a.mainmenu:hover,
-.utpp-navGenerated a:hover {
+.utpp-navGenerated a.mainmenu:hover {
   color: var(--th-cl-acc3);
 }
 
-.utpp-navGenerated a.mainmenu::after,
-.utpp-navGenerated a::after {
-  content: "";
-  display: block;
-  position: absolute;
-}
-
-.utpp-navGenerated a.mainmenu,
-.utpp-navGenerated a {
-  position: relative;
-}
-
-.utpp-navGenerated a.mainmenu::before,
-.utpp-navGenerated a::before {
+.utpp-navGenerated a.mainmenu::after {
   content: "";
   position: absolute;
   left: 50%;
@@ -116,8 +152,7 @@
   transition: width var(--th-trans-fast);
 }
 
-.utpp-navGenerated a.mainmenu:hover::before,
-.utpp-navGenerated a:hover::before {
+.utpp-navGenerated a.mainmenu:hover::after {
   width: 100%;
 }
 
@@ -132,7 +167,7 @@
 
 .utpp-navModules > a,
 .utpp-navModules > button,
-.utpp-navModules .color-scheme-toggle {
+.utpp-navModules > [data-theme-controls] > button {
   position: relative;
   width: 38px;
   height: 38px;
@@ -157,10 +192,15 @@
 
 .utpp-navModules > a:hover,
 .utpp-navModules > button:hover,
-.utpp-navModules .color-scheme-toggle:hover {
+.utpp-navModules > [data-theme-controls] > button:hover {
   transform: translateY(-2px);
   background: var(--th-grad-chip);
   box-shadow: 0 12px 24px var(--th-cl-shadowStrong);
+}
+
+.utpp-navModules #switcheroo {
+  display: flex;
+  align-items: center;
 }
 
 .utpp-navModules span[id$="-count"],
@@ -170,16 +210,16 @@
   right: -4px;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 860px) {
   body {
-    padding-top: 105px;
+    padding-top: 118px;
   }
 
-  .utpp_navig {
-    width: calc(100vw - 20px);
-    padding: 10px 12px;
+  .utpp-headerNavbar {
+    padding: 10px 15px;
     align-items: flex-start;
     flex-direction: column;
+    gap: 10px;
   }
 
   .utpp-navGenerated,
@@ -188,8 +228,23 @@
     width: 100%;
   }
 
+  .utpp-navGenerated {
+    flex-wrap: wrap;
+  }
+
+  .utpp-navGenerated ul {
+    gap: 12px;
+  }
+
   .utpp-navModules {
-    justify-content: flex-end;
     margin-left: 0;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .utpp-navProfileName {
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
