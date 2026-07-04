@@ -14,11 +14,11 @@
   position: relative;
   place-items: center;
   background-color: var(--th-cl-bord);
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border-radius: var(--th-radius-md);
   cursor: pointer;
-  outline-offset: 5px;
+  outline-offset: 3px;
   outline: 1px solid var(--th-cl-bordDark);
   transition: border-radius var(--th-trans-fast) !important;
 }
@@ -99,21 +99,27 @@
 
 .switcheroo__popper {
   position: absolute;
-  top: 50%;
-  right: calc(100% + 30px);
-  left: auto;
-  transform: translateY(-50%) scale(0.98);
-  transform-origin: right;
-  border: 1px var(--th-cl-bord) solid;
-  border-radius: var(--th-radius-md);
+  top: calc(100% + 12px);
+  left: 50%;
+  right: auto;
   width: max-content;
-  height: 26px;
-  background-color: var(--th-cl-bg);
+  max-width: 220px;
+  min-height: 20px;
+  height: auto;
   padding: 0.3rem 1rem;
   color: var(--th-cl-font);
+  background-color: var(--th-cl-bg);
+  border: 1px solid var(--th-cl-bord);
+  border-radius: var(--th-radius-md);
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--th-trans-fast), transform var(--th-trans-fast);
+  transform: translateX(-50%) translateY(-4px) scale(0.98);
+  transform-origin: top center;
+  transition:
+    opacity var(--th-trans-fast),
+    transform var(--th-trans-fast);
+  white-space: nowrap;
+  z-index: 999;
 }
 
 .switcheroo__popper::before {
@@ -121,18 +127,19 @@
   position: absolute;
   width: 10px;
   height: 10px;
-  right: -6px;
-  top: 50%;
-  transform: translateY(-50%) rotate(45deg);
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%) rotate(45deg);
   background-color: var(--th-cl-bg);
-  border-right: 1px solid var(--th-cl-bord);
+  border-left: 1px solid var(--th-cl-bord);
   border-top: 1px solid var(--th-cl-bord);
   border-radius: 2px;
 }
 
 .switcheroo__squircle:hover .switcheroo__popper {
   opacity: 1;
-  transform: translateY(-50%) scale(1);
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0) scale(1);
 }
 
 /* ----- LOGO - retirez display:none pour retrouver le logo ----- */
