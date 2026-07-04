@@ -156,66 +156,100 @@
     setTimeout(updateState, 250);
   };
 
-  const buildNavbar = () => {
-    const navbar = document.querySelector(NAVBAR_SELECTOR);
-    if (!navbar) return false;
+const buildNavbar = () => {
+  const navbar = document.querySelector(NAVBAR_SELECTOR);
+  if (!navbar) return false;
 
-    const navig = navbar.querySelector(NAVIG_SELECTOR);
-    if (!navig) return false;
+  const navig = navbar.querySelector(NAVIG_SELECTOR);
+  if (!navig) return false;
 
-    let left = navig.querySelector(".utpp-navLeft");
-    let center = navig.querySelector(".utpp-navCenter");
-    let right = navig.querySelector(".utpp-navRight");
+  let left = navig.querySelector(".utpp-navLeft");
+  let center = navig.querySelector(".utpp-navCenter");
+  let right = navig.querySelector(".utpp-navRight");
 
-    if (!center) {
-      left = document.createElement("div");
-      left.className = "utpp-navLeft";
+  const generatedSource = navig.querySelector(".utpp-navGenerated");
+  const modulesSource = navig.querySelector(".utpp-navModules");
 
-      center = document.createElement("nav");
-      center.className = "utpp-navCenter";
-      center.setAttribute("aria-label", "Navigation principale");
+  if (!center) {
+    left = document.createElement("div");
+    left.className = "utpp-navLeft";
 
-      right = document.createElement("div");
-      right.className = "utpp-navRight";
-      right.setAttribute("aria-label", "Modules rapides");
+    center = document.createElement("nav");
+    center.className = "utpp-navCenter";
+    center.setAttribute("aria-label", "Navigation principale");
 
-      while (navig.firstChild) {
-        center.appendChild(navig.firstChild);
+    right = document.createElement("div");
+    right.className = "utpp-navRight";
+    right.setAttribute("aria-label", "Modules rapides");
+
+    if (generatedSource) {
+      while (generatedSource.firstChild) {
+        center.appendChild(generatedSource.firstChild);
       }
 
-      left.appendChild(center);
-      navig.append(left, right);
-    }
-
-    if (!left) {
-      left = document.createElement("div");
-      left.className = "utpp-navLeft";
-      navig.insertBefore(left, navig.firstChild);
-      left.appendChild(center);
-    }
-
-    if (!right) {
-      right = document.createElement("div");
-      right.className = "utpp-navRight";
-      right.setAttribute("aria-label", "Modules rapides");
-      navig.appendChild(right);
-    }
-
-    const oldProfile = left.querySelector(".utpp-navProfile");
-    const newProfile = createProfile();
-
-    if (oldProfile) {
-      oldProfile.replaceWith(newProfile);
+      generatedSource.remove();
     } else {
-      left.insertBefore(newProfile, center);
+      Array.from(navig.childNodes).forEach((node) => {
+        if (
+          node !== modulesSource &&
+          node !== left &&
+          node !== center &&
+          node !== right
+        ) {
+          center.appendChild(node);
+        }
+      });
     }
 
-    center.querySelectorAll("a.mainmenu").forEach(prepareLink);
+    if (modulesSource) {
+      while (modulesSource.firstChild) {
+        right.appendChild(modulesSource.firstChild);
+      }
 
-    setupStickyState(navbar, navig);
+      modulesSource.remove();
+    }
 
-    return true;
-  };
+    left.appendChild(center);
+    navig.append(left, right);
+  }
+
+  if (!left) {
+    left = document.createElement("div");
+    left.className = "utpp-navLeft";
+    navig.insertBefore(left, navig.firstChild);
+    left.appendChild(center);
+  }
+
+  if (!right) {
+    right = document.createElement("div");
+    right.className = "utpp-navRight";
+    right.setAttribute("aria-label", "Modules rapides");
+    navig.appendChild(right);
+  }
+
+  if (modulesSource) {
+    while (modulesSource.firstChild) {
+      right.appendChild(modulesSource.firstChild);
+    }
+
+    modulesSource.remove();
+  }
+
+  const oldProfile = left.querySelector(".utpp-navProfile");
+  const newProfile = createProfile();
+
+  if (oldProfile) {
+    oldProfile.replaceWith(newProfile);
+  } else {
+    left.insertBefore(newProfile, center);
+  }
+
+  center.querySelectorAll("a.mainmenu").forEach(prepareLink);
+
+  setupStickyState(navbar, navig);
+
+  return true;
+};
 
   let observer;
 
