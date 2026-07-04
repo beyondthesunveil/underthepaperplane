@@ -2,6 +2,10 @@
   color: var(--th-cl-font);
 }
 
+.switcheroo[direction="horizontal"] {
+ width: 100%;
+}
+
 .switcheroo__squircles {
   display: flex;
   flex-direction: column;
