@@ -374,3 +374,107 @@
     text-overflow: ellipsis;
   }
 }
+
+.utpp-navGenerated,
+.utpp-navModules {
+  display: none;
+}
+
+.utpp-moduleBtn {
+  position: relative;
+
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+
+  color: var(--th-cl-font);
+  background: var(--th-cl-cardAlt);
+  box-shadow: 0 8px 18px var(--th-cl-shadow);
+
+  cursor: pointer;
+  text-decoration: none;
+  appearance: none;
+
+  transition:
+    transform var(--th-trans-fast),
+    background var(--th-trans-fast),
+    box-shadow var(--th-trans-fast);
+}
+
+.utpp-moduleBtn:hover {
+  transform: translateY(-2px);
+  background: var(--th-grad-chip);
+  box-shadow: 0 12px 24px var(--th-cl-shadowStrong);
+}
+
+.utpp-moduleIcon {
+  width: 18px;
+  height: 18px;
+  display: block;
+
+  background: var(--th-cl-font);
+
+  mask-image: var(--utpp-module-icon);
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+
+  -webkit-mask-image: var(--utpp-module-icon);
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+
+  transition:
+    transform var(--th-trans-fast),
+    background var(--th-trans-fast);
+}
+
+.utpp-moduleBtn:hover .utpp-moduleIcon {
+  transform: scale(1.12) rotate(8deg);
+}
+
+/* Tooltip des modules */
+.utpp-moduleBtn::after,
+.utpp-navRight [data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%;
+  bottom: -36px;
+  z-index: 30;
+
+  max-width: 190px;
+  padding: 6px 9px;
+
+  color: var(--th-cl-card);
+  background: var(--th-cl-font);
+  border-radius: var(--th-radius-sm);
+  box-shadow: 0 8px 18px var(--th-cl-shadowStrong);
+
+  font-family: var(--fte2);
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 5px);
+
+  transition:
+    opacity var(--th-trans-fast),
+    transform var(--th-trans-fast);
+}
+
+.utpp-moduleBtn:hover::after,
+.utpp-navRight [data-tip]:hover::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
