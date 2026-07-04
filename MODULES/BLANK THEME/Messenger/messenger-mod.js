@@ -23,9 +23,9 @@
       // Permet d'aller chercher les éléments des pages par leur class
       select: {
         // Titre d'un forum et d'un sujet
-        forum_info: ".lithium-vb_titlemape",
+        forum_info: ".page-title",
         // Titre d'un sujet dans la liste des sujets ou d'un forum
-        forumtitle: ".lithium-ib_titlefrm a, a.lithium-ib_latesttopic",
+        forumtitle: "a.forumtitle, a.topictitle",
         // Forum ou sujet dans la liste des sujets
         topic: ".forum, .topicslist_row",
         // Date du dernier message d'un sujet dans la liste des sujets
@@ -33,7 +33,7 @@
         // Avatar du dernier posteur d'un sujet dans la liste des sujets
         lastpost_avatar: ".lastpostavatar img",
         // Type d'un sujet (note, annonce, sondage...)
-        topic_type: ".announcement",
+        topic_type: ".topic-type > strong",
         // Un post
         post: ".post_row",
         // Avatar du post
