@@ -141,6 +141,65 @@
     });
   };
 
+  const isTopicPage = () => {
+  const path = window.location.pathname.toLowerCase();
+
+  return /^\/t\d+(p\d+)?(?:-|$)/.test(path);
+};
+
+const getTopicTitle = () => {
+  const selectors = [
+    "h1.page-title",
+    ".topic-title h1",
+    ".topic-title",
+    "h1"
+  ];
+
+  for (const selector of selectors) {
+    const element = document.querySelector(selector);
+    const text = getCleanLabel(element);
+
+    if (text && text !== "Lien") {
+      return text;
+    }
+  }
+
+  return document.title
+    .replace(/\s[-–—]\s.*$/, "")
+    .replace(/\s+/g, " ")
+    .trim();
+};
+
+const addContextLink = (generated) => {
+  const oldContext = generated.querySelector(".utpp-contextLink");
+
+  if (oldContext) {
+    oldContext.remove();
+  }
+
+  if (!isTopicPage()) return;
+
+  const topicTitle = getTopicTitle();
+
+  if (!topicTitle) return;
+
+  const contextLink = document.createElement("a");
+  contextLink.className = "utpp-contextLink";
+  contextLink.href = window.location.href;
+  contextLink.textContent = topicTitle;
+  contextLink.setAttribute("title", topicTitle);
+  contextLink.setAttribute("aria-current", "page");
+  contextLink.setAttribute("aria-label", `Sujet actuel : ${topicTitle}`);
+
+  const firstMenuLink = generated.querySelector("a.mainmenu");
+
+  if (firstMenuLink) {
+    generated.insertBefore(contextLink, firstMenuLink);
+  } else {
+    generated.appendChild(contextLink);
+  }
+};
+
   const bootNavbar = () => {
     const navbar = document.querySelector(NAVBAR_SELECTOR);
     if (!navbar) return;
@@ -150,6 +209,7 @@
 
     addProfile(generated);
     renameNavbarLinks(generated);
+    addContextLink(generated);
     setActiveNavbarLink(generated);
 
     if (window.lucide && typeof window.lucide.createIcons === "function") {
