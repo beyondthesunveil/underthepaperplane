@@ -288,13 +288,3 @@
   background: var(--th-grad-chip);
   transform: translateX(-50%);
 }
-
-.utpp-navigBar .utpp-contextLink::before {
-  content: "vous êtes ici";
-  margin-right: 8px;
-  color: var(--th-cl-font);
-  opacity: 0.55;
-  font-size: 7px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-}
