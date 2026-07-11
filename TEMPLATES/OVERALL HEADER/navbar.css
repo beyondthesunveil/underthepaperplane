@@ -265,6 +265,8 @@
   padding: 5px 0;
   color: var(--th-cl-acc3);
   background: none !important;
+  border: 1px solid var(--th-cl-acc3);
+  border-radius: 10px;
   text-decoration: none;
   font: 8px var(--fst3);
   font-weight: 700;
