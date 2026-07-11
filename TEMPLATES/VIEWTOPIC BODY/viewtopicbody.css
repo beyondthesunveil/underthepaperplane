@@ -75,7 +75,7 @@ h1.utppVB_titlemap {
 }
 /* bloc qui va gérer l'affichage de la bande gauche avec l'avatar, le rang, le bloc des infos */
 .utppVB_blockperso {
-  width: 250px;
+  width: 270px;
   background-color: var(--th-cl-panelAlt);
   border-radius: 0 0 0 var(--th-radius-xs);
   border-right: 1px solid var(--th-cl-bord);
@@ -183,7 +183,7 @@ h1.utppVB_titlemap {
 }
 /* bloc qui va gérer l'affichage général de la mise en page du texte, la date, les boutons edit */
 .utppVB_blockcontent {
-  width: 765px;
+  width: 856px;
   background-color: var(--th-cl-cardAlt);
   border-radius: 0 0 var(--th-radius-xs) 0;
 }
@@ -234,7 +234,6 @@ h1.utppVB_titlemap {
   color: var(--th-cl-txt);
   background-color: var(--th-cl-card);
   border: 1px solid var(--th-cl-bord);
-  box-shadow: 0 8px 24px var(--th-cl-shadow);
   margin: 20px;
   min-height: 790px;
   border-radius: var(--th-radius-md);
