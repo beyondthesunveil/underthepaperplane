@@ -47,12 +47,17 @@
   gap: 4px;
 }
 
-/* .utpp-navigBar ul {
+.utpp-navigBar ul {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-} */
+}
+
+.utpp-navigBar li {
+  display: flex;
+  align-items: center;
+}
 
 .utpp-navProfile {
   flex: 0 0 auto;
