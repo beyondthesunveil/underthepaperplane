@@ -261,13 +261,86 @@
   let currentArticleId = null;
   let lastFocusedElement = null;
 
-  function waitForBody(callback) {
-    if (!document.body) {
-      setTimeout(() => waitForBody(callback), 100);
-      return;
+  function createToggleButton() {
+    const toggle = document.createElement("button");
+
+    toggle.id = "newspaper-toggle";
+    toggle.type = "button";
+    toggle.title = "Newspaper";
+    toggle.setAttribute("aria-controls", "newspaper-root");
+    toggle.setAttribute("aria-expanded", "false");
+
+    toggle.innerHTML = `
+      <i data-lucide="${NEWSPAPER.icon}"></i>
+      <span id="newspaper-count"></span>
+    `;
+
+    return toggle;
+  }
+
+  function ensureToggleButton() {
+    const navigation = document.querySelector(".utpp-navigMod");
+
+    if (!navigation) {
+      return null;
     }
 
-    callback();
+    let toggle = navigation.querySelector("#newspaper-toggle");
+
+    /*
+     * Un autre script reconstruit .utpp-navigMod et supprime le bouton
+     * pourtant présent dans la source HTML. On le restaure donc ici,
+     * exactement après Notifications.
+     */
+    if (!toggle) {
+      document.querySelectorAll("#newspaper-toggle").forEach(candidate => {
+        candidate.remove();
+      });
+
+      toggle = createToggleButton();
+
+      const notifications = navigation.querySelector("#notiffi_button");
+      const messenger = navigation.querySelector("#FAM-button-open");
+
+      if (notifications) {
+        notifications.insertAdjacentElement("afterend", toggle);
+      } else if (messenger) {
+        navigation.insertBefore(toggle, messenger);
+      } else {
+        navigation.prepend(toggle);
+      }
+
+      refreshLucideIcons();
+    }
+
+    return toggle;
+  }
+
+  function observeNavigation() {
+    let scheduled = false;
+
+    const restoreToggle = () => {
+      if (scheduled) {
+        return;
+      }
+
+      scheduled = true;
+
+      requestAnimationFrame(() => {
+        scheduled = false;
+        ensureToggleButton();
+        updateCount();
+      });
+    };
+
+    const observer = new MutationObserver(restoreToggle);
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    restoreToggle();
   }
 
   function escapeHTML(value) {
@@ -353,20 +426,6 @@
       window.lucide.createIcons();
     }
   }
-
-function ensureToggleButton() {
-  const toggle = document.querySelector("#newspaper-toggle");
-
-  if (!toggle) {
-    console.warn(
-      "[NEWSPAPER] Bouton #newspaper-toggle introuvable. Le module n’est pas initialisé."
-    );
-
-    return null;
-  }
-
-  return toggle;
-}
 
   function createNewspaperRoot() {
     document.querySelector("#newspaper-root")?.remove();
@@ -760,13 +819,13 @@ function ensureToggleButton() {
     const root = document.querySelector("#newspaper-root");
     const toggle = document.querySelector("#newspaper-toggle");
 
-    if (!root || !toggle) {
+    if (!root) {
       return;
     }
 
     lastFocusedElement = document.activeElement;
     root.hidden = false;
-    toggle.setAttribute("aria-expanded", "true");
+    toggle?.setAttribute("aria-expanded", "true");
     document.body.classList.add("newspaper-is-open");
 
     renderEdition();
@@ -784,13 +843,13 @@ function ensureToggleButton() {
     const root = document.querySelector("#newspaper-root");
     const toggle = document.querySelector("#newspaper-toggle");
 
-    if (!root || !toggle) {
+    if (!root) {
       return;
     }
 
     closeArticle();
     root.hidden = true;
-    toggle.setAttribute("aria-expanded", "false");
+    toggle?.setAttribute("aria-expanded", "false");
     document.body.classList.remove("newspaper-is-open");
 
     if (lastFocusedElement instanceof HTMLElement) {
@@ -824,8 +883,16 @@ function ensureToggleButton() {
     renderEdition();
   }
 
-  function bindEvents(toggle, root) {
-    toggle.addEventListener("click", toggleNewspaper);
+  function bindEvents(root) {
+    /*
+     * Gestion déléguée : même si la barre remplace le bouton par un nouveau
+     * nœud, le clic continue de fonctionner.
+     */
+    document.addEventListener("click", event => {
+      if (event.target.closest(".utpp-navigMod #newspaper-toggle")) {
+        toggleNewspaper();
+      }
+    });
 
     root.addEventListener("click", event => {
       if (event.target.closest("[data-newspaper-close]")) {
@@ -893,18 +960,23 @@ function ensureToggleButton() {
       return;
     }
 
-    const toggle = ensureToggleButton();
-
-    if (!toggle) {
+    if (document.querySelector("#newspaper-root")) {
       return;
     }
 
     const root = createNewspaperRoot();
 
-    bindEvents(toggle, root);
+    bindEvents(root);
+    observeNavigation();
     updateCount();
     refreshLucideIcons();
   }
 
-  waitForBody(initNewspaper);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initNewspaper, {
+      once: true
+    });
+  } else {
+    initNewspaper();
+  }
 })();
