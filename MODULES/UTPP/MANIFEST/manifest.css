@@ -1,0 +1,658 @@
+:root {
+  --manifest-bg: #171817;
+  --manifest-panel: #202220;
+  --manifest-panel-soft: #282b28;
+  --manifest-border: rgba(255, 255, 255, 0.09);
+  --manifest-text: #f5f4ed;
+  --manifest-muted: #aaa99f;
+  --manifest-accent: #8fa68b;
+  --manifest-danger: #cf6d69;
+  --manifest-warning: #d5aa62;
+}
+
+body.manifest-is-open {
+  overflow: hidden;
+}
+
+#manifest-toggle {
+  position: relative;
+}
+
+#manifest-count {
+  position: absolute;
+  top: -6px;
+  right: -7px;
+
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+  background: var(--manifest-danger);
+  color: #fff;
+
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+#manifest-count:empty,
+#manifest-count[hidden] {
+  display: none;
+}
+
+.manifest-root[hidden] {
+  display: none;
+}
+
+.manifest-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1000000;
+
+  display: grid;
+  place-items: center;
+
+  padding: 30px;
+}
+
+.manifest-backdrop {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(5, 6, 5, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.manifest-window {
+  position: relative;
+  z-index: 1;
+
+  width: min(1050px, 96vw);
+  height: min(760px, 92vh);
+
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+
+  overflow: hidden;
+
+  border: 1px solid var(--manifest-border);
+  border-radius: 24px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(143, 166, 139, 0.11),
+      transparent 32%
+    ),
+    var(--manifest-bg);
+
+  color: var(--manifest-text);
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.58),
+    inset 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.manifest-header {
+  min-height: 76px;
+  padding: 18px 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid var(--manifest-border);
+}
+
+.manifest-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.manifest-heading > svg {
+  width: 28px;
+  height: 28px;
+  color: var(--manifest-accent);
+}
+
+.manifest-heading div {
+  display: grid;
+  gap: 3px;
+}
+
+.manifest-heading strong {
+  font-size: 18px;
+  letter-spacing: 0.12em;
+}
+
+.manifest-heading span {
+  color: var(--manifest-muted);
+  font-size: 12px;
+}
+
+.manifest-close {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--manifest-border);
+  border-radius: 12px;
+
+  background: transparent;
+  color: inherit;
+
+  cursor: pointer;
+}
+
+.manifest-close:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.manifest-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+
+  border-bottom: 1px solid var(--manifest-border);
+}
+
+.manifest-tab {
+  position: relative;
+
+  min-width: 0;
+  min-height: 74px;
+  padding: 14px 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  border: 0;
+  border-right: 1px solid var(--manifest-border);
+
+  background: transparent;
+  color: var(--manifest-muted);
+
+  font: inherit;
+  cursor: pointer;
+}
+
+.manifest-tab:last-child {
+  border-right: 0;
+}
+
+.manifest-tab svg {
+  width: 18px;
+  height: 18px;
+}
+
+.manifest-tab small {
+  min-width: 18px;
+  height: 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+
+  font-size: 10px;
+}
+
+.manifest-tab small:empty {
+  display: none;
+}
+
+.manifest-tab:hover,
+.manifest-tab.is-active {
+  background: rgba(143, 166, 139, 0.1);
+  color: var(--manifest-text);
+}
+
+.manifest-tab.is-active::after {
+  content: "";
+
+  position: absolute;
+  right: 18px;
+  bottom: 0;
+  left: 18px;
+
+  height: 2px;
+  border-radius: 99px;
+
+  background: var(--manifest-accent);
+}
+
+.manifest-main {
+  min-height: 0;
+  overflow-y: auto;
+
+  padding: 24px;
+}
+
+.manifest-composer {
+  padding: 18px;
+
+  border: 1px solid var(--manifest-border);
+  border-radius: 18px;
+
+  background: var(--manifest-panel);
+}
+
+.manifest-composer-top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+}
+
+.manifest-composer input,
+.manifest-composer textarea,
+.manifest-composer select {
+  box-sizing: border-box;
+  width: 100%;
+
+  border: 1px solid var(--manifest-border);
+  border-radius: 12px;
+
+  background: rgba(0, 0, 0, 0.17);
+  color: var(--manifest-text);
+
+  font: inherit;
+  outline: 0;
+}
+
+.manifest-composer input,
+.manifest-composer select {
+  min-height: 46px;
+  padding: 10px 13px;
+}
+
+.manifest-composer textarea {
+  min-height: 80px;
+  padding: 12px 13px;
+  resize: vertical;
+}
+
+.manifest-composer input:focus,
+.manifest-composer textarea:focus,
+.manifest-composer select:focus {
+  border-color: var(--manifest-accent);
+  box-shadow: 0 0 0 3px rgba(143, 166, 139, 0.12);
+}
+
+#manifest-add {
+  min-height: 46px;
+  padding: 0 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background: var(--manifest-accent);
+  color: #141614;
+
+  font: inherit;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+#manifest-add svg {
+  width: 18px;
+  height: 18px;
+}
+
+.manifest-composer-options {
+  margin-top: 14px;
+
+  display: grid;
+  grid-template-columns: 180px 190px 1fr;
+  gap: 14px;
+}
+
+.manifest-composer-options label {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+}
+
+.manifest-composer-options label > span {
+  color: var(--manifest-muted);
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.manifest-toolbar {
+  margin: 22px 0 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.manifest-summary {
+  display: grid;
+  gap: 3px;
+}
+
+.manifest-summary strong {
+  font-size: 17px;
+}
+
+.manifest-summary span {
+  color: var(--manifest-muted);
+  font-size: 12px;
+}
+
+.manifest-summary i {
+  margin: 0 5px;
+  font-style: normal;
+}
+
+.manifest-filters {
+  padding: 4px;
+
+  display: flex;
+
+  border: 1px solid var(--manifest-border);
+  border-radius: 12px;
+
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.manifest-filters button {
+  padding: 8px 12px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: transparent;
+  color: var(--manifest-muted);
+
+  font: inherit;
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.manifest-filters button:hover,
+.manifest-filters button.is-active {
+  background: var(--manifest-panel-soft);
+  color: var(--manifest-text);
+}
+
+.manifest-list {
+  display: grid;
+  gap: 10px;
+}
+
+.manifest-task {
+  padding: 15px;
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 14px;
+
+  border: 1px solid var(--manifest-border);
+  border-radius: 16px;
+
+  background: var(--manifest-panel);
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.manifest-task:hover {
+  transform: translateY(-1px);
+  border-color: rgba(143, 166, 139, 0.26);
+}
+
+.manifest-task.is-completed {
+  opacity: 0.54;
+}
+
+.manifest-task.is-completed .manifest-task-content strong {
+  text-decoration: line-through;
+}
+
+.manifest-task.is-overdue {
+  border-color: rgba(207, 109, 105, 0.45);
+}
+
+.manifest-task-check {
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+  place-items: center;
+
+  border: 0;
+  background: transparent;
+  color: var(--manifest-accent);
+
+  cursor: pointer;
+}
+
+.manifest-task-check svg {
+  width: 22px;
+  height: 22px;
+}
+
+.manifest-task-content {
+  min-width: 0;
+}
+
+.manifest-task-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.manifest-task-title-row strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.manifest-task-content p {
+  margin: 8px 0 0;
+
+  color: var(--manifest-muted);
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.manifest-priority {
+  flex: none;
+
+  padding: 4px 7px;
+
+  border-radius: 999px;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.manifest-priority-low {
+  background: rgba(140, 158, 181, 0.12);
+  color: #aab7ca;
+}
+
+.manifest-priority-normal {
+  background: rgba(143, 166, 139, 0.13);
+  color: #aac0a7;
+}
+
+.manifest-priority-high {
+  background: rgba(213, 170, 98, 0.14);
+  color: #e0bd7e;
+}
+
+.manifest-priority-urgent {
+  background: rgba(207, 109, 105, 0.15);
+  color: #df8b87;
+}
+
+.manifest-task-meta {
+  margin-top: 10px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  color: var(--manifest-muted);
+  font-size: 11px;
+}
+
+.manifest-task-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.manifest-task-meta svg {
+  width: 13px;
+  height: 13px;
+}
+
+.manifest-task-meta .is-overdue {
+  color: var(--manifest-danger);
+}
+
+.manifest-task-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.manifest-task-actions button {
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+  place-items: center;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: transparent;
+  color: var(--manifest-muted);
+
+  cursor: pointer;
+}
+
+.manifest-task-actions button:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--manifest-text);
+}
+
+.manifest-task-actions button:last-child:hover {
+  color: var(--manifest-danger);
+}
+
+.manifest-task-actions svg {
+  width: 15px;
+  height: 15px;
+}
+
+.manifest-empty {
+  min-height: 220px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--manifest-muted);
+  text-align: center;
+}
+
+.manifest-empty svg {
+  width: 34px;
+  height: 34px;
+  margin-bottom: 14px;
+
+  color: var(--manifest-accent);
+}
+
+.manifest-empty strong {
+  color: var(--manifest-text);
+}
+
+.manifest-empty span {
+  margin-top: 6px;
+  font-size: 12px;
+}
+
+@media (max-width: 780px) {
+  .manifest-root {
+    padding: 10px;
+  }
+
+  .manifest-window {
+    width: 100%;
+    height: 96vh;
+    border-radius: 18px;
+  }
+
+  .manifest-tabs {
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .manifest-tab {
+    min-width: 145px;
+    flex: 0 0 auto;
+  }
+
+  .manifest-main {
+    padding: 16px;
+  }
+
+  .manifest-composer-top,
+  .manifest-composer-options {
+    grid-template-columns: 1fr;
+  }
+
+  #manifest-add {
+    width: 100%;
+  }
+
+  .manifest-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .manifest-filters {
+    align-self: flex-start;
+  }
+
+  .manifest-task {
+    grid-template-columns: auto 1fr;
+  }
+
+  .manifest-task-actions {
+    grid-column: 2;
+    justify-content: flex-end;
+  }
+}
