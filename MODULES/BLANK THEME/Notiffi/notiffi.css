@@ -8,6 +8,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  height:35px;
+  width:35px;
   color: var(--th-cl-acc3);
   border: 1px solid var(--th-cl-bord);
   padding: 5px;
