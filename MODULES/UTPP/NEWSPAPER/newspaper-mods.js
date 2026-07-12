@@ -354,41 +354,19 @@
     }
   }
 
-  function ensureToggleButton() {
-    let toggle = document.querySelector("#newspaper-toggle");
+function ensureToggleButton() {
+  const toggle = document.querySelector("#newspaper-toggle");
 
-    if (toggle) {
-      return toggle;
-    }
+  if (!toggle) {
+    console.warn(
+      "[NEWSPAPER] Bouton #newspaper-toggle introuvable. Le module n’est pas initialisé."
+    );
 
-    toggle = document.createElement("button");
-    toggle.id = "newspaper-toggle";
-    toggle.type = "button";
-    toggle.title = "Newspaper";
-    toggle.setAttribute("aria-controls", "newspaper-root");
-    toggle.setAttribute("aria-expanded", "false");
-
-    toggle.innerHTML = `
-      <i data-lucide="${NEWSPAPER.icon}"></i>
-      <span id="newspaper-count"></span>
-    `;
-
-    const preferredAnchor =
-      document.querySelector("#manifest-toggle") ||
-      document.querySelector("#ticker-toggle") ||
-      document.querySelector("#logbook-toggle");
-
-    if (preferredAnchor) {
-      preferredAnchor.insertAdjacentElement("afterend", toggle);
-    } else {
-      console.warn(
-        "[NEWSPAPER] Aucun bouton d’ancrage trouvé. Ajoute #newspaper-toggle dans la navigation."
-      );
-      return null;
-    }
-
-    return toggle;
+    return null;
   }
+
+  return toggle;
+}
 
   function createNewspaperRoot() {
     document.querySelector("#newspaper-root")?.remove();
