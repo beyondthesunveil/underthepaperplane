@@ -131,37 +131,58 @@
     }
   }
 
-  function getCurrentUserId() {
-    const possibleIds = [
-      window._userdata?.user_id,
-      window._userdata?.userid,
-      window._userdata?.id
-    ];
+  function getAuthorizedUserId() {
+    const data = window._userdata;
 
-    for (const value of possibleIds) {
-      const parsed = Number(value);
-
-      if (Number.isInteger(parsed) && parsed > 0) {
-        return parsed;
-      }
+    if (!data || Number(data.session_logged_in) !== 1) {
+      return null;
     }
 
-    const profileLinks = [
-      document.querySelector('#page-header a[href^="/u"]'),
-      document.querySelector('.navbar a[href^="/u"]'),
-      document.querySelector('a[href^="/u"][title*="Profil"]'),
-      document.querySelector('a[href^="/u"]')
-    ];
+    const userId = Number(data.user_id);
 
-    for (const link of profileLinks) {
-      const match = link?.getAttribute("href")?.match(/^\/u(\d+)/);
-
-      if (match) {
-        return Number(match[1]);
-      }
+    if (!Number.isInteger(userId) || userId <= 0) {
+      return null;
     }
 
-    return null;
+    return MANIFEST.allowedUsers.includes(userId)
+      ? userId
+      : null;
+  }
+
+  function isAuthorizedSession() {
+    const data = window._userdata;
+
+    return Boolean(
+      currentUserId &&
+      data &&
+      Number(data.session_logged_in) === 1 &&
+      Number(data.user_id) === currentUserId &&
+      MANIFEST.allowedUsers.includes(currentUserId)
+    );
+  }
+
+  function lockManifestAccess() {
+    const toggle = document.querySelector("#manifest-toggle");
+
+    document.querySelector("#manifest-root")?.remove();
+    document.body?.classList.remove("manifest-is-open");
+
+    if (!toggle) {
+      return;
+    }
+
+    toggle.hidden = true;
+    toggle.disabled = true;
+    toggle.setAttribute("aria-hidden", "true");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.removeAttribute("data-manifest-authorized");
+  }
+
+  function unlockManifestAccess(toggle) {
+    toggle.hidden = false;
+    toggle.disabled = false;
+    toggle.removeAttribute("aria-hidden");
+    toggle.dataset.manifestAuthorized = "true";
   }
 
   function getStorageKey() {
@@ -273,35 +294,7 @@
   }
 
   function ensureToggleButton() {
-    let toggle = document.querySelector("#manifest-toggle");
-
-    if (toggle) {
-      return toggle;
-    }
-
-    const logbookToggle = document.querySelector("#logbook-toggle");
-
-    if (!logbookToggle) {
-      console.warn(
-        "[MANIFEST] Bouton #manifest-toggle introuvable et aucun #logbook-toggle disponible."
-      );
-      return null;
-    }
-
-    toggle = document.createElement("button");
-    toggle.id = "manifest-toggle";
-    toggle.type = "button";
-    toggle.title = "Manifest";
-    toggle.setAttribute("aria-controls", "manifest-root");
-    toggle.setAttribute("aria-expanded", "false");
-
-    toggle.innerHTML = `
-      <i data-lucide="clipboard-check"></i>
-      <span id="manifest-count"></span>
-    `;
-
-    logbookToggle.insertAdjacentElement("afterend", toggle);
-    return toggle;
+    return document.querySelector("#manifest-toggle");
   }
 
   function createDayPicker(prefix) {
@@ -1428,7 +1421,13 @@
     const root = document.querySelector("#manifest-root");
     const toggle = document.querySelector("#manifest-toggle");
 
-    if (!root || !toggle) {
+    if (
+      !root ||
+      !toggle ||
+      !isAuthorizedSession() ||
+      toggle.dataset.manifestAuthorized !== "true"
+    ) {
+      lockManifestAccess();
       return;
     }
 
@@ -1616,33 +1615,41 @@
   }
 
   function initManifest() {
-    currentUserId = getCurrentUserId();
+    lockManifestAccess();
+
+    currentUserId = getAuthorizedUserId();
 
     if (!currentUserId) {
-      console.warn("[MANIFEST] Impossible d’identifier l’utilisateur connecté.");
       return;
     }
-
-    if (!MANIFEST.allowedUsers.includes(currentUserId)) {
-      document.querySelector("#manifest-toggle")?.remove();
-      return;
-    }
-
-    state = loadState();
-    saveState(); // Enregistre immédiatement la migration au format V3.
 
     const toggle = ensureToggleButton();
 
     if (!toggle) {
+      console.warn(
+        "[MANIFEST] Bouton #manifest-toggle introuvable dans le template."
+      );
       return;
     }
 
+    unlockManifestAccess(toggle);
+
+    state = loadState();
+    saveState();
+
     const root = createManifestRoot();
+
     bindEvents(toggle, root);
     clearComposer();
     render();
     refreshLucideIcons();
   }
 
-  waitForBody(initManifest);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initManifest, {
+      once: true
+    });
+  } else {
+    initManifest();
+  }
 })();
