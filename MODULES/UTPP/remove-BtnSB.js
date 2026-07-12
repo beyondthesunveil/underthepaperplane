@@ -1,4 +1,4 @@
-$(function () {
+/* $(function () {
 
   if (typeof _userdata !== 'undefined' && _userdata.session_logged_in !== 1) {
     $('#notiffi_button').hide();
@@ -11,4 +11,26 @@ $(function () {
     $('#KRSN-button').hide();
   }
 
+}); */
+
+$(function () {
+  const isLoggedIn =
+    Number(window._userdata?.session_logged_in) === 1;
+
+  if (isLoggedIn) {
+    return;
+  }
+
+  const guestHiddenModules = [
+    "#notiffi_button",
+    "#fa-pins-button",
+    "#FAM-button-open",
+    "#logbook-toggle",
+    "#newspaper-toggle",
+    "#frqcy-toggle",
+    "#rpg-panel-button",
+    "#KRSN-button"
+  ];
+
+  $(guestHiddenModules.join(",")).remove();
 });
