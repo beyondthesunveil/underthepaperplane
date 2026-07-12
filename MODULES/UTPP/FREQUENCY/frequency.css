@@ -59,8 +59,8 @@
 
 #frqcy-toggle {
   position: relative;
-  width: 45px;
-  height: 45px;
+  width: 35px;
+  height: 35px;
   margin: 0 auto;
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-md);
