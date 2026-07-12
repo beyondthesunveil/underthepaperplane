@@ -29,7 +29,7 @@ $(function () {
     "#newspaper-toggle",
     "#frqcy-toggle",
     "#rpg-panel-button",
-    "#manifest-toggle",
+    /*"#manifest-toggle",*/
     "#KRSN-button"
   ];
 
