@@ -262,7 +262,7 @@
   justify-content: center;
   max-width: 220px;
   min-height: 32px;
-  padding: 5px 0;
+  padding: 5px 10px;
   color: var(--th-cl-acc3);
   background: none !important;
   border: 1px solid var(--th-cl-acc3);
