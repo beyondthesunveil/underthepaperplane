@@ -5,6 +5,7 @@ $(function () {
     $('#fa-pins-button').hide();
     $('#FAM-button-open').hide();
     $('#logbook-toggle').hide();
+    $('#newspaper-toggle').hide();
     $('#frqcy-toggle').hide();
     $('#rpg-panel-button').hide();
     $('#KRSN-button').hide();
