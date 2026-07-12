@@ -66,9 +66,8 @@ h1.utppVB_titlemap {
   display: flex;
   flex-wrap: wrap;
   border: 1px solid var(--th-cl-bord);
-  border-radius: var(--th-radius-lg);
+  border-radius: 10px;
   background: var(--th-cl-panel);
-  box-shadow: 0 12px 32px var(--th-cl-shadow);
   width: 100%;
   justify-content: space-between;
   box-sizing: border-box;
@@ -82,9 +81,7 @@ h1.utppVB_titlemap {
 }
 .utppVB_posttracker {
   position: sticky;
-  top: 45px;
-  align-self: flex-start;
-  margin-bottom:15px;
+  top: 65px;
 }
 .utppVB_postname {
   width: 235px;
@@ -111,10 +108,11 @@ h1.utppVB_titlemap {
   width:220px;
 }
 .utppVB_posteravatar {
-  margin: 15px;
-  border: 5px solid var(--th-cl-card);
-  width: 220px;
-  height: 340px;
+  margin: 15px auto;
+  border: 5px solid var(--manifest-panel-soft);
+  width: 230px;
+  border-radius: 2px;
+  height: 360px;
   outline: 1px solid var(--th-cl-bordDark);
   overflow: hidden;
   outline-offset: 5px;
@@ -183,7 +181,7 @@ h1.utppVB_titlemap {
 }
 /* bloc qui va gérer l'affichage général de la mise en page du texte, la date, les boutons edit */
 .utppVB_blockcontent {
-  width: 856px;
+  width: 888px;
   background-color: var(--th-cl-cardAlt);
   border-radius: 0 0 var(--th-radius-xs) 0;
 }
