@@ -656,3 +656,654 @@ body.manifest-is-open {
     justify-content: flex-end;
   }
 }
+/* =========================================================
+   MANIFEST V1.3
+   Modale d’édition · check hebdomadaire · glisser-déposer
+   ========================================================= */
+
+.manifest-week[hidden],
+.manifest-composer-recurrence[hidden],
+.manifest-editor[hidden],
+.manifest-confirm[hidden],
+.manifest-editor-recurrence[hidden] {
+  display: none;
+}
+
+.manifest-week {
+  margin-bottom: 18px;
+  padding: 18px;
+
+  border: 1px solid var(--manifest-border);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(135deg, rgba(143, 166, 139, 0.11), transparent 58%),
+    var(--manifest-panel);
+}
+
+.manifest-week-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.manifest-week-head > div:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.manifest-week-kicker {
+  color: var(--manifest-accent);
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.manifest-week-range {
+  font-size: 18px;
+  text-transform: capitalize;
+}
+
+.manifest-week-navigation {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.manifest-week-navigation button {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 11px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--manifest-border);
+  border-radius: 10px;
+
+  background: rgba(0, 0, 0, 0.13);
+  color: var(--manifest-muted);
+
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.manifest-week-navigation button:hover {
+  background: var(--manifest-panel-soft);
+  color: var(--manifest-text);
+}
+
+.manifest-week-navigation svg {
+  width: 16px;
+  height: 16px;
+}
+
+.manifest-week-progress {
+  margin-top: 16px;
+}
+
+.manifest-week-progress-copy {
+  margin-bottom: 9px;
+
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.manifest-week-progress-copy strong {
+  font-size: 12px;
+}
+
+.manifest-week-progress-copy span {
+  color: var(--manifest-muted);
+  font-size: 11px;
+}
+
+.manifest-progress-track {
+  height: 6px;
+  overflow: hidden;
+
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.manifest-progress-track span {
+  width: 0;
+  height: 100%;
+
+  display: block;
+
+  border-radius: inherit;
+  background: var(--manifest-accent);
+
+  transition: width 0.25s ease;
+}
+
+.manifest-day-tabs {
+  margin-top: 16px;
+
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.manifest-day-tab {
+  min-width: 0;
+  min-height: 68px;
+  padding: 9px 5px;
+
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 2px;
+
+  border: 1px solid transparent;
+  border-radius: 12px;
+
+  background: rgba(0, 0, 0, 0.13);
+  color: var(--manifest-muted);
+
+  font: inherit;
+  cursor: pointer;
+}
+
+.manifest-day-tab:hover {
+  border-color: var(--manifest-border);
+  color: var(--manifest-text);
+}
+
+.manifest-day-tab.is-active {
+  border-color: rgba(143, 166, 139, 0.38);
+  background: rgba(143, 166, 139, 0.15);
+  color: var(--manifest-text);
+}
+
+.manifest-day-tab.is-today:not(.is-active) {
+  box-shadow: inset 0 0 0 1px rgba(143, 166, 139, 0.22);
+}
+
+.manifest-day-tab span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.manifest-day-tab strong {
+  font-size: 16px;
+}
+
+.manifest-day-tab small {
+  color: var(--manifest-muted);
+  font-size: 9px;
+}
+
+.manifest-composer-recurrence {
+  margin-top: 14px;
+  padding-top: 14px;
+
+  border-top: 1px solid var(--manifest-border);
+}
+
+.manifest-recurrence-fields {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  align-items: end;
+  gap: 14px;
+}
+
+.manifest-recurrence-fields > label {
+  display: grid;
+  gap: 7px;
+}
+
+.manifest-recurrence-fields > label > span,
+.manifest-day-picker legend,
+.manifest-editor-body label > span {
+  color: var(--manifest-muted);
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.manifest-day-picker {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+
+  transition: opacity 0.2s ease;
+}
+
+.manifest-day-picker legend {
+  margin-bottom: 7px;
+}
+
+.manifest-day-picker > div {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.manifest-day-picker label {
+  position: relative;
+  min-width: 0;
+}
+
+.manifest-day-picker input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.manifest-day-picker span {
+  min-height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--manifest-border);
+  border-radius: 10px;
+
+  background: rgba(0, 0, 0, 0.13);
+  color: var(--manifest-muted);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.manifest-day-picker input:checked + span {
+  border-color: rgba(143, 166, 139, 0.45);
+  background: rgba(143, 166, 139, 0.16);
+  color: var(--manifest-text);
+}
+
+.manifest-day-picker input:focus-visible + span {
+  outline: 2px solid var(--manifest-accent);
+  outline-offset: 2px;
+}
+
+.manifest-day-picker.is-disabled {
+  opacity: 0.34;
+}
+
+.manifest-day-picker.is-disabled span {
+  cursor: default;
+}
+
+/* La poignée devient une vraie colonne dans la carte. */
+.manifest-task {
+  grid-template-columns: auto auto 1fr auto;
+}
+
+.manifest-drag-handle {
+  width: 24px;
+  min-height: 32px;
+  padding: 0;
+
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+
+  border: 0;
+  background: transparent;
+  color: rgba(170, 169, 159, 0.55);
+
+  cursor: grab;
+  touch-action: none;
+}
+
+.manifest-drag-handle:active {
+  cursor: grabbing;
+}
+
+.manifest-drag-handle:hover,
+.manifest-drag-handle:focus-visible {
+  color: var(--manifest-accent);
+}
+
+.manifest-drag-handle svg {
+  width: 17px;
+  height: 17px;
+}
+
+.manifest-task.is-dragging {
+  opacity: 0.35;
+  transform: scale(0.99);
+}
+
+.manifest-task.is-drag-before {
+  box-shadow: 0 -3px 0 var(--manifest-accent);
+}
+
+.manifest-task.is-drag-after {
+  box-shadow: 0 3px 0 var(--manifest-accent);
+}
+
+.manifest-task[draggable="true"] {
+  user-select: none;
+}
+
+/* ---------- Modale d’édition ---------- */
+
+.manifest-editor,
+.manifest-confirm {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+
+  display: grid;
+  place-items: center;
+
+  padding: 20px;
+}
+
+.manifest-editor-backdrop {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(4, 5, 4, 0.79);
+  backdrop-filter: blur(7px);
+}
+
+.manifest-editor-dialog,
+.manifest-confirm-dialog {
+  position: relative;
+  z-index: 1;
+
+  width: min(600px, 94vw);
+  max-height: min(760px, 90vh);
+  overflow: auto;
+
+  border: 1px solid var(--manifest-border);
+  border-radius: 20px;
+
+  background:
+    radial-gradient(circle at top right, rgba(143, 166, 139, 0.12), transparent 34%),
+    var(--manifest-bg);
+  color: var(--manifest-text);
+
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.62);
+}
+
+.manifest-editor-dialog > header {
+  min-height: 70px;
+  padding: 16px 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  border-bottom: 1px solid var(--manifest-border);
+}
+
+.manifest-editor-dialog > header > div {
+  display: grid;
+  gap: 3px;
+}
+
+.manifest-editor-dialog > header span {
+  color: var(--manifest-accent);
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.manifest-editor-dialog > header strong {
+  font-size: 17px;
+}
+
+.manifest-editor-dialog > header button {
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--manifest-border);
+  border-radius: 10px;
+
+  background: transparent;
+  color: var(--manifest-muted);
+
+  cursor: pointer;
+}
+
+.manifest-editor-dialog > header button:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--manifest-text);
+}
+
+.manifest-editor-body {
+  padding: 20px;
+
+  display: grid;
+  gap: 16px;
+}
+
+.manifest-editor-body > label,
+.manifest-editor-grid > label {
+  display: grid;
+  gap: 7px;
+}
+
+.manifest-editor-body input,
+.manifest-editor-body textarea,
+.manifest-editor-body select {
+  box-sizing: border-box;
+  width: 100%;
+
+  border: 1px solid var(--manifest-border);
+  border-radius: 12px;
+
+  background: rgba(0, 0, 0, 0.17);
+  color: var(--manifest-text);
+
+  font: inherit;
+  outline: 0;
+}
+
+.manifest-editor-body input,
+.manifest-editor-body select {
+  min-height: 46px;
+  padding: 10px 13px;
+}
+
+.manifest-editor-body textarea {
+  min-height: 120px;
+  padding: 12px 13px;
+  resize: vertical;
+}
+
+.manifest-editor-body input:focus,
+.manifest-editor-body textarea:focus,
+.manifest-editor-body select:focus {
+  border-color: var(--manifest-accent);
+  box-shadow: 0 0 0 3px rgba(143, 166, 139, 0.12);
+}
+
+.manifest-editor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.manifest-editor-recurrence {
+  padding-top: 16px;
+  border-top: 1px solid var(--manifest-border);
+}
+
+.manifest-editor-dialog > footer {
+  padding: 15px 20px;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  border-top: 1px solid var(--manifest-border);
+}
+
+.manifest-button-primary,
+.manifest-button-secondary,
+.manifest-button-danger {
+  min-height: 42px;
+  padding: 0 15px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  border-radius: 11px;
+
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.manifest-button-primary {
+  border: 0;
+  background: var(--manifest-accent);
+  color: #141614;
+}
+
+.manifest-button-secondary {
+  border: 1px solid var(--manifest-border);
+  background: transparent;
+  color: var(--manifest-muted);
+}
+
+.manifest-button-danger {
+  border: 0;
+  background: var(--manifest-danger);
+  color: #fff;
+}
+
+.manifest-button-secondary:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--manifest-text);
+}
+
+.manifest-button-primary svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* ---------- Confirmation interne de suppression ---------- */
+
+.manifest-confirm-dialog {
+  width: min(420px, 92vw);
+  padding: 27px;
+
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+
+  text-align: center;
+}
+
+.manifest-confirm-dialog > svg {
+  width: 34px;
+  height: 34px;
+  margin-bottom: 3px;
+  color: var(--manifest-danger);
+}
+
+.manifest-confirm-dialog > strong {
+  font-size: 18px;
+}
+
+.manifest-confirm-dialog > p {
+  margin: 0;
+  color: var(--manifest-muted);
+  line-height: 1.55;
+}
+
+.manifest-confirm-dialog > div {
+  margin-top: 10px;
+  display: flex;
+  gap: 9px;
+}
+
+@media (max-width: 780px) {
+  .manifest-week-head,
+  .manifest-week-progress-copy {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .manifest-week-navigation {
+    align-self: flex-start;
+  }
+
+  .manifest-day-tabs {
+    overflow-x: auto;
+    grid-template-columns: repeat(7, minmax(62px, 1fr));
+    padding-bottom: 3px;
+  }
+
+  .manifest-recurrence-fields,
+  .manifest-editor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .manifest-task {
+    grid-template-columns: auto auto 1fr;
+  }
+
+  .manifest-task-actions {
+    grid-column: 3;
+  }
+
+  .manifest-editor,
+  .manifest-confirm {
+    padding: 10px;
+  }
+
+  .manifest-editor-dialog {
+    width: 100%;
+    max-height: 94vh;
+  }
+}
+
+@media (max-width: 520px) {
+  .manifest-week,
+  .manifest-composer {
+    padding: 14px;
+  }
+
+  .manifest-week-navigation button[data-week-today] {
+    padding: 0 9px;
+  }
+
+  .manifest-day-picker > div {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .manifest-editor-body {
+    padding: 16px;
+  }
+
+  .manifest-editor-dialog > footer {
+    padding: 13px 16px;
+  }
+}
