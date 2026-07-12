@@ -4,7 +4,7 @@ jQuery(function ($) {
 
         var $post = $(this);
 
-        $post.find('.lithium-vb_charafield').each(function () {
+        $post.find('.utppVB_charafield').each(function () {
 
             var $field = $(this);
 
