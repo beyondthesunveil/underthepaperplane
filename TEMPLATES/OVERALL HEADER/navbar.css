@@ -22,13 +22,16 @@
 .utpp-headerNavbar {
   position: fixed;
   top: 0;
-  left: 0;
   right: 0;
+  left: 0;
   z-index: 990;
   width: 100%;
-  max-height: 50px;
+  height: 50px;
   padding: 0 20px;
   display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: visible;
   background: var(--th-cl-bord);
   border-bottom: 1px solid var(--th-cl-bord);
   backdrop-filter: blur(10px);
@@ -36,31 +39,72 @@
 
 .utpp-headerNavbar ul,
 .utpp-headerNavbar li {
-  list-style: none;
   margin: 0;
   padding: 0;
+  list-style: none;
+}
+
+.utpp-headerNavbar > #manifest-toggle {
+  position: relative !important;
+  width: 35px;
+  height: 35px;
+  min-width: 35px;
+  flex: 0 0 35px;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 10px !important;
+  color: var(--th-cl-font) !important;
+  background: var(--th-cl-cardAlt) !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  appearance: none;
+  transition:
+    transform var(--th-trans-fast),
+    background var(--th-trans-fast),
+    box-shadow var(--th-trans-fast);
+}
+
+.utpp-headerNavbar > #manifest-toggle:hover {
+  transform: translateY(-2px);
+  background: var(--th-grad-chip) !important;
 }
 
 .utpp-navigBar {
+  min-width: 0;
+  flex: 1 1 auto;
   display: flex;
   align-items: center;
   gap: 4px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.utpp-navigBar::-webkit-scrollbar {
+  display: none;
 }
 
 .utpp-navigBar ul {
+  width: max-content;
+  min-width: max-content;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 16px;
 }
 
 .utpp-navigBar li {
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
 }
 
 .utpp-navProfile {
   flex: 0 0 auto;
+
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -69,8 +113,8 @@
   font-family: var(--fst3);
   font-size: 0.76rem;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: 0.06em;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
@@ -85,10 +129,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
   overflow: hidden;
-  background: var(--th-grad-chip);
   border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 50%;
+  background: var(--th-grad-chip);
 }
 
 .utpp-navProfileAvatar img {
@@ -100,8 +144,8 @@
 }
 
 .utpp-navProfileFallback {
-  font-size: 0.7rem;
   color: var(--th-cl-font);
+  font-size: 0.7rem;
 }
 
 .utpp-navProfileBracket {
@@ -116,27 +160,28 @@
   display: none !important;
 }
 
-.utpp-navigBar a.mainmenu {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  max-height: 32px;
-  background-color: var(--th-cl-acc3);
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--th-cl-bg);
-  text-decoration: none;
-  font: 8px var(--fst3);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  transition: color var(--th-trans-fast);
-}
-
 .utpp-navigBar a.mainmenu,
 .utpp-navigBar .utpp-contextLink {
   position: relative;
+}
+
+.utpp-navigBar a.mainmenu {
+  max-height: 32px;
+  padding: 5px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background-color: var(--th-cl-acc3);
+  color: var(--th-cl-bg);
+  text-decoration: none;
+  font: 700 8px/1 var(--fst3);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition:
+    color var(--th-trans-fast),
+    background var(--th-trans-fast);
 }
 
 .utpp-navigBar a.mainmenu:hover,
@@ -149,8 +194,8 @@
 .utpp-navigBar .utpp-contextLink::after {
   content: "";
   position: absolute;
-  left: 50%;
   bottom: -5px;
+  left: 50%;
   width: 0;
   height: 2px;
   border-radius: 999px;
@@ -164,22 +209,57 @@
   width: 100%;
 }
 
+.utpp-navigBar a.mainmenu.utpp-activeLink {
+  color: var(--th-cl-acc3);
+  background: none !important;
+}
+
+.utpp-navigBar a.mainmenu.utpp-activeLink::after {
+  width: 100%;
+  background: var(--th-grad-chip);
+}
+
+.utpp-navigBar .utpp-contextLink {
+  max-width: 220px;
+  max-height: 32px;
+  margin-right: 8px;
+  padding: 4px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--th-cl-acc3);
+  border-radius: 5px;
+  background: none !important;
+  color: var(--th-cl-acc3);
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 700 8px/1 var(--fst3);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
 .utpp-navigMod {
+  min-width: 0;
   flex: 0 0 auto;
   margin-left: auto;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  flex-wrap: nowrap;
   gap: 9px;
 }
 
 .utpp-navigMod > a,
 .utpp-navigMod > button,
+.utpp-navigMod > #notiffi_button,
 .utpp-navigMod > [data-theme-controls] > button {
   position: relative !important;
   width: 35px;
   height: 35px;
   min-width: 35px;
+  flex: 0 0 35px;
   display: inline-flex !important;
   align-items: center;
   justify-content: center;
@@ -192,107 +272,159 @@
   cursor: pointer;
   text-decoration: none;
   appearance: none;
-  transition: transform var(--th-trans-fast), background var(--th-trans-fast), box-shadow var(--th-trans-fast);
+  transition:
+    transform var(--th-trans-fast),
+    background var(--th-trans-fast),
+    box-shadow var(--th-trans-fast);
 }
 
 .utpp-navigMod > a:hover,
 .utpp-navigMod > button:hover,
+.utpp-navigMod > #notiffi_button:hover,
 .utpp-navigMod > [data-theme-controls] > button:hover {
   transform: translateY(-2px);
-  background: var(--th-grad-chip);
+  background: var(--th-grad-chip) !important;
 }
 
-.utpp-navigMod #switcheroo {
+.utpp-headerNavbar > #manifest-toggle > svg,
+.utpp-navigMod > button > svg,
+.utpp-navigMod > a > svg,
+.utpp-navigMod > a > i,
+.utpp-navigMod > [data-theme-controls] > button svg,
+.utpp-navigMod > [data-theme-controls] > button i {
+  display: block;
+  width: 19px;
+  height: 19px;
+  flex: 0 0 auto;
+}
+
+.utpp-navigMod > #notiffi_button {
+  font-size: 0;
+}
+
+.utpp-navigMod > #notiffi_button .ntf_button-text {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+.utpp-navigMod > [data-theme-controls] {
+  min-width: 35px;
+  flex: 0 0 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.utpp-navigMod > [data-theme-controls] > button {
+  margin: 0 !important;
+}
+
+.utpp-headerNavbar span[id$="-count"],
+.utpp-headerNavbar span[id$="-badge"],
+.utpp-navigMod .unread_count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  z-index: 2;
+}
+
+.utpp-navigMod > #switcheroo {
+  min-width: max-content;
+  flex: 0 0 auto;
+
   display: flex;
   align-items: center;
 }
 
-.utpp-navigMod span[id$="-count"],
-.utpp-navigMod span[id$="-badge"] {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-}
-
 @media (max-width: 860px) {
   body {
-    padding-top: 118px;
+    padding-top: 58px;
   }
 
   .utpp-headerNavbar {
-    padding: 10px 15px;
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 10px;
+    height: 58px;
+    padding: 7px 10px;
+    align-items: center;
+    flex-direction: row;
+    gap: 8px;
   }
 
-  .utpp-navigBar,
-  .utpp-navigBar ul,
-  .utpp-navigMod {
-    width: 100%;
+  .utpp-headerNavbar > #manifest-toggle {
+    flex: 0 0 35px;
   }
 
   .utpp-navigBar {
-    flex-wrap: wrap;
+    min-width: 0;
+    flex: 1 1 0;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 
   .utpp-navigBar ul {
+    width: max-content;
+    min-width: max-content;
+    flex-wrap: nowrap;
     gap: 12px;
   }
 
   .utpp-navigMod {
-    margin-left: 0;
-    justify-content: flex-end;
-    flex-wrap: wrap;
+    width: auto;
+    min-width: 0;
+    max-width: 65vw;
+    flex: 0 1 auto;
+    margin-left: auto;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    overscroll-behavior-inline: contain;
+  }
+
+  .utpp-navigMod::-webkit-scrollbar {
+    display: none;
+  }
+
+  .utpp-navigMod > a,
+  .utpp-navigMod > button,
+  .utpp-navigMod > #notiffi_button,
+  .utpp-navigMod > [data-theme-controls],
+  .utpp-navigMod > #switcheroo {
+    flex-shrink: 0;
   }
 
   .utpp-navProfileName {
     max-width: 130px;
+
     overflow: hidden;
     text-overflow: ellipsis;
   }
 }
 
-.utpp-navigBar a.mainmenu.utpp-activeLink {
-  color: var(--th-cl-acc3);
-  background: none !important;
-}
+@media (max-width: 560px) {
+  .utpp-headerNavbar {
+    padding-inline: 7px;
+    gap: 6px;
+  }
 
-.utpp-navigBar a.mainmenu.utpp-activeLink::after {
-  width: 100%;
-  background: var(--th-grad-chip);
-}
+  .utpp-navigBar {
+    flex: 0 1 34%;
+  }
 
-.utpp-navigBar .utpp-contextLink {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 220px;
-  margin-right: 8px;
-  max-height:32px;
-  padding: 4px 10px;
-  color: var(--th-cl-acc3);
-  background: none !important;
-  border: 1px solid var(--th-cl-acc3);
-  border-radius: 5px;
-  text-decoration: none;
-  font: 8px var(--fst3);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+  .utpp-navigMod {
+    max-width: 58vw;
+    gap: 7px;
+  }
 
-.utpp-navigBar .utpp-contextLink::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -5px;
-  height: 2px;
-  border-radius: 999px;
-  background: var(--th-grad-chip);
-  transform: translateX(-50%);
+  .utpp-navProfileName {
+    max-width: 90px;
+  }
 }
