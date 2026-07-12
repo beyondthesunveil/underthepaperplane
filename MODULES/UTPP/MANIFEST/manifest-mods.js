@@ -2,7 +2,7 @@
   "use strict";
 
   const MANIFEST = {
-    allowedUsers: [1], // Ajoute d'autres IDs ici : [1, 2, 7]
+    allowedUsers: [1, 2], // Ajoute d'autres IDs ici : [1, 2, 7]
     storagePrefix: "manifest-v1",
     title: "MANIFEST",
     version: 3,
