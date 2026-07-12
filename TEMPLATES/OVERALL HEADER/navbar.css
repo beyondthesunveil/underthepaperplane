@@ -266,12 +266,13 @@
   align-items: center;
   justify-content: center;
   max-width: 220px;
-  min-height: 32px;
-  padding: 5px 10px;
+  margin-right: 8px;
+  max-height:32px;
+  padding: 4px 10px;
   color: var(--th-cl-acc3);
   background: none !important;
   border: 1px solid var(--th-cl-acc3);
-  border-radius: 10px;
+  border-radius: 5px;
   text-decoration: none;
   font: 8px var(--fst3);
   font-weight: 700;
