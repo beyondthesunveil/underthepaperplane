@@ -89,7 +89,6 @@
   overflow: hidden;
   background: var(--th-grad-chip);
   border: 1px solid rgba(255, 255, 255, 0.65);
-  box-shadow: 0 4px 12px var(--th-cl-shadow);
 }
 
 .utpp-navProfileAvatar img {
@@ -189,14 +188,12 @@
   border-radius: 50%;
   color: var(--th-cl-font);
   background: var(--th-cl-cardAlt);
-  box-shadow: 0 8px 18px var(--th-cl-shadow);
   cursor: pointer;
   text-decoration: none;
   appearance: none;
   transition:
     transform var(--th-trans-fast),
     background var(--th-trans-fast),
-    box-shadow var(--th-trans-fast);
 }
 
 .utpp-navigMod > a:hover,
@@ -204,7 +201,6 @@
 .utpp-navigMod > [data-theme-controls] > button:hover {
   transform: translateY(-2px);
   background: var(--th-grad-chip);
-  box-shadow: 0 12px 24px var(--th-cl-shadowStrong);
 }
 
 .utpp-navigMod #switcheroo {
