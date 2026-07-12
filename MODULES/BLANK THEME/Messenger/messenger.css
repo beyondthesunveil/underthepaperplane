@@ -58,19 +58,18 @@
 
 /* Bouton pour ouvrir la fenetre */
 #FAM-button-open {
-    color: var(--th-cl-font);
-    font-size: 18px;
-    background-color: var(--th-cl-panelAlt);
-    border: 1px solid var(--th-cl-bord);
-    border-radius: 10px;
-    width: 45px;
-    height: 45px;
-    margin: 45px 0 0 0;
-    cursor: pointer;
-    transition-property: right;
-    transition-duration: 500ms;
-    display: grid;
-    place-items: center;
+  color: var(--th-cl-font);
+  font-size: 18px;
+  background-color: var(--th-cl-panelAlt);
+  border: 1px solid var(--th-cl-bord);
+  border-radius: 10px;
+  width: 30px;
+  height: 35px;
+  cursor: pointer;
+  transition-property: right;
+  transition-duration: 500ms;
+  display: grid;
+  place-items: center;
 }
 
 #FAM-button-open:hover {
