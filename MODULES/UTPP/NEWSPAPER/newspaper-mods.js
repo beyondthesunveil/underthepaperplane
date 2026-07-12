@@ -1,18 +1,6 @@
 (function () {
   "use strict";
 
-  /*
-   * NEWSPAPER — prototype public V0.1
-   * ---------------------------------
-   * Le module est visible par tous.
-   * Les éditions sont définies dans NEWSPAPER_DATA, ci-dessous.
-   *
-   * Pour publier une nouvelle édition :
-   * 1. duplique un objet d'édition ;
-   * 2. donne-lui un id unique ;
-   * 3. place-la en première position dans le tableau.
-   */
-
   const NEWSPAPER = {
     title: "NEWSPAPER",
     subtitle: "Le journal inRP de Philadelphie",
@@ -261,88 +249,6 @@
   let currentArticleId = null;
   let lastFocusedElement = null;
 
-  function createToggleButton() {
-    const toggle = document.createElement("button");
-
-    toggle.id = "newspaper-toggle";
-    toggle.type = "button";
-    toggle.title = "Newspaper";
-    toggle.setAttribute("aria-controls", "newspaper-root");
-    toggle.setAttribute("aria-expanded", "false");
-
-    toggle.innerHTML = `
-      <i data-lucide="${NEWSPAPER.icon}"></i>
-      <span id="newspaper-count"></span>
-    `;
-
-    return toggle;
-  }
-
-  function ensureToggleButton() {
-    const navigation = document.querySelector(".utpp-navigMod");
-
-    if (!navigation) {
-      return null;
-    }
-
-    let toggle = navigation.querySelector("#newspaper-toggle");
-
-    /*
-     * Un autre script reconstruit .utpp-navigMod et supprime le bouton
-     * pourtant présent dans la source HTML. On le restaure donc ici,
-     * exactement après Notifications.
-     */
-    if (!toggle) {
-      document.querySelectorAll("#newspaper-toggle").forEach(candidate => {
-        candidate.remove();
-      });
-
-      toggle = createToggleButton();
-
-      const notifications = navigation.querySelector("#notiffi_button");
-      const messenger = navigation.querySelector("#FAM-button-open");
-
-      if (notifications) {
-        notifications.insertAdjacentElement("afterend", toggle);
-      } else if (messenger) {
-        navigation.insertBefore(toggle, messenger);
-      } else {
-        navigation.prepend(toggle);
-      }
-
-      refreshLucideIcons();
-    }
-
-    return toggle;
-  }
-
-  function observeNavigation() {
-    let scheduled = false;
-
-    const restoreToggle = () => {
-      if (scheduled) {
-        return;
-      }
-
-      scheduled = true;
-
-      requestAnimationFrame(() => {
-        scheduled = false;
-        ensureToggleButton();
-        updateCount();
-      });
-    };
-
-    const observer = new MutationObserver(restoreToggle);
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-
-    restoreToggle();
-  }
-
   function escapeHTML(value) {
     return String(value ?? "").replace(/[&<>"']/g, character => ({
       "&": "&amp;",
@@ -427,7 +333,7 @@
     }
   }
 
-  function createNewspaperRoot() {
+function createNewspaperRoot() {
     document.querySelector("#newspaper-root")?.remove();
 
     const root = document.createElement("section");
@@ -819,13 +725,14 @@
     const root = document.querySelector("#newspaper-root");
     const toggle = document.querySelector("#newspaper-toggle");
 
-    if (!root) {
+    if (!root || !toggle) {
       return;
     }
 
     lastFocusedElement = document.activeElement;
     root.hidden = false;
-    toggle?.setAttribute("aria-expanded", "true");
+    toggle.classList.add("is-active");
+    toggle.setAttribute("aria-expanded", "true");
     document.body.classList.add("newspaper-is-open");
 
     renderEdition();
@@ -843,13 +750,14 @@
     const root = document.querySelector("#newspaper-root");
     const toggle = document.querySelector("#newspaper-toggle");
 
-    if (!root) {
+    if (!root || !toggle) {
       return;
     }
 
     closeArticle();
     root.hidden = true;
-    toggle?.setAttribute("aria-expanded", "false");
+    toggle.classList.remove("is-active");
+    toggle.setAttribute("aria-expanded", "false");
     document.body.classList.remove("newspaper-is-open");
 
     if (lastFocusedElement instanceof HTMLElement) {
@@ -883,16 +791,8 @@
     renderEdition();
   }
 
-  function bindEvents(root) {
-    /*
-     * Gestion déléguée : même si la barre remplace le bouton par un nouveau
-     * nœud, le clic continue de fonctionner.
-     */
-    document.addEventListener("click", event => {
-      if (event.target.closest(".utpp-navigMod #newspaper-toggle")) {
-        toggleNewspaper();
-      }
-    });
+  function bindEvents(toggle, root) {
+    toggle.addEventListener("click", toggleNewspaper);
 
     root.addEventListener("click", event => {
       if (event.target.closest("[data-newspaper-close]")) {
@@ -960,14 +860,15 @@
       return;
     }
 
-    if (document.querySelector("#newspaper-root")) {
+    const toggle = document.querySelector("#newspaper-toggle");
+
+    if (!toggle) {
       return;
     }
 
     const root = createNewspaperRoot();
 
-    bindEvents(root);
-    observeNavigation();
+    bindEvents(toggle, root);
     updateCount();
     refreshLucideIcons();
   }
