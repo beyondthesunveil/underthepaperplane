@@ -8,6 +8,7 @@
       match: (href, text) =>
         href === "/" ||
         href === "/forum" ||
+        href === "/forum.htm" ||
         text === "accueil"
     },
     {
@@ -46,7 +47,7 @@
   };
 
   const getPath = (link) => {
-    const rawHref = link.getAttribute("href") || "";
+    const rawHref = link?.getAttribute("href") || "";
 
     try {
       const url = new URL(rawHref, window.location.origin);
@@ -56,14 +57,16 @@
     }
   };
 
-  const getCleanLabel = (link) => {
-    const img = link.querySelector("img");
+  const getCleanLabel = (element) => {
+    if (!element) return "";
+
+    const img = element.querySelector?.("img");
 
     return (
-      link.getAttribute("title") ||
+      element.getAttribute?.("title") ||
       img?.getAttribute("alt") ||
-      link.textContent ||
-      "Lien"
+      element.textContent ||
+      ""
     )
       .replace(/\u00a0/g, " ")
       .replace(/\s+/g, " ")
@@ -142,63 +145,109 @@
   };
 
   const isTopicPage = () => {
-  const path = window.location.pathname.toLowerCase();
+    const path = window.location.pathname.toLowerCase();
 
-  return /^\/t\d+(p\d+)?(?:-|$)/.test(path);
-};
+    return /^\/t\d+(p\d+)?(?:-|$)/.test(path);
+  };
 
-const getTopicTitle = () => {
-  const selectors = [
-    "h1.page-title",
-    ".topic-title h1",
-    ".topic-title",
-    "h1"
-  ];
+  const getTopicTitle = () => {
+    const selectors = [
+      "h1.page-title",
+      ".topic-title h1",
+      ".topic-title",
+      "h1"
+    ];
 
-  for (const selector of selectors) {
-    const element = document.querySelector(selector);
-    const text = getCleanLabel(element);
+    for (const selector of selectors) {
+      const element = document.querySelector(selector);
+      const text = getCleanLabel(element);
 
-    if (text && text !== "Lien") {
-      return text;
+      if (text) {
+        return text;
+      }
     }
-  }
 
-  return document.title
-    .replace(/\s[-–—]\s.*$/, "")
-    .replace(/\s+/g, " ")
-    .trim();
-};
+    return document.title
+      .replace(/\s[-–—]\s.*$/, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  };
 
-const addContextLink = (generated) => {
-  const oldContext = generated.querySelector(".utpp-contextLink");
+  const addContextLink = (generated) => {
+    const oldContext = generated.querySelector(".utpp-contextLink");
 
-  if (oldContext) {
-    oldContext.remove();
-  }
+    if (oldContext) {
+      oldContext.remove();
+    }
 
-  if (!isTopicPage()) return;
+    if (!isTopicPage()) return;
 
-  const topicTitle = getTopicTitle();
+    const topicTitle = getTopicTitle();
 
-  if (!topicTitle) return;
+    if (!topicTitle) return;
 
-  const contextLink = document.createElement("a");
-  contextLink.className = "utpp-contextLink";
-  contextLink.href = window.location.href;
-  contextLink.textContent = topicTitle;
-  contextLink.setAttribute("title", topicTitle);
-  contextLink.setAttribute("aria-current", "page");
-  contextLink.setAttribute("aria-label", `Sujet actuel : ${topicTitle}`);
+    const contextLink = document.createElement("a");
+    contextLink.className = "utpp-contextLink";
+    contextLink.href = window.location.href;
+    contextLink.textContent = topicTitle;
+    contextLink.setAttribute("title", topicTitle);
+    contextLink.setAttribute("aria-current", "page");
+    contextLink.setAttribute("aria-label", `Sujet actuel : ${topicTitle}`);
 
-  const firstMenuLink = generated.querySelector("a.mainmenu");
+    const children = Array.from(generated.children);
 
-  if (firstMenuLink) {
-    generated.insertBefore(contextLink, firstMenuLink);
-  } else {
-    generated.appendChild(contextLink);
-  }
-};
+    const firstMenuBlock = children.find((child) => {
+      return (
+        child.matches?.("a.mainmenu") ||
+        child.querySelector?.("a.mainmenu")
+      );
+    });
+
+    if (firstMenuBlock) {
+      generated.insertBefore(contextLink, firstMenuBlock);
+    } else {
+      generated.appendChild(contextLink);
+    }
+  };
+
+  const normalizePath = (href) => {
+    try {
+      const url = new URL(href, window.location.origin);
+      return url.pathname.toLowerCase();
+    } catch (e) {
+      return String(href || "").toLowerCase();
+    }
+  };
+
+  const isHomePath = (path) => {
+    return path === "/" || path === "/forum" || path === "/forum.htm";
+  };
+
+  const setActiveNavbarLink = (generated) => {
+    const currentPath = window.location.pathname.toLowerCase();
+
+    generated.querySelectorAll("a.mainmenu").forEach((link) => {
+      const linkPath = normalizePath(link.getAttribute("href"));
+
+      const isActive =
+        linkPath === currentPath ||
+        (isHomePath(currentPath) && isHomePath(linkPath)) ||
+        (
+          currentPath.startsWith("/privmsg") &&
+          linkPath.startsWith("/privmsg")
+        ) ||
+        (
+          currentPath.startsWith("/profile") &&
+          linkPath.startsWith("/profile")
+        ) ||
+        (
+          currentPath.startsWith("/memberlist") &&
+          linkPath.startsWith("/memberlist")
+        );
+
+      link.classList.toggle("utpp-activeLink", isActive);
+    });
+  };
 
   const bootNavbar = () => {
     const navbar = document.querySelector(NAVBAR_SELECTOR);
@@ -216,37 +265,6 @@ const addContextLink = (generated) => {
       window.lucide.createIcons();
     }
   };
-
-  const setActiveNavbarLink = (generated) => {
-  const currentPath = window.location.pathname.toLowerCase();
-
-  generated.querySelectorAll("a.mainmenu").forEach((link) => {
-    const href = link.getAttribute("href") || "";
-    let linkPath = href.toLowerCase();
-
-    try {
-      const url = new URL(href, window.location.origin);
-      linkPath = url.pathname.toLowerCase();
-    } catch (e) {}
-
-    const isActive =
-      linkPath === currentPath ||
-      (
-        currentPath.startsWith("/privmsg") &&
-        linkPath.startsWith("/privmsg")
-      ) ||
-      (
-        currentPath.startsWith("/profile") &&
-        linkPath.startsWith("/profile")
-      ) ||
-      (
-        currentPath.startsWith("/memberlist") &&
-        linkPath.startsWith("/memberlist")
-      );
-
-    link.classList.toggle("utpp-activeLink", isActive);
-  });
-};
 
   document.addEventListener("DOMContentLoaded", bootNavbar);
   window.addEventListener("load", bootNavbar);
