@@ -19,25 +19,53 @@ body.newspaper-is-open {
 
 #newspaper-toggle {
   position: relative;
+  width: 35px;
+  height: 35px;
+  margin: 0 auto;
+  border: 1px solid var(--th-cl-bord);
+  border-radius: var(--th-radius-md);
+  background: var(--th-cl-panelAlt);
+  color: var(--th-cl-font);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: .25s;
+}
+
+#newspaper-toggle:hover {
+  transform: scale(1.08) rotate(-6deg);
+  background: var(--th-grad-chip);
+  color: var(--th-cl-font);
+}
+
+#newspaper-toggle.is-active {
+  transform: translateY(-1px);
+  filter: brightness(1.12);
+}
+
+#newspaper-toggle svg,
+#newspaper-toggle i {
+  pointer-events: none;
+}
+
+#newspaper-toggle svg {
+  width: 18px;
+  height: 18px;
 }
 
 #newspaper-count {
   position: absolute;
   top: -6px;
   right: -7px;
-
   min-width: 18px;
   height: 18px;
   padding: 0 5px;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   border-radius: 999px;
   background: var(--newspaper-accent);
   color: #fff;
-
   font-size: 10px;
   font-weight: 800;
   line-height: 1;
