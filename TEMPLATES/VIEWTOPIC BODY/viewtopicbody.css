@@ -531,3 +531,12 @@ h1.utppVB_titlemap {
 [data-color-scheme="dark"] .utppVB_btnaction a[href*="mode=delete"] {
   color: var(--th-cl-desc2);
 }
+
+.systab .tab {
+  appearance: none;
+  line-height: normal;
+}
+
+.systab .content[hidden] {
+  display: none !important;
+}
