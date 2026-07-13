@@ -474,22 +474,16 @@ h1.utppVB_titlemap {
 > .utppVB_tabList
 > .utppVB_tabButton {
   appearance: none;
-
   min-width: 0;
   margin: 0;
   padding: 2px 11px;
-
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-md);
-
   background: var(--th-cl-cardAlt);
   color: var(--th-cl-sub);
-
   cursor: pointer;
-
   font: 700 12px/1.2 var(--fte2);
   text-transform: uppercase;
-
   transition:
     background var(--th-trans-med),
     color var(--th-trans-med),
@@ -518,7 +512,6 @@ h1.utppVB_titlemap {
 > .utppVB_tabList
 > .utppVB_tabButton.utppVB_tabButtonActive {
   border-color: transparent;
-
   background: var(--th-grad-chip);
   color: var(--th-cl-font);
 }
@@ -537,13 +530,10 @@ h1.utppVB_titlemap {
   height: 30px;
   min-width: 30px;
   flex: 0 0 30px;
-
   display: inline-grid;
   place-items: center;
-
   margin-left: 2px;
   padding: 0;
-
   border-radius: 50%;
 }
 
@@ -552,17 +542,13 @@ h1.utppVB_titlemap {
 > .utppVB_tabButtonBadge svg {
   width: 15px;
   height: 15px;
-
   pointer-events: none;
 }
 
 .utppVB_tabsystem > .utppVB_tabPanels {
   min-height: 150px;
-
   overflow: hidden;
-
   border-radius: var(--th-radius-md);
-
   background: var(--th-cl-cardAlt);
   color: var(--th-cl-acc3);
 }
@@ -583,7 +569,6 @@ h1.utppVB_titlemap {
   display: flex;
   flex-direction: column;
   gap: 10px;
-
   padding: 12px;
 }
 
@@ -591,9 +576,7 @@ h1.utppVB_titlemap {
   display: flex;
   align-items: center;
   gap: 10px;
-
   padding-bottom: 10px;
-
   border-bottom: 1px solid var(--th-cl-bord);
 }
 
@@ -601,13 +584,10 @@ h1.utppVB_titlemap {
   width: 34px;
   height: 34px;
   min-width: 34px;
-
   display: grid;
   place-items: center;
-
   border: 1px solid var(--th-cl-bord);
   border-radius: 50%;
-
   background: var(--th-grad-chip);
   color: var(--th-cl-font);
 }
@@ -619,9 +599,7 @@ h1.utppVB_titlemap {
 
 .utppVB_playerIdentity small {
   display: block;
-
   color: var(--th-cl-sub);
-
   font: 9px var(--fst4);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -629,9 +607,7 @@ h1.utppVB_titlemap {
 
 .utppVB_playerIdentity strong {
   display: block;
-
   color: var(--th-cl-font);
-
   font: 700 12px var(--fte2);
 }
 
@@ -648,23 +624,17 @@ h1.utppVB_titlemap {
 
 .utppVB_playerProfileLink {
   align-self: flex-end;
-
   display: inline-flex;
   align-items: center;
   gap: 5px;
-
   padding: 4px 8px;
-
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-md);
-
   background: var(--th-cl-card);
   color: var(--th-cl-sub);
-
   font: 700 9px var(--fte2);
   text-decoration: none;
   text-transform: uppercase;
-
   transition:
     background var(--th-trans-med),
     color var(--th-trans-med),
@@ -673,7 +643,6 @@ h1.utppVB_titlemap {
 
 .utppVB_playerProfileLink:hover {
   transform: translateY(-1px);
-
   background: var(--th-grad-chip);
   color: var(--th-cl-font);
 }
@@ -685,17 +654,13 @@ h1.utppVB_titlemap {
 
 .utppVB_srOnly {
   position: absolute !important;
-
   width: 1px !important;
   height: 1px !important;
   padding: 0 !important;
   margin: -1px !important;
-
   overflow: hidden !important;
-
   clip: rect(0, 0, 0, 0) !important;
   clip-path: inset(50%) !important;
-
   border: 0 !important;
   white-space: nowrap !important;
 }
@@ -726,35 +691,49 @@ h1.utppVB_titlemap {
    CONTACTS DU PROFIL
    ========================================================= */
 
+/* =========================================================
+   UTPPVB — CONTACTS
+   ========================================================= */
+
 .utppVB_contFields {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 
   margin: 12px auto;
   padding: 0;
 }
 
-.utppVB_contFields[hidden],
 .utppVB_contFields:empty {
-  display: none !important;
+  display: none;
 }
 
+
+/* Carrés */
+
+.utppVB_contFields > a,
 .utppVB_contField {
   position: relative;
+
   width: 36px;
   height: 36px;
   flex: 0 0 36px;
+
   display: grid;
   place-items: center;
+
   padding: 0;
+
   border: 1px solid var(--th-cl-bord);
   border-radius: 10px;
+
   background: var(--th-cl-cardAlt);
   color: var(--th-cl-font);
+
   font-size: 0;
   text-decoration: none;
+
   transition:
     transform var(--th-trans-med),
     background var(--th-trans-med),
@@ -776,9 +755,15 @@ h1.utppVB_titlemap {
   outline-offset: 2px;
 }
 
+
+/* Image native conservée dans le DOM, mais masquée */
+
 .utppVB_contField img {
   display: none !important;
 }
+
+
+/* Icône commune */
 
 .utppVB_contField::before {
   content: "";
@@ -786,20 +771,21 @@ h1.utppVB_titlemap {
   width: 16px;
   height: 16px;
 
+  display: block;
+
   background-color: currentColor;
 
-  mask-image:
-    url("https://unpkg.com/lucide-static/icons/link-2.svg");
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: contain;
 
-  -webkit-mask-image:
-    url("https://unpkg.com/lucide-static/icons/link-2.svg");
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
   -webkit-mask-size: contain;
 }
+
+
+/* Suivi RPs */
 
 .utppVB_contField[
   data-utppvb-contact="rps"
@@ -811,6 +797,9 @@ h1.utppVB_titlemap {
     url("https://unpkg.com/lucide-static/icons/scroll-text.svg");
 }
 
+
+/* Fiche de liens */
+
 .utppVB_contField[
   data-utppvb-contact="links"
 ]::before {
@@ -820,6 +809,9 @@ h1.utppVB_titlemap {
   -webkit-mask-image:
     url("https://unpkg.com/lucide-static/icons/users-round.svg");
 }
+
+
+/* Présentation */
 
 .utppVB_contField[
   data-utppvb-contact="presentation"
@@ -831,31 +823,43 @@ h1.utppVB_titlemap {
     url("https://unpkg.com/lucide-static/icons/id-card.svg");
 }
 
+
+/* Tooltip personnalisé */
+
 .utppVB_contField::after {
   content: attr(data-utppvb-tooltip);
+
   position: absolute;
-  z-index: 100;
+  z-index: 999;
+
   left: 50%;
   bottom: calc(100% + 9px);
-  max-width: 180px;
+
   padding: 6px 9px;
+
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-sm);
+
   background: var(--th-cl-panel);
   color: var(--th-cl-font);
+
   box-shadow:
     0 8px 22px var(--th-cl-shadow);
+
   font: 600 10px/1.2 var(--fte2);
   letter-spacing: 0.03em;
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
+
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+
   transform:
     translateX(-50%)
     translateY(4px);
+
   transition:
     opacity var(--th-trans-fast),
     visibility var(--th-trans-fast),
@@ -866,6 +870,7 @@ h1.utppVB_titlemap {
 .utppVB_contField:focus-visible::after {
   opacity: 1;
   visibility: visible;
+
   transform:
     translateX(-50%)
     translateY(0);
