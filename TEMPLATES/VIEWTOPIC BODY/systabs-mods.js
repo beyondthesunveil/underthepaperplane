@@ -20,7 +20,10 @@
     profileFields: [
       "pseudo",
       "pronoms",
-      "présence"
+      "présence",
+      "trigger warning",
+      "tw joués",
+      "infos rp"
     ],
 
     retryCount: 20,
