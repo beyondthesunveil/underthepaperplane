@@ -462,7 +462,6 @@ h1.utppVB_titlemap {
   padding: 15px;
 }
 
-
 .utppVB_tabsystem > .utppVB_tabList {
   display: flex;
   align-items: center;
@@ -494,7 +493,7 @@ h1.utppVB_titlemap {
 
 .utppVB_tabsystem
 > .utppVB_tabList
-> .utppVB_tabButton:not(.utppVB_tabButtonIcon) {
+> .utppVB_tabButton:not(.utppVB_tabButtonBadge) {
   flex: 1 1 0;
 }
 
@@ -502,7 +501,9 @@ h1.utppVB_titlemap {
 > .utppVB_tabList
 > .utppVB_tabButton:hover {
   transform: translateY(-1px);
+
   border-color: transparent;
+
   background: var(--th-grad-chip);
   color: var(--th-cl-font);
 }
@@ -524,13 +525,12 @@ h1.utppVB_titlemap {
 
 .utppVB_tabsystem
 > .utppVB_tabList
-> .utppVB_tabButtonIcon {
-  position: relative;
+> .utppVB_tabButtonBadge {
   width: 30px;
   height: 30px;
   min-width: 30px;
   flex: 0 0 30px;
-  display: grid;
+  display: inline-grid;
   place-items: center;
   margin-left: 2px;
   padding: 0;
@@ -539,66 +539,10 @@ h1.utppVB_titlemap {
 
 .utppVB_tabsystem
 > .utppVB_tabList
-> .utppVB_tabButtonIcon::before {
-  content: "";
+> .utppVB_tabButtonBadge svg {
   width: 15px;
   height: 15px;
-  display: block;
-  background-color: currentColor;
-  mask-image: var(--utppVB-tab-icon);
-  mask-repeat: no-repeat;
-  mask-position: center;
-  mask-size: contain;
-  -webkit-mask-image: var(--utppVB-tab-icon);
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  -webkit-mask-size: contain;
   pointer-events: none;
-}
-
-.utppVB_tabsystem
-> .utppVB_tabList
-> .utppVB_tabButtonIcon::after {
-  content: attr(data-utppvb-tooltip);
-  position: absolute;
-  z-index: 999;
-  left: 50%;
-  bottom: calc(100% + 8px);
-  padding: 5px 8px;
-  border: 1px solid var(--th-cl-bord);
-  border-radius: var(--th-radius-sm);
-  background: var(--th-cl-panel);
-  color: var(--th-cl-font);
-  box-shadow:
-    0 8px 22px var(--th-cl-shadow);
-  font: 600 9px/1.2 var(--fte2);
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform:
-    translateX(-50%)
-    translateY(4px);
-  transition:
-    opacity var(--th-trans-fast),
-    visibility var(--th-trans-fast),
-    transform var(--th-trans-fast);
-}
-
-.utppVB_tabsystem
-> .utppVB_tabList
-> .utppVB_tabButtonIcon:hover::after,
-.utppVB_tabsystem
-> .utppVB_tabList
-> .utppVB_tabButtonIcon:focus-visible::after {
-  opacity: 1;
-  visibility: visible;
-
-  transform:
-    translateX(-50%)
-    translateY(0);
 }
 
 .utppVB_tabsystem > .utppVB_tabPanels {
@@ -621,9 +565,120 @@ h1.utppVB_titlemap {
   display: none !important;
 }
 
-.utppVB_other,
-.utppVB_profileFields {
-  box-sizing: border-box;
+.utppVB_playerPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+}
+
+.utppVB_playerIdentity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--th-cl-bord);
+}
+
+.utppVB_playerGlyph {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--th-cl-bord);
+  border-radius: 50%;
+  background: var(--th-grad-chip);
+  color: var(--th-cl-font);
+}
+
+.utppVB_playerGlyph svg {
+  width: 16px;
+  height: 16px;
+}
+
+.utppVB_playerIdentity small {
+  display: block;
+  color: var(--th-cl-sub);
+  font: 9px var(--fst4);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.utppVB_playerIdentity strong {
+  display: block;
+  color: var(--th-cl-font);
+  font: 700 12px var(--fte2);
+}
+
+.utppVB_playerIdentity strong,
+.utppVB_playerIdentity strong * {
+  color: inherit !important;
+}
+
+.utppVB_playerFields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.utppVB_playerProfileLink {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  border: 1px solid var(--th-cl-bord);
+  border-radius: var(--th-radius-md);
+  background: var(--th-cl-card);
+  color: var(--th-cl-sub);
+  font: 700 9px var(--fte2);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background var(--th-trans-med),
+    color var(--th-trans-med),
+    transform var(--th-trans-med);
+}
+
+.utppVB_playerProfileLink:hover {
+  transform: translateY(-1px);
+  background: var(--th-grad-chip);
+  color: var(--th-cl-font);
+}
+
+.utppVB_playerProfileLink svg {
+  width: 12px;
+  height: 12px;
+}
+
+.utppVB_srOnly {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+.utppVB_tabsystem.utppVB_tabsBottom
+> .utppVB_tabPanels {
+  margin-bottom: 10px;
+}
+
+.utppVB_tabsystem.utppVB_tabsBottom
+> .utppVB_tabList {
+  margin: 10px 0 -20px;
+}
+
+.utppVB_tabsystem.utppVB_tabsVertical
+> .utppVB_tabList {
+  flex-direction: column;
+  align-items: stretch;
 }
 
 [data-color-scheme="dark"]
@@ -631,7 +686,6 @@ h1.utppVB_titlemap {
 > .utppVB_tabPanels {
   color: var(--th-cl-acc2);
 }
-
 
 /* =========================================================
    CONTACTS DU PROFIL
