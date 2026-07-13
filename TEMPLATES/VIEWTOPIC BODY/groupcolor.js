@@ -9,6 +9,10 @@
     7: "ashes among thorns"
   };
 
+  const FORCED_GROUP_BY_USER = {
+    1: 3
+  };
+
   const STYLE_ID = "utpp-post-groups-style";
 
   function installGroupStyles() {
@@ -20,8 +24,6 @@
 
     style.id = STYLE_ID;
     style.textContent = `
-      /* Nom du groupe et trait coloré */
-
       .utppVB_posttracker .group-label {
         display: inline-block;
         padding-bottom: 4px;
@@ -30,8 +32,6 @@
           currentColor
         );
       }
-
-      /* Bloc du pseudo coloré */
 
       .utppVB_posttracker .utppVB_postname.is-group-colored {
         padding: 6px 10px;
@@ -42,14 +42,14 @@
         color: #fff !important;
       }
 
-      /* Le pseudo Forumactif peut contenir un lien et plusieurs spans */
-
       .utppVB_posttracker
       .utppVB_postname.is-group-colored,
       .utppVB_posttracker
       .utppVB_postname.is-group-colored a,
       .utppVB_posttracker
-      .utppVB_postname.is-group-colored span {
+      .utppVB_postname.is-group-colored span,
+      .utppVB_posttracker
+      .utppVB_postname.is-group-colored strong {
         color: #fff !important;
       }
 
@@ -62,35 +62,91 @@
     document.head.appendChild(style);
   }
 
+  function getPosterId(tracker) {
+    const avatar = tracker.querySelector(
+      ".utppVB_posteravatar[data-id]"
+    );
+
+    const posterId = Number(avatar?.dataset.id);
+
+    return Number.isInteger(posterId)
+      ? posterId
+      : null;
+  }
+
+  function getDetectedGroupId(groupElement) {
+    if (!groupElement) {
+      return null;
+    }
+
+    const groupClass = [...groupElement.classList].find(
+      className => /^group-\d+$/.test(className)
+    );
+
+    if (!groupClass) {
+      return null;
+    }
+
+    return Number(groupClass.replace("group-", ""));
+  }
+
+  function getForcedGroupColor(tracker, groupId) {
+
+    const probe = document.createElement("span");
+
+    probe.className = `group-${groupId}`;
+    probe.textContent = ".";
+
+    probe.style.position = "absolute";
+    probe.style.visibility = "hidden";
+    probe.style.pointerEvents = "none";
+
+    tracker.appendChild(probe);
+
+    const color = getComputedStyle(probe).color;
+
+    probe.remove();
+
+    return color || "#666";
+  }
+
   function applyGroupStyles() {
     document
       .querySelectorAll(".utppVB_posttracker")
       .forEach(tracker => {
-        const pseudo = tracker.querySelector(
-          '.utppVB_postname [class*="group-"]'
+        const pseudoBlock = tracker.querySelector(
+          ".utppVB_postname"
         );
 
-        if (!pseudo) {
+        const groupLabel = tracker.querySelector(
+          ".group-label"
+        );
+
+        const groupElement = pseudoBlock?.querySelector(
+          '[class*="group-"]'
+        );
+
+        const posterId = getPosterId(tracker);
+
+        const forcedGroupId =
+          FORCED_GROUP_BY_USER[posterId];
+
+        const detectedGroupId =
+          getDetectedGroupId(groupElement);
+
+        const groupId =
+          forcedGroupId || detectedGroupId;
+
+        if (!groupId || !pseudoBlock) {
           return;
         }
 
-        const groupClass = [...pseudo.classList].find(className => {
-          return /^group-\d+$/.test(className);
-        });
+        const groupName =
+          GROUP_NAMES[groupId] || "";
 
-        if (!groupClass) {
-          return;
-        }
-
-        const groupId = Number(
-          groupClass.replace("group-", "")
-        );
-
-        const groupName = GROUP_NAMES[groupId] || "";
-        const groupColor = getComputedStyle(pseudo).color;
-
-        const groupLabel = tracker.querySelector(".group-label");
-        const pseudoBlock = tracker.querySelector(".utppVB_postname");
+        const groupColor = forcedGroupId
+          ? getForcedGroupColor(tracker, groupId)
+          : getComputedStyle(groupElement).color;
 
         tracker.style.setProperty(
           "--utpp-post-group-color",
@@ -101,9 +157,9 @@
           groupLabel.textContent = groupName;
         }
 
-        if (pseudoBlock) {
-          pseudoBlock.classList.add("is-group-colored");
-        }
+        pseudoBlock.classList.add(
+          "is-group-colored"
+        );
       });
   }
 
