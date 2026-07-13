@@ -144,25 +144,21 @@ h1.utppVB_titlemap {
   width: 100%;
 }
 .utppVB_charafields {
-  margin: 15px;
-  height: 150px;
+  margin: 10px;
+  height: 200px;
   overflow: auto;
   padding: 10px;
   background: var(--th-cl-cardAlt);
-  border-radius: var(--th-radius-md);
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 5px;
   border: 1px solid var(--th-cl-bord);
 }
 .utppVB_charafield {
   font: 11px var(--fte2);
-  padding: 6px 8px;
-  border-radius: var(--th-radius-md);
+  padding: 3px 0px;
   border-bottom: 1px solid var(--th-cl-bord);
-  background: var(--th-cl-card);
-  position: relative;
-  transition: var(--th-trans-med);
 }
 .utppVB_charalabel {
   font: 10px var(--fst4);
@@ -630,8 +626,8 @@ h1.utppVB_titlemap {
 .utppVB_tabsystem > .utppVB_tabPanels {
   min-height: 150px;
   overflow: hidden;
-  border-radius: var(--th-radius-md);
-  background: var(--th-cl-cardAlt);
+  border-radius: 5px;
+  background: var(--th-cl-neutral);
   color: var(--th-cl-acc3);
 }
 
@@ -682,9 +678,8 @@ h1.utppVB_titlemap {
   align-items: center;
   justify-content: center;
   gap: 8px;
-
-  margin: 12px auto;
-  padding: 0;
+  margin: -10px auto;
+  padding: 0 0 15px 0;
 }
 
 .utppVB_contFields:empty {
