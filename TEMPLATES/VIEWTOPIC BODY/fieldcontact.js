@@ -1,58 +1,20 @@
 (() => {
   "use strict";
 
-  const CONTACT_TYPES = [
+  const CONTACTS = [
     {
       type: "rps",
-      keywords: [
-        "fiche suivi rps",
-        "suivi rps",
-        "suivi rp"
-      ],
       tooltip: "Fiche suivi RPs"
     },
     {
       type: "links",
-      keywords: [
-        "fiche de liens",
-        "fiche liens",
-        "liens"
-      ],
       tooltip: "Fiche de liens"
     },
     {
       type: "presentation",
-      keywords: [
-        "presentation",
-        "fiche de presentation"
-      ],
       tooltip: "Présentation"
     }
   ];
-
-  function normalizeUTPPVBContact(value) {
-    return String(value || "")
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/\u00a0/g, " ")
-      .replace(/[’‘]/g, "'")
-      .replace(/\s+/g, " ")
-      .trim()
-      .toLowerCase();
-  }
-
-  function getUTPPVBContactText(link) {
-    const image = link.querySelector("img");
-
-    return [
-      link.getAttribute("title"),
-      link.getAttribute("aria-label"),
-      image?.getAttribute("title"),
-      image?.getAttribute("alt")
-    ]
-      .filter(Boolean)
-      .join(" ");
-  }
 
   function initializeUTPPVBContacts() {
     document
@@ -66,75 +28,45 @@
         }
 
         const links = Array.from(
-          container.querySelectorAll("a")
+          container.querySelectorAll(":scope > a")
         );
 
-        links.forEach(link => {
-          const originalText =
-            getUTPPVBContactText(link);
+        links.forEach((link, index) => {
+          const contact = CONTACTS[index];
 
-          const normalizedText =
-            normalizeUTPPVBContact(
-              originalText
-            );
-
-          const contactType =
-            CONTACT_TYPES.find(contact => {
-              return contact.keywords.some(
-                keyword => {
-                  return normalizedText.includes(
-                    normalizeUTPPVBContact(
-                      keyword
-                    )
-                  );
-                }
-              );
-            });
+          if (!contact) {
+            return;
+          }
 
           link.classList.add(
             "utppVB_contField"
           );
 
-          if (contactType) {
-            link.dataset.utppvbContact =
-              contactType.type;
+          link.dataset.utppvbContact =
+            contact.type;
 
-            link.dataset.utppvbTooltip =
-              contactType.tooltip;
+          link.dataset.utppvbTooltip =
+            contact.tooltip;
 
-            link.setAttribute(
-              "aria-label",
-              contactType.tooltip
-            );
-          } else {
-            link.dataset.utppvbContact =
-              "default";
+          link.setAttribute(
+            "aria-label",
+            contact.tooltip
+          );
 
-            link.dataset.utppvbTooltip =
-              originalText || "Ouvrir le lien";
-
-            link.setAttribute(
-              "aria-label",
-              originalText || "Ouvrir le lien"
-            );
-          }
-          
+          /*
+           * Retrait du tooltip natif.
+           */
           link.removeAttribute("title");
 
           link
             .querySelectorAll("[title]")
             .forEach(element => {
-              element.removeAttribute(
-                "title"
-              );
+              element.removeAttribute("title");
             });
         });
 
         container.dataset.utppvbContactsReady =
           "true";
-
-        container.hidden =
-          links.length === 0;
       });
   }
 
