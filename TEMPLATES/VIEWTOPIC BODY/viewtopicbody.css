@@ -464,8 +464,8 @@ h1.utppVB_titlemap {
 
 .utppVB_tabsystem > .utppVB_tabList {
   display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 6px;
   margin: -20px 0 10px;
 }
@@ -473,37 +473,24 @@ h1.utppVB_titlemap {
 .utppVB_tabsystem
 > .utppVB_tabList
 > .utppVB_tabButton {
-  appearance: none;
-  min-width: 0;
-  margin: 0;
+  width: 115px;
   padding: 2px 11px;
   border: 1px solid var(--th-cl-bord);
-  border-radius: var(--th-radius-md);
+  border-radius: 5px;
   background: var(--th-cl-cardAlt);
   color: var(--th-cl-sub);
   cursor: pointer;
-  font: 700 12px/1.2 var(--fte2);
-  text-transform: uppercase;
-  transition:
-    background var(--th-trans-med),
-    color var(--th-trans-med),
-    border-color var(--th-trans-med),
-    transform var(--th-trans-med);
-}
-
-.utppVB_tabsystem
-> .utppVB_tabList
-> .utppVB_tabButton:not(.utppVB_tabButtonBadge) {
-  flex: 1 1 0;
+  font: 11px var(--fte2);
+  font-weight: bold;
+  text-transform: lowercase;
+  transition: background var(--th-trans-med), color var(--th-trans-med), border-color var(--th-trans-med), transform var(--th-trans-med);
 }
 
 .utppVB_tabsystem
 > .utppVB_tabList
 > .utppVB_tabButton:hover {
   transform: translateY(-1px);
-
   border-color: transparent;
-
   background: var(--th-grad-chip);
   color: var(--th-cl-font);
 }
@@ -512,7 +499,7 @@ h1.utppVB_titlemap {
 > .utppVB_tabList
 > .utppVB_tabButton.utppVB_tabButtonActive {
   border-color: transparent;
-  background: var(--th-grad-chip);
+  background: var(--th-cl-neutral);
   color: var(--th-cl-font);
 }
 
@@ -523,32 +510,13 @@ h1.utppVB_titlemap {
   outline-offset: 2px;
 }
 
-.utppVB_tabsystem
-> .utppVB_tabList
-> .utppVB_tabButtonBadge {
-  width: 30px;
-  height: 30px;
-  min-width: 30px;
-  flex: 0 0 30px;
-  display: inline-grid;
-  place-items: center;
-  margin-left: 2px;
-  padding: 0;
-  border-radius: 50%;
-}
-
-.utppVB_tabsystem
-> .utppVB_tabList
-> .utppVB_tabButtonBadge svg {
-  width: 15px;
-  height: 15px;
-  pointer-events: none;
-}
-
 .utppVB_tabsystem > .utppVB_tabPanels {
   min-height: 150px;
+
   overflow: hidden;
+
   border-radius: var(--th-radius-md);
+
   background: var(--th-cl-cardAlt);
   color: var(--th-cl-acc3);
 }
@@ -563,106 +531,6 @@ h1.utppVB_titlemap {
 > .utppVB_tabPanels
 > .utppVB_tabPanel[hidden] {
   display: none !important;
-}
-
-.utppVB_playerPanel {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 12px;
-}
-
-.utppVB_playerIdentity {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--th-cl-bord);
-}
-
-.utppVB_playerGlyph {
-  width: 34px;
-  height: 34px;
-  min-width: 34px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--th-cl-bord);
-  border-radius: 50%;
-  background: var(--th-grad-chip);
-  color: var(--th-cl-font);
-}
-
-.utppVB_playerGlyph svg {
-  width: 16px;
-  height: 16px;
-}
-
-.utppVB_playerIdentity small {
-  display: block;
-  color: var(--th-cl-sub);
-  font: 9px var(--fst4);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.utppVB_playerIdentity strong {
-  display: block;
-  color: var(--th-cl-font);
-  font: 700 12px var(--fte2);
-}
-
-.utppVB_playerIdentity strong,
-.utppVB_playerIdentity strong * {
-  color: inherit !important;
-}
-
-.utppVB_playerFields {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.utppVB_playerProfileLink {
-  align-self: flex-end;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 4px 8px;
-  border: 1px solid var(--th-cl-bord);
-  border-radius: var(--th-radius-md);
-  background: var(--th-cl-card);
-  color: var(--th-cl-sub);
-  font: 700 9px var(--fte2);
-  text-decoration: none;
-  text-transform: uppercase;
-  transition:
-    background var(--th-trans-med),
-    color var(--th-trans-med),
-    transform var(--th-trans-med);
-}
-
-.utppVB_playerProfileLink:hover {
-  transform: translateY(-1px);
-  background: var(--th-grad-chip);
-  color: var(--th-cl-font);
-}
-
-.utppVB_playerProfileLink svg {
-  width: 12px;
-  height: 12px;
-}
-
-.utppVB_srOnly {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  padding: 0 !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  clip-path: inset(50%) !important;
-  border: 0 !important;
-  white-space: nowrap !important;
 }
 
 .utppVB_tabsystem.utppVB_tabsBottom
@@ -688,10 +556,6 @@ h1.utppVB_titlemap {
 }
 
 /* =========================================================
-   CONTACTS DU PROFIL
-   ========================================================= */
-
-/* =========================================================
    UTPPVB — CONTACTS
    ========================================================= */
 
@@ -708,9 +572,6 @@ h1.utppVB_titlemap {
 .utppVB_contFields:empty {
   display: none;
 }
-
-
-/* Carrés */
 
 .utppVB_contFields > a,
 .utppVB_contField {
