@@ -81,14 +81,14 @@ h1.utppVB_titlemap {
 }
 .utppVB_posttracker {
   position: sticky;
-  top: 65px;
+  top: 50px;
 }
 .utppVB_postname {
-  width: 235px;
+  width: 240px;
   border: 1px solid var(--th-cl-bord);
   margin: 15px auto;
   padding: 0 0 10px 0;
-  border-radius: var(--th-radius-md);
+  border-radius: 5px;
   text-align: center;
 }
 .utppVB_postname strong {
@@ -126,15 +126,14 @@ h1.utppVB_titlemap {
   font: 15px var(--fst1);
   color: var(--th-cl-font);
   text-transform: uppercase;
-  margin: 10px auto;
+  margin: 0 auto;
   width: 240px;
-  padding: 0 0 10px 0;
 }
 .utppVB_rank > span {
   display: block;
   font: 11px var(--fte1);
   text-align: center;
-  padding: 3px;
+  padding: 5px 0;
   background: var(--newspaper-paper-deep);
   border-radius: 5px;
 }
