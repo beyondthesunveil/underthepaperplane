@@ -1,4 +1,4 @@
-jQuery(function ($) {
+/* jQuery(function ($) {
 
     $('.utppVB_postprofile .post').each(function () {
 
@@ -24,4 +24,4 @@ jQuery(function ($) {
 
     });
 
-});
+}); */
