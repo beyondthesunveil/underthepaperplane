@@ -1,6 +1,36 @@
 (function () {
   "use strict";
 
+  const MANIFEST_GUARD_STYLE_ID = "manifest-js-access-guard";
+  const MANIFEST_AUTH_ATTRIBUTE = "data-manifest-authorized";
+
+  function installManifestAccessGuard() {
+    if (!document.getElementById(MANIFEST_GUARD_STYLE_ID)) {
+      const style = document.createElement("style");
+
+      style.id = MANIFEST_GUARD_STYLE_ID;
+      style.textContent = `
+        #manifest-toggle:not([${MANIFEST_AUTH_ATTRIBUTE}="true"]) {
+          display: none !important;
+        }
+      `;
+
+      (document.head || document.documentElement).appendChild(style);
+    }
+
+    const toggle = document.querySelector("#manifest-toggle");
+
+    if (toggle && toggle.dataset.manifestAuthorized !== "true") {
+      toggle.hidden = true;
+      toggle.disabled = true;
+      toggle.setAttribute("aria-hidden", "true");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.style.setProperty("display", "none", "important");
+    }
+  }
+
+  installManifestAccessGuard();
+
   const MANIFEST = {
     allowedUsers: [1], // Ajoute d'autres IDs ici : [1, 2, 7]
     storagePrefix: "manifest-v1",
@@ -36,15 +66,6 @@
   let pendingDeleteTaskId = null;
   let dragArmedTaskId = null;
   let draggedTaskId = null;
-
-  function waitForBody(callback) {
-    if (!document.body) {
-      setTimeout(() => waitForBody(callback), 100);
-      return;
-    }
-
-    callback();
-  }
 
   function escapeHTML(value) {
     return String(value || "").replace(/[&<>"']/g, character => ({
@@ -161,8 +182,9 @@
     );
   }
 
-  function lockManifestAccess() {
+  function lockManifestAccess(options = {}) {
     const toggle = document.querySelector("#manifest-toggle");
+    const removeToggle = options.removeToggle === true;
 
     document.querySelector("#manifest-root")?.remove();
     document.body?.classList.remove("manifest-is-open");
@@ -175,14 +197,36 @@
     toggle.disabled = true;
     toggle.setAttribute("aria-hidden", "true");
     toggle.setAttribute("aria-expanded", "false");
-    toggle.removeAttribute("data-manifest-authorized");
+    toggle.removeAttribute(MANIFEST_AUTH_ATTRIBUTE);
+    toggle.style.setProperty("display", "none", "important");
+
+    if (removeToggle) {
+      toggle.remove();
+    }
   }
 
   function unlockManifestAccess(toggle) {
+    toggle.setAttribute(MANIFEST_AUTH_ATTRIBUTE, "true");
     toggle.hidden = false;
     toggle.disabled = false;
     toggle.removeAttribute("aria-hidden");
-    toggle.dataset.manifestAuthorized = "true";
+    toggle.style.removeProperty("display");
+  }
+
+  function waitForForumactifSession(callback, attempt = 0) {
+    const data = window._userdata;
+    const sessionReady =
+      data &&
+      Object.prototype.hasOwnProperty.call(data, "session_logged_in");
+
+    if (sessionReady || attempt >= 50) {
+      callback();
+      return;
+    }
+
+    setTimeout(() => {
+      waitForForumactifSession(callback, attempt + 1);
+    }, 100);
   }
 
   function getStorageKey() {
@@ -1425,9 +1469,9 @@
       !root ||
       !toggle ||
       !isAuthorizedSession() ||
-      toggle.dataset.manifestAuthorized !== "true"
+      toggle.getAttribute(MANIFEST_AUTH_ATTRIBUTE) !== "true"
     ) {
-      lockManifestAccess();
+      lockManifestAccess({ removeToggle: true });
       return;
     }
 
@@ -1620,6 +1664,7 @@
     currentUserId = getAuthorizedUserId();
 
     if (!currentUserId) {
+      lockManifestAccess({ removeToggle: true });
       return;
     }
 
@@ -1645,11 +1690,15 @@
     refreshLucideIcons();
   }
 
+  function startManifest() {
+    waitForForumactifSession(initManifest);
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initManifest, {
+    document.addEventListener("DOMContentLoaded", startManifest, {
       once: true
     });
   } else {
-    initManifest();
+    startManifest();
   }
 })();
