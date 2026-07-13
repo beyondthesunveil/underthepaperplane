@@ -40,7 +40,7 @@ h1.utppVB_titlemap {
 }
 
 /* ----- début bloc sujet ----- */
-  
+
 .utppVB_postprofile .row1,
 .utppVB_postprofile .row2 {
   background: transparent !important;
@@ -58,7 +58,7 @@ h1.utppVB_titlemap {
 }
 .sub-header-buttons {
   display: flex;
-  float:right;
+  float: right;
   margin: 0 0 30px 0;
 }
 /* bloc qui gère l'ensemble de la structure */
@@ -105,7 +105,7 @@ h1.utppVB_titlemap {
   border-bottom: 1px solid currentColor;
   padding: 4px 8px;
   transition: all var(--th-trans-fast);
-  width:220px;
+  width: 220px;
 }
 .utppVB_posteravatar {
   margin: 15px auto;
@@ -118,9 +118,9 @@ h1.utppVB_titlemap {
   outline-offset: 5px;
 }
 .utppVB_posteravatar img {
-  max-width: 222px!important;
+  max-width: 222px !important;
   margin: 0;
-  object-fit:cover;
+  object-fit: cover;
 }
 .utppVB_rank {
   font: 15px var(--fst1);
@@ -136,17 +136,17 @@ h1.utppVB_titlemap {
   padding: 5px 0;
   background: var(--newspaper-paper-deep);
   border-radius: 5px;
-  margin-top:10px;
+  margin-top: 10px;
 }
 .group-label {
   text-align: center;
   margin: 0 auto;
-  width:100%;
+  width: 100%;
 }
 .utppVB_charafields {
   margin: 15px;
-  height:150px;
-  overflow:auto;
+  height: 150px;
+  overflow: auto;
   padding: 10px;
   background: var(--th-cl-cardAlt);
   border-radius: var(--th-radius-md);
@@ -177,8 +177,8 @@ h1.utppVB_titlemap {
   max-width: 120px;
 }
 .utppVB_characontent img {
-  object-fit:cover!important;
-  width: 183px!important;
+  object-fit: cover !important;
+  width: 183px !important;
 }
 /* bloc qui va gérer l'affichage général de la mise en page du texte, la date, les boutons edit */
 .utppVB_blockcontent {
@@ -193,8 +193,8 @@ h1.utppVB_titlemap {
 .profile-icons {
   display: flex;
   gap: 6px;
-  margin:0!important;
-  justify-content:center;
+  margin: 0 !important;
+  justify-content: center;
 }
 .profile-icons a {
   width: 25px;
@@ -212,16 +212,24 @@ h1.utppVB_titlemap {
   font-size: 13px;
   color: var(--th-cl-font);
 }
-.icon-quote::before { content: "❝"; }
-.icon-edit::before { content: "✎"; }
-.icon-delete::before { content: "✕"; }
-.icon-ip::before { content: "⛨"; }
+.icon-quote::before {
+  content: "❝";
+}
+.icon-edit::before {
+  content: "✎";
+}
+.icon-delete::before {
+  content: "✕";
+}
+.icon-ip::before {
+  content: "⛨";
+}
 
 .profile-icons a:hover {
   background: var(--th-cl-cardAlt);
   border-color: var(--th-cl-desc3);
   transform: translateY(-2px);
-  color:var(--th-cl-font);
+  color: var(--th-cl-font);
 }
 .profile-icons a:hover::before {
   color: var(--th-cl-desc3);
@@ -238,8 +246,8 @@ h1.utppVB_titlemap {
   border-radius: var(--th-radius-md);
 }
 .utppVB_content img {
-  max-width:600px;
-  object-fit:cover;
+  max-width: 600px;
+  object-fit: cover;
 }
 .utppVB_modoaction {
   display: flex;
@@ -292,7 +300,7 @@ h1.utppVB_titlemap {
 }
 .quickmod .button2:hover {
   transform: translateY(-1px);
-   opacity: .9;
+  opacity: 0.9;
 }
 .utppVB_btnaction {
   display: flex;
@@ -414,12 +422,12 @@ h1.utppVB_titlemap {
   content: "Corbeille";
 }
 
-.utppVB_runtime { 
+.utppVB_runtime {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   justify-content: space-between;
-  margin: 10px;    
+  margin: 10px;
   height: 40px;
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-sm);
@@ -456,102 +464,212 @@ h1.utppVB_titlemap {
   transition: var(--th-trans-med) !important;
 }
 
-/*** -------------------- PROFIL SYSTEME ONGLET --------------- ***/
+/* =========================================================
+   UTPPVB — PROFIL : SYSTÈME D’ONGLETS
+   ========================================================= */
 
 .utppVB_tabsystem {
+  box-sizing: border-box;
+  width: 100%;
   padding: 15px;
 }
 
+/* Barre des trois onglets */
+
 .utppVB_tabsystem > .utppVB_tabList {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
   gap: 6px;
+  width: 100%;
   margin: -20px 0 10px;
+  overflow: visible;
 }
 
-.utppVB_tabsystem
-> .utppVB_tabList
-> .utppVB_tabButton {
-  width: 115px;
+/* Base commune */
+
+.utppVB_tabsystem > .utppVB_tabList > .utppVB_tabButton {
+  appearance: none;
+  box-sizing: border-box;
+  min-width: 0;
+  height: 30px;
+  margin: 0;
   padding: 2px 11px;
   border: 1px solid var(--th-cl-bord);
   border-radius: 5px;
   background: var(--th-cl-cardAlt);
   color: var(--th-cl-sub);
   cursor: pointer;
-  font: 11px var(--fte2);
-  font-weight: bold;
+  font: 700 11px/1 var(--fte2);
   text-transform: lowercase;
-  transition: background var(--th-trans-med), color var(--th-trans-med), border-color var(--th-trans-med), transform var(--th-trans-med);
+  transition:
+    background var(--th-trans-med),
+    color var(--th-trans-med),
+    border-color var(--th-trans-med),
+    transform var(--th-trans-med);
 }
 
+/* Les deux onglets textuels se partagent l’espace restant */
+
 .utppVB_tabsystem
-> .utppVB_tabList
-> .utppVB_tabButton:hover {
+  > .utppVB_tabList
+  > .utppVB_tabButton:not(.utppVB_tabButtonIcon) {
+  flex: 1 1 0;
+  width: auto;
+}
+
+.utppVB_tabsystem > .utppVB_tabList > .utppVB_tabButton:hover {
   transform: translateY(-1px);
   border-color: transparent;
   background: var(--th-grad-chip);
   color: var(--th-cl-font);
 }
 
-.utppVB_tabsystem
-> .utppVB_tabList
-> .utppVB_tabButton.utppVB_tabButtonActive {
+.utppVB_tabsystem > .utppVB_tabList > .utppVB_tabButton.utppVB_tabButtonActive {
   border-color: transparent;
   background: var(--th-cl-neutral);
   color: var(--th-cl-font);
 }
 
-.utppVB_tabsystem
-> .utppVB_tabList
-> .utppVB_tabButton:focus-visible {
+.utppVB_tabsystem > .utppVB_tabList > .utppVB_tabButton:focus-visible {
   outline: 2px solid var(--th-cl-acc3);
   outline-offset: 2px;
 }
 
+/* ---------------------------------------------------------
+   Troisième onglet : bouton rond avec icône Lucide
+   Le JS fournit --utppVB-tab-icon.
+   --------------------------------------------------------- */
+
+.utppVB_tabsystem > .utppVB_tabList > .utppVB_tabButtonIcon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 30px;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 0;
+  line-height: 0;
+}
+
+.utppVB_tabsystem > .utppVB_tabList > .utppVB_tabButtonIcon::before {
+  content: "";
+  display: block;
+  width: 15px;
+  height: 15px;
+  background-color: currentColor;
+  mask-image: var(
+    --utppVB-tab-icon,
+    url("https://unpkg.com/lucide-static/icons/user-round.svg")
+  );
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-image: var(
+    --utppVB-tab-icon,
+    url("https://unpkg.com/lucide-static/icons/user-round.svg")
+  );
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  pointer-events: none;
+}
+
+/* Compatibilité si le bouton contient déjà une balise Lucide */
+
+.utppVB_tabsystem > .utppVB_tabList > .utppVB_tabButtonIcon > :is(i, svg, img) {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Tooltip personnalisé du bouton rond */
+
+.utppVB_tabsystem > .utppVB_tabList > .utppVB_tabButtonIcon::after {
+  content: attr(data-utppvb-tooltip);
+  position: absolute;
+  z-index: 999;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  padding: 5px 8px;
+  border: 1px solid var(--th-cl-bord);
+  border-radius: var(--th-radius-sm);
+  background: var(--th-cl-panel);
+  color: var(--th-cl-font);
+  box-shadow: 0 8px 22px var(--th-cl-shadow);
+  font: 600 9px/1.2 var(--fte2);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(4px);
+  transition:
+    opacity var(--th-trans-fast),
+    visibility var(--th-trans-fast),
+    transform var(--th-trans-fast);
+}
+
+.utppVB_tabsystem > .utppVB_tabList > .utppVB_tabButtonIcon:hover::after,
+.utppVB_tabsystem
+  > .utppVB_tabList
+  > .utppVB_tabButtonIcon:focus-visible::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Panneaux */
+
 .utppVB_tabsystem > .utppVB_tabPanels {
   min-height: 150px;
-
   overflow: hidden;
-
   border-radius: var(--th-radius-md);
-
   background: var(--th-cl-cardAlt);
   color: var(--th-cl-acc3);
 }
 
-.utppVB_tabsystem
-> .utppVB_tabPanels
-> .utppVB_tabPanel {
+.utppVB_tabsystem > .utppVB_tabPanels > .utppVB_tabPanel {
   min-width: 0;
 }
 
-.utppVB_tabsystem
-> .utppVB_tabPanels
-> .utppVB_tabPanel[hidden] {
+.utppVB_tabsystem > .utppVB_tabPanels > .utppVB_tabPanel[hidden] {
   display: none !important;
 }
 
-.utppVB_tabsystem.utppVB_tabsBottom
-> .utppVB_tabPanels {
+.utppVB_other,
+.utppVB_profileFields {
+  box-sizing: border-box;
+}
+
+/* Variantes conservées */
+
+.utppVB_tabsystem.utppVB_tabsBottom > .utppVB_tabPanels {
   margin-bottom: 10px;
 }
 
-.utppVB_tabsystem.utppVB_tabsBottom
-> .utppVB_tabList {
+.utppVB_tabsystem.utppVB_tabsBottom > .utppVB_tabList {
   margin: 10px 0 -20px;
 }
 
-.utppVB_tabsystem.utppVB_tabsVertical
-> .utppVB_tabList {
+.utppVB_tabsystem.utppVB_tabsVertical > .utppVB_tabList {
   flex-direction: column;
   align-items: stretch;
 }
 
-[data-color-scheme="dark"]
-.utppVB_tabsystem
-> .utppVB_tabPanels {
+.utppVB_tabsystem.utppVB_tabsVertical
+  > .utppVB_tabList
+  > .utppVB_tabButtonIcon {
+  align-self: center;
+}
+
+[data-color-scheme="dark"] .utppVB_tabsystem > .utppVB_tabPanels {
   color: var(--th-cl-acc2);
 }
 
@@ -616,13 +734,11 @@ h1.utppVB_titlemap {
   outline-offset: 2px;
 }
 
-
 /* Image native conservée dans le DOM, mais masquée */
 
 .utppVB_contField img {
   display: none !important;
 }
-
 
 /* Icône commune */
 
@@ -645,45 +761,29 @@ h1.utppVB_titlemap {
   -webkit-mask-size: contain;
 }
 
-
 /* Suivi RPs */
 
-.utppVB_contField[
-  data-utppvb-contact="rps"
-]::before {
-  mask-image:
-    url("https://unpkg.com/lucide-static/icons/scroll-text.svg");
+.utppVB_contField[data-utppvb-contact="rps"]::before {
+  mask-image: url("https://unpkg.com/lucide-static/icons/scroll-text.svg");
 
-  -webkit-mask-image:
-    url("https://unpkg.com/lucide-static/icons/scroll-text.svg");
+  -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/scroll-text.svg");
 }
-
 
 /* Fiche de liens */
 
-.utppVB_contField[
-  data-utppvb-contact="links"
-]::before {
-  mask-image:
-    url("https://unpkg.com/lucide-static/icons/users-round.svg");
+.utppVB_contField[data-utppvb-contact="links"]::before {
+  mask-image: url("https://unpkg.com/lucide-static/icons/users-round.svg");
 
-  -webkit-mask-image:
-    url("https://unpkg.com/lucide-static/icons/users-round.svg");
+  -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/users-round.svg");
 }
-
 
 /* Présentation */
 
-.utppVB_contField[
-  data-utppvb-contact="presentation"
-]::before {
-  mask-image:
-    url("https://unpkg.com/lucide-static/icons/id-card.svg");
+.utppVB_contField[data-utppvb-contact="presentation"]::before {
+  mask-image: url("https://unpkg.com/lucide-static/icons/id-card.svg");
 
-  -webkit-mask-image:
-    url("https://unpkg.com/lucide-static/icons/id-card.svg");
+  -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/id-card.svg");
 }
-
 
 /* Tooltip personnalisé */
 
@@ -704,8 +804,7 @@ h1.utppVB_titlemap {
   background: var(--th-cl-panel);
   color: var(--th-cl-font);
 
-  box-shadow:
-    0 8px 22px var(--th-cl-shadow);
+  box-shadow: 0 8px 22px var(--th-cl-shadow);
 
   font: 600 10px/1.2 var(--fte2);
   letter-spacing: 0.03em;
@@ -717,9 +816,7 @@ h1.utppVB_titlemap {
   visibility: hidden;
   pointer-events: none;
 
-  transform:
-    translateX(-50%)
-    translateY(4px);
+  transform: translateX(-50%) translateY(4px);
 
   transition:
     opacity var(--th-trans-fast),
@@ -732,7 +829,5 @@ h1.utppVB_titlemap {
   opacity: 1;
   visibility: visible;
 
-  transform:
-    translateX(-50%)
-    translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
