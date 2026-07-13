@@ -2,7 +2,7 @@
   "use strict";
 
   const GROUP_NAMES = {
-    3: "omniscience",
+    3: "l'éminence grise",
     4: "bones beneath fire",
     5: "smoke through hearts",
     6: "blood within stone",
@@ -30,12 +30,6 @@
     }
 
     style.textContent = `
-      /*
-       * Par défaut, aucun nom de groupe et aucun trait.
-       * La classe .has-listed-group est ajoutée uniquement
-       * pour les groupes définis dans GROUP_NAMES.
-       */
-
       .utppVB_posttracker .group-label {
         display: none !important;
         padding-bottom: 0;
