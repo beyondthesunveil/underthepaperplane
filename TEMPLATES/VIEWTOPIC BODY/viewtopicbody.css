@@ -721,3 +721,72 @@ h1.utppVB_titlemap {
 > .utppVB_tabPanels {
   color: var(--th-cl-acc2);
 }
+
+/* =========================================================
+   UTPPVB — CONTACTS DU PROFIL
+   ========================================================= */
+
+.utppVB_contFields {
+  display: grid;
+  grid-template-columns: repeat(3, 36px);
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  margin: 12px auto;
+  padding: 0;
+}
+
+.utppVB_contFields a {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--th-cl-bord);
+  border-radius: 10px;
+  background: var(--th-cl-cardAlt);
+  color: var(--th-cl-font);
+  font-size: 0;
+  text-decoration: none;
+  transition:
+    transform var(--th-trans-med),
+    background var(--th-trans-med),
+    color var(--th-trans-med),
+    border-color var(--th-trans-med);
+}
+
+.utppVB_contFields a:hover {
+  transform: translateY(-2px);
+  border-color: transparent;
+  background: var(--th-grad-chip);
+  color: var(--th-cl-font);
+}
+
+.utppVB_contFields a:focus-visible {
+  outline: 2px solid var(--th-cl-acc3);
+  outline-offset: 2px;
+}
+
+.utppVB_contFields a img {
+  display: none !important;
+}
+
+.utppVB_contFields a::before {
+  content: "";
+
+  width: 16px;
+  height: 16px;
+
+  background-color: currentColor;
+
+  mask-image: url("https://unpkg.com/lucide-static/icons/link-2.svg");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+
+  -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/link-2.svg");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
