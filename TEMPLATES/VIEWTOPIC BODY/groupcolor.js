@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   const groupNames = {
-    3: "l'omniscient",
+    3: "omniscience",
     4: "bones beneath fire",
     5: "smoke through hearts",
     6: "blood within stone",
