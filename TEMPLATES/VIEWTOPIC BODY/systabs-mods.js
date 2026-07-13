@@ -5,8 +5,10 @@
     systemSelector: ".utppVB_tabsystem",
     sourceSelector: ":scope > .utppVB_tabSource",
     titleSelector: ":scope > .utppVB_tabTitle",
+
     rearDestinationSelector: ".utppVB_other",
-    playerDestinationSelector: ".utppVB_playerFields",
+    profileDestinationSelector: ".utppVB_profileFields",
+
     readyAttribute: "data-utppvb-tabs-ready",
 
     rearFields: [
@@ -15,10 +17,10 @@
       "messages"
     ],
 
-    playerFields: [
+    profileFields: [
       "pseudo",
-      "pronom",
-      "pronoms"
+      "pronoms",
+      "présence"
     ],
 
     retryCount: 20,
@@ -29,21 +31,20 @@
 
   function normalizeUTPPVBLabel(value) {
     return String(value || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
       .replace(/\u00a0/g, " ")
       .replace(/[’‘]/g, "'")
       .replace(/\s+/g, " ")
       .replace(/\s*:\s*$/, "")
       .trim()
-      .toLocaleLowerCase("fr");
+      .toLowerCase();
   }
 
-  function refreshUTPPVBIcons() {
-    if (
-      window.lucide &&
-      typeof window.lucide.createIcons === "function"
-    ) {
-      window.lucide.createIcons();
-    }
+  function createUTPPVBLabelSet(labels) {
+    return new Set(
+      labels.map(normalizeUTPPVBLabel)
+    );
   }
 
   function moveUTPPVBFields(system) {
@@ -51,47 +52,46 @@
       UTPPVB_TABS.rearDestinationSelector
     );
 
-    const playerDestination = system.querySelector(
-      UTPPVB_TABS.playerDestinationSelector
+    const profileDestination = system.querySelector(
+      UTPPVB_TABS.profileDestinationSelector
     );
 
-    const rearLabels = new Set(
-      UTPPVB_TABS.rearFields.map(normalizeUTPPVBLabel)
+    const rearLabels = createUTPPVBLabelSet(
+      UTPPVB_TABS.rearFields
     );
 
-    const playerLabels = new Set(
-      UTPPVB_TABS.playerFields.map(normalizeUTPPVBLabel)
+    const profileLabels = createUTPPVBLabelSet(
+      UTPPVB_TABS.profileFields
     );
 
-    system
-      .querySelectorAll(".utppVB_charafield")
-      .forEach(field => {
-        const labelElement = field.querySelector(
-          ".utppVB_charalabel"
-        );
+    const fields = Array.from(
+      system.querySelectorAll(".utppVB_charafield")
+    );
 
-        const label = normalizeUTPPVBLabel(
-          labelElement?.textContent
-        );
+    fields.forEach(field => {
+      const labelElement = field.querySelector(
+        ".utppVB_charalabel"
+      );
 
-        /*
-         * Les champs du joueur sont prioritaires.
-         */
-        if (
-          playerDestination &&
-          playerLabels.has(label)
-        ) {
-          playerDestination.appendChild(field);
-          return;
-        }
+      const label = normalizeUTPPVBLabel(
+        labelElement?.textContent
+      );
 
-        if (
-          rearDestination &&
-          rearLabels.has(label)
-        ) {
-          rearDestination.appendChild(field);
-        }
-      });
+      if (
+        profileDestination &&
+        profileLabels.has(label)
+      ) {
+        profileDestination.appendChild(field);
+        return;
+      }
+
+      if (
+        rearDestination &&
+        rearLabels.has(label)
+      ) {
+        rearDestination.appendChild(field);
+      }
+    });
   }
 
   function getUTPPVBTabs(system) {
@@ -125,10 +125,14 @@
     const maximumIndex =
       Math.min(tabs.length, panels.length) - 1;
 
+    const parsedIndex = Number(requestedIndex);
+
     const index = Math.max(
       0,
       Math.min(
-        Number(requestedIndex) || 0,
+        Number.isFinite(parsedIndex)
+          ? parsedIndex
+          : 0,
         maximumIndex
       )
     );
@@ -215,50 +219,66 @@
     );
   }
 
-  function createUTPPVBTabButton(item, tabId, panelId, index) {
-    const tabButton = document.createElement("button");
+  function sanitizeUTPPVBIconName(value) {
+    const icon = String(value || "user-round")
+      .trim()
+      .toLowerCase();
+
+    return /^[a-z0-9-]+$/.test(icon)
+      ? icon
+      : "user-round";
+  }
+
+  function createUTPPVBTabButton(
+    item,
+    tabId,
+    panelId,
+    index
+  ) {
+    const tabButton =
+      document.createElement("button");
 
     tabButton.type = "button";
-    tabButton.className = "utppVB_tabButton";
+    tabButton.className =
+      "utppVB_tabButton";
+
     tabButton.id = tabId;
 
     tabButton.dataset.utppvbTabIndex =
       String(index);
 
     tabButton.setAttribute("role", "tab");
-    tabButton.setAttribute("aria-controls", panelId);
-    tabButton.setAttribute("aria-selected", "false");
+    tabButton.setAttribute(
+      "aria-controls",
+      panelId
+    );
+    tabButton.setAttribute(
+      "aria-selected",
+      "false"
+    );
+
     tabButton.tabIndex = -1;
 
-    if (item.variant === "badge") {
+    if (item.isIconTab) {
       const iconName =
-        item.icon || "user-round";
-
-      const accessibleLabel =
-        item.accessibleLabel ||
-        item.label ||
-        "Informations";
-
-      const icon = document.createElement("i");
-      const label = document.createElement("span");
-
-      icon.setAttribute("data-lucide", iconName);
-      icon.setAttribute("aria-hidden", "true");
-
-      label.className = "utppVB_srOnly";
-      label.textContent = accessibleLabel;
+        sanitizeUTPPVBIconName(item.icon);
 
       tabButton.classList.add(
-        "utppVB_tabButtonBadge"
+        "utppVB_tabButtonIcon"
       );
 
-      tabButton.title = accessibleLabel;
+      tabButton.dataset.utppvbTooltip =
+        item.accessibleLabel;
+
       tabButton.setAttribute(
         "aria-label",
-        accessibleLabel
+        item.accessibleLabel
       );
 
-      tabButton.append(icon, label);
+      tabButton.style.setProperty(
+        "--utppVB-tab-icon",
+        `url("https://unpkg.com/lucide-static/icons/${iconName}.svg")`
+      );
     } else {
       tabButton.textContent = item.label;
     }
@@ -297,19 +317,28 @@
           return null;
         }
 
+        const label =
+          title.textContent.trim();
+
         return {
           panel,
           title,
-          label: title.textContent.trim(),
-          variant:
-            title.dataset.utppvbTabVariant ||
-            "text",
+          label,
+
+          isIconTab:
+            panel.classList.contains(
+              "utppVB_tabSourceIcon"
+            ),
+
           icon:
-            title.dataset.utppvbTabIcon ||
-            "",
+            panel.dataset.utppvbTabIcon ||
+            "user-round",
+
           accessibleLabel:
-            title.dataset.utppvbTabLabel ||
-            title.textContent.trim(),
+            panel.dataset.utppvbTabLabel ||
+            label ||
+            "Informations du joueur",
+
           initiallyActive:
             panel.classList.contains(
               "utppVB_tabSourceActive"
@@ -331,8 +360,13 @@
     const tabPanels =
       document.createElement("div");
 
-    tabList.className = "utppVB_tabList";
-    tabList.setAttribute("role", "tablist");
+    tabList.className =
+      "utppVB_tabList";
+
+    tabList.setAttribute(
+      "role",
+      "tablist"
+    );
 
     tabPanels.className =
       "utppVB_tabPanels";
@@ -364,7 +398,8 @@
 
       item.panel.classList.remove(
         "utppVB_tabSource",
-        "utppVB_tabSourceActive"
+        "utppVB_tabSourceActive",
+        "utppVB_tabSourceIcon"
       );
 
       item.panel.classList.add(
@@ -388,23 +423,10 @@
       tabPanels.appendChild(item.panel);
     });
 
-    system.replaceChildren();
-
-    if (
-      system.classList.contains(
-        "utppVB_tabsBottom"
-      )
-    ) {
-      system.append(
-        tabPanels,
-        tabList
-      );
-    } else {
-      system.append(
-        tabList,
-        tabPanels
-      );
-    }
+    system.replaceChildren(
+      tabList,
+      tabPanels
+    );
 
     system.setAttribute(
       UTPPVB_TABS.readyAttribute,
@@ -425,9 +447,7 @@
 
         activateUTPPVBTab(
           system,
-          Number(
-            tabButton.dataset.utppvbTabIndex
-          )
+          tabButton.dataset.utppvbTabIndex
         );
       }
     );
@@ -442,47 +462,19 @@
       }
     );
 
-    if (
-      system.classList.contains(
-        "utppVB_tabsHover"
-      )
-    ) {
-      tabList.addEventListener(
-        "mouseover",
-        event => {
-          const tabButton =
-            event.target.closest(
-              ".utppVB_tabButton"
-            );
-
-          if (!tabButton) {
-            return;
-          }
-
-          activateUTPPVBTab(
-            system,
-            Number(
-              tabButton.dataset.utppvbTabIndex
-            )
-          );
-        }
-      );
-    }
-
     activateUTPPVBTab(
       system,
       activeIndex
     );
 
-    refreshUTPPVBIcons();
-
     return true;
   }
 
   function initializeAllUTPPVBTabs() {
-    const systems = document.querySelectorAll(
-      UTPPVB_TABS.systemSelector
-    );
+    const systems =
+      document.querySelectorAll(
+        UTPPVB_TABS.systemSelector
+      );
 
     systems.forEach(
       buildUTPPVBTabSystem
@@ -510,7 +502,7 @@
     }
 
     window.__UTPPVB_PROFILE_TABS__ = {
-      version: "2.1.0",
+      version: "2.2.0",
       systemsFound: found,
       systemsReady:
         document.querySelectorAll(
@@ -518,17 +510,13 @@
         ).length
     };
 
-    refreshUTPPVBIcons();
-
     console.info(
       "[UTPPVB PROFILE TABS]",
       window.__UTPPVB_PROFILE_TABS__
     );
   }
 
-  if (
-    document.readyState === "loading"
-  ) {
+  if (document.readyState === "loading") {
     document.addEventListener(
       "DOMContentLoaded",
       () => {
