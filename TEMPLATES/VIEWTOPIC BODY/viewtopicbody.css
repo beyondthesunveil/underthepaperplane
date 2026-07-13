@@ -126,7 +126,7 @@ h1.utppVB_titlemap {
   font: 15px var(--fst1);
   color: var(--th-cl-font);
   text-transform: uppercase;
-  margin: 0 auto;
+  margin: 10px auto 0;
   width: 240px;
 }
 .utppVB_rank > span {
