@@ -458,85 +458,113 @@ h1.utppVB_titlemap {
 
 /*** -------------------- PROFIL SYSTEME ONGLET --------------- ***/
 
-.systab {
+.utppVB_tabsystem {
   padding: 15px;
 }
 
-.tabs {
+.utppVB_tabsystem > .utppVB_tabList {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  gap: 6px;
   margin: -20px 0 10px;
-} 
-/* .systab .tab => les onglet */
-.systab .tab {
+}
+
+.utppVB_tabsystem
+> .utppVB_tabList
+> .utppVB_tabButton {
+  appearance: none;
+
+  min-width: 0;
+  margin: 0;
   padding: 2px 11px;
-  margin-left: 1px;
-  color: var(--th-cl-sub);
-  background: var(--th-cl-cardAlt);
+
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-md);
-  font: 700 12px var(--fte2);
-  text-transform: uppercase;
+
+  background: var(--th-cl-cardAlt);
+  color: var(--th-cl-sub);
+
   cursor: pointer;
+
+  font: 700 12px/1.2 var(--fte2);
+  text-transform: uppercase;
+
   transition:
     background var(--th-trans-med),
     color var(--th-trans-med),
     border-color var(--th-trans-med),
     transform var(--th-trans-med);
 }
-/* .systab .tab:hover => les onglets survolés */
-.systab .tab:hover {
-  background: var(--th-grad-chip);
-  color: var(--th-cl-font);
-  border-color: transparent;
+
+.utppVB_tabsystem
+> .utppVB_tabList
+> .utppVB_tabButton:hover {
   transform: translateY(-1px);
-}
-/* .systab .tab.selected => les onglets sélectionnés */
-.systab .tab.selected{
-  color: var(--th-cl-font);
-  font: 11px var(--fte2);
-  text-transform: uppercase;
-  height:18px;
-  font-weight: bold;
-  border: none;
+
+  border-color: transparent;
+
   background: var(--th-grad-chip);
-  border-radius: var(--th-radius-md);
+  color: var(--th-cl-font);
 }
-/* .systab .contents => les conteneurs des contenus associés aux onglets  */
-.systab .contents {
-  color: var(--th-cl-acc3);
+
+.utppVB_tabsystem
+> .utppVB_tabList
+> .utppVB_tabButton.utppVB_tabButtonActive {
+  border-color: transparent;
+
+  background: var(--th-grad-chip);
+  color: var(--th-cl-font);
+}
+
+.utppVB_tabsystem
+> .utppVB_tabList
+> .utppVB_tabButton:focus-visible {
+  outline: 2px solid var(--th-cl-acc3);
+  outline-offset: 2px;
+}
+
+.utppVB_tabsystem > .utppVB_tabPanels {
+  min-height: 150px;
+
+  overflow: hidden;
+
+  border-radius: var(--th-radius-md);
+
   background: var(--th-cl-cardAlt);
-  border-radius: var(--th-radius-md);
-}
-/* style des onglets si ils sont à gauche ou à droite */
-.systab.s_float .tab,.systab.s_float .tab {
-  display: block;
-  margin: 5px;
-}
-/* flottement des conteneurs si les onglets sont à gauche où à droite */
-.systab.s_float .tabs,.systab.s_float .contents {
-  float: left;
+  color: var(--th-cl-acc3);
 }
 
-[data-color-scheme="dark"] .utppVB_brdcrmbtrail a,
-[data-color-scheme="dark"] .utppVB_btnaction a,
-[data-color-scheme="dark"] .systab .contents {
-  color: var(--th-cl-acc2);
+.utppVB_tabsystem
+> .utppVB_tabPanels
+> .utppVB_tabPanel {
+  min-width: 0;
 }
 
-[data-color-scheme="dark"] .utppVB_charalabel,
-[data-color-scheme="dark"] .profile-icons a:hover,
-[data-color-scheme="dark"] .profile-icons a:hover::before,
-[data-color-scheme="dark"] .utppVB_btnaction a[href*="mode=delete"] {
-  color: var(--th-cl-desc2);
-}
-
-.systab .tab {
-  appearance: none;
-  line-height: normal;
-}
-
-.systab .content[hidden] {
+.utppVB_tabsystem
+> .utppVB_tabPanels
+> .utppVB_tabPanel[hidden] {
   display: none !important;
+}
+
+.utppVB_tabsystem.utppVB_tabsBottom
+> .utppVB_tabPanels {
+  margin-bottom: 10px;
+}
+
+.utppVB_tabsystem.utppVB_tabsBottom
+> .utppVB_tabList {
+  margin: 10px 0 -20px;
+}
+
+.utppVB_tabsystem.utppVB_tabsVertical
+> .utppVB_tabList {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+[data-color-scheme="dark"]
+.utppVB_tabsystem
+> .utppVB_tabPanels {
+  color: var(--th-cl-acc2);
 }
