@@ -27,14 +27,10 @@
         $(b).data("tab").addClass("selected")
     }).on("click", ".tab", d).filter(".s_hover").on("mouseenter", ".tab", d)
 });
-* /
+*/
 
 (() => {
   "use strict";
-
-  /* ========================================================
-     CHAMPS À DÉPLACER VERS « L’ARRIÈRE »
-     ======================================================== */
 
   const REAR_FIELD_LABELS = new Set([
     "feat",
