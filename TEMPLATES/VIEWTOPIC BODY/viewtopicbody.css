@@ -123,20 +123,20 @@ h1.utppVB_titlemap {
   object-fit:cover;
 }
 .utppVB_rank {
-  font: 15px var(--fst4);
+  font: 15px var(--fst1);
   color: var(--th-cl-font);
   text-transform: uppercase;
-  margin: 10px;
-  letter-spacing:1px;
+  margin: 10px auto;
+  width: 240px;
   padding: 0 0 10px 0;
 }
 .utppVB_rank > span {
   display: block;
-  font: 13px var(--fst3);
-  letter-spacing: 0.5px;
+  font: 11px var(--fte1);
+  text-align: center;
   padding: 3px;
-  background: var(--th-cl-cardAlt);
-  border-radius: var(--th-radius-sm);
+  background: var(--newspaper-paper-deep);
+  border-radius: 5px;
 }
 .group-label {
   text-align: center;
