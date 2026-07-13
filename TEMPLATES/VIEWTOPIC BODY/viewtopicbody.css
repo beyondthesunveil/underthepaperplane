@@ -140,7 +140,8 @@ h1.utppVB_titlemap {
 }
 .group-label {
   text-align: center;
-  margin: 5px 0;
+  margin: 5px auto;
+  width:100%;
 }
 .utppVB_charafields {
   margin: 15px;
