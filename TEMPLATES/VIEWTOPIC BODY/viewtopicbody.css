@@ -1,4 +1,4 @@
-.utppVB_blocktitle {
+/* .utppVB_blocktitle {
   width: 100%;
   border-bottom: 1px var(--manifest-bg) solid;
   display: flex;
@@ -42,7 +42,7 @@ h1.utppVB_titlemap {
   background: var(--th-grad-chip);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
+} */
 
 /* ----- début bloc sujet ----- */
 
