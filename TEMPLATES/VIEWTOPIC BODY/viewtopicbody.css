@@ -2,6 +2,7 @@
   --title-height: 40px;
   --cut-size: 14px;
   width: 100%;
+  margin: 25px 0 -15px 0;
   display: flex;
   box-sizing: border-box;
 }
@@ -83,7 +84,7 @@
   display: flex;
   flex-wrap: wrap;
   border: 1px solid var(--th-cl-bord);
-  border-radius: 10px;
+  border-radius: 5px;
   background: var(--th-cl-panel);
   width: 100%;
   justify-content: space-between;
@@ -263,25 +264,21 @@
   object-fit: cover;
 }
 .utppVB_modoaction {
+  height: 60px;
   display: flex;
-  flex-direction: row;
-  align-items: center;
   justify-content: space-between;
-  gap: 16px;
   margin: 20px 0;
   padding: 0 0 0 14px;
-  border-radius: var(--th-radius-sm);
-  background: var(--th-grad-panel);
+  border-radius: 5px;
+  background: var(--newspaper-paper);
   border: 1px solid var(--th-cl-bord);
-  box-shadow: 0 8px 22px var(--th-cl-shadow);
-  backdrop-filter: blur(8px);
 }
 .quickmod {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 0;
-  margin: 0;
+  margin: 10px 0 !important;
   background: transparent;
   border: none;
   backdrop-filter: none;
@@ -935,4 +932,104 @@
   color: var(--th-cl-tle);
   background: var(--th-grad-chip);
   border-color: transparent;
+}
+
+.utppVB_permblock {
+  position: relative;
+  overflow: hidden;
+  margin: 16px 0;
+  padding: 1px;
+  color: var(--th-cl-txt);
+  background: var(--th-grad-panel);
+  border: 1px solid var(--th-cl-bord);
+  border-radius: var(--th-radius-md);
+  box-shadow: 0 5px 18px var(--th-cl-shadow);
+}
+
+.utppVB_permblock::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  bottom: 12px;
+  left: 0;
+  width: 3px;
+  background: var(--th-grad-chip);
+  border-radius: 0 var(--th-radius-xs) var(--th-radius-xs) 0;
+}
+
+.utppVB_permblock > div {
+  min-height: 42px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--th-cl-tle);
+  background: var(--th-grad-head);
+  border-radius:
+    calc(var(--th-radius-md) - 2px)
+    calc(var(--th-radius-md) - 2px)
+    0
+    0;
+  font: 15px var(--fti5);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.utppVB_permblock > div > i {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask:
+    url("https://unpkg.com/lucide-static/icons/lock-keyhole.svg")
+    center / contain no-repeat;
+  mask:
+    url("https://unpkg.com/lucide-static/icons/lock-keyhole.svg")
+    center / contain no-repeat;
+}
+
+.utppVB_permblock > div > i::before {
+  content: none !important;
+  display: none !important;
+}
+
+.utppVB_permblock > p {
+  margin: 0;
+  padding: 14px 18px 16px;
+  color: var(--th-cl-txt);
+  background: var(--th-cl-card);
+  font: 12px/1.8 var(--fte2);
+}
+
+.utppVB_permblock > p a {
+  color: var(--th-cl-acc3);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--th-trans-fast);
+}
+
+.utppVB_permblock > p a:hover {
+  color: var(--th-cl-desc3);
+}
+
+.utppVB_permblock > p strong {
+  color: var(--th-cl-tle);
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .utppVB_permblock > div {
+    min-height: 38px;
+    padding: 0 13px;
+    font-size: 13px;
+  }
+
+  .utppVB_permblock > p {
+    padding: 12px 14px 14px;
+    font-size: 11px;
+    line-height: 1.7;
+  }
 }
