@@ -193,34 +193,56 @@
       return;
     }
 
-    let previous =
-      quickReply.previousElementSibling;
+function hideLegacyQuickReplyTitle(quickReply) {
+  const parent = quickReply.parentElement;
 
-    let inspected = 0;
-
-
-    while (previous && inspected < 3) {
-  const previousText = normalizeText(
-    previous.textContent || ""
-  );
-
-const previousTitle = previousText
-    .replace(/[\s:：\-–—]+$/g, "")
-    .trim();
-
-  if (
-    previousTitle === "reponse rapide" ||
-    previousTitle === "quick reply"
-  ) {
-    previous.classList.add(
-      "utppVB_quickreply-legacy-title"
-    );
-
-    break;
+  if (!parent) {
+    return;
   }
 
-  previous = previous.previousElementSibling;
-  inspected += 1;
+  const possibleTitles = parent.querySelectorAll(
+    [
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      ".h1",
+      ".h2",
+      ".h3",
+      ".h4",
+      ".page-title",
+      ".topic-title"
+    ].join(",")
+  );
+
+  possibleTitles.forEach(function (element) {
+
+    const isBeforeQuickReply =
+      element.compareDocumentPosition(quickReply) &
+      Node.DOCUMENT_POSITION_FOLLOWING;
+
+    if (!isBeforeQuickReply) {
+      return;
+    }
+
+    const normalizedTitle = normalizeText(
+      element.textContent || ""
+    )
+      .replace(/[\s:：\-–—]+$/g, "")
+      .trim();
+
+    const isQuickReplyTitle =
+      normalizedTitle === "reponse rapide" ||
+      normalizedTitle === "quick reply";
+
+    if (isQuickReplyTitle) {
+      element.classList.add(
+        "utppVB_quickreply-legacy-title"
+      );
+    }
+  });
 }
 
     const header =
