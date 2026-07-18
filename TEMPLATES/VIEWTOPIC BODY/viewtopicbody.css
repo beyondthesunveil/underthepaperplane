@@ -783,75 +783,47 @@
 /* ================ SUBHEADER ============== */
 
 .sub-header-buttons {
-  --tools-height: 50px;
-  --tools-cut: 14px;
-  --tools-accent: #c44d58;
-
   width: 100%;
   margin: 16px 0 25px;
-  padding-top: 10px;
+  padding: 10px 0;
   box-sizing: border-box;
-
   display: flex;
-  align-items: stretch;
-  gap: 0;
-
-  border-top: 1px solid var(--manifest-accent);
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: transparent;
+  border-top: 1px solid var(--th-cl-bord);
+  border-bottom: 1px solid var(--th-cl-bord);
 }
 
 .sub-header-buttons__left,
 .sub-header-buttons__right {
   min-width: 0;
-  min-height: var(--tools-height);
-  padding: 5px 18px;
+  min-height: 46px;
+  padding: 0;
   box-sizing: border-box;
-
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;
-  gap: 5px;
-}
-
-/* Petit bloc clair à gauche. */
-.sub-header-buttons__left {
-  flex: 0 1 38%;
-  justify-content: flex-start;
-  padding-right: calc(18px + var(--tools-cut));
-
+  gap: 7px;
   color: var(--th-cl-txt);
-  background: var(--th-cl-panel);
-  border-radius: 5px 0 0 5px;
-
-  clip-path: polygon(
-    0 0,
-    calc(100% - var(--tools-cut)) 0,
-    100% 100%,
-    0 100%
-  );
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  clip-path: none;
 }
 
-/* Grand bloc coloré à droite : miroir du grand cartouche du titre. */
+.sub-header-buttons__left {
+  flex: 1 1 auto;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
 .sub-header-buttons__right {
-  flex: 1 1 62%;
-  justify-content: flex-end;
-  margin-left: calc(var(--tools-cut) * -1);
-  padding-left: calc(18px + var(--tools-cut));
-
-  color: var(--manifest-text);
-  background: var(--tools-accent);
-  border-radius: 0 5px 5px 0;
-
-  clip-path: polygon(
-    var(--tools-cut) 0,
-    100% 0,
-    100% 100%,
-    0 100%
-  );
-}
-
-/* Empêche les trois outils de droite de provoquer une seconde ligne. */
-.sub-header-buttons__right > * {
   flex: 0 0 auto;
+  justify-content: flex-end;
+  margin-left: auto;
+  white-space: nowrap;
+  font: 600 12px var(--fst3);
 }
 
 .sub-header-buttons .button,
@@ -879,30 +851,128 @@
   object-fit: contain;
 }
 
-/* ================================================================
-   FAVORIS
-   ================================================================ */
+.sub-header-buttons__right.utppVB_participants-ready {
+  gap: 0;
+}
+
+.sub-header-buttons__right.utppVB_participants-ready::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  flex: 0 0 16px;
+  background: var(--th-cl-acc3);
+  -webkit-mask: url("https://unpkg.com/lucide-static/icons/users-round.svg") center / contain no-repeat;
+  mask: url("https://unpkg.com/lucide-static/icons/users-round.svg") center / contain no-repeat;
+}
+
+.utppVB_participant {
+  position: relative;
+  z-index: 1;
+  width: 42px;
+  height: 42px;
+  margin-left: -9px;
+  flex: 0 0 42px;
+  display: block;
+  border-radius: 50%;
+  outline: none;
+  transition: transform var(--th-trans-fast), z-index 0s;
+}
+
+.sub-header-buttons__right .utppVB_participant:first-of-type {
+  margin-left: 0;
+}
+
+.utppVB_participant:hover,
+.utppVB_participant:focus-visible {
+  z-index: 10;
+  transform: translateY(-4px) scale(1.06);
+}
+
+.utppVB_participant > img,
+.utppVB_participant img {
+  width: 42px !important;
+  height: 42px !important;
+  display: block;
+  object-fit: cover;
+  border: 3px solid var(--th-cl-card);
+  border-radius: 50%;
+  box-sizing: border-box;
+  background: var(--th-cl-panelAlt);
+  box-shadow: 0 4px 12px var(--th-cl-shadow);
+}
+
+.utppVB_participant[data-participant-name]::before {
+  content: "";
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 5px);
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: var(--th-cl-tle);
+  transform: translateX(-50%) rotate(45deg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--th-trans-fast), top var(--th-trans-fast);
+}
+
+.utppVB_participant[data-participant-name]::after {
+  content: attr(data-participant-name);
+  position: absolute;
+  z-index: 21;
+  top: calc(100% + 9px);
+  left: 50%;
+  padding: 7px 10px;
+  color: var(--th-cl-bg);
+  background: var(--th-cl-tle);
+  border-radius: var(--th-radius-xs);
+  box-shadow: 0 6px 16px var(--th-cl-shadowStrong);
+  font: 600 10px var(--fst3);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transform: translateX(-50%) translateY(-4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--th-trans-fast), transform var(--th-trans-fast);
+}
+
+.utppVB_participant[data-participant-name]:hover::before,
+.utppVB_participant[data-participant-name]:focus-visible::before,
+.utppVB_participant[data-participant-name]:hover::after,
+.utppVB_participant[data-participant-name]:focus-visible::after {
+  opacity: 1;
+}
+
+.utppVB_participant[data-participant-name]:hover::after,
+.utppVB_participant[data-participant-name]:focus-visible::after {
+  transform: translateX(-50%) translateY(0);
+}
+
+.utppVB_participants-count {
+  margin-left: 12px;
+  color: var(--th-cl-sub);
+  font: 600 11px var(--fst3);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
 
 #fa-topic-fav-button {
   min-height: 34px;
   padding: 7px 12px;
   box-sizing: border-box;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
-
   color: var(--th-cl-txt);
   background: var(--th-cl-card);
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-sm);
-
   font: 13px/1.2 var(--fst3);
   text-transform: lowercase;
   white-space: nowrap;
   cursor: pointer;
-
   transition:
     color var(--th-trans-fast),
     background var(--th-trans-fast),
@@ -943,10 +1013,6 @@
   fill: currentColor;
 }
 
-/* ================================================================
-   SURVEILLANCE — cible exacte : .utppVB_watchtopicBG
-   ================================================================ */
-
 .utppVB_watchtopicBG {
   min-height: 34px;
   margin: 0 !important;
@@ -970,17 +1036,14 @@
   align-items: center !important;
   justify-content: center;
   gap: 7px;
-
   color: var(--th-cl-txt) !important;
   background: var(--th-cl-card) !important;
   border: 1px solid var(--th-cl-bord) !important;
   border-radius: var(--th-radius-sm) !important;
-
   font: 13px/1.2 var(--fst3) !important;
   text-transform: lowercase;
   text-decoration: none !important;
   white-space: nowrap;
-
   transition:
     color var(--th-trans-fast),
     background var(--th-trans-fast),
@@ -1088,7 +1151,7 @@
   align-items: center;
   gap: 4px;
   padding-left: 11px;
-  font-size: 0; 
+  font-size: 0;
 }
 
 .utppVB_pages__list::before {
