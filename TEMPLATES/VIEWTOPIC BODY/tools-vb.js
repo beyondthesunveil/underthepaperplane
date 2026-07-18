@@ -15,7 +15,7 @@
     "wand-sparkles",
     "scan-eye"
   ];
-  
+
   const QUICK_REPLY_COPY = {
     eyebrow: "Discussion",
     title: "Écrire une réponse",
@@ -43,9 +43,12 @@
         Math.random() * RANDOM_ICONS.length
       );
 
+      const randomIcon =
+        RANDOM_ICONS[randomIndex];
+
       element.setAttribute(
         "data-lucide",
-        RANDOM_ICONS[randomIndex]
+        randomIcon
       );
     });
   }
@@ -69,6 +72,7 @@
       if (!currentPage) {
         return;
       }
+
 
       const currentNumber =
         currentPage.textContent.trim();
@@ -122,10 +126,12 @@
         );
       }
 
+
       pagination.append(
         currentLabel,
         pageList
       );
+
 
       pagination.dataset.paginationReady =
         "true";
@@ -160,6 +166,7 @@
         linkText.includes("stop watching") ||
         linkHref.includes("unwatch");
 
+
       watchBlock.classList.toggle(
         "is-watching",
         isWatching
@@ -169,6 +176,69 @@
         "aria-pressed",
         String(isWatching)
       );
+    });
+  }
+
+  function hideLegacyQuickReplyTitle(quickReply) {
+    const parent =
+      quickReply.parentElement;
+
+    if (!parent) {
+      return;
+    }
+
+    const possibleTitles = parent.querySelectorAll(
+      [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        ".h1",
+        ".h2",
+        ".h3",
+        ".h4",
+        ".page-title",
+        ".topic-title"
+      ].join(",")
+    );
+
+
+    possibleTitles.forEach(function (element) {
+
+      const position =
+        element.compareDocumentPosition(
+          quickReply
+        );
+
+      const isBeforeQuickReply = Boolean(
+        position &
+        Node.DOCUMENT_POSITION_FOLLOWING
+      );
+
+
+      if (!isBeforeQuickReply) {
+        return;
+      }
+
+      const normalizedTitle = normalizeText(
+        element.textContent || ""
+      )
+        .replace(/[\s:：\-–—]+$/g, "")
+        .trim();
+
+
+      const isQuickReplyTitle =
+        normalizedTitle === "reponse rapide" ||
+        normalizedTitle === "quick reply";
+
+
+      if (isQuickReplyTitle) {
+        element.classList.add(
+          "utppVB_quickreply-legacy-title"
+        );
+      }
     });
   }
 
@@ -186,66 +256,16 @@
 
 
     const editorContent = quickReply.querySelector(
-  "#textarea_content"
-);
+      "#textarea_content"
+    );
 
-if (!editorContent) {
-  return;
-}
-
-hideLegacyQuickReplyTitle(quickReply);
-
-function hideLegacyQuickReplyTitle(quickReply) {
-  const parent = quickReply.parentElement;
-
-  if (!parent) {
-    return;
-  }
-
-  const possibleTitles = parent.querySelectorAll(
-    [
-      "h1",
-      "h2",
-      "h3",
-      "h4",
-      "h5",
-      "h6",
-      ".h1",
-      ".h2",
-      ".h3",
-      ".h4",
-      ".page-title",
-      ".topic-title"
-    ].join(",")
-  );
-
-  possibleTitles.forEach(function (element) {
-
-    const isBeforeQuickReply =
-      element.compareDocumentPosition(quickReply) &
-      Node.DOCUMENT_POSITION_FOLLOWING;
-
-    if (!isBeforeQuickReply) {
+    if (!editorContent) {
       return;
     }
 
-    const normalizedTitle = normalizeText(
-      element.textContent || ""
-    )
-      .replace(/[\s:：\-–—]+$/g, "")
-      .trim();
-
-    const isQuickReplyTitle =
-      normalizedTitle === "reponse rapide" ||
-      normalizedTitle === "quick reply";
-
-    if (isQuickReplyTitle) {
-      element.classList.add(
-        "utppVB_quickreply-legacy-title"
-      );
-    }
-  });
-}
+    hideLegacyQuickReplyTitle(
+      quickReply
+    );
 
     const header =
       document.createElement("header");
@@ -319,7 +339,7 @@ function hideLegacyQuickReplyTitle(quickReply) {
       header,
       editorContent
     );
-    
+
     const previewButton = quickReply.querySelector(
       'input[type="submit"][name="preview"]'
     );
@@ -378,7 +398,6 @@ function hideLegacyQuickReplyTitle(quickReply) {
         QUICK_REPLY_COPY.title
       );
     });
-
 
     quickReply.dataset.quickReplyReady =
       "true";
