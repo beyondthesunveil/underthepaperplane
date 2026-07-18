@@ -78,11 +78,6 @@
   box-shadow: none;
   margin: 24px 0;
 }
-.sub-header-buttons {
-  display: flex;
-  float: right;
-  margin: 0 0 30px 0;
-}
 /* bloc qui gère l'ensemble de la structure */
 .utppVB_blockmember {
   display: flex;
@@ -482,17 +477,13 @@
   transition: var(--th-trans-med) !important;
 }
 
-/* =========================================================
-   UTPPVB — PROFIL : SYSTÈME D’ONGLETS
-   ========================================================= */
+/* ================ SYSTÊME D'ONGLETS =============== */
 
 .utppVB_tabsystem {
   box-sizing: border-box;
   width: 100%;
   padding: 15px;
 }
-
-/* Barre des trois onglets */
 
 .utppVB_tabsystem > .utppVB_tabList {
   position: relative;
@@ -504,8 +495,6 @@
   margin: -20px 0 10px;
   overflow: visible;
 }
-
-/* Base commune */
 
 .utppVB_tabsystem > .utppVB_tabList > .utppVB_tabButton {
   appearance: none;
@@ -527,8 +516,6 @@
     border-color var(--th-trans-med),
     transform var(--th-trans-med);
 }
-
-/* Les deux onglets textuels se partagent l’espace restant */
 
 .utppVB_tabsystem
   > .utppVB_tabList
@@ -554,11 +541,6 @@
   outline: 2px solid var(--th-cl-acc3);
   outline-offset: 2px;
 }
-
-/* ---------------------------------------------------------
-   Troisième onglet : bouton rond avec icône Lucide
-   Le JS fournit --utppVB-tab-icon.
-   --------------------------------------------------------- */
 
 .utppVB_tabsystem > .utppVB_tabList > .utppVB_tabButtonIcon {
   position: relative;
@@ -597,16 +579,12 @@
   pointer-events: none;
 }
 
-/* Compatibilité si le bouton contient déjà une balise Lucide */
-
 .utppVB_tabsystem > .utppVB_tabList > .utppVB_tabButtonIcon > :is(i, svg, img) {
   width: 15px;
   height: 15px;
   object-fit: contain;
   pointer-events: none;
 }
-
-/* Tooltip personnalisé du bouton rond */
 
 .utppVB_tabsystem > .utppVB_tabList > .utppVB_tabButtonIcon::after {
   content: attr(data-utppvb-tooltip);
@@ -643,8 +621,6 @@
   transform: translateX(-50%) translateY(0);
 }
 
-/* Panneaux */
-
 .utppVB_tabsystem > .utppVB_tabPanels {
   min-height: 150px;
   overflow: hidden;
@@ -665,8 +641,6 @@
 .utppVB_profileFields {
   box-sizing: border-box;
 }
-
-/* Variantes conservées */
 
 .utppVB_tabsystem.utppVB_tabsBottom > .utppVB_tabPanels {
   margin-bottom: 10px;
@@ -691,9 +665,7 @@
   color: var(--th-cl-acc2);
 }
 
-/* =========================================================
-   UTPPVB — CONTACTS
-   ========================================================= */
+/* ===================== BOUTONS LIENS ==================== */
 
 .utppVB_contFields {
   display: flex;
@@ -711,25 +683,18 @@
 .utppVB_contFields > a,
 .utppVB_contField {
   position: relative;
-
   width: 36px;
   height: 36px;
   flex: 0 0 36px;
-
   display: grid;
   place-items: center;
-
   padding: 0;
-
   border: 1px solid var(--th-cl-bord);
   border-radius: 10px;
-
   background: var(--th-cl-cardAlt);
   color: var(--th-cl-font);
-
   font-size: 0;
   text-decoration: none;
-
   transition:
     transform var(--th-trans-med),
     background var(--th-trans-med),
@@ -739,9 +704,7 @@
 
 .utppVB_contField:hover {
   transform: translateY(-2px);
-
   border-color: transparent;
-
   background: var(--th-grad-chip);
   color: var(--th-cl-font);
 }
@@ -751,90 +714,60 @@
   outline-offset: 2px;
 }
 
-/* Image native conservée dans le DOM, mais masquée */
-
 .utppVB_contField img {
   display: none !important;
 }
 
-/* Icône commune */
-
 .utppVB_contField::before {
   content: "";
-
   width: 16px;
   height: 16px;
-
   display: block;
-
   background-color: currentColor;
-
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: contain;
-
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
   -webkit-mask-size: contain;
 }
 
-/* Suivi RPs */
-
 .utppVB_contField[data-utppvb-contact="rps"]::before {
   mask-image: url("https://unpkg.com/lucide-static/icons/scroll-text.svg");
-
   -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/scroll-text.svg");
 }
 
-/* Fiche de liens */
-
 .utppVB_contField[data-utppvb-contact="links"]::before {
   mask-image: url("https://unpkg.com/lucide-static/icons/users-round.svg");
-
   -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/users-round.svg");
 }
 
-/* Présentation */
-
 .utppVB_contField[data-utppvb-contact="presentation"]::before {
   mask-image: url("https://unpkg.com/lucide-static/icons/id-card.svg");
-
   -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/id-card.svg");
 }
 
-/* Tooltip personnalisé */
-
 .utppVB_contField::after {
   content: attr(data-utppvb-tooltip);
-
   position: absolute;
   z-index: 999;
-
   left: 50%;
   bottom: calc(100% + 9px);
-
   padding: 6px 9px;
-
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-sm);
-
   background: var(--th-cl-panel);
   color: var(--th-cl-font);
-
   box-shadow: 0 8px 22px var(--th-cl-shadow);
-
   font: 600 10px/1.2 var(--fte2);
   letter-spacing: 0.03em;
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
-
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-
   transform: translateX(-50%) translateY(4px);
-
   transition:
     opacity var(--th-trans-fast),
     visibility var(--th-trans-fast),
@@ -845,6 +778,161 @@
 .utppVB_contField:focus-visible::after {
   opacity: 1;
   visibility: visible;
-
   transform: translateX(-50%) translateY(0);
+}
+
+/* ================ SUBHEADER ============== */
+
+.sub-header-buttons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--th-panel-gap);
+  margin: 12px 0;
+}
+
+.sub-header-buttons__left,
+.sub-header-buttons__right {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.sub-header-buttons__left {
+  justify-content: flex-start;
+}
+
+.sub-header-buttons__right {
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.sub-header-buttons .button,
+.sub-header-buttons .button1,
+.sub-header-buttons .button2,
+.sub-header-buttons .rep-button {
+  margin: 0 !important;
+}
+
+#fa-topic-fav-button {
+  white-space: nowrap;
+}
+
+#fa-topic-fav-button svg {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  fill: transparent;
+  stroke: currentColor;
+  stroke-width: 2;
+  transition:
+    fill var(--th-trans-fast),
+    transform var(--th-trans-fast);
+}
+
+#fa-topic-fav-button:hover svg {
+  transform: scale(1.12);
+}
+
+#fa-topic-fav-button.is-favorite svg,
+#fa-topic-fav-button.active svg {
+  fill: currentColor;
+}
+
+.utppVB_watchtopic {
+  display: inline-flex;
+  align-items: center;
+}
+
+.utppVB_watchtopic a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center;
+  gap: 7px;
+  padding: 7px 13px !important;
+  color: var(--th-cl-txt) !important;
+  background: var(--th-cl-cardAlt) !important;
+  border: 1px solid var(--th-cl-bord) !important;
+  border-radius: var(--th-radius-sm) !important;
+  font: 13px var(--fst3) !important;
+  line-height: 1.2;
+  text-transform: lowercase;
+  text-decoration: none !important;
+  white-space: nowrap;
+  transition:
+    color var(--th-trans-fast),
+    background var(--th-trans-fast),
+    border-color var(--th-trans-fast),
+    box-shadow var(--th-trans-fast),
+    transform var(--th-trans-fast) !important;
+}
+
+.utppVB_watchtopic a:hover {
+  color: var(--th-cl-tle) !important;
+  background: var(--th-grad-chip) !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 12px var(--th-cl-shadow);
+  transform: translateY(-1px);
+}
+
+.utppVB_watchtopic a::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  background-color: currentColor;
+  -webkit-mask:
+    url("https://unpkg.com/lucide-static/icons/eye.svg")
+    center / contain no-repeat;
+  mask:
+    url("https://unpkg.com/lucide-static/icons/eye.svg")
+    center / contain no-repeat;
+}
+
+.utppVB_watchtopic.is-watching a::before {
+  -webkit-mask-image:
+    url("https://unpkg.com/lucide-static/icons/eye-off.svg");
+  mask-image:
+    url("https://unpkg.com/lucide-static/icons/eye-off.svg");
+}
+
+.utppVB_pages {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 4px;
+  font: 12px var(--fst3);
+  color: var(--th-cl-sub);
+}
+
+.utppVB_pages a,
+.utppVB_pages strong {
+  min-width: 30px;
+  height: 30px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--th-cl-txt);
+  background: var(--th-cl-cardAlt);
+  border: 1px solid var(--th-cl-bord);
+  border-radius: var(--th-radius-xs);
+  text-decoration: none;
+  transition: var(--th-trans-fast);
+}
+
+.utppVB_pages a:hover {
+  color: var(--th-cl-tle);
+  background: var(--th-grad-chip);
+  border-color: transparent;
+  transform: translateY(-1px);
+}
+
+.utppVB_pages strong {
+  color: var(--th-cl-tle);
+  background: var(--th-grad-chip);
+  border-color: transparent;
 }
