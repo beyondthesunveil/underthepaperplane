@@ -786,13 +786,16 @@
   --tools-height: 50px;
   --tools-cut: 14px;
   --tools-accent: #c44d58;
+
   width: 100%;
   margin: 16px 0 25px;
   padding-top: 10px;
   box-sizing: border-box;
+
   display: flex;
   align-items: stretch;
   gap: 0;
+
   border-top: 1px solid var(--manifest-accent);
 }
 
@@ -802,19 +805,23 @@
   min-height: var(--tools-height);
   padding: 5px 18px;
   box-sizing: border-box;
+
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 5px;
 }
 
+/* Petit bloc clair à gauche. */
 .sub-header-buttons__left {
   flex: 0 1 38%;
   justify-content: flex-start;
   padding-right: calc(18px + var(--tools-cut));
+
   color: var(--th-cl-txt);
   background: var(--th-cl-panel);
   border-radius: 5px 0 0 5px;
+
   clip-path: polygon(
     0 0,
     calc(100% - var(--tools-cut)) 0,
@@ -823,20 +830,28 @@
   );
 }
 
+/* Grand bloc coloré à droite : miroir du grand cartouche du titre. */
 .sub-header-buttons__right {
   flex: 1 1 62%;
   justify-content: flex-end;
   margin-left: calc(var(--tools-cut) * -1);
   padding-left: calc(18px + var(--tools-cut));
+
   color: var(--manifest-text);
   background: var(--tools-accent);
   border-radius: 0 5px 5px 0;
+
   clip-path: polygon(
     var(--tools-cut) 0,
     100% 0,
     100% 100%,
     0 100%
   );
+}
+
+/* Empêche les trois outils de droite de provoquer une seconde ligne. */
+.sub-header-buttons__right > * {
+  flex: 0 0 auto;
 }
 
 .sub-header-buttons .button,
@@ -864,22 +879,30 @@
   object-fit: contain;
 }
 
+/* ================================================================
+   FAVORIS
+   ================================================================ */
+
 #fa-topic-fav-button {
   min-height: 34px;
   padding: 7px 12px;
   box-sizing: border-box;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
+
   color: var(--th-cl-txt);
   background: var(--th-cl-card);
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-sm);
+
   font: 13px/1.2 var(--fst3);
   text-transform: lowercase;
   white-space: nowrap;
   cursor: pointer;
+
   transition:
     color var(--th-trans-fast),
     background var(--th-trans-fast),
@@ -919,6 +942,10 @@
 #fa-topic-fav-button.is-favorite svg {
   fill: currentColor;
 }
+
+/* ================================================================
+   SURVEILLANCE — cible exacte : .utppVB_watchtopicBG
+   ================================================================ */
 
 .utppVB_watchtopicBG {
   min-height: 34px;
@@ -1122,6 +1149,7 @@
 .utppVB_pages__list a::after {
   font-size: 15px;
 }
+
 /* ==================== BLOC PERMISSIONS ==================== */
 
 .utppVB_permblock {
