@@ -1230,6 +1230,10 @@
   border-radius: 5px;
 }
 
+#quick_reply #textarea_content {
+  box-shadow: none;
+}
+
 .utppVB_quickreply-head {
   padding: 18px 20px 16px;
   display: flex;
