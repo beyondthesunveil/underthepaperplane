@@ -851,6 +851,10 @@
   object-fit: contain;
 }
 
+/* ================================================================
+   PARTICIPANTS DU SUJET — enrichis par le JS
+   ================================================================ */
+
 .sub-header-buttons__right.utppVB_participants-ready {
   padding: 7px 10px;
   gap: 0;
@@ -936,22 +940,30 @@
   color: var(--th-cl-neutral);
 }
 
+/* ================================================================
+   FAVORIS
+   ================================================================ */
+
 #fa-topic-fav-button {
   min-height: 34px;
   padding: 7px 12px;
   box-sizing: border-box;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
+
   color: var(--th-cl-txt);
   background: var(--th-cl-card);
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-sm);
+
   font: 13px/1.2 var(--fst3);
   text-transform: lowercase;
   white-space: nowrap;
   cursor: pointer;
+
   transition:
     color var(--th-trans-fast),
     background var(--th-trans-fast),
@@ -992,6 +1004,10 @@
   fill: currentColor;
 }
 
+/* ================================================================
+   SURVEILLANCE — cible exacte : .utppVB_watchtopicBG
+   ================================================================ */
+
 .utppVB_watchtopicBG {
   min-height: 34px;
   margin: 0 !important;
@@ -1015,14 +1031,17 @@
   align-items: center !important;
   justify-content: center;
   gap: 7px;
+
   color: var(--th-cl-txt) !important;
   background: var(--th-cl-card) !important;
   border: 1px solid var(--th-cl-bord) !important;
   border-radius: var(--th-radius-sm) !important;
+
   font: 13px/1.2 var(--fst3) !important;
   text-transform: lowercase;
   text-decoration: none !important;
   white-space: nowrap;
+
   transition:
     color var(--th-trans-fast),
     background var(--th-trans-fast),
@@ -1055,6 +1074,7 @@
   transform: scale(1.12);
 }
 
+/* Le lien propose d'arrêter : la surveillance est donc active. */
 .utppVB_watchtopicBG.is-watching > a {
   color: var(--th-cl-acc3) !important;
   background: var(--th-cl-accSoft) !important;
@@ -1078,6 +1098,10 @@
 .utppVB_watchtopicBG.is-watching > a:hover::before {
   transform: scale(1.12) rotate(-5deg);
 }
+
+/* ================================================================
+   PAGINATION ENRICHIE PAR utppvb-topic-tools.js
+   ================================================================ */
 
 .utppVB_pages {
   display: inline-flex;
@@ -1130,7 +1154,7 @@
   align-items: center;
   gap: 4px;
   padding-left: 11px;
-  font-size: 0;
+  font-size: 0; /* Cache la ponctuation brute produite par Forumactif. */
 }
 
 .utppVB_pages__list::before {
