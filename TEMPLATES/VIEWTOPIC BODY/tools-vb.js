@@ -1,19 +1,5 @@
-/**
- * UTPPVB — outils des pages de sujet Forumactif
- *
- * - Icône Lucide aléatoire du titre
- * - Pagination enrichie
- * - État de surveillance du sujet
- * - Réponse rapide façon messagerie
- */
-
 (function () {
   "use strict";
-
-
-  /* ==================================================
-     CONFIGURATION
-     ================================================== */
 
   const RANDOM_ICONS = [
     "sparkles",
@@ -29,13 +15,7 @@
     "wand-sparkles",
     "scan-eye"
   ];
-
-
-  /*
-   * Tu peux personnaliser ici tous les textes
-   * affichés dans la réponse rapide.
-   */
-
+  
   const QUICK_REPLY_COPY = {
     eyebrow: "Discussion",
     title: "Écrire une réponse",
@@ -45,11 +25,6 @@
     send: "Envoyer"
   };
 
-
-  /* ==================================================
-     OUTIL DE NORMALISATION
-     ================================================== */
-
   function normalizeText(value) {
     return value
       .trim()
@@ -57,11 +32,6 @@
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
   }
-
-
-  /* ==================================================
-     ICÔNE ALÉATOIRE DU TITRE
-     ================================================== */
 
   function setRandomTitleIcons() {
     const iconElements = document.querySelectorAll(
@@ -80,32 +50,18 @@
     });
   }
 
-
-  /* ==================================================
-     PAGINATION
-     ================================================== */
-
   function enhancePaginations() {
     const paginations = document.querySelectorAll(
       ".utppVB_pages"
     );
 
     paginations.forEach(function (pagination) {
-      /*
-       * Évite de transformer plusieurs fois
-       * la même pagination.
-       */
 
       if (
         pagination.dataset.paginationReady === "true"
       ) {
         return;
       }
-
-      /*
-       * Forumactif place normalement le numéro
-       * de la page courante dans <strong>.
-       */
 
       const currentPage =
         pagination.querySelector("strong");
@@ -116,11 +72,6 @@
 
       const currentNumber =
         currentPage.textContent.trim();
-
-
-      /*
-       * Création des nouveaux conteneurs.
-       */
 
       const pageList =
         document.createElement("div");
@@ -165,18 +116,11 @@
         number
       );
 
-
-      /*
-       * Déplace les liens existants sans les recréer.
-       * La navigation Forumactif reste fonctionnelle.
-       */
-
       while (pagination.firstChild) {
         pageList.appendChild(
           pagination.firstChild
         );
       }
-
 
       pagination.append(
         currentLabel,
@@ -187,11 +131,6 @@
         "true";
     });
   }
-
-
-  /* ==================================================
-     SURVEILLANCE DU SUJET
-     ================================================== */
 
   function updateWatchTopicStates() {
     const watchBlocks = document.querySelectorAll(
@@ -215,26 +154,11 @@
         watchLink.getAttribute("href") || ""
       ).toLowerCase();
 
-
-      /*
-       * Si le lien propose d’arrêter la surveillance,
-       * cela signifie que le sujet est déjà suivi.
-       */
-
       const isWatching =
         linkText.includes("arreter") ||
         linkText.includes("ne plus surveiller") ||
         linkText.includes("stop watching") ||
         linkHref.includes("unwatch");
-
-
-      /*
-       * La classe .is-watching déclenche :
-       *
-       * - l’œil barré ;
-       * - la couleur turquoise ;
-       * - le survol orange de désactivation.
-       */
 
       watchBlock.classList.toggle(
         "is-watching",
@@ -248,20 +172,10 @@
     });
   }
 
-
-  /* ==================================================
-     RÉPONSE RAPIDE
-     ================================================== */
-
   function enhanceQuickReply() {
     const quickReply = document.querySelector(
       "#quick_reply"
     );
-
-    /*
-     * Arrêt si la réponse rapide n’existe pas
-     * ou si elle a déjà été transformée.
-     */
 
     if (
       !quickReply ||
@@ -279,17 +193,6 @@
       return;
     }
 
-
-    /* --------------------------------------------------
-       Ancien titre “Réponse rapide”
-       -------------------------------------------------- */
-
-    /*
-     * Forumactif peut placer le titre juste avant
-     * le formulaire. On inspecte les trois éléments
-     * précédents afin de le retrouver.
-     */
-
     let previous =
       quickReply.previousElementSibling;
 
@@ -297,34 +200,28 @@
 
 
     while (previous && inspected < 3) {
-      const previousText = normalizeText(
-        previous.textContent || ""
-      );
+  const previousText = normalizeText(
+    previous.textContent || ""
+  );
 
-      const isLegacyTitle =
-        previousText === "reponse rapide" ||
-        previousText === "quick reply";
+const previousTitle = previousText
+    .replace(/[\s:：\-–—]+$/g, "")
+    .trim();
 
+  if (
+    previousTitle === "reponse rapide" ||
+    previousTitle === "quick reply"
+  ) {
+    previous.classList.add(
+      "utppVB_quickreply-legacy-title"
+    );
 
-      if (isLegacyTitle) {
-        previous.classList.add(
-          "utppVB_quickreply-legacy-title"
-        );
+    break;
+  }
 
-        break;
-      }
-
-
-      previous =
-        previous.previousElementSibling;
-
-      inspected += 1;
-    }
-
-
-    /* --------------------------------------------------
-       Création de l’en-tête
-       -------------------------------------------------- */
+  previous = previous.previousElementSibling;
+  inspected += 1;
+}
 
     const header =
       document.createElement("header");
@@ -394,22 +291,11 @@
       heading
     );
 
-
-    /*
-     * L’en-tête est placé juste avant SCEditor,
-     * directement dans le formulaire.
-     */
-
     quickReply.insertBefore(
       header,
       editorContent
     );
-
-
-    /* --------------------------------------------------
-       Boutons du formulaire
-       -------------------------------------------------- */
-
+    
     const previewButton = quickReply.querySelector(
       'input[type="submit"][name="preview"]'
     );
@@ -442,12 +328,6 @@
       );
     }
 
-
-    /*
-     * Le bloc d’actions possède des styles inline.
-     * On retire ceux-ci pour laisser le CSS agir.
-     */
-
     if (
       actions &&
       actions.parentElement === quickReply
@@ -458,16 +338,6 @@
 
       actions.removeAttribute("style");
     }
-
-
-    /* --------------------------------------------------
-       Placeholder
-       -------------------------------------------------- */
-
-    /*
-     * Le textarea visible est créé par SCEditor
-     * à côté du textarea original.
-     */
 
     const editorTextareas = quickReply.querySelectorAll(
       ".sceditor-container textarea"
@@ -490,16 +360,7 @@
       "true";
   }
 
-
-  /* ==================================================
-     RENDU DES ICÔNES LUCIDE
-     ================================================== */
-
   function renderLucideIcons() {
-    /*
-     * La vérification évite une erreur JS si Lucide
-     * n’est pas chargé sur une page particulière.
-     */
 
     if (
       window.lucide &&
@@ -509,11 +370,6 @@
     }
   }
 
-
-  /* ==================================================
-     INITIALISATION
-     ================================================== */
-
   function initTopicTools() {
     setRandomTitleIcons();
     enhancePaginations();
@@ -521,11 +377,6 @@
     enhanceQuickReply();
     renderLucideIcons();
   }
-
-
-  /*
-   * Le fichier fonctionne avec ou sans l’attribut defer.
-   */
 
   if (document.readyState === "loading") {
     document.addEventListener(
