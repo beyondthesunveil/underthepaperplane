@@ -1140,6 +1140,45 @@
     padding-left: 5px;
   }
 }
+.sub-header-buttons__right
+  > div.is-watching
+  > a {
+  color: var(--th-cl-acc3) !important;
+  background: var(--th-cl-accSoft) !important;
+  border-color: var(--th-cl-acc2) !important;
+
+  box-shadow:
+    inset 0 0 0 1px var(--th-cl-accFade),
+    0 3px 10px var(--th-cl-shadow);
+}
+
+.sub-header-buttons__right
+  > div.is-watching
+  > a::before {
+  -webkit-mask:
+    url("https://unpkg.com/lucide-static/icons/eye-off.svg")
+    center / contain no-repeat !important;
+
+  mask:
+    url("https://unpkg.com/lucide-static/icons/eye-off.svg")
+    center / contain no-repeat !important;
+}
+
+.sub-header-buttons__right
+  > div.is-watching
+  > a:hover {
+  color: var(--th-cl-desc3) !important;
+  background: var(--th-cl-descSoft) !important;
+  border-color: var(--th-cl-desc2) !important;
+
+  box-shadow: 0 4px 12px var(--th-cl-shadow);
+}
+
+.sub-header-buttons__right
+  > div.is-watching
+  > a:hover::before {
+  transform: scale(1.12) rotate(-5deg);
+}
 /* ==================== BLOC PERMISSIONS ==================== */
 
 .utppVB_permblock {
