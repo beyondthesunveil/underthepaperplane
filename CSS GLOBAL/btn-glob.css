@@ -1,0 +1,147 @@
+.rep-button,
+.button,
+.button1,
+.button2,
+a.button,
+a.button1,
+a.button2 {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center;
+  gap: 7px !important;
+  margin: 6px 6px 0 0 !important;
+  padding: 7px 13px !important;
+  color: var(--th-cl-txt) !important;
+  background: var(--th-cl-cardAlt) !important;
+  border: 1px solid var(--th-cl-bord) !important;
+  border-radius: var(--th-radius-sm) !important;
+  outline: none !important;
+  font: 13px var(--fst3) !important;
+  line-height: 1.2;
+  text-transform: lowercase;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition:
+    color var(--th-trans-fast),
+    background var(--th-trans-fast),
+    border-color var(--th-trans-fast),
+    box-shadow var(--th-trans-fast),
+    transform var(--th-trans-fast) !important;
+}
+
+.rep-button:hover,
+.button:hover,
+.button1:hover,
+.button2:hover,
+a.button:hover,
+a.button1:hover,
+a.button2:hover {
+  color: var(--th-cl-tle) !important;
+  background: var(--th-grad-chip) !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 12px var(--th-cl-shadow);
+  transform: translateY(-1px);
+}
+
+.rep-button:focus-visible,
+.button:focus-visible,
+.button1:focus-visible,
+.button2:focus-visible {
+  outline: 2px solid var(--th-cl-acc2) !important;
+  outline-offset: 2px;
+}
+
+.rep-button::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask:
+    url("https://unpkg.com/lucide-static/icons/heart.svg")
+    center / contain no-repeat;
+  mask:
+    url("https://unpkg.com/lucide-static/icons/heart.svg")
+    center / contain no-repeat;
+  transition: transform var(--th-trans-fast);
+}
+
+.rep-button:hover::before {
+  transform: scale(1.12);
+}
+
+.rep-button.fa_liked {
+  color: var(--th-cl-tle) !important;
+  background: var(--th-grad-chip) !important;
+  border-color: transparent !important;
+  box-shadow: 0 3px 10px var(--th-cl-shadow);
+}
+
+.rep-button.fa_liked::before {
+  transform: scale(1.08);
+}
+
+a[class*="ion-"] i {
+  display: none !important;
+}
+
+a[class*="ion-"]::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  transition: transform var(--th-trans-fast);
+}
+
+a[class*="ion-"]:hover::before {
+  transform: scale(1.1);
+}
+
+a.ion-post::before {
+  -webkit-mask-image:
+    url("https://unpkg.com/lucide-static/icons/square-pen.svg");
+
+  mask-image:
+    url("https://unpkg.com/lucide-static/icons/square-pen.svg");
+}
+
+a.ion-reply::before {
+  -webkit-mask-image:
+    url("https://unpkg.com/lucide-static/icons/message-circle-reply.svg");
+  mask-image:
+    url("https://unpkg.com/lucide-static/icons/message-circle-reply.svg");
+}
+
+a.ion-edit::before {
+  -webkit-mask-image:
+    url("https://unpkg.com/lucide-static/icons/file-pen-line.svg");
+  mask-image:
+    url("https://unpkg.com/lucide-static/icons/file-pen-line.svg");
+}
+
+a.ion-locked::before {
+  -webkit-mask-image:
+    url("https://unpkg.com/lucide-static/icons/lock-keyhole.svg");
+  mask-image:
+    url("https://unpkg.com/lucide-static/icons/lock-keyhole.svg");
+}
+
+.rep-button:disabled,
+.button:disabled,
+.button1:disabled,
+.button2:disabled,
+a.ion-locked {
+  opacity: 0.55;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
