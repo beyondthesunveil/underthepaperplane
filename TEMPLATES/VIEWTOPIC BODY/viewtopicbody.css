@@ -1039,45 +1039,21 @@
 /* ==================== BLOC PERMISSIONS ==================== */
 
 .utppVB_permblock {
-  position: relative;
-  overflow: hidden;
-  margin: 16px 0;
-  padding: 1px;
   color: var(--th-cl-txt);
   background: var(--th-grad-panel);
-  border: 1px solid var(--th-cl-bord);
-  border-radius: var(--th-radius-md);
-  box-shadow: 0 5px 18px var(--th-cl-shadow);
-}
-
-.utppVB_permblock::before {
-  content: "";
-  position: absolute;
-  z-index: 2;
-  top: 12px;
-  bottom: 12px;
-  left: 0;
-  width: 3px;
-  background: var(--th-grad-chip);
-  border-radius: 0 var(--th-radius-xs) var(--th-radius-xs) 0;
+  border-radius: 5px;
 }
 
 .utppVB_permblock > div {
   min-height: 42px;
   padding: 0 16px;
-  box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 9px;
   color: var(--th-cl-tle);
   background: var(--th-grad-head);
-  border-radius:
-    calc(var(--th-radius-md) - 2px)
-    calc(var(--th-radius-md) - 2px)
-    0
-    0;
+  border-radius: 5px;
   font: 15px var(--fti5);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
@@ -1101,11 +1077,11 @@
 }
 
 .utppVB_permblock > p {
-  margin: 0;
   padding: 14px 18px 16px;
   color: var(--th-cl-txt);
   background: var(--th-cl-card);
-  font: 12px/1.8 var(--fte2);
+  font: 12px var(--fte1);
+  border-radius: 0 0 5px 5px;
 }
 
 .utppVB_permblock > p a {
@@ -1122,18 +1098,4 @@
 .utppVB_permblock > p strong {
   color: var(--th-cl-tle);
   font-weight: 700;
-}
-
-@media (max-width: 600px) {
-  .utppVB_permblock > div {
-    min-height: 38px;
-    padding: 0 13px;
-    font-size: 13px;
-  }
-
-  .utppVB_permblock > p {
-    padding: 12px 14px 14px;
-    font-size: 11px;
-    line-height: 1.7;
-  }
 }
