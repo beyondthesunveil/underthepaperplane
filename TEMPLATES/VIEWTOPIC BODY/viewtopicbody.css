@@ -1,36 +1,52 @@
-/* .utppVB_blocktitle {
+.utppVB_blocktitle {
+  --title-height: 40px;
+  --cut-size: 14px;
   width: 100%;
-  border-bottom: 1px var(--manifest-bg) solid;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  box-sizing: border-box;
 }
-h1.utppVB_titlemap {
-  padding: 10px 20px;
-  font: 30px var(--fti1);
-  border-bottom: 1px solid var(--th-cl-bord);
-  font-style: italic;
-  background: var(--th-grad-chip);
+.utppVB_titleicon {
+  width: 40px;
+  display: grid;
+  place-items: center;
+  color: var(--manifest-text);
+  background: var(--newspaper-ink);
+  border-radius: 5px;
+}
+.utppVB_titleicon svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+.utppVB_titlemap {
+  padding: 0 15px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+  flex: 1 1 auto;
+  border-radius: 5px 0 0 5px;
+  background: #c44d58;
+  color: var(--manifest-text);
+  font: 18px var(--fti5);
   text-transform: uppercase;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  width: 100%;
-  margin: 0;
+  font-weight: bold;
+  overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, calc(100% - var(--cut-size)) 100%, 0 100%);
 }
 .utppVB_brdcrmbtrail {
-  --p: 70px;
-  height: 100px;
-  aspect-ratio: 1;
-  clip-path: polygon(var(--p) 0,100% 0,100% 100%,0 100%);
+  height: var(--title-height);
+  padding: 0 15px 0 28px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  border-radius: 0 5px 5px 0;
+  margin-left: -5px;
   background: var(--th-cl-panel);
-  margin-top: 12px;
-  display: inline-block;
-  float: right;
-  font: 15px var(--fst4);
-  letter-spacing: 1px;
-  text-transform: lowercase;
-  padding: 6px 14px;
   color: var(--th-cl-font);
+  font: italic 11px var(--fst2);
+  text-transform: lowercase;
+  clip-path: polygon(var(--cut-size) 0, 100% 0, 100% 100%, 0 100%);
 }
 .utppVB_brdcrmbtrail a {
   color: var(--th-cl-acc3);
@@ -38,11 +54,12 @@ h1.utppVB_titlemap {
   transition: var(--th-trans-fast);
 }
 .utppVB_brdcrmbtrail a:hover {
-  opacity: 1;
   background: var(--th-grad-chip);
+  background-clip: text;
   -webkit-background-clip: text;
+  color: transparent;
   -webkit-text-fill-color: transparent;
-} */
+}
 
 /* ----- début bloc sujet ----- */
 
@@ -150,7 +167,7 @@ h1.utppVB_titlemap {
 }
 .utppVB_charafields {
   margin: 10px;
-  height: 200px;
+  height: 195px;
   overflow: auto;
   padding: 10px;
   background: var(--th-cl-cardAlt);
@@ -243,8 +260,8 @@ h1.utppVB_titlemap {
   background-color: var(--th-cl-card);
   border: 1px solid var(--th-cl-bord);
   margin: 20px;
-  min-height: 790px;
-  border-radius: var(--th-radius-md);
+  min-height: 735px;
+  border-radius: 5px;
 }
 .utppVB_content img {
   max-width: 600px;
