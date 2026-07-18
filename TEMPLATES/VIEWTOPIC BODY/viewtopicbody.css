@@ -852,27 +852,32 @@
 }
 
 .sub-header-buttons__right.utppVB_participants-ready {
+  padding: 7px 10px;
   gap: 0;
+  color: var(--th-cl-txt);
+  background: var(--th-cl-card);
+  border: 1px solid var(--th-cl-bord);
+  border-radius: var(--th-radius-md);
+  box-shadow: 0 4px 14px var(--th-cl-shadow);
 }
 
 .sub-header-buttons__right.utppVB_participants-ready::before {
-  content: "";
-  width: 16px;
-  height: 16px;
-  margin-right: 10px;
-  flex: 0 0 16px;
-  background: var(--th-cl-acc3);
-  -webkit-mask: url("https://unpkg.com/lucide-static/icons/users-round.svg") center / contain no-repeat;
-  mask: url("https://unpkg.com/lucide-static/icons/users-round.svg") center / contain no-repeat;
+  content: "Participants";
+  margin: 0 12px 0 3px;
+  color: var(--th-cl-acc3);
+  font: 700 9px var(--fst3);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .utppVB_participant {
   position: relative;
   z-index: 1;
-  width: 42px;
-  height: 42px;
-  margin-left: -9px;
-  flex: 0 0 42px;
+  width: 36px;
+  height: 36px;
+  margin-left: -8px;
+  flex: 0 0 36px;
   display: block;
   border-radius: 50%;
   outline: none;
@@ -891,8 +896,8 @@
 
 .utppVB_participant > img,
 .utppVB_participant img {
-  width: 42px !important;
-  height: 42px !important;
+  width: 36px !important;
+  height: 36px !important;
   display: block;
   object-fit: cover;
   border: 3px solid var(--th-cl-card);
@@ -902,59 +907,33 @@
   box-shadow: 0 4px 12px var(--th-cl-shadow);
 }
 
-.utppVB_participant[data-participant-name]::before {
-  content: "";
-  position: absolute;
-  z-index: 20;
-  top: calc(100% + 5px);
-  left: 50%;
-  width: 8px;
-  height: 8px;
-  background: var(--th-cl-tle);
-  transform: translateX(-50%) rotate(45deg);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--th-trans-fast), top var(--th-trans-fast);
-}
-
-.utppVB_participant[data-participant-name]::after {
-  content: attr(data-participant-name);
-  position: absolute;
-  z-index: 21;
-  top: calc(100% + 9px);
-  left: 50%;
-  padding: 7px 10px;
-  color: var(--th-cl-bg);
-  background: var(--th-cl-tle);
-  border-radius: var(--th-radius-xs);
-  box-shadow: 0 6px 16px var(--th-cl-shadowStrong);
-  font: 600 10px var(--fst3);
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-  transform: translateX(-50%) translateY(-4px);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--th-trans-fast), transform var(--th-trans-fast);
-}
-
-.utppVB_participant[data-participant-name]:hover::before,
-.utppVB_participant[data-participant-name]:focus-visible::before,
-.utppVB_participant[data-participant-name]:hover::after,
-.utppVB_participant[data-participant-name]:focus-visible::after {
-  opacity: 1;
-}
-
-.utppVB_participant[data-participant-name]:hover::after,
-.utppVB_participant[data-participant-name]:focus-visible::after {
-  transform: translateX(-50%) translateY(0);
-}
-
-.utppVB_participants-count {
+.utppVB_participants-names {
+  min-width: 0;
   margin-left: 12px;
-  color: var(--th-cl-sub);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 6px;
   font: 600 11px var(--fst3);
-  letter-spacing: 0.02em;
+}
+
+.utppVB_participants-name {
+  display: inline-flex;
+  align-items: center;
+  color: var(--th-cl-txt);
+  text-decoration: none;
   white-space: nowrap;
+  transition: color var(--th-trans-fast);
+}
+
+.utppVB_participants-name:hover {
+  color: var(--th-cl-acc3);
+}
+
+.utppVB_participants-name + .utppVB_participants-name::before {
+  content: "·";
+  margin-right: 6px;
+  color: var(--th-cl-neutral);
 }
 
 #fa-topic-fav-button {
