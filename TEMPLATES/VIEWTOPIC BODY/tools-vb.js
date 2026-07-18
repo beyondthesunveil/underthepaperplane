@@ -186,12 +186,14 @@
 
 
     const editorContent = quickReply.querySelector(
-      "#textarea_content"
-    );
+  "#textarea_content"
+);
 
-    if (!editorContent) {
-      return;
-    }
+if (!editorContent) {
+  return;
+}
+
+hideLegacyQuickReplyTitle(quickReply);
 
 function hideLegacyQuickReplyTitle(quickReply) {
   const parent = quickReply.parentElement;
