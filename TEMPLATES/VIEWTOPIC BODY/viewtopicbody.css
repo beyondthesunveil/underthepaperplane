@@ -993,17 +993,37 @@
 }
 
 .utppVB_pages {
-  display: flex;
+  display: inline-flex;
+  align-items: stretch;
+  gap: 6px;
+  margin: 0 0 0 4px;
+  padding: 4px;
+  background: var(--th-cl-card);
+  border: 1px solid var(--th-cl-bord);
+  border-radius: var(--th-radius-md);
+  box-shadow: 0 3px 12px var(--th-cl-shadow);
+}
+
+.utppVB_pages__current {
+  min-height: 34px;
+  padding: 4px 6px 4px 12px;
+  display: inline-flex;
   align-items: center;
-  gap: 3px;
-  margin: 0 0 0 3px;
+  gap: 10px;
   color: var(--th-cl-sub);
-  font: 12px var(--fst3);
+  background: var(--th-cl-panelAlt);
+  border-radius: calc(var(--th-radius-md) - 4px);
   white-space: nowrap;
 }
 
-.utppVB_pages a,
-.utppVB_pages strong {
+.utppVB_pages__label {
+  font: 10px var(--fst3);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.utppVB_pages__number {
   min-width: 30px;
   height: 30px;
   padding: 0 7px;
@@ -1011,31 +1031,115 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  color: var(--th-cl-tle);
+  background: var(--th-grad-chip);
+  border-radius: var(--th-radius-sm);
+  box-shadow: 0 3px 9px var(--th-cl-shadow);
+  font: 700 14px var(--fst3);
+}
+
+.utppVB_pages__list {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 11px;
+  font-size: 0;
+}
+
+.utppVB_pages__list::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  left: 2px;
+  width: 1px;
+  background: var(--th-cl-bord);
+}
+
+.utppVB_pages__list a,
+.utppVB_pages__list strong {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 9px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--th-cl-txt);
   background: var(--th-cl-cardAlt);
   border: 1px solid var(--th-cl-bord);
-  border-radius: var(--th-radius-xs);
+  border-radius: var(--th-radius-sm);
+  font: 13px var(--fst3);
   text-decoration: none;
   transition:
     color var(--th-trans-fast),
     background var(--th-trans-fast),
     border-color var(--th-trans-fast),
+    box-shadow var(--th-trans-fast),
     transform var(--th-trans-fast);
 }
 
-.utppVB_pages a:hover {
+.utppVB_pages__list a:hover {
   color: var(--th-cl-tle);
   background: var(--th-grad-chip);
   border-color: transparent;
-  transform: translateY(-1px);
+
+  box-shadow: 0 4px 10px var(--th-cl-shadow);
+  transform: translateY(-2px);
 }
 
-.utppVB_pages strong {
+.utppVB_pages__list strong {
   color: var(--th-cl-tle);
-  background: var(--th-grad-chip);
-  border-color: transparent;
+  background: var(--th-cl-accSoft);
+  border-color: var(--th-cl-acc2);
+
+  font-weight: 700;
 }
 
+.utppVB_pages__list a img {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+}
+
+.utppVB_pages__list a::before,
+.utppVB_pages__list a::after {
+  font-size: 15px;
+}
+
+
+/* ==================================================
+   RESPONSIVE
+   ================================================== */
+
+@media (max-width: 700px) {
+  .utppVB_pages {
+    width: 100%;
+    margin-left: 0;
+    box-sizing: border-box;
+
+    overflow-x: auto;
+  }
+
+  .utppVB_pages__current {
+    flex: 0 0 auto;
+  }
+
+  .utppVB_pages__list {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 440px) {
+  .utppVB_pages__label {
+    display: none;
+  }
+
+  .utppVB_pages__current {
+    padding-left: 5px;
+  }
+}
 /* ==================== BLOC PERMISSIONS ==================== */
 
 .utppVB_permblock {
