@@ -26,7 +26,7 @@
   };
 
   function normalizeText(value) {
-    return value
+    return String(value || "")
       .trim()
       .toLowerCase()
       .normalize("NFD")
@@ -43,12 +43,9 @@
         Math.random() * RANDOM_ICONS.length
       );
 
-      const randomIcon =
-        RANDOM_ICONS[randomIndex];
-
       element.setAttribute(
         "data-lucide",
-        randomIcon
+        RANDOM_ICONS[randomIndex]
       );
     });
   }
@@ -59,7 +56,6 @@
     );
 
     paginations.forEach(function (pagination) {
-
       if (
         pagination.dataset.paginationReady === "true"
       ) {
@@ -72,7 +68,6 @@
       if (!currentPage) {
         return;
       }
-
 
       const currentNumber =
         currentPage.textContent.trim();
@@ -126,12 +121,10 @@
         );
       }
 
-
       pagination.append(
         currentLabel,
         pageList
       );
-
 
       pagination.dataset.paginationReady =
         "true";
@@ -150,7 +143,6 @@
       if (!watchLink) {
         return;
       }
-
 
       const linkText = normalizeText(
         watchLink.textContent
@@ -179,6 +171,137 @@
     });
   }
 
+  function enhanceTopicParticipants() {
+    const participants = document.querySelector(
+      ".sub-header-buttons__right"
+    );
+
+    if (
+      !participants ||
+      participants.dataset.participantsReady === "true"
+    ) {
+      return;
+    }
+
+    const participantImages =
+      participants.querySelectorAll("img");
+
+
+    participantImages.forEach(function (image) {
+      
+      const profileLink =
+        image.closest("a");
+
+      const avatar =
+        profileLink || image.parentElement;
+
+
+      if (!avatar) {
+        return;
+      }
+      
+      const participantName =
+        image.getAttribute("alt") ||
+        image.getAttribute("title") ||
+        avatar.getAttribute("title") ||
+        (
+          profileLink
+            ? profileLink.textContent.trim()
+            : ""
+        ) ||
+        "Voir le profil";
+
+
+      avatar.classList.add(
+        "utppVB_participant"
+      );
+
+      avatar.dataset.participantName =
+        participantName;
+
+      if (!profileLink) {
+        avatar.setAttribute(
+          "tabindex",
+          "0"
+        );
+      }
+
+
+      if (!avatar.getAttribute("aria-label")) {
+        avatar.setAttribute(
+          "aria-label",
+          participantName
+        );
+      }
+
+      image.removeAttribute("title");
+      avatar.removeAttribute("title");
+    });
+
+    const textNodes = [];
+
+    const walker = document.createTreeWalker(
+      participants,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode: function (node) {
+
+          const isInsideParticipant =
+            node.parentElement &&
+            node.parentElement.closest(
+              ".utppVB_participant"
+            );
+
+          if (isInsideParticipant) {
+            return NodeFilter.FILTER_REJECT;
+          }
+
+
+          const isParticipantCount =
+            /participants?/i.test(
+              node.textContent
+            );
+
+
+          return isParticipantCount
+            ? NodeFilter.FILTER_ACCEPT
+            : NodeFilter.FILTER_REJECT;
+        }
+      }
+    );
+
+
+    while (walker.nextNode()) {
+      textNodes.push(
+        walker.currentNode
+      );
+    }
+
+
+    textNodes.forEach(function (textNode) {
+      const count =
+        document.createElement("span");
+
+      count.className =
+        "utppVB_participants-count";
+
+      count.textContent =
+        textNode.textContent.trim();
+
+      textNode.replaceWith(
+        count
+      );
+    });
+
+
+    participants.classList.add(
+      "utppVB_participants-ready"
+    );
+
+    participants.dataset.participantsReady =
+      "true";
+  }
+
   function hideLegacyQuickReplyTitle(quickReply) {
     const parent =
       quickReply.parentElement;
@@ -186,6 +309,7 @@
     if (!parent) {
       return;
     }
+
 
     const possibleTitles = parent.querySelectorAll(
       [
@@ -206,7 +330,6 @@
 
 
     possibleTitles.forEach(function (element) {
-
       const position =
         element.compareDocumentPosition(
           quickReply
@@ -222,8 +345,9 @@
         return;
       }
 
+
       const normalizedTitle = normalizeText(
-        element.textContent || ""
+        element.textContent
       )
         .replace(/[\s:：\-–—]+$/g, "")
         .trim();
@@ -247,6 +371,7 @@
       "#quick_reply"
     );
 
+
     if (
       !quickReply ||
       quickReply.dataset.quickReplyReady === "true"
@@ -262,6 +387,7 @@
     if (!editorContent) {
       return;
     }
+
 
     hideLegacyQuickReplyTitle(
       quickReply
@@ -335,6 +461,7 @@
       heading
     );
 
+
     quickReply.insertBefore(
       header,
       editorContent
@@ -372,6 +499,7 @@
       );
     }
 
+
     if (
       actions &&
       actions.parentElement === quickReply
@@ -380,7 +508,9 @@
         "utppVB_quickreply-actions"
       );
 
-      actions.removeAttribute("style");
+      actions.removeAttribute(
+        "style"
+      );
     }
 
     const editorTextareas = quickReply.querySelectorAll(
@@ -399,12 +529,12 @@
       );
     });
 
+
     quickReply.dataset.quickReplyReady =
       "true";
   }
 
   function renderLucideIcons() {
-
     if (
       window.lucide &&
       typeof window.lucide.createIcons === "function"
@@ -417,6 +547,7 @@
     setRandomTitleIcons();
     enhancePaginations();
     updateWatchTopicStates();
+    enhanceTopicParticipants();
     enhanceQuickReply();
     renderLucideIcons();
   }
