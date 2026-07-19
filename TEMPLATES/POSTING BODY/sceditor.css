@@ -760,3 +760,90 @@
       220px !important;
   }
 }
+
+/* ==================================================
+   INTÉGRATION DANS POSTING_BODY
+   ================================================== */
+
+/*
+ * Tous les <dl> natifs de Forumactif restent
+ * sur toute la largeur de la grille.
+ */
+
+.utppPB_editorgrid > dl {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+
+/*
+ * Les éventuels <br> directs, notamment celui placé
+ * avant edit_reason, ne doivent pas devenir des
+ * cellules de la grille.
+ */
+
+.utppPB_editorgrid > br {
+  display: none;
+}
+
+
+/*
+ * Neutralise la mise en page native de Forumactif,
+ * qui utilise souvent float et des largeurs fixes
+ * pour #smiley-box et #message-box.
+ */
+
+.utppPB_editorgrid > .utppPB_smileybox {
+  grid-column: 1;
+
+  width: auto !important;
+  min-width: 0;
+  height: auto;
+
+  margin: 0 !important;
+  float: none !important;
+  clear: none !important;
+}
+
+
+.utppPB_editorgrid > .utppPB_messagebox {
+  grid-column: 2;
+
+  width: auto !important;
+  min-width: 0;
+  height: auto;
+
+  margin: 0 !important;
+  float: none !important;
+  clear: none !important;
+}
+
+
+/*
+ * Le contenu du textarea doit prendre toute
+ * la largeur disponible dans le message-box.
+ */
+
+.utppPB_messagebox > .utppPB_textareacontent {
+  width: 100% !important;
+  margin: 0 !important;
+  float: none !important;
+}
+
+
+/* ==================================================
+   RESPONSIVE
+   ================================================== */
+
+@media (max-width: 850px) {
+  .utppPB_editorgrid {
+    grid-template-columns: 1fr;
+  }
+
+  .utppPB_editorgrid
+    > .utppPB_smileybox,
+  .utppPB_editorgrid
+    > .utppPB_messagebox {
+    grid-column: 1;
+  }
+}
