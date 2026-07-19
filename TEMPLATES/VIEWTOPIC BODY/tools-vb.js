@@ -35,6 +35,10 @@
       .replace(/[\u0300-\u036f]/g, "");
   }
 
+  /* ==================================================
+     ICÔNES ALÉATOIRES
+     ================================================== */
+
   function setRandomTitleIcons() {
     const elements =
       document.querySelectorAll(
@@ -53,6 +57,10 @@
       );
     });
   }
+
+  /* ==================================================
+     PAGINATION
+     ================================================== */
 
   function enhancePaginations() {
     const paginations =
@@ -141,6 +149,10 @@
     );
   }
 
+  /* ==================================================
+     SURVEILLANCE DU SUJET
+     ================================================== */
+
   function updateWatchTopicStates() {
     const watchBlocks =
       document.querySelectorAll(
@@ -193,6 +205,10 @@
       }
     );
   }
+
+  /* ==================================================
+     PARTICIPANTS
+     ================================================== */
 
   function enhanceTopicParticipants() {
     const participants =
@@ -441,6 +457,10 @@
       .participantsReady = "true";
   }
 
+  /* ==================================================
+     MASQUAGE DE L’ANCIEN TITRE
+     ================================================== */
+
   function hideLegacyQuickReplyTitle(
     quickReply
   ) {
@@ -512,9 +532,14 @@
     );
   }
 
+  /* ==================================================
+     COMPTEURS DE LA RÉPONSE RAPIDE
+     ================================================== */
+
   function initQuickReplyCounters(
     quickReply,
-    editorContent
+    editorContent,
+    actions
   ) {
     if (
       !quickReply ||
@@ -553,8 +578,16 @@
         '<span data-word-label>mots</span>' +
       "</span>";
 
-    editorContent.appendChild(
-      counters
+    /*
+     * Le compteur est placé dans la barre
+     * d’actions, avant les boutons.
+     */
+    const counterHost =
+      actions || editorContent;
+
+    counterHost.insertBefore(
+      counters,
+      counterHost.firstChild
     );
 
     quickReply.dataset
@@ -709,7 +742,10 @@
               ""
           );
         } catch (error) {
-
+          /*
+           * Le mode source reste
+           * disponible.
+           */
         }
       }
 
@@ -733,7 +769,9 @@
         );
 
       editorContent
-        .querySelectorAll("iframe")
+        .querySelectorAll(
+          "iframe"
+        )
         .forEach(
           bindIframe
         );
@@ -765,6 +803,10 @@
 
     connectEditors();
 
+    /*
+     * Cet observateur ignore les
+     * changements du compteur.
+     */
     const observer =
       new MutationObserver(
         function (mutations) {
@@ -819,6 +861,10 @@
       }
     );
   }
+
+  /* ==================================================
+     RÉPONSE RAPIDE
+     ================================================== */
 
   function enhanceQuickReply() {
     const quickReply =
@@ -995,14 +1041,23 @@
       }
     );
 
+    /*
+     * Le bloc actions est transmis afin
+     * d’y placer les compteurs.
+     */
     initQuickReplyCounters(
       quickReply,
-      editorContent
+      editorContent,
+      actions
     );
 
     quickReply.dataset
       .quickReplyReady = "true";
   }
+
+  /* ==================================================
+     ICÔNES LUCIDE
+     ================================================== */
 
   function renderLucideIcons() {
     if (
@@ -1013,6 +1068,10 @@
       window.lucide.createIcons();
     }
   }
+
+  /* ==================================================
+     INITIALISATION
+     ================================================== */
 
   function initTopicTools() {
     setRandomTitleIcons();
