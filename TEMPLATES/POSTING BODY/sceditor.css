@@ -178,6 +178,8 @@
 #postingbox #message-box {
   margin-top: 14px;
   box-sizing: border-box;
+  clear: none !important;
+  vertical-align: top;
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-md);
   overflow: hidden;
@@ -186,8 +188,10 @@
 
 #postingbox #smiley-box {
   width: var(--utppPB-smiley-closed) !important;
+  height: 470px !important;
   min-height: 470px;
-  float: left;
+  max-height: 470px;
+  float: left !important;
   position: relative;
   background: var(--th-cl-panelAlt);
 }
@@ -199,8 +203,10 @@
 
 #postingbox #message-box {
   width: calc(100% - var(--utppPB-smiley-closed) - var(--utppPB-editor-gap)) !important;
+  height: 470px !important;
   min-height: 470px;
-  float: right;
+  max-height: 470px;
+  float: right !important;
   padding: 0;
   background: var(--th-cl-card);
 }
@@ -551,11 +557,13 @@
   #postingbox #smiley-box.is-open,
   #postingbox #smiley-box.is-open + #message-box {
     width: 100% !important;
-    float: none;
+    float: none !important;
   }
 
   #postingbox #smiley-box {
+    height: auto !important;
     min-height: 54px;
+    max-height: none;
   }
 
   #postingbox .utppPB_smileyToggle,
@@ -588,6 +596,8 @@
   }
 
   #postingbox #message-box {
+    height: auto !important;
+    max-height: none;
     margin-top: 10px;
   }
 
