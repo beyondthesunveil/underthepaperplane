@@ -1,321 +1,338 @@
-#postingbox fieldset.fields1 > dl:has(input[name="subject"]),
-#postingbox fieldset.fields1 > dl:has(input[name="description"]) {
+#postingbox {
+  --utppPB-smiley-closed: 58px;
+  --utppPB-smiley-open: 250px;
+  --utppPB-editor-gap: 12px;
   width: 100%;
-  min-width: 0;
-  margin: 0 0 10px !important;
-  padding: 13px 15px;
   box-sizing: border-box;
-
-  display: grid;
-  grid-template-columns: 145px minmax(0, 1fr);
-  align-items: center;
-  gap: 14px;
-
+  overflow: hidden;
+  color: var(--th-cl-txt);
   background: var(--th-cl-card);
   border: 1px solid var(--th-cl-bord);
-  border-radius: var(--th-radius-md);
+  border-radius: var(--th-radius-lg);
 }
 
-#postingbox fieldset.fields1 > dl:has(input[name="subject"]) > dt,
-#postingbox fieldset.fields1 > dl:has(input[name="description"]) > dt {
-  width: auto !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  float: none !important;
+#postingbox > .inner,
+#postingbox .inner {
+  padding: 0;
 }
 
-#postingbox fieldset.fields1 > dl:has(input[name="subject"]) > dd,
-#postingbox fieldset.fields1 > dl:has(input[name="description"]) > dd {
-  width: auto !important;
-  min-width: 0;
-  margin: 0 !important;
-  padding: 0 !important;
-  float: none !important;
+#postingbox .corners-top,
+#postingbox .corners-bottom {
+  display: none;
+}
 
+/* En-tête natif du formulaire */
+#postingbox h3 {
+  min-height: 104px;
+  margin: 0 0 18px;
+  padding: 24px 30px 24px 102px;
+  box-sizing: border-box;
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
-}
-
-#postingbox fieldset.fields1 > dl:has(input[name="subject"]) > dt label,
-#postingbox fieldset.fields1 > dl:has(input[name="description"]) > dt label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  color: var(--th-cl-sub);
-  font: 700 10px var(--fst3);
-  letter-spacing: 0.1em;
+  color: var(--th-cl-tle);
+  background: var(--th-grad-head);
+  border-bottom: 1px solid var(--th-cl-bord);
+  font: 700 24px var(--fti5);
   text-transform: uppercase;
 }
 
-#postingbox fieldset.fields1 > dl:has(input[name="subject"]) > dt label::before,
-#postingbox fieldset.fields1 > dl:has(input[name="description"]) > dt label::before {
+#postingbox h3::before {
   content: "";
-  width: 15px;
-  height: 15px;
-  flex: 0 0 15px;
-  background-color: var(--th-cl-acc3);
+  width: 52px;
+  height: 52px;
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  translate: 0 -50%;
+  background: var(--th-grad-chip);
+  border-radius: var(--th-radius-md);
+}
+
+#postingbox h3::after {
+  content: "";
+  width: 21px;
+  height: 21px;
+  position: absolute;
+  left: 45px;
+  top: 50%;
+  translate: 0 -50%;
+  background: var(--th-cl-tle);
+  -webkit-mask: url("https://unpkg.com/lucide-static/icons/square-pen.svg") center / contain no-repeat;
+  mask: url("https://unpkg.com/lucide-static/icons/square-pen.svg") center / contain no-repeat;
+}
+
+/* Zone native qui contient les champs et l'éditeur */
+#postingbox fieldset.fields1 {
+  margin: 0;
+  padding: 0 18px 18px;
+  border: 0;
+  min-width: 0;
+}
+
+/* Titre + description dans une seule carte */
+#postingbox fieldset.fields1 > dl {
+  min-height: 70px;
+  margin: 0;
+  padding: 12px 18px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 235px minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  background: var(--th-cl-panelAlt);
+  border-left: 1px solid var(--th-cl-bord);
+  border-right: 1px solid var(--th-cl-bord);
+}
+
+#postingbox fieldset.fields1 > dl:first-of-type {
+  padding-top: 18px;
+  border-top: 1px solid var(--th-cl-bord);
+  border-radius: var(--th-radius-md) var(--th-radius-md) 0 0;
+}
+
+#postingbox fieldset.fields1 > dl:nth-of-type(2) {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--th-cl-bord);
+  border-radius: 0 0 var(--th-radius-md) var(--th-radius-md);
+}
+
+#postingbox fieldset.fields1 > dl + dl::before {
+  content: "";
+  height: 1px;
+  position: absolute;
+}
+
+#postingbox fieldset.fields1 > dl dt,
+#postingbox fieldset.fields1 > dl dd {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  float: none;
+}
+
+#postingbox fieldset.fields1 > dl dt label {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--th-cl-sub);
+  font: 700 12px var(--fst3);
+  letter-spacing: 0.09em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+#postingbox fieldset.fields1 > dl dt label::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  background: var(--th-cl-acc3);
   -webkit-mask: url("https://unpkg.com/lucide-static/icons/type.svg") center / contain no-repeat;
   mask: url("https://unpkg.com/lucide-static/icons/type.svg") center / contain no-repeat;
 }
 
-#postingbox fieldset.fields1 > dl:has(input[name="description"]) > dt label::before {
-  -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/text.svg");
-  mask-image: url("https://unpkg.com/lucide-static/icons/text.svg");
+#postingbox fieldset.fields1 > dl:nth-of-type(2) dt label::before {
+  -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/text-align-start.svg");
+  mask-image: url("https://unpkg.com/lucide-static/icons/text-align-start.svg");
 }
 
-#postingbox input[name="subject"],
-#postingbox input[name="description"] {
-  width: 100% !important;
-  min-width: 0;
-  height: 40px !important;
-  padding: 0 13px !important;
+#postingbox input.inputbox,
+#postingbox select[name="topic_color"] {
+  height: 42px;
   box-sizing: border-box;
-
-  color: var(--th-cl-txt) !important;
-  background: var(--th-cl-cardAlt) !important;
-  border: 1px solid var(--th-cl-bord) !important;
-  border-radius: var(--th-radius-sm) !important;
-  outline: none !important;
-  font: 13px var(--fte2) !important;
-
-  transition:
-    background var(--th-trans-fast),
-    border-color var(--th-trans-fast);
+  color: var(--th-cl-txt);
+  background: var(--th-cl-card);
+  border: 1px solid var(--th-cl-bordDark);
+  border-radius: var(--th-radius-sm);
+  outline: 0;
+  font: 14px var(--fte2);
+  transition: border-color var(--th-trans-fast), background var(--th-trans-fast);
 }
 
-#postingbox input[name="subject"] {
-  flex: 1 1 auto;
+#postingbox input.inputbox {
+  width: 100% !important;
+  padding: 0 13px;
 }
 
-#postingbox input[name="subject"]:hover,
-#postingbox input[name="description"]:hover {
-  border-color: var(--th-cl-bordDark) !important;
+#postingbox input.inputbox:focus,
+#postingbox select[name="topic_color"]:focus {
+  background: var(--th-cl-card);
+  border-color: var(--th-cl-acc2);
 }
 
-#postingbox input[name="subject"]:focus,
-#postingbox input[name="description"]:focus {
-  background: var(--th-cl-card) !important;
-  border-color: var(--th-cl-acc2) !important;
+#postingbox dl dd:has(select[name="topic_color"]) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 145px;
+  gap: 8px;
 }
 
 #postingbox select[name="topic_color"] {
-  width: auto !important;
-  min-width: 150px;
-  height: 40px !important;
-  max-height: 40px !important;
-  margin: 0 !important;
-  padding: 0 34px 0 12px !important;
-  box-sizing: border-box;
-
-  display: inline-block !important;
-  overflow: hidden !important;
-  vertical-align: middle;
-
-  color: var(--th-cl-txt);
-  background-color: var(--th-cl-panelAlt);
-  border: 1px solid var(--th-cl-bord);
-  border-radius: var(--th-radius-sm);
-  outline: none;
-  font: 12px var(--fst3);
-  cursor: pointer;
-
-  appearance: auto;
-  -webkit-appearance: menulist;
+  width: 145px;
+  margin-left: 0 !important;
+  padding: 0 10px;
 }
 
-#postingbox select[name="topic_color"]:focus {
-  border-color: var(--th-cl-acc2);
-}
-
-/* ================================================================
-   COLONNES NATIVES : SMILEYS + MESSAGE
-   ================================================================ */
-
-#postingbox #smiley-box {
-  position: relative;
-  width: 220px !important;
-  min-width: 220px;
-  min-height: 360px;
-  margin: 4px 14px 16px 0 !important;
-  padding: 58px 12px 14px !important;
+/* Accordéon + message : les éléments restent natifs et côte à côte */
+#postingbox #smiley-box,
+#postingbox #message-box {
+  margin-top: 14px;
   box-sizing: border-box;
-
-  float: left !important;
-  clear: left !important;
-
-  color: var(--th-cl-sub);
-  background: var(--th-cl-panelAlt);
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-md);
-  font: 10px/1.6 var(--fst3);
-  text-align: center;
+  overflow: hidden;
+  transition: width var(--th-trans-med), border-color var(--th-trans-fast);
+}
+
+#postingbox #smiley-box {
+  width: var(--utppPB-smiley-closed) !important;
+  min-height: 470px;
+  float: left;
+  position: relative;
+  background: var(--th-cl-panelAlt);
+}
+
+#postingbox #smiley-box.is-open {
+  width: var(--utppPB-smiley-open) !important;
+  border-color: var(--th-cl-acc2);
 }
 
 #postingbox #message-box {
-  position: relative;
-  width: calc(100% - 234px) !important;
-  min-width: 0;
-  min-height: 481px;
-  margin: 4px 0 16px !important;
-  padding: 16px 0;
-  box-sizing: border-box;
-  float: right !important;
-  clear: right !important;
+  width: calc(100% - var(--utppPB-smiley-closed) - var(--utppPB-editor-gap)) !important;
+  min-height: 470px;
+  float: right;
+  padding: 0;
   background: var(--th-cl-card);
-  border: 1px solid var(--th-cl-bord);
-  border-radius: var(--th-radius-md);
 }
 
-/* Clearfix du fieldset natif, sans changer son display. */
-#postingbox fieldset.fields1:has(> #smiley-box)::after {
+#postingbox #smiley-box.is-open + #message-box {
+  width: calc(100% - var(--utppPB-smiley-open) - var(--utppPB-editor-gap)) !important;
+}
+
+#postingbox fieldset.fields1::after {
   content: "";
-  display: block;
+  display: table;
   clear: both;
 }
 
-/* ================================================================
-   EN-TÊTES DES DEUX PANNEAUX
-   ================================================================ */
-
-#postingbox #smiley-box::before,
-#postingbox #message-box::before {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  min-height: 45px;
-  padding: 0 14px;
+/* Véritable commande accessible, injectée par le JS */
+#postingbox .utppPB_smileyToggle {
+  width: 100%;
+  height: 468px;
+  padding: 14px 0;
   box-sizing: border-box;
-
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--th-cl-acc3);
+  background: var(--th-grad-head);
+  border: 0;
+  border-radius: calc(var(--th-radius-md) - 1px);
+  outline: 0;
+  cursor: pointer;
+  transition: color var(--th-trans-fast), background var(--th-trans-fast);
+}
 
-  color: var(--th-cl-tle);
-  background: var(--th-grad-panel);
-  border-bottom: 1px solid var(--th-cl-bord);
-  border-radius:
-    calc(var(--th-radius-md) - 1px)
-    calc(var(--th-radius-md) - 1px)
-    0 0;
+#postingbox .utppPB_smileyToggle:focus-visible {
+  outline: 2px solid var(--th-cl-acc2);
+  outline-offset: -3px;
+}
 
+#postingbox .utppPB_smileyToggleIcon,
+#postingbox .utppPB_smileyToggleArrow {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  display: grid;
+  place-items: center;
+  background: var(--th-cl-accSoft);
+  border: 1px solid var(--th-cl-accFade);
+  border-radius: 50%;
+}
+
+#postingbox .utppPB_smileyToggle svg {
+  width: 17px;
+  height: 17px;
+  stroke-width: 2;
+}
+
+#postingbox .utppPB_smileyToggleText {
+  writing-mode: vertical-rl;
+  rotate: 180deg;
   font: 700 11px var(--fst3);
-  letter-spacing: 0.09em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
-#postingbox #smiley-box::before {
-  content: "Émotions";
+#postingbox .utppPB_smileyToggleArrow svg {
+  transition: rotate var(--th-trans-med);
 }
 
-#postingbox #message-box::before {
-  content: "Votre message";
+#postingbox #smiley-box.is-open .utppPB_smileyToggle {
+  height: 58px;
+  padding: 0 14px;
+  flex-direction: row;
+  justify-content: flex-start;
+  border-radius: calc(var(--th-radius-md) - 1px) calc(var(--th-radius-md) - 1px) 0 0;
+  border-bottom: 1px solid var(--th-cl-bord);
 }
 
-#postingbox #smiley-box::after,
-#postingbox #message-box::after {
-  content: "";
-  position: absolute;
-  top: 15px;
-  right: 14px;
-  width: 16px;
-  height: 16px;
-  background-color: var(--th-cl-acc3);
-  -webkit-mask-position: center;
-  -webkit-mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-position: center;
-  mask-size: contain;
-  mask-repeat: no-repeat;
+#postingbox #smiley-box.is-open .utppPB_smileyToggleText {
+  writing-mode: horizontal-tb;
+  rotate: 0deg;
 }
 
-#postingbox #smiley-box::after {
-  -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/smile-plus.svg");
-  mask-image: url("https://unpkg.com/lucide-static/icons/smile-plus.svg");
+#postingbox #smiley-box.is-open .utppPB_smileyToggleArrow {
+  margin-left: auto;
 }
 
-#postingbox #message-box::after {
-  -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/message-square-text.svg");
-  mask-image: url("https://unpkg.com/lucide-static/icons/message-square-text.svg");
+#postingbox #smiley-box.is-open .utppPB_smileyToggleArrow svg {
+  rotate: 180deg;
 }
-
-/* ================================================================
-   SMILEYS ET STATUTS
-   ================================================================ */
 
 #postingbox #smileyContainer {
-  max-height: 270px;
-  padding: 6px;
+  height: 410px;
+  padding: 14px;
+  box-sizing: border-box;
+  overflow: auto;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--th-trans-med), visibility var(--th-trans-med);
+}
 
-  display: flex;
-  align-content: flex-start;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 5px;
+#postingbox #smiley-box.is-open #smileyContainer {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
 
-  overflow-x: hidden;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--th-cl-acc2) transparent;
+#postingbox #smileyContainer select {
+  width: 100%;
+  height: 36px;
+  margin: 0 0 12px;
+  padding: 0 9px;
+  color: var(--th-cl-txt);
+  background: var(--th-cl-card);
+  border: 1px solid var(--th-cl-bord);
+  border-radius: var(--th-radius-sm);
+  outline: 0;
+  font: 12px var(--fst3);
 }
 
 #postingbox #smileyContainer img {
-  max-width: 38px;
-  max-height: 38px;
-  padding: 5px;
-  box-sizing: content-box;
-  display: block;
-
-  background: var(--th-cl-card);
-  border: 1px solid transparent;
-  border-radius: var(--th-radius-sm);
-  cursor: pointer;
-
-  transition:
-    background var(--th-trans-fast),
-    border-color var(--th-trans-fast),
-    transform var(--th-trans-fast);
+  margin: 5px;
+  transition: scale var(--th-trans-fast);
 }
 
 #postingbox #smileyContainer img:hover {
-  background: var(--th-cl-accSoft);
-  border-color: var(--th-cl-acc2);
-  transform: translateY(-2px) scale(1.08);
+  scale: 1.18;
 }
 
-#postingbox #smiley-box > a[href*="mode=bbcode"] {
-  margin-top: 12px;
-  padding-top: 10px;
-  display: block;
-  color: var(--th-cl-acc3);
-  border-top: 1px solid var(--th-cl-bord);
-  font: 600 10px var(--fst3);
-  text-decoration: none;
-}
-
-#postingbox #smiley-box > a[href*="mode=bbcode"]:hover {
-  color: var(--th-cl-desc3);
-}
-
-/* ================================================================
-   MESSAGE ET SCEDITOR
-   ================================================================ */
-
-#postingbox #message-box > .left-box {
-  min-height: 20px;
-  margin: 0 0 8px !important;
-  float: none !important;
-  display: flex;
-  align-items: center;
-}
-
-#postingbox #helpbox {
-  color: var(--th-cl-sub);
-  font: italic 10px var(--fst3);
-}
-
+/* Éditeur SCEditor */
+#postingbox #message-box > .left-box,
 #postingbox #message-box > br {
   display: none;
 }
@@ -323,475 +340,286 @@
 #postingbox #textarea_content {
   width: 100% !important;
   margin: 0 !important;
-  float: none !important;
 }
 
-#postingbox #text_editor_textarea {
+#postingbox .sceditor-container {
   width: 100% !important;
-  min-height: 280px;
-  padding: 16px;
+  min-height: 468px;
   box-sizing: border-box;
-
-  color: var(--th-cl-txt);
-  background: var(--th-cl-cardAlt);
-  border: 1px solid var(--th-cl-bord);
-  border-radius: var(--th-radius-md);
-  outline: none;
-  font: 14px/1.7 var(--fte2);
-  resize: vertical;
-}
-
-#postingbox #message-box .sceditor-container {
-  overflow: hidden;
-  background: var(--th-cl-cardAlt) !important;
-}
-
-#postingbox #message-box .sceditor-toolbar {
-  padding: 8px 9px !important;
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 5px;
-  background: var(--th-cl-panelAlt) !important;
+  flex-direction: column;
+  color: var(--th-cl-txt) !important;
+  background: var(--th-cl-card) !important;
   border: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Toolbar plus légère : groupes nets, boutons plats et aérés */
+#postingbox .sceditor-toolbar {
+  min-height: 66px;
+  padding: 10px !important;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  gap: 6px;
+  overflow: visible !important;
+  background: var(--th-cl-panelAlt) !important;
   border-bottom: 1px solid var(--th-cl-bord) !important;
 }
 
-#postingbox #message-box .sceditor-group {
+#postingbox .sceditor-group {
   margin: 0 !important;
   padding: 3px !important;
   display: inline-flex !important;
   align-items: center;
   gap: 2px;
-  background: var(--th-cl-card) !important;
+  background: color-mix(in srgb, var(--th-cl-card) 88%, transparent) !important;
   border: 1px solid var(--th-cl-bord) !important;
   border-radius: var(--th-radius-sm) !important;
 }
 
-#postingbox #message-box .sceditor-button {
-  width: 28px !important;
-  height: 28px !important;
+#postingbox a.sceditor-button {
+  width: 30px !important;
+  height: 30px !important;
   margin: 0 !important;
+  padding: 0 !important;
   display: grid !important;
   place-items: center;
   background-color: transparent !important;
-  border: 0 !important;
+  border: 1px solid transparent !important;
   border-radius: 6px !important;
-  opacity: 0.72;
-  transition:
-    background var(--th-trans-fast),
-    opacity var(--th-trans-fast),
-    transform var(--th-trans-fast) !important;
+  transition: background var(--th-trans-fast), border-color var(--th-trans-fast), translate var(--th-trans-fast);
 }
 
-#postingbox #message-box .sceditor-button:hover,
-#postingbox #message-box .sceditor-button.hover,
-#postingbox #message-box .sceditor-button.active {
+#postingbox a.sceditor-button:hover {
   background-color: var(--th-cl-accFade) !important;
-  opacity: 1;
-  transform: translateY(-1px);
+  border-color: var(--th-cl-acc2) !important;
+  translate: 0 -1px;
 }
 
-#postingbox #message-box .sceditor-button.disabled {
-  opacity: 0.3;
-  transform: none;
+#postingbox a.sceditor-button.active,
+#postingbox a.sceditor-button.hover {
+  background-color: var(--th-cl-accSoft) !important;
+  border-color: var(--th-cl-acc2) !important;
 }
 
-#postingbox #message-box .sceditor-container iframe,
-#postingbox #message-box .sceditor-container textarea {
+#postingbox a.sceditor-button.disabled {
+  opacity: 0.35;
+}
+
+#postingbox a.sceditor-button > div {
+  margin: auto !important;
+}
+
+#postingbox .sceditor-container iframe,
+#postingbox .sceditor-container textarea {
   width: 100% !important;
-  min-height: 320px !important;
-  padding: 18px !important;
+  min-height: 400px !important;
+  flex: 1 1 auto;
   box-sizing: border-box !important;
+  padding: 22px !important;
   color: var(--th-cl-txt) !important;
   background: var(--th-cl-card) !important;
   border: 0 !important;
   outline: 0 !important;
-  font: 14px/1.7 var(--fte2) !important;
-  resize: vertical;
+  font: 15px/1.65 var(--fte2) !important;
 }
 
-#postingbox #message-box .sceditor-grip {
-  height: 8px !important;
+#postingbox .sceditor-grip {
   background: var(--th-cl-panelAlt) !important;
-  border: 0 !important;
   border-top: 1px solid var(--th-cl-bord) !important;
 }
 
-message-box .sceditor-container {
-  width: auto !important;
-}
-
-/* ================================================================
-   RESPONSIVE
-   ================================================================ */
-
-@media (max-width: 850px) {
-  #postingbox #smiley-box,
-  #postingbox #message-box {
-    width: 100% !important;
-    min-width: 0;
-    min-height: 0;
-    margin: 0 0 14px !important;
-    float: none !important;
-    clear: both !important;
-  }
-
-  #postingbox #smileyContainer {
-    max-height: 180px;
-  }
-}
-
-@media (max-width: 600px) {
-  #postingbox fieldset.fields1 > dl:has(input[name="subject"]),
-  #postingbox fieldset.fields1 > dl:has(input[name="description"]) {
-    grid-template-columns: 1fr;
-    gap: 7px;
-  }
-
-  #postingbox fieldset.fields1 > dl:has(input[name="subject"]) > dd,
-  #postingbox fieldset.fields1 > dl:has(input[name="description"]) > dd {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  #postingbox select[name="topic_color"] {
-    width: 100% !important;
-  }
-
-  #postingbox #message-box .sceditor-container iframe,
-  #postingbox #message-box .sceditor-container textarea {
-    min-height: 320px !important;
-  }
-}
-
-/* ================================================================
-   TOOLBAR FINALE — PALETTE MULTILIGNE SANS OMBRE
-   ================================================================ */
-
-#postingbox #message-box .sceditor-toolbar {
-  min-height: 0;
-  padding: 10px 12px !important;
-
-  display: flex !important;
-  align-items: center;
-  align-content: center;
-  flex-wrap: wrap !important;
-  gap: 7px;
-
-  overflow: visible;
-  background: var(--th-cl-panelAlt) !important;
-  border: 0 !important;
-  border-bottom: 1px solid var(--th-cl-bord) !important;
-  scrollbar-width: auto;
-}
-
-#postingbox #message-box .sceditor-group {
-  min-height: 38px;
-  margin: 0 !important;
-  padding: 4px !important;
-  box-sizing: border-box;
-
-  display: inline-flex !important;
-  align-items: center;
-  flex: 0 0 auto;
-  gap: 2px;
-
-  background: var(--th-cl-card) !important;
-  border: 1px solid var(--th-cl-bord) !important;
-  border-radius: 10px !important;
-}
-
-#postingbox #message-box .sceditor-button {
-  width: 30px !important;
-  height: 30px !important;
-  margin: 0 !important;
-  flex: 0 0 30px;
-
-  display: grid !important;
-  place-items: center;
-
-  background: transparent !important;
-  border: 1px solid transparent !important;
-  border-radius: 7px !important;
-  opacity: 0.72;
-
-  transition:
-    background var(--th-trans-fast),
-    border-color var(--th-trans-fast),
-    opacity var(--th-trans-fast),
-    transform var(--th-trans-fast) !important;
-}
-
-#postingbox #message-box .sceditor-button:hover,
-#postingbox #message-box .sceditor-button.hover {
-  background: var(--th-cl-accFade) !important;
-  border-color: var(--th-cl-acc2) !important;
-  opacity: 1;
-  transform: translateY(-1px);
-}
-
-#postingbox #message-box .sceditor-button.active,
-#postingbox #message-box .sceditor-button-source.active,
-#postingbox #message-box .sceditor-button-source.hover {
-  background: var(--th-cl-accSoft) !important;
-  border-color: var(--th-cl-acc2) !important;
-  opacity: 1;
-}
-
-#postingbox #message-box .sceditor-button.disabled {
-  background: transparent !important;
-  border-color: transparent !important;
-  opacity: 0.25;
-  transform: none;
-}
-
-@media (max-width: 650px) {
-  #postingbox #message-box .sceditor-toolbar {
-    flex-wrap: nowrap !important;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: thin;
-    scrollbar-color: var(--th-cl-acc2) transparent;
-  }
-}
-
-/* ================================================================
-   AJUSTEMENT FINAL — MÉTADONNÉES RACCORDÉES À L’ÉDITEUR
-   ================================================================ */
-
-/* Le sujet ouvre le bandeau commun. */
-#postingbox fieldset.fields1 > dl:has(input[name="subject"]) {
-  border-radius: var(--th-radius-md) var(--th-radius-md) 0 0;
-}
-
-/* La description ferme le contenu, mais sans recréer une carte autonome. */
-#postingbox fieldset.fields1 > dl:has(input[name="description"]) {
-  margin-bottom: 6px !important;
-  border-radius: 0;
-}
-
-/* Si aucune description n'existe, le sujet garde lui aussi une base plate. */
-#postingbox fieldset.fields1
-  > dl:has(input[name="subject"]):not(:has(+ dl input[name="description"])) {
-  margin-bottom: 6px !important;
-  border-radius: var(--th-radius-md) var(--th-radius-md) 0 0;
-}
-
-#postingbox #smiley-box,
-#postingbox #message-box {
-  margin-top: 0 !important;
-}
-
-/* ================================================================
-   COMPOSEUR UNIFIÉ : POSTINGBOX + PIED DE BOUTONS
-   ================================================================ */
-
-/* Carte principale. */
-#postingbox {
-  margin: 22px 0 0 !important;
-  overflow: visible;
-  background: var(--th-cl-card) !important;
-  border: 1px solid var(--th-cl-bord) !important;
-  border-bottom: 0 !important;
-  border-radius: var(--th-radius-lg) var(--th-radius-lg) 0 0 !important;
-}
-
-#postingbox > .inner {
-  overflow: visible;
-}
-
-#postingbox .corners-top,
-#postingbox .corners-bottom,
-#postingbox + .panel.row2 .corners-top,
-#postingbox + .panel.row2 .corners-bottom {
-  display: none !important;
-}
-
-/* En-tête natif du formulaire transformé en bandeau. */
-#postingbox > .inner > .h3 {
-  position: relative;
-  min-height: 78px;
-  margin: -19px -19px 15px -19px!important;
-  padding: 0 22px 0 76px !important;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  color: var(--th-cl-tle) !important;
-  background: var(--th-grad-panel) !important;
-  border: 0 !important;
-  border-bottom: 1px solid var(--th-cl-bord) !important;
-  border-radius: var(--th-radius-lg) var(--th-radius-lg) 0 0;
- font: 700 18px var(--fti5) !important;
- letter-spacing: 0.03em;
- text-transform: uppercase;
-}
-
-#postingbox > .inner > .h3::before {
-  content: "";
-  position: absolute;
-  top: 18px;
-  left: 20px;
-  width: 42px;
-  height: 42px;
-  background: var(--th-grad-chip);
-  border-radius: 14px;
-}
-
-#postingbox > .inner > .h3::after {
-  content: "";
-  position: absolute;
-  top: 30px;
-  left: 32px;
-  width: 18px;
-  height: 18px;
-  background-color: var(--th-cl-tle);
-  -webkit-mask: url("https://unpkg.com/lucide-static/icons/square-pen.svg") center / contain no-repeat;
-  mask: url("https://unpkg.com/lucide-static/icons/square-pen.svg") center / contain no-repeat;
-}
-
-/* ================================================================
-   SUJET + DESCRIPTION : UN SEUL PANNEAU VISUEL
-   ================================================================ */
-
-#postingbox fieldset.fields1 > dl:has(input[name="subject"]) {
-  margin-bottom: 0 !important;
-  padding-bottom: 9px;
-  background: var(--th-cl-panelAlt);
-  border-bottom: 0;
-  border-radius: var(--th-radius-md) var(--th-radius-md) 0 0;
-}
-
-#postingbox fieldset.fields1 > dl:has(input[name="description"]) {
-  position: relative;
-  margin-top: 0 !important;
-  margin-bottom: 14px !important;
-  padding-top: 9px;
-  background: var(--th-cl-panelAlt);
-  border-top: 0;
-  border-radius: 0 0 var(--th-radius-md) var(--th-radius-md);
-}
-
-/* Fine séparation interne, sans créer une seconde carte. */
-#postingbox fieldset.fields1 > dl:has(input[name="description"])::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 15px;
-  left: 15px;
-  height: 1px;
-  background: var(--th-cl-bord);
-}
-
-/* ================================================================
-   PIED DU COMPOSEUR ET BOUTONS NATIFS
-   ================================================================ */
-
-#postingbox + .panel.row2 {
-  margin: 0 0 22px !important;
-  padding: 0 !important;
-  background: var(--th-cl-card) !important;
-  border: 1px solid var(--th-cl-bord) !important;
-  border-top: 0 !important;
-  border-radius: 0 0 var(--th-radius-lg) var(--th-radius-lg) !important;
-}
-
-#postingbox + .panel.row2 > .inner {
-  padding: 0 18px 16px !important;
-}
-
-#postingbox + .panel.row2 .submit-buttons {
-  width: 100%;
-  min-height: 58px;
-  margin: 0 !important;
-  padding: 12px 0 0 !important;
-  box-sizing: border-box;
-
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  gap: 8px;
-
-  border: 0 !important;
-  border-top: 1px solid var(--th-cl-bord) !important;
-  text-align: initial !important;
-}
-
-#postingbox + .panel.row2 .submit-buttons input[type="hidden"] {
-  display: none;
-}
-
-#postingbox + .panel.row2 .submit-buttons input[type="submit"] {
-  min-width: 112px;
-  min-height: 40px;
-  margin: 0 !important;
-  padding: 8px 16px !important;
-  box-sizing: border-box;
+#postingbox .sceditor-dropdown {
   color: var(--th-cl-txt) !important;
-  background: var(--th-cl-cardAlt) !important;
+  background: var(--th-cl-card) !important;
   border: 1px solid var(--th-cl-bord) !important;
   border-radius: var(--th-radius-sm) !important;
-  font: 700 12px var(--fst3) !important;
+}
+
+/* Motif d'édition éventuel */
+#postingbox dl:has(input[name="edit_reason"]) {
+  clear: both;
+  margin-top: 14px !important;
+  border: 1px solid var(--th-cl-bord) !important;
+  border-radius: var(--th-radius-md) !important;
+}
+
+/* Boutons désormais intégrés au bloc global */
+#postingbox fieldset.submit-buttons {
+  width: 100%;
+  min-height: 76px;
+  margin: 0;
+  padding: 14px 18px;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  clear: both;
+  background: var(--th-cl-cardAlt);
+  border: 0;
+  border-top: 1px solid var(--th-cl-bord);
+}
+
+#postingbox fieldset.submit-buttons input[type="submit"] {
+  min-height: 40px;
+  margin: 0 !important;
+  padding: 0 17px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--th-cl-txt) !important;
+  background: var(--th-cl-panel) !important;
+  border: 1px solid var(--th-cl-bordDark) !important;
+  border-radius: var(--th-radius-sm) !important;
+  outline: 0;
+  font: 700 13px var(--fst3) !important;
   text-transform: none;
   cursor: pointer;
-  transition:
-    color var(--th-trans-fast),
-    background var(--th-trans-fast),
-    border-color var(--th-trans-fast),
-    transform var(--th-trans-fast) !important;
+  transition: color var(--th-trans-fast), background var(--th-trans-fast), border-color var(--th-trans-fast), translate var(--th-trans-fast);
 }
 
-#postingbox + .panel.row2 .submit-buttons input[type="submit"]:hover {
-  color: var(--th-cl-acc3) !important;
+#postingbox fieldset.submit-buttons input[type="submit"]:hover {
+  color: var(--th-cl-tle) !important;
   background: var(--th-cl-accSoft) !important;
   border-color: var(--th-cl-acc2) !important;
-  transform: translateY(-1px);
+  translate: 0 -1px;
 }
 
-#postingbox + .panel.row2 .submit-buttons input[name="post"],
-#postingbox + .panel.row2 .submit-buttons input[name="publish"] {
+#postingbox fieldset.submit-buttons input[name="post"],
+#postingbox fieldset.submit-buttons input[name="publish"] {
   color: var(--th-cl-tle) !important;
   background: var(--th-grad-chip) !important;
   border-color: transparent !important;
 }
 
-#postingbox + .panel.row2 .submit-buttons input[name="post"]:hover,
-#postingbox + .panel.row2 .submit-buttons input[name="publish"]:hover {
-  color: var(--th-cl-tle) !important;
-  background: var(--th-grad-chip) !important;
-  border-color: transparent !important;
+#postingbox fieldset.submit-buttons input:disabled,
+#postingbox fieldset.submit-buttons input.disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  translate: 0;
 }
 
-#postingbox + .panel.row2 .submit-buttons .info {
-  flex: 1 0 100%;
+#postingbox fieldset.submit-buttons .info {
+  width: 100%;
+  margin-top: 6px;
   color: var(--th-cl-desc3);
-  font: 11px/1.5 var(--fst3);
+  font: 12px/1.5 var(--fte2);
   text-align: right;
 }
 
-@media (max-width: 600px) {
-  #postingbox {
-    border-radius: var(--th-radius-md) var(--th-radius-md) 0 0 !important;
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 760px) {
+  #postingbox h3 {
+    min-height: 82px;
+    padding: 18px 20px 18px 78px;
+    font-size: 20px;
   }
 
-  #postingbox > .inner {
-    padding-right: 12px !important;
-    padding-left: 12px !important;
+  #postingbox h3::before {
+    width: 44px;
+    height: 44px;
+    left: 20px;
   }
 
-  #postingbox > .inner > .h3 {
-    margin-right: -12px !important;
-    margin-left: -12px !important;
-    border-radius: var(--th-radius-md) var(--th-radius-md) 0 0;
+  #postingbox h3::after {
+    left: 32px;
   }
 
-  #postingbox + .panel.row2 {
-    border-radius: 0 0 var(--th-radius-md) var(--th-radius-md) !important;
+  #postingbox fieldset.fields1 > dl {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 
-  #postingbox + .panel.row2 .submit-buttons input[type="submit"] {
-    flex: 1 1 calc(50% - 4px);
-    min-width: 0;
+  #postingbox dl dd:has(select[name="topic_color"]) {
+    grid-template-columns: 1fr;
+  }
+
+  #postingbox select[name="topic_color"] {
+    width: 100%;
+  }
+
+  #postingbox #smiley-box,
+  #postingbox #message-box,
+  #postingbox #smiley-box.is-open,
+  #postingbox #smiley-box.is-open + #message-box {
+    width: 100% !important;
+    float: none;
+  }
+
+  #postingbox #smiley-box {
+    min-height: 54px;
+  }
+
+  #postingbox .utppPB_smileyToggle,
+  #postingbox #smiley-box.is-open .utppPB_smileyToggle {
+    height: 52px;
+    padding: 0 12px;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  #postingbox .utppPB_smileyToggleText {
+    writing-mode: horizontal-tb;
+    rotate: 0deg;
+  }
+
+  #postingbox .utppPB_smileyToggleArrow {
+    margin-left: auto;
+  }
+
+  #postingbox #smileyContainer {
+    height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  #postingbox #smiley-box.is-open #smileyContainer {
+    height: 230px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  #postingbox #message-box {
+    margin-top: 10px;
+  }
+
+  #postingbox .sceditor-toolbar {
+    flex-wrap: nowrap;
+    overflow-x: auto !important;
+  }
+
+  #postingbox .sceditor-group {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  #postingbox fieldset.fields1 {
+    padding: 0 10px 10px;
+  }
+
+  #postingbox fieldset.submit-buttons {
+    padding: 12px;
+  }
+
+  #postingbox fieldset.submit-buttons input[type="submit"] {
+    flex: 1 1 calc(50% - 8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #postingbox *,
+  #postingbox *::before,
+  #postingbox *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
