@@ -1,11 +1,10 @@
-/* ==================================================
-   SUJET ET DESCRIPTION
-   ================================================== */
-
-.utppPB_field {
+#postingbox fieldset.fields1 > dl:has(input[name="subject"]),
+#postingbox fieldset.fields1 > dl:has(input[name="description"]) {
+  width: 100%;
   min-width: 0;
-  margin: 0 0 10px;
+  margin: 0 0 10px !important;
   padding: 13px 15px;
+  box-sizing: border-box;
 
   display: grid;
   grid-template-columns: 145px minmax(0, 1fr);
@@ -18,102 +17,69 @@
   box-shadow: 0 5px 16px var(--th-cl-shadow);
 }
 
-.utppPB_field + .utppPB_field {
-  margin-top: -5px;
-}
-
-
-/* Libellé */
-
-.utppPB_fieldlabel {
+#postingbox fieldset.fields1 > dl:has(input[name="subject"]) > dt,
+#postingbox fieldset.fields1 > dl:has(input[name="description"]) > dt {
   width: auto !important;
   margin: 0 !important;
-  padding: 0;
+  padding: 0 !important;
   float: none !important;
 }
 
-.utppPB_fieldlabel label {
+#postingbox fieldset.fields1 > dl:has(input[name="subject"]) > dd,
+#postingbox fieldset.fields1 > dl:has(input[name="description"]) > dd {
+  width: auto !important;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  float: none !important;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#postingbox fieldset.fields1 > dl:has(input[name="subject"]) > dt label,
+#postingbox fieldset.fields1 > dl:has(input[name="description"]) > dt label {
   display: flex;
   align-items: center;
   gap: 8px;
 
   color: var(--th-cl-sub);
-
   font: 700 10px var(--fst3);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-
-/* Petite icône de champ */
-
-.utppPB_fieldlabel label::before {
+#postingbox fieldset.fields1 > dl:has(input[name="subject"]) > dt label::before,
+#postingbox fieldset.fields1 > dl:has(input[name="description"]) > dt label::before {
   content: "";
-
   width: 15px;
   height: 15px;
   flex: 0 0 15px;
-
   background-color: var(--th-cl-acc3);
-
-  -webkit-mask:
-    url("https://unpkg.com/lucide-static/icons/type.svg")
-    center / contain no-repeat;
-
-  mask:
-    url("https://unpkg.com/lucide-static/icons/type.svg")
-    center / contain no-repeat;
+  -webkit-mask: url("https://unpkg.com/lucide-static/icons/type.svg") center / contain no-repeat;
+  mask: url("https://unpkg.com/lucide-static/icons/type.svg") center / contain no-repeat;
 }
 
-.utppPB_descriptionfield
-  .utppPB_fieldlabel
-  label::before {
-  -webkit-mask-image:
-    url("https://unpkg.com/lucide-static/icons/text.svg");
-
-  mask-image:
-    url("https://unpkg.com/lucide-static/icons/text.svg");
+#postingbox fieldset.fields1 > dl:has(input[name="description"]) > dt label::before {
+  -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/text.svg");
+  mask-image: url("https://unpkg.com/lucide-static/icons/text.svg");
 }
 
-
-/* Contrôle */
-
-.utppPB_fieldcontrol {
-  width: auto !important;
-  min-width: 0;
-  margin: 0 !important;
-  padding: 0;
-  float: none !important;
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-
-/* Champs texte */
-
-.utppPB_input {
+#postingbox input[name="subject"],
+#postingbox input[name="description"] {
   width: 100% !important;
   min-width: 0;
-  height: 40px;
+  height: 40px !important;
   padding: 0 13px !important;
   box-sizing: border-box;
 
   color: var(--th-cl-txt) !important;
   background: var(--th-cl-cardAlt) !important;
-
-  border:
-    1px solid
-    var(--th-cl-bord) !important;
-
-  border-radius:
-    var(--th-radius-sm) !important;
-
+  border: 1px solid var(--th-cl-bord) !important;
+  border-radius: var(--th-radius-sm) !important;
   outline: none !important;
-
-  font:
-    13px var(--fte2) !important;
+  font: 13px var(--fte2) !important;
 
   transition:
     background var(--th-trans-fast),
@@ -121,178 +87,173 @@
     box-shadow var(--th-trans-fast);
 }
 
-.utppPB_input:hover {
-  border-color:
-    var(--th-cl-bordDark) !important;
+#postingbox input[name="subject"] {
+  flex: 1 1 auto;
 }
 
-.utppPB_input:focus {
-  background:
-    var(--th-cl-card) !important;
-
-  border-color:
-    var(--th-cl-acc2) !important;
-
-  box-shadow:
-    0 0 0 3px
-    var(--th-cl-accFade) !important;
+#postingbox input[name="subject"]:hover,
+#postingbox input[name="description"]:hover {
+  border-color: var(--th-cl-bordDark) !important;
 }
 
-.utppPB_input::placeholder {
-  color: var(--th-cl-sub);
-  opacity: 0.7;
+#postingbox input[name="subject"]:focus,
+#postingbox input[name="description"]:focus {
+  background: var(--th-cl-card) !important;
+  border-color: var(--th-cl-acc2) !important;
+  box-shadow: 0 0 0 3px var(--th-cl-accFade) !important;
 }
 
+#postingbox select[name="topic_color"] {
+  width: auto !important;
+  min-width: 150px;
+  height: 40px !important;
+  max-height: 40px !important;
+  margin: 0 !important;
+  padding: 0 34px 0 12px !important;
+  box-sizing: border-box;
 
-/* Sélecteur de couleur */
-
-.utppPB_select {
-  flex: 0 0 auto;
-  height: 40px;
-  padding: 0 34px 0 12px;
+  display: inline-block !important;
+  overflow: hidden !important;
+  vertical-align: middle;
 
   color: var(--th-cl-txt);
   background-color: var(--th-cl-panelAlt);
-
-  border:
-    1px solid
-    var(--th-cl-bord);
-
-  border-radius:
-    var(--th-radius-sm);
-
+  border: 1px solid var(--th-cl-bord);
+  border-radius: var(--th-radius-sm);
   outline: none;
-
-  font:
-    12px var(--fst3);
-
+  font: 12px var(--fst3);
   cursor: pointer;
 
-  transition:
-    border-color var(--th-trans-fast),
-    box-shadow var(--th-trans-fast);
+  appearance: auto;
+  -webkit-appearance: menulist;
 }
 
-.utppPB_select:focus {
-  border-color:
-    var(--th-cl-acc2);
-
-  box-shadow:
-    0 0 0 3px
-    var(--th-cl-accFade);
+#postingbox select[name="topic_color"]:focus {
+  border-color: var(--th-cl-acc2);
+  box-shadow: 0 0 0 3px var(--th-cl-accFade);
 }
 
+/* ================================================================
+   COLONNES NATIVES : SMILEYS + MESSAGE
+   ================================================================ */
 
-/* ==================================================
-   PANNEAU DES SMILEYS
-   ================================================== */
-
-.utppPB_smileybox {
+#postingbox #smiley-box {
   position: relative;
-
   width: 220px !important;
   min-width: 220px;
-  margin: 0 14px 16px 0 !important;
+  min-height: 360px;
+  margin: 4px 14px 16px 0 !important;
+  padding: 58px 12px 14px !important;
+  box-sizing: border-box;
+
   float: left !important;
   clear: left !important;
 
-  padding: 58px 12px 14px;
-  box-sizing: border-box;
-
   color: var(--th-cl-sub);
   background: var(--th-cl-panelAlt);
-
-  border:
-    1px solid
-    var(--th-cl-bord);
-
-  border-radius:
-    var(--th-radius-md);
-
-  box-shadow:
-    0 6px 18px
-    var(--th-cl-shadow);
-
-  font:
-    10px/1.6 var(--fst3);
-
+  border: 1px solid var(--th-cl-bord);
+  border-radius: var(--th-radius-md);
+  box-shadow: 0 6px 18px var(--th-cl-shadow);
+  font: 10px/1.6 var(--fst3);
   text-align: center;
 }
 
+#postingbox #message-box {
+  position: relative;
+  width: calc(100% - 234px) !important;
+  min-width: 0;
+  min-height: 360px;
+  margin: 4px 0 16px !important;
+  padding: 58px 14px 14px !important;
+  box-sizing: border-box;
 
-/* En-tête du panneau */
+  float: right !important;
+  clear: right !important;
 
-.utppPB_smileybox::before {
-  content: "Émotions";
+  background: var(--th-cl-card);
+  border: 1px solid var(--th-cl-bord);
+  border-radius: var(--th-radius-md);
+  box-shadow: 0 6px 18px var(--th-cl-shadow);
+}
 
+/* Clearfix du fieldset natif, sans changer son display. */
+#postingbox fieldset.fields1:has(> #smiley-box)::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* ================================================================
+   EN-TÊTES DES DEUX PANNEAUX
+   ================================================================ */
+
+#postingbox #smiley-box::before,
+#postingbox #message-box::before {
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
-
   min-height: 45px;
-  padding: 0 13px;
+  padding: 0 14px;
+  box-sizing: border-box;
 
   display: flex;
   align-items: center;
 
   color: var(--th-cl-tle);
   background: var(--th-grad-panel);
-
-  border-bottom:
-    1px solid
-    var(--th-cl-bord);
-
+  border-bottom: 1px solid var(--th-cl-bord);
   border-radius:
     calc(var(--th-radius-md) - 1px)
     calc(var(--th-radius-md) - 1px)
-    0
-    0;
+    0 0;
 
-  font:
-    700 11px var(--fst3);
-
+  font: 700 11px var(--fst3);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
 
+#postingbox #smiley-box::before {
+  content: "Émotions";
+}
 
-/* Icône décorative */
+#postingbox #message-box::before {
+  content: "Votre message";
+}
 
-.utppPB_smileybox::after {
+#postingbox #smiley-box::after,
+#postingbox #message-box::after {
   content: "";
-
   position: absolute;
   top: 15px;
   right: 14px;
-
   width: 16px;
   height: 16px;
-
-  background-color:
-    var(--th-cl-acc3);
-
-  -webkit-mask:
-    url("https://unpkg.com/lucide-static/icons/smile-plus.svg")
-    center / contain no-repeat;
-
-  mask:
-    url("https://unpkg.com/lucide-static/icons/smile-plus.svg")
-    center / contain no-repeat;
+  background-color: var(--th-cl-acc3);
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
 }
 
-
-/* Cache les retours à la ligne natifs */
-
-.utppPB_smileybox > br {
-  display: none;
+#postingbox #smiley-box::after {
+  -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/smile-plus.svg");
+  mask-image: url("https://unpkg.com/lucide-static/icons/smile-plus.svg");
 }
 
+#postingbox #message-box::after {
+  -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/message-square-text.svg");
+  mask-image: url("https://unpkg.com/lucide-static/icons/message-square-text.svg");
+}
 
-/* Galerie */
+/* ================================================================
+   SMILEYS ET STATUTS
+   ================================================================ */
 
-.utppPB_smileycontainer {
-  max-height: 330px;
+#postingbox #smileyContainer {
+  max-height: 270px;
   padding: 6px;
 
   display: flex;
@@ -304,34 +265,20 @@
 
   overflow-x: hidden;
   overflow-y: auto;
-
   scrollbar-width: thin;
-  scrollbar-color:
-    var(--th-cl-acc2)
-    transparent;
+  scrollbar-color: var(--th-cl-acc2) transparent;
 }
 
-
-/* Smileys */
-
-.utppPB_smileycontainer img {
+#postingbox #smileyContainer img {
   max-width: 38px;
   max-height: 38px;
   padding: 5px;
   box-sizing: content-box;
-
   display: block;
 
-  background:
-    var(--th-cl-card);
-
-  border:
-    1px solid
-    transparent;
-
-  border-radius:
-    var(--th-radius-sm);
-
+  background: var(--th-cl-card);
+  border: 1px solid transparent;
+  border-radius: var(--th-radius-sm);
   cursor: pointer;
 
   transition:
@@ -341,439 +288,192 @@
     transform var(--th-trans-fast);
 }
 
-.utppPB_smileycontainer img:hover {
-  background:
-    var(--th-cl-accSoft);
-
-  border-color:
-    var(--th-cl-acc2);
-
-  box-shadow:
-    0 4px 10px
-    var(--th-cl-shadow);
-
-  transform:
-    translateY(-2px)
-    scale(1.08);
+#postingbox #smileyContainer img:hover {
+  background: var(--th-cl-accSoft);
+  border-color: var(--th-cl-acc2);
+  box-shadow: 0 4px 10px var(--th-cl-shadow);
+  transform: translateY(-2px) scale(1.08);
 }
 
-
-/* Aide BBCode */
-
-.utppPB_bbcodehelp {
+#postingbox #smiley-box > a[href*="mode=bbcode"] {
   margin-top: 12px;
   padding-top: 10px;
-
   display: block;
-
   color: var(--th-cl-acc3);
-
-  border-top:
-    1px solid
-    var(--th-cl-bord);
-
-  font:
-    600 10px var(--fst3);
-
+  border-top: 1px solid var(--th-cl-bord);
+  font: 600 10px var(--fst3);
   text-decoration: none;
 }
 
-.utppPB_bbcodehelp:hover {
+#postingbox #smiley-box > a[href*="mode=bbcode"]:hover {
   color: var(--th-cl-desc3);
 }
 
+/* ================================================================
+   MESSAGE ET SCEDITOR
+   ================================================================ */
 
-/* ==================================================
-   BLOC PRINCIPAL DU MESSAGE
-   ================================================== */
-
-.utppPB_messagebox {
-  position: relative;
-
-  width: calc(100% - 234px) !important;
-  min-width: 0;
-  margin: 0 0 16px !important;
-  float: right !important;
-  clear: right !important;
-
-  padding: 58px 14px 14px;
-  box-sizing: border-box;
-
-  background:
-    var(--th-cl-card);
-
-  border:
-    1px solid
-    var(--th-cl-bord);
-
-  border-radius:
-    var(--th-radius-md);
-
-  box-shadow:
-    0 6px 18px
-    var(--th-cl-shadow);
-}
-
-
-/* En-tête */
-
-.utppPB_messagebox::before {
-  content: "Votre message";
-
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-
-  min-height: 45px;
-  padding: 0 14px;
-
-  display: flex;
-  align-items: center;
-
-  color: var(--th-cl-tle);
-  background: var(--th-grad-panel);
-
-  border-bottom:
-    1px solid
-    var(--th-cl-bord);
-
-  border-radius:
-    calc(var(--th-radius-md) - 1px)
-    calc(var(--th-radius-md) - 1px)
-    0
-    0;
-
-  font:
-    700 11px var(--fst3);
-
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-
-
-/* Icône */
-
-.utppPB_messagebox::after {
-  content: "";
-
-  position: absolute;
-  top: 15px;
-  right: 15px;
-
-  width: 16px;
-  height: 16px;
-
-  background-color:
-    var(--th-cl-acc3);
-
-  -webkit-mask:
-    url("https://unpkg.com/lucide-static/icons/message-square-text.svg")
-    center / contain no-repeat;
-
-  mask:
-    url("https://unpkg.com/lucide-static/icons/message-square-text.svg")
-    center / contain no-repeat;
-}
-
-
-/* Retours à la ligne natifs */
-
-.utppPB_messagebox > br {
-  display: none;
-}
-
-
-/* Ligne d’aide SCEditor */
-
-.utppPB_helpbox {
+#postingbox #message-box > .left-box {
   min-height: 20px;
-  margin: 0 0 8px;
+  margin: 0 0 8px !important;
   float: none !important;
-
   display: flex;
   align-items: center;
 }
 
-.utppPB_helpline {
+#postingbox #helpbox {
   color: var(--th-cl-sub);
   font: italic 10px var(--fst3);
 }
 
-
-/* Conteneur du textarea */
-
-.utppPB_textareacontent {
-  width: 100% !important;
-  margin: 0 !important;
+#postingbox #message-box > br {
+  display: none;
 }
 
+#postingbox #textarea_content {
+  width: 100% !important;
+  margin: 0 !important;
+  float: none !important;
+}
 
-/* Textarea natif avant initialisation */
-
-.utppPB_textarea {
-  width: 100%;
+#postingbox #text_editor_textarea {
+  width: 100% !important;
   min-height: 280px;
   padding: 16px;
   box-sizing: border-box;
 
   color: var(--th-cl-txt);
   background: var(--th-cl-cardAlt);
-
-  border:
-    1px solid
-    var(--th-cl-bord);
-
-  border-radius:
-    var(--th-radius-md);
-
+  border: 1px solid var(--th-cl-bord);
+  border-radius: var(--th-radius-md);
   outline: none;
-
-  font:
-    14px/1.7 var(--fte2);
-
+  font: 14px/1.7 var(--fte2);
   resize: vertical;
 }
 
-
-/* ==================================================
-   SCEDITOR DANS L’ÉDITEUR COMPLET
-   ================================================== */
-
-.utppPB_messagebox .sceditor-container {
+#postingbox #message-box .sceditor-container {
   width: 100% !important;
   overflow: hidden;
-
-  background:
-    var(--th-cl-cardAlt) !important;
-
-  border:
-    1px solid
-    var(--th-cl-bord) !important;
-
-  border-radius:
-    var(--th-radius-md) !important;
-
+  background: var(--th-cl-cardAlt) !important;
+  border: 1px solid var(--th-cl-bord) !important;
+  border-radius: var(--th-radius-md) !important;
   box-shadow:
-    inset 0 1px 0
-    rgb(255 255 255 / 0.08),
-    0 5px 16px
-    var(--th-cl-shadow) !important;
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    0 5px 16px var(--th-cl-shadow) !important;
 }
 
-
-/* Barre d’outils */
-
-.utppPB_messagebox .sceditor-toolbar {
+#postingbox #message-box .sceditor-toolbar {
   padding: 8px 9px !important;
-
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 5px;
-
-  background:
-    var(--th-cl-panelAlt) !important;
-
+  background: var(--th-cl-panelAlt) !important;
   border: 0 !important;
-
-  border-bottom:
-    1px solid
-    var(--th-cl-bord) !important;
+  border-bottom: 1px solid var(--th-cl-bord) !important;
 }
 
-
-/* Groupes d’outils */
-
-.utppPB_messagebox .sceditor-group {
+#postingbox #message-box .sceditor-group {
   margin: 0 !important;
   padding: 3px !important;
-
-  display:
-    inline-flex !important;
-
+  display: inline-flex !important;
   align-items: center;
   gap: 2px;
-
-  background:
-    var(--th-cl-card) !important;
-
-  border:
-    1px solid
-    var(--th-cl-bord) !important;
-
-  border-radius:
-    var(--th-radius-sm) !important;
-
-  box-shadow:
-    0 2px 7px
-    var(--th-cl-shadow);
+  background: var(--th-cl-card) !important;
+  border: 1px solid var(--th-cl-bord) !important;
+  border-radius: var(--th-radius-sm) !important;
+  box-shadow: 0 2px 7px var(--th-cl-shadow);
 }
 
-
-/* Boutons SCEditor */
-
-.utppPB_messagebox .sceditor-button {
+#postingbox #message-box .sceditor-button {
   width: 28px !important;
   height: 28px !important;
   margin: 0 !important;
-
   display: grid !important;
   place-items: center;
-
-  background-color:
-    transparent !important;
-
+  background-color: transparent !important;
   border: 0 !important;
-
-  border-radius:
-    6px !important;
-
+  border-radius: 6px !important;
   opacity: 0.72;
-
   transition:
     background var(--th-trans-fast),
     opacity var(--th-trans-fast),
     transform var(--th-trans-fast) !important;
 }
 
-.utppPB_messagebox .sceditor-button:hover,
-.utppPB_messagebox .sceditor-button.hover,
-.utppPB_messagebox .sceditor-button.active {
-  background-color:
-    var(--th-cl-accFade) !important;
-
+#postingbox #message-box .sceditor-button:hover,
+#postingbox #message-box .sceditor-button.hover,
+#postingbox #message-box .sceditor-button.active {
+  background-color: var(--th-cl-accFade) !important;
   opacity: 1;
-
-  transform:
-    translateY(-1px);
+  transform: translateY(-1px);
 }
 
-.utppPB_messagebox .sceditor-button.disabled {
+#postingbox #message-box .sceditor-button.disabled {
   opacity: 0.3;
   transform: none;
 }
 
-
-/* Zone d’écriture */
-
-.utppPB_messagebox
-  .sceditor-container iframe,
-.utppPB_messagebox
-  .sceditor-container textarea {
+#postingbox #message-box .sceditor-container iframe,
+#postingbox #message-box .sceditor-container textarea {
   width: 100% !important;
   min-height: 280px !important;
   padding: 18px !important;
   box-sizing: border-box !important;
-
-  color:
-    var(--th-cl-txt) !important;
-
-  background:
-    var(--th-cl-card) !important;
-
+  color: var(--th-cl-txt) !important;
+  background: var(--th-cl-card) !important;
   border: 0 !important;
   outline: 0 !important;
-
-  font:
-    14px/1.7 var(--fte2) !important;
-
+  font: 14px/1.7 var(--fte2) !important;
   resize: vertical;
 }
 
-
-/* Poignée de redimensionnement */
-
-.utppPB_messagebox .sceditor-grip {
+#postingbox #message-box .sceditor-grip {
   height: 8px !important;
-
-  background:
-    var(--th-cl-panelAlt) !important;
-
+  background: var(--th-cl-panelAlt) !important;
   border: 0 !important;
-
-  border-top:
-    1px solid
-    var(--th-cl-bord) !important;
+  border-top: 1px solid var(--th-cl-bord) !important;
 }
 
-
-/* ==================================================
+/* ================================================================
    RESPONSIVE
-   ================================================== */
+   ================================================================ */
 
 @media (max-width: 850px) {
-  .utppPB_smileybox,
-  .utppPB_messagebox {
+  #postingbox #smiley-box,
+  #postingbox #message-box {
     width: 100% !important;
     min-width: 0;
+    min-height: 0;
     margin: 0 0 14px !important;
     float: none !important;
     clear: both !important;
   }
 
-  .utppPB_smileycontainer {
+  #postingbox #smileyContainer {
     max-height: 180px;
   }
 }
 
-
 @media (max-width: 600px) {
-  .utppPB_field {
+  #postingbox fieldset.fields1 > dl:has(input[name="subject"]),
+  #postingbox fieldset.fields1 > dl:has(input[name="description"]) {
     grid-template-columns: 1fr;
     gap: 7px;
   }
 
-  .utppPB_fieldcontrol {
+  #postingbox fieldset.fields1 > dl:has(input[name="subject"]) > dd,
+  #postingbox fieldset.fields1 > dl:has(input[name="description"]) > dd {
     align-items: stretch;
     flex-direction: column;
   }
 
-  .utppPB_select {
-    width: 100%;
+  #postingbox select[name="topic_color"] {
+    width: 100% !important;
   }
 
-  .utppPB_smileybox,
-  .utppPB_messagebox {
-    border-radius:
-      var(--th-radius-sm);
+  #postingbox #message-box .sceditor-container iframe,
+  #postingbox #message-box .sceditor-container textarea {
+    min-height: 220px !important;
   }
-
-  .utppPB_messagebox
-    .sceditor-container iframe,
-  .utppPB_messagebox
-    .sceditor-container textarea {
-    min-height:
-      220px !important;
-  }
-}
-
-/* Empêche les éléments natifs suivants de remonter entre les deux colonnes. */
-.utppPB_messagebox ~ br {
-  clear: both;
-}
-
-.utppPB_messagebox > .utppPB_textareacontent {
-  width: 100% !important;
-  margin: 0 !important;
-  float: none !important;
-}
-
-select.utppPB_colorselect {
-  width: auto !important;
-  min-width: 150px;
-  height: 40px !important;
-  max-height: 40px !important;
-  display: inline-block !important;
-  overflow: hidden !important;
-  vertical-align: middle;
-  appearance: auto;
-  -webkit-appearance: menulist;
-}
-
-/* Contient proprement les deux colonnes flottantes sans toucher au fieldset. */
-.utppPB_postingfields::after {
-  content: "";
-  display: block;
-  clear: both;
 }
