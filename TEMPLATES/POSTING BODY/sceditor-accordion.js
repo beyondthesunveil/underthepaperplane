@@ -9,10 +9,43 @@
       .replace(/[\u0300-\u036f]/g, "");
   }
 
-  /*
-   * Récupère l’intitulé natif de Forumactif lorsque
-   * celui-ci se trouve à l’extérieur de #postingbox.
-   */
+  function hideDuplicatePostingHeadings(
+    referenceHeading
+  ) {
+    const referenceText = normalizeText(
+      referenceHeading.textContent
+    );
+
+    if (!referenceText) {
+      return;
+    }
+
+    document
+      .querySelectorAll(
+        [
+          "h1",
+          "h2",
+          "h3",
+          ".page-title",
+          ".topic-title"
+        ].join(",")
+      )
+      .forEach(function (heading) {
+        const headingText = normalizeText(
+          heading.textContent
+        );
+
+        if (
+          heading !== referenceHeading &&
+          headingText === referenceText
+        ) {
+          heading.classList.add(
+            "utppPB_postingHeaderLegacy"
+          );
+        }
+      });
+  }
+
   function enhancePostingHeader() {
     const postingBox = document.querySelector(
       "#postingbox"
@@ -25,17 +58,23 @@
       return;
     }
 
-    const internalHeading = postingBox.querySelector(
-      "h1, h2, h3, .utppPB_postingHeader"
-    );
+    const internalHeading =
+      postingBox.querySelector(
+        [
+          "h1",
+          "h2",
+          "h3",
+          ".utppPB_postingHeader"
+        ].join(",")
+      );
 
-    /*
-     * Si le titre existe déjà dans #postingbox,
-     * on lui ajoute simplement notre classe.
-     */
     if (internalHeading) {
       internalHeading.classList.add(
         "utppPB_postingHeader"
+      );
+
+      hideDuplicatePostingHeadings(
+        internalHeading
       );
 
       postingBox.dataset.headerReady = "true";
@@ -43,10 +82,6 @@
       return;
     }
 
-    /*
-     * Sinon, on cherche le titre natif placé avant
-     * le formulaire par Forumactif.
-     */
     const possibleHeadings = Array.from(
       document.querySelectorAll(
         [
@@ -63,33 +98,35 @@
       }
 
       const position =
-        element.compareDocumentPosition(postingBox);
+        element.compareDocumentPosition(
+          postingBox
+        );
 
       const isBeforePostingBox = Boolean(
-        position & Node.DOCUMENT_POSITION_FOLLOWING
+        position &
+          Node.DOCUMENT_POSITION_FOLLOWING
       );
 
       const text = normalizeText(
         element.textContent
       );
 
+      const isPostingHeading =
+        text.includes("poster") ||
+        text.includes("repondre") ||
+        text.includes("nouveau sujet") ||
+        text.includes("editer");
+
       return (
         isBeforePostingBox &&
-        (
-          text.includes("poster") ||
-          text.includes("repondre") ||
-          text.includes("nouveau sujet") ||
-          text.includes("editer")
-        )
+        isPostingHeading
       );
     });
 
-    /*
-     * On prend le titre correspondant le plus proche
-     * du formulaire.
-     */
     const nativeHeading =
-      possibleHeadings[possibleHeadings.length - 1];
+      possibleHeadings[
+        possibleHeadings.length - 1
+      ];
 
     if (!nativeHeading) {
       postingBox.dataset.headerReady = "true";
@@ -106,10 +143,6 @@
     header.textContent =
       nativeHeading.textContent.trim();
 
-    /*
-     * On masque l’ancien titre sans le supprimer,
-     * puis on place le nouveau dans #postingbox.
-     */
     nativeHeading.classList.add(
       "utppPB_postingHeaderLegacy"
     );
@@ -119,13 +152,11 @@
       postingBox.firstChild
     );
 
+    hideDuplicatePostingHeadings(header);
+
     postingBox.dataset.headerReady = "true";
   }
 
-  /*
-   * Transforme la boîte native des smileys
-   * en accordéon horizontal accessible.
-   */
   function initSmileyAccordion() {
     const smileyBox = document.querySelector(
       "#postingbox #smiley-box"
@@ -140,7 +171,8 @@
     if (
       !smileyBox ||
       !smileyContainer ||
-      smileyBox.dataset.accordionReady === "true"
+      smileyBox.dataset.accordionReady ===
+        "true"
     ) {
       return;
     }
@@ -186,9 +218,6 @@
         '<i data-lucide="chevron-right"></i>' +
       "</span>";
 
-    /*
-     * L’accordéon est toujours fermé au chargement.
-     */
     smileyBox.classList.remove(
       "is-open"
     );
@@ -224,13 +253,11 @@
     );
   }
 
-  /*
-   * Convertit les balises data-lucide en SVG.
-   */
   function renderLucideIcons() {
     if (
       window.lucide &&
-      typeof window.lucide.createIcons === "function"
+      typeof window.lucide.createIcons ===
+        "function"
     ) {
       window.lucide.createIcons();
     }
