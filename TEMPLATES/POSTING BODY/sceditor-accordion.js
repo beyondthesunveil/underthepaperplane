@@ -63,52 +63,90 @@
    * injecter après le chargement initial.
    */
   function watchForDuplicatePostingHeadings(
-    referenceHeading,
-    postingBox
+  referenceHeading,
+  postingBox
+) {
+  if (
+    !window.MutationObserver ||
+    postingBox.dataset
+      .headerObserverReady === "true"
   ) {
-    if (
-      !window.MutationObserver ||
-      postingBox.dataset
-        .headerObserverReady === "true"
-    ) {
-      return;
-    }
-
-    let scheduled = false;
-
-    const searchRoot =
-      postingBox.parentElement ||
-      document.body;
-
-    const observer =
-      new MutationObserver(function () {
-        if (scheduled) {
-          return;
-        }
-
-        scheduled = true;
-
-        window.requestAnimationFrame(
-          function () {
-            hideDuplicatePostingHeadings(
-              referenceHeading,
-              postingBox
-            );
-
-            scheduled = false;
-          }
-        );
-      });
-
-    observer.observe(searchRoot, {
-      childList: true,
-      subtree: true
-    });
-
-    postingBox.dataset.headerObserverReady =
-      "true";
+    return;
   }
 
+  let scheduled = false;
+
+  const searchRoot =
+    postingBox.parentElement ||
+    document.body;
+
+  const observer =
+    new MutationObserver(function (mutations) {
+      const referenceText = normalizeText(
+        referenceHeading.textContent
+      );
+
+      /*
+       * On vérifie uniquement les nouveaux éléments.
+       * Les changements du compteur sont ainsi ignorés.
+       */
+      const duplicateMayExist =
+        mutations.some(function (mutation) {
+          return Array.from(
+            mutation.addedNodes
+          ).some(function (node) {
+            if (
+              normalizeText(node.textContent) ===
+              referenceText
+            ) {
+              return true;
+            }
+
+            if (
+              node.nodeType !==
+              Node.ELEMENT_NODE
+            ) {
+              return false;
+            }
+
+            return Array.from(
+              node.querySelectorAll("*")
+            ).some(function (child) {
+              return (
+                normalizeText(
+                  child.textContent
+                ) === referenceText
+              );
+            });
+          });
+        });
+
+      if (!duplicateMayExist || scheduled) {
+        return;
+      }
+
+      scheduled = true;
+
+      window.requestAnimationFrame(
+        function () {
+          hideDuplicatePostingHeadings(
+            referenceHeading,
+            postingBox
+          );
+
+          scheduled = false;
+        }
+      );
+    });
+
+  observer.observe(searchRoot, {
+    childList: true,
+    subtree: true
+  });
+
+  postingBox.dataset.headerObserverReady =
+    "true";
+}
   /*
    * Récupère ou reconstruit la grande entête
    * du formulaire Forumactif.
