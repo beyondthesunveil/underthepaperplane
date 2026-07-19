@@ -1,0 +1,370 @@
+.utppPB_extraToggle {
+  min-height: 56px;
+  margin: 10px 0 0 !important;
+  padding: 9px 14px !important;
+  box-sizing: border-box;
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  gap: 11px;
+  color: var(--th-cl-tle) !important;
+  background: var(--th-grad-head) !important;
+  border: 1px solid var(--th-cl-bord) !important;
+  border-radius: var(--th-radius-md) !important;
+  font: 700 13px var(--fst3) !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color var(--th-trans-fast), background var(--th-trans-fast);
+}
+
+.utppPB_extraToggle::after {
+  content: "";
+  width: 17px;
+  height: 17px;
+  margin-left: auto;
+  flex: 0 0 17px;
+  background: currentColor;
+  -webkit-mask: url("https://unpkg.com/lucide-static/icons/chevron-down.svg") center / contain no-repeat;
+  mask: url("https://unpkg.com/lucide-static/icons/chevron-down.svg") center / contain no-repeat;
+  transition: rotate var(--th-trans-med);
+}
+
+.utppPB_extraToggle[aria-expanded="true"]::after {
+  rotate: 180deg;
+}
+
+.utppPB_extraToggle:focus-visible {
+  outline: 2px solid var(--th-cl-acc2);
+  outline-offset: 2px;
+}
+
+.utppPB_extraToggle .forum-hide {
+  display: none !important;
+}
+
+.utppPB_extraToggleIcon {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  display: grid;
+  place-items: center;
+  color: var(--th-cl-acc3);
+  background: var(--th-cl-accSoft);
+  border: 1px solid var(--th-cl-accFade);
+  border-radius: var(--th-radius-sm);
+}
+
+.utppPB_extraToggleIcon svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.utppPB_extraPanel {
+  margin: 8px 0 16px !important;
+  color: var(--th-cl-txt) !important;
+  background: var(--th-cl-card) !important;
+  border: 1px solid var(--th-cl-bord) !important;
+  border-radius: var(--th-radius-md) !important;
+  overflow: hidden;
+}
+
+.utppPB_extraPanel > .inner {
+  padding: 18px !important;
+}
+
+.utppPB_extraPanel .corners-top,
+.utppPB_extraPanel .corners-bottom {
+  display: none !important;
+}
+
+.utppPB_extraPanel fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.utppPB_extraPanel hr.dashed {
+  margin: 18px 0;
+  border: 0;
+  border-top: 1px dashed var(--th-cl-bordDark);
+}
+
+/* Lancer de dés */
+
+.utppPB_diceList,
+.utppPB_diceList tbody,
+.utppPB_diceList tr,
+.utppPB_diceList td {
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+}
+
+.utppPB_diceList tr + tr {
+  margin-top: 8px;
+}
+
+.utppPB_diceList td {
+  min-height: 58px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: var(--th-cl-sub);
+  background: var(--th-cl-panelAlt);
+  border: 1px solid var(--th-cl-bord);
+  border-radius: var(--th-radius-sm);
+  font: 12px var(--fst3);
+}
+
+.utppPB_diceList select,
+.utppPB_diceList input[type="text"] {
+  height: 36px;
+  box-sizing: border-box;
+  color: var(--th-cl-txt);
+  background: var(--th-cl-card);
+  border: 1px solid var(--th-cl-bordDark);
+  border-radius: var(--th-radius-xs);
+  outline: 0;
+  font: 12px var(--fte2);
+}
+
+.utppPB_diceList select {
+  min-width: 140px;
+  padding: 0 10px;
+}
+
+.utppPB_diceList input[type="text"] {
+  width: 52px;
+  padding: 0 8px;
+  text-align: center;
+}
+
+.utppPB_diceList a:has(.sprite-tabs_more) {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  color: var(--th-cl-acc3);
+  background: var(--th-cl-accSoft);
+  border: 1px solid var(--th-cl-accFade);
+  border-radius: 50%;
+}
+
+.utppPB_diceList a:has(.sprite-tabs_more)::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  background: currentColor;
+  -webkit-mask: url("https://unpkg.com/lucide-static/icons/plus.svg") center / contain no-repeat;
+  mask: url("https://unpkg.com/lucide-static/icons/plus.svg") center / contain no-repeat;
+}
+
+.utppPB_diceList .sprite-tabs_more {
+  display: none;
+}
+
+/* Options */
+
+.utppPB_optionsFieldset {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+}
+
+.utppPB_optionsFieldset > br {
+  display: none;
+}
+
+.utppPB_optionChoice {
+  min-height: 38px;
+  padding: 7px 11px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--th-cl-txt);
+  background: var(--th-cl-panelAlt);
+  border: 1px solid var(--th-cl-bord);
+  border-radius: var(--th-radius-sm);
+  font: 12px var(--fte2);
+  cursor: pointer;
+  transition: border-color var(--th-trans-fast), background var(--th-trans-fast);
+}
+
+.utppPB_optionChoice:hover {
+  background: var(--th-cl-accFade);
+  border-color: var(--th-cl-acc2);
+}
+
+.utppPB_optionChoice--checkbox input {
+  width: 36px;
+  height: 20px;
+  margin: 0;
+  flex: 0 0 36px;
+  position: relative;
+  appearance: none;
+  background: var(--th-cl-neutral);
+  border: 1px solid var(--th-cl-bordDark);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background var(--th-trans-fast), border-color var(--th-trans-fast);
+}
+
+.utppPB_optionChoice--checkbox input::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background: var(--th-cl-card);
+  border-radius: 50%;
+  transition: translate var(--th-trans-fast);
+}
+
+.utppPB_optionChoice--checkbox input:checked {
+  background: var(--th-cl-acc2);
+  border-color: var(--th-cl-acc2);
+}
+
+.utppPB_optionChoice--checkbox input:checked::before {
+  translate: 16px 0;
+}
+
+.utppPB_optionLegend {
+  width: 100%;
+  margin-top: 8px;
+  color: var(--th-cl-sub);
+  font: 700 10px var(--fst3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.utppPB_optionChoice--radio,
+.utppPB_pollChoice {
+  border-radius: 999px;
+}
+
+.utppPB_optionChoice--radio input,
+.utppPB_pollChoice input {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  accent-color: var(--th-cl-acc2);
+}
+
+/* Sondage */
+
+.utppPB_pollFieldset {
+  display: grid;
+  gap: 10px;
+}
+
+.utppPB_pollRow {
+  margin: 0 !important;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  background: var(--th-cl-panelAlt);
+  border: 1px solid var(--th-cl-bord);
+  border-radius: var(--th-radius-sm);
+}
+
+.utppPB_pollRow dt,
+.utppPB_pollRow dd {
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  float: none !important;
+}
+
+.utppPB_pollRow dt > label {
+  color: var(--th-cl-tle);
+  font: 700 12px var(--fst3);
+}
+
+.utppPB_pollRow .italic {
+  display: block;
+  margin-top: 5px;
+  color: var(--th-cl-sub);
+  font: italic 10px/1.5 var(--fte2);
+}
+
+.utppPB_pollRow input[type="text"],
+.utppPB_pollRow textarea {
+  width: 100% !important;
+  box-sizing: border-box;
+  color: var(--th-cl-txt);
+  background: var(--th-cl-card);
+  border: 1px solid var(--th-cl-bordDark);
+  border-radius: var(--th-radius-sm);
+  outline: 0;
+  font: 13px var(--fte2);
+}
+
+.utppPB_pollRow input[type="text"] {
+  height: 40px;
+  padding: 0 11px;
+}
+
+.utppPB_pollRow input.tiny {
+  width: 70px !important;
+  margin-right: 7px;
+  text-align: center;
+}
+
+.utppPB_pollRow textarea {
+  min-height: 130px;
+  padding: 11px;
+  resize: vertical;
+}
+
+.utppPB_pollChoice {
+  min-height: 34px;
+  margin: 3px 5px 3px 0;
+  padding: 6px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--th-cl-txt);
+  background: var(--th-cl-card);
+  border: 1px solid var(--th-cl-bord);
+  font: 11px var(--fte2);
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .utppPB_pollRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .utppPB_extraPanel > .inner {
+    padding: 12px !important;
+  }
+
+  .utppPB_optionsFieldset {
+    align-items: stretch;
+  }
+
+  .utppPB_optionChoice--checkbox {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .utppPB_extraToggle,
+  .utppPB_extraToggle::after,
+  .utppPB_optionChoice,
+  .utppPB_optionChoice--checkbox input,
+  .utppPB_optionChoice--checkbox input::before {
+    transition-duration: 0.01ms !important;
+  }
+}
