@@ -785,15 +785,10 @@
 .sub-header-buttons {
   width: 100%;
   margin: 16px 0 25px;
-  padding: 10px 0;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  background: transparent;
-  border-top: 1px solid var(--th-cl-bord);
-  border-bottom: 1px solid var(--th-cl-bord);
 }
 
 .sub-header-buttons__left,
@@ -856,13 +851,11 @@
    ================================================================ */
 
 .sub-header-buttons__right.utppVB_participants-ready {
-  padding: 7px 10px;
-  gap: 0;
+  padding: 0 20px;
   color: var(--th-cl-txt);
   background: var(--th-cl-card);
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-md);
-  box-shadow: 0 4px 14px var(--th-cl-shadow);
 }
 
 .sub-header-buttons__right.utppVB_participants-ready::before {
@@ -890,6 +883,13 @@
 
 .sub-header-buttons__right .utppVB_participant:first-of-type {
   margin-left: 0;
+}
+
+.sub-header-buttons__right .poster-count {
+  display: none !important;
+}
+.sub-header-buttons__right[hidden] {
+  display: none !important;
 }
 
 .utppVB_participant:hover,
@@ -938,6 +938,11 @@
   content: "·";
   margin-right: 6px;
   color: var(--th-cl-neutral);
+}
+
+.poster-list {
+    display: flex;
+    font-family: "Roboto Condensed", sans-serif;
 }
 
 /* ================================================================
