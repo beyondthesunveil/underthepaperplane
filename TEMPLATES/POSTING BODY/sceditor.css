@@ -3,14 +3,12 @@
   --utppPB-smiley-open: 250px;
   --utppPB-editor-gap: 12px;
   width: 100%;
-  margin: 0 !important;
+  margin: 20px 0 !important;
   padding: 0 !important;
-  box-sizing: border-box;
   overflow: hidden;
   color: var(--th-cl-txt);
   background: var(--th-cl-card);
-  border: 1px solid var(--th-cl-bord);
-  border-radius: var(--th-radius-lg);
+  border-radius: 10px;
 }
 
 #postingbox > .inner,
@@ -198,6 +196,7 @@
   min-height: 470px;
   max-height: 470px;
   float: left !important;
+  margin-right: 12px;
   position: relative;
   background: var(--th-cl-panelAlt);
 }
@@ -210,9 +209,6 @@
 #postingbox #message-box {
   width: calc(100% - var(--utppPB-smiley-closed) - var(--utppPB-editor-gap)) !important;
   height: 470px !important;
-  min-height: 470px;
-  max-height: 470px;
-  float: right !important;
   padding: 0;
   background: var(--th-cl-card);
 }
@@ -372,6 +368,7 @@
   flex-wrap: wrap;
   align-content: center;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   overflow: visible !important;
   background: var(--th-cl-panelAlt) !important;
