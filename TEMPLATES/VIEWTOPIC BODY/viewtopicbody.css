@@ -1564,29 +1564,39 @@
     scale(1);
 }
 
-#quick_reply #textarea_content {
-  position: relative;
+#quick_reply .utppVB_quickreply-actions {
+  width: 100%;
+  padding: 14px 18px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
+/* Compteurs placés à gauche */
 #quick_reply .utppVB_quickreply-stats {
-  min-height: 30px;
-  padding: 5px 9px;
-  position: absolute;
-  right: 13px;
-  bottom: 10px;
-  z-index: 5;
+  min-height: 32px;
+  margin-right: auto;
+  padding: 6px 10px;
   box-sizing: border-box;
+
+  position: static;
+  inset: auto;
+  z-index: auto;
+
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  order: -1;
+
   color: var(--th-cl-sub);
-  background: color-mix(
-    in srgb,
-    var(--th-cl-panel) 92%,
-    transparent
-  );
+  background: var(--th-cl-panel);
   border: 1px solid var(--th-cl-bord);
   border-radius: 999px;
+
   font: 10px var(--fst3);
   letter-spacing: 0.02em;
   pointer-events: none;
@@ -1607,6 +1617,7 @@
   height: 3px;
   margin-right: 5px;
   align-self: center;
+
   background: var(--th-cl-acc2);
   border-radius: 50%;
 }
@@ -1617,11 +1628,4 @@
   font-size: 11px;
   font-weight: 800;
 }
-
-@media (max-width: 500px) {
-  #quick_reply .utppVB_quickreply-stats {
-    right: 8px;
-    bottom: 8px;
-    font-size: 9px;
-  }
 }
