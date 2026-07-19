@@ -157,14 +157,12 @@
   position: relative;
   width: calc(100% - 234px) !important;
   min-width: 0;
-  min-height: 360px;
+  min-height: 481px;
   margin: 4px 0 16px !important;
-  padding: 58px 14px 14px !important;
+  padding: 16px 0;
   box-sizing: border-box;
-
   float: right !important;
   clear: right !important;
-
   background: var(--th-cl-card);
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-md);
@@ -344,11 +342,8 @@
 }
 
 #postingbox #message-box .sceditor-container {
-  width: 100% !important;
   overflow: hidden;
   background: var(--th-cl-cardAlt) !important;
-  border: 1px solid var(--th-cl-bord) !important;
-  border-radius: var(--th-radius-md) !important;
 }
 
 #postingbox #message-box .sceditor-toolbar {
@@ -405,7 +400,7 @@
 #postingbox #message-box .sceditor-container iframe,
 #postingbox #message-box .sceditor-container textarea {
   width: 100% !important;
-  min-height: 280px !important;
+  min-height: 320px !important;
   padding: 18px !important;
   box-sizing: border-box !important;
   color: var(--th-cl-txt) !important;
@@ -421,6 +416,10 @@
   background: var(--th-cl-panelAlt) !important;
   border: 0 !important;
   border-top: 1px solid var(--th-cl-bord) !important;
+}
+
+message-box .sceditor-container {
+  width: auto !important;
 }
 
 /* ================================================================
@@ -462,7 +461,7 @@
 
   #postingbox #message-box .sceditor-container iframe,
   #postingbox #message-box .sceditor-container textarea {
-    min-height: 220px !important;
+    min-height: 320px !important;
   }
 }
 
@@ -599,7 +598,6 @@
 }
 
 #postingbox > .inner {
-  padding: 0 18px 18px !important;
   overflow: visible;
 }
 
@@ -614,22 +612,19 @@
 #postingbox > .inner > .h3 {
   position: relative;
   min-height: 78px;
-  margin: 0 -18px 16px !important;
+  margin: -19px -19px 15px -19px!important;
   padding: 0 22px 0 76px !important;
   box-sizing: border-box;
-
   display: flex;
   align-items: center;
-
   color: var(--th-cl-tle) !important;
   background: var(--th-grad-panel) !important;
   border: 0 !important;
   border-bottom: 1px solid var(--th-cl-bord) !important;
   border-radius: var(--th-radius-lg) var(--th-radius-lg) 0 0;
-
-  font: 700 18px var(--fti5) !important;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+ font: 700 18px var(--fti5) !important;
+ letter-spacing: 0.03em;
+ text-transform: uppercase;
 }
 
 #postingbox > .inner > .h3::before {
