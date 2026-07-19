@@ -9,6 +9,10 @@
       .replace(/[\u0300-\u036f]/g, "");
   }
 
+  /*
+   * Masque les versions natives du titre qui possèdent
+   * exactement le même texte que notre belle entête.
+   */
   function hideDuplicatePostingHeadings(
     referenceHeading,
     postingBox
@@ -27,33 +31,37 @@
 
     searchRoot
       .querySelectorAll("*")
-      .forEach(function (element) {
+      .forEach(function (heading) {
         const belongsToReference =
-          element === referenceHeading ||
-          referenceHeading.contains(element) ||
-          element.closest(
+          heading === referenceHeading ||
+          referenceHeading.contains(heading) ||
+          heading.closest(
             ".utppPB_postingHeader"
           ) === referenceHeading;
 
         const isCompactElement =
-          element.children.length <= 1;
+          heading.children.length <= 1;
 
-        const elementText = normalizeText(
-          element.textContent
+        const headingText = normalizeText(
+          heading.textContent
         );
 
         if (
           !belongsToReference &&
           isCompactElement &&
-          elementText === referenceText
+          headingText === referenceText
         ) {
-          element.classList.add(
+          heading.classList.add(
             "utppPB_postingHeaderLegacy"
           );
         }
       });
   }
 
+  /*
+   * Surveille les titres que Forumactif pourrait
+   * injecter après le chargement initial.
+   */
   function watchForDuplicatePostingHeadings(
     referenceHeading,
     postingBox
@@ -101,6 +109,10 @@
       "true";
   }
 
+  /*
+   * Récupère ou reconstruit la grande entête
+   * du formulaire Forumactif.
+   */
   function enhancePostingHeader() {
     const postingBox = document.querySelector(
       "#postingbox"
@@ -124,6 +136,10 @@
         ].join(",")
       );
 
+    /*
+     * Si un titre se trouve déjà dans #postingbox,
+     * on le transforme directement.
+     */
     if (internalHeading) {
       internalHeading.classList.add(
         "utppPB_postingHeader"
@@ -145,6 +161,10 @@
       return;
     }
 
+    /*
+     * Sinon, on recherche l’intitulé natif situé
+     * avant le formulaire.
+     */
     const possibleHeadings = Array.from(
       document.querySelectorAll(
         [
@@ -230,6 +250,10 @@
       "true";
   }
 
+  /*
+   * Transforme la boîte native des émoticônes
+   * en accordéon horizontal.
+   */
   function initSmileyAccordion() {
     const smileyBox = document.querySelector(
       "#postingbox #smiley-box"
@@ -291,6 +315,10 @@
         '<i data-lucide="chevron-right"></i>' +
       "</span>";
 
+    /*
+     * L’accordéon est toujours refermé
+     * au chargement de la page.
+     */
     smileyBox.classList.remove(
       "is-open"
     );
@@ -326,6 +354,247 @@
     );
   }
 
+  /*
+   * Ajoute le compteur de caractères et de mots.
+   */
+  function initEditorCounters() {
+    const postingBox = document.querySelector(
+      "#postingbox"
+    );
+
+    const messageBox =
+      postingBox &&
+      postingBox.querySelector(
+        "#message-box"
+      );
+
+    if (
+      !messageBox ||
+      messageBox.dataset.countersReady ===
+        "true"
+    ) {
+      return;
+    }
+
+    const counters =
+      document.createElement("div");
+
+    counters.className =
+      "utppPB_editorStats";
+
+    counters.setAttribute(
+      "aria-live",
+      "polite"
+    );
+
+    counters.setAttribute(
+      "aria-atomic",
+      "true"
+    );
+
+    counters.innerHTML =
+      '<span class="utppPB_editorStat">' +
+        '<strong data-character-count>0</strong> ' +
+        '<span data-character-label>caractères</span>' +
+      "</span>" +
+
+      '<span class="utppPB_editorStat">' +
+        '<strong data-word-count>0</strong> ' +
+        '<span data-word-label>mots</span>' +
+      "</span>";
+
+    messageBox.appendChild(counters);
+
+    messageBox.dataset.countersReady =
+      "true";
+
+    const characterCount =
+      counters.querySelector(
+        "[data-character-count]"
+      );
+
+    const characterLabel =
+      counters.querySelector(
+        "[data-character-label]"
+      );
+
+    const wordCount =
+      counters.querySelector(
+        "[data-word-count]"
+      );
+
+    const wordLabel =
+      counters.querySelector(
+        "[data-word-label]"
+      );
+
+    /*
+     * Évite d’attacher plusieurs fois les mêmes
+     * événements aux éléments de SCEditor.
+     */
+    const boundEditors =
+      new WeakSet();
+
+    function updateCounters(text) {
+      const value =
+        String(text || "");
+
+      const words =
+        value.trim().match(/\S+/g);
+
+      const characters =
+        value.length;
+
+      const totalWords =
+        words ? words.length : 0;
+
+      characterCount.textContent =
+        String(characters);
+
+      characterLabel.textContent =
+        characters === 1
+          ? "caractère"
+          : "caractères";
+
+      wordCount.textContent =
+        String(totalWords);
+
+      wordLabel.textContent =
+        totalWords === 1
+          ? "mot"
+          : "mots";
+    }
+
+    /*
+     * Connexion au mode source de SCEditor.
+     */
+    function bindTextarea(textarea) {
+      if (boundEditors.has(textarea)) {
+        return;
+      }
+
+      boundEditors.add(textarea);
+
+      textarea.addEventListener(
+        "input",
+        function () {
+          updateCounters(
+            textarea.value
+          );
+        }
+      );
+    }
+
+    /*
+     * Connexion au mode visuel de SCEditor.
+     */
+    function bindIframe(iframe) {
+      if (boundEditors.has(iframe)) {
+        return;
+      }
+
+      function connectIframeBody() {
+        try {
+          const body =
+            iframe.contentDocument &&
+            iframe.contentDocument.body;
+
+          if (
+            !body ||
+            boundEditors.has(body)
+          ) {
+            return;
+          }
+
+          boundEditors.add(body);
+
+          body.addEventListener(
+            "input",
+            function () {
+              updateCounters(
+                body.innerText ||
+                body.textContent ||
+                ""
+              );
+            }
+          );
+
+          updateCounters(
+            body.innerText ||
+            body.textContent ||
+            ""
+          );
+        } catch (error) {
+          /*
+           * Si l’iframe est inaccessible,
+           * le compteur source reste disponible.
+           */
+        }
+      }
+
+      boundEditors.add(iframe);
+
+      iframe.addEventListener(
+        "load",
+        connectIframeBody
+      );
+
+      connectIframeBody();
+    }
+
+    /*
+     * Recherche et connecte les éléments créés
+     * dynamiquement par SCEditor.
+     */
+    function connectEditors() {
+      messageBox
+        .querySelectorAll("textarea")
+        .forEach(bindTextarea);
+
+      messageBox
+        .querySelectorAll("iframe")
+        .forEach(bindIframe);
+
+      const visibleTextarea =
+        Array.from(
+          messageBox.querySelectorAll(
+            "textarea"
+          )
+        ).find(function (textarea) {
+          return (
+            window
+              .getComputedStyle(textarea)
+              .display !== "none"
+          );
+        });
+
+      if (visibleTextarea) {
+        updateCounters(
+          visibleTextarea.value
+        );
+      }
+    }
+
+    connectEditors();
+
+    /*
+     * SCEditor peut être construit après notre JS :
+     * on surveille donc l’arrivée de ses éléments.
+     */
+    const observer =
+      new MutationObserver(
+        connectEditors
+      );
+
+    observer.observe(messageBox, {
+      childList: true,
+      subtree: true
+    });
+  }
+
+  /*
+   * Conversion des icônes Lucide en SVG.
+   */
   function renderLucideIcons() {
     if (
       window.lucide &&
@@ -339,6 +608,7 @@
   function initPostingEditor() {
     enhancePostingHeader();
     initSmileyAccordion();
+    initEditorCounters();
     renderLucideIcons();
   }
 
