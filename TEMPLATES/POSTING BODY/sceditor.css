@@ -5,16 +5,13 @@
   margin: 0 0 10px !important;
   padding: 13px 15px;
   box-sizing: border-box;
-
   display: grid;
   grid-template-columns: 145px minmax(0, 1fr);
   align-items: center;
   gap: 14px;
-
   background: var(--th-cl-card);
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-md);
-  box-shadow: 0 5px 16px var(--th-cl-shadow);
 }
 
 #postingbox fieldset.fields1 > dl:has(input[name="subject"]) > dt,
@@ -73,18 +70,15 @@
   height: 40px !important;
   padding: 0 13px !important;
   box-sizing: border-box;
-
   color: var(--th-cl-txt) !important;
   background: var(--th-cl-cardAlt) !important;
   border: 1px solid var(--th-cl-bord) !important;
   border-radius: var(--th-radius-sm) !important;
   outline: none !important;
   font: 13px var(--fte2) !important;
-
   transition:
     background var(--th-trans-fast),
     border-color var(--th-trans-fast),
-    box-shadow var(--th-trans-fast);
 }
 
 #postingbox input[name="subject"] {
@@ -100,7 +94,6 @@
 #postingbox input[name="description"]:focus {
   background: var(--th-cl-card) !important;
   border-color: var(--th-cl-acc2) !important;
-  box-shadow: 0 0 0 3px var(--th-cl-accFade) !important;
 }
 
 #postingbox select[name="topic_color"] {
@@ -111,11 +104,9 @@
   margin: 0 !important;
   padding: 0 34px 0 12px !important;
   box-sizing: border-box;
-
   display: inline-block !important;
   overflow: hidden !important;
   vertical-align: middle;
-
   color: var(--th-cl-txt);
   background-color: var(--th-cl-panelAlt);
   border: 1px solid var(--th-cl-bord);
@@ -123,14 +114,12 @@
   outline: none;
   font: 12px var(--fst3);
   cursor: pointer;
-
   appearance: auto;
   -webkit-appearance: menulist;
 }
 
 #postingbox select[name="topic_color"]:focus {
   border-color: var(--th-cl-acc2);
-  box-shadow: 0 0 0 3px var(--th-cl-accFade);
 }
 
 /* ================================================================
@@ -145,15 +134,12 @@
   margin: 4px 14px 16px 0 !important;
   padding: 58px 12px 14px !important;
   box-sizing: border-box;
-
   float: left !important;
   clear: left !important;
-
   color: var(--th-cl-sub);
   background: var(--th-cl-panelAlt);
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-md);
-  box-shadow: 0 6px 18px var(--th-cl-shadow);
   font: 10px/1.6 var(--fst3);
   text-align: center;
 }
@@ -166,14 +152,11 @@
   margin: 4px 0 16px !important;
   padding: 58px 14px 14px !important;
   box-sizing: border-box;
-
   float: right !important;
   clear: right !important;
-
   background: var(--th-cl-card);
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-md);
-  box-shadow: 0 6px 18px var(--th-cl-shadow);
 }
 
 /* Clearfix du fieldset natif, sans changer son display. */
@@ -196,10 +179,8 @@
   min-height: 45px;
   padding: 0 14px;
   box-sizing: border-box;
-
   display: flex;
   align-items: center;
-
   color: var(--th-cl-tle);
   background: var(--th-grad-panel);
   border-bottom: 1px solid var(--th-cl-bord);
@@ -207,7 +188,6 @@
     calc(var(--th-radius-md) - 1px)
     calc(var(--th-radius-md) - 1px)
     0 0;
-
   font: 700 11px var(--fst3);
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -255,14 +235,12 @@
 #postingbox #smileyContainer {
   max-height: 270px;
   padding: 6px;
-
   display: flex;
   align-content: flex-start;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   gap: 5px;
-
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-width: thin;
@@ -275,23 +253,19 @@
   padding: 5px;
   box-sizing: content-box;
   display: block;
-
   background: var(--th-cl-card);
   border: 1px solid transparent;
   border-radius: var(--th-radius-sm);
   cursor: pointer;
-
   transition:
     background var(--th-trans-fast),
     border-color var(--th-trans-fast),
-    box-shadow var(--th-trans-fast),
     transform var(--th-trans-fast);
 }
 
 #postingbox #smileyContainer img:hover {
   background: var(--th-cl-accSoft);
   border-color: var(--th-cl-acc2);
-  box-shadow: 0 4px 10px var(--th-cl-shadow);
   transform: translateY(-2px) scale(1.08);
 }
 
@@ -341,7 +315,6 @@
   min-height: 280px;
   padding: 16px;
   box-sizing: border-box;
-
   color: var(--th-cl-txt);
   background: var(--th-cl-cardAlt);
   border: 1px solid var(--th-cl-bord);
@@ -357,9 +330,6 @@
   background: var(--th-cl-cardAlt) !important;
   border: 1px solid var(--th-cl-bord) !important;
   border-radius: var(--th-radius-md) !important;
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.08),
-    0 5px 16px var(--th-cl-shadow) !important;
 }
 
 #postingbox #message-box .sceditor-toolbar {
@@ -382,7 +352,6 @@
   background: var(--th-cl-card) !important;
   border: 1px solid var(--th-cl-bord) !important;
   border-radius: var(--th-radius-sm) !important;
-  box-shadow: 0 2px 7px var(--th-cl-shadow);
 }
 
 #postingbox #message-box .sceditor-button {
@@ -507,16 +476,13 @@
   margin: 0 -18px 16px !important;
   padding: 0 22px 0 76px !important;
   box-sizing: border-box;
-
   display: flex;
   align-items: center;
-
   color: var(--th-cl-tle) !important;
   background: var(--th-grad-panel) !important;
   border: 0 !important;
   border-bottom: 1px solid var(--th-cl-bord) !important;
   border-radius: var(--th-radius-lg) var(--th-radius-lg) 0 0;
-
   font: 700 18px var(--fti5) !important;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -531,7 +497,6 @@
   height: 42px;
   background: var(--th-grad-chip);
   border-radius: 14px;
-  box-shadow: 0 5px 14px var(--th-cl-shadow);
 }
 
 #postingbox > .inner > .h3::after {
@@ -556,7 +521,6 @@
   background: var(--th-cl-panelAlt);
   border-bottom: 0;
   border-radius: var(--th-radius-md) var(--th-radius-md) 0 0;
-  box-shadow: 0 5px 16px var(--th-cl-shadow);
 }
 
 #postingbox fieldset.fields1 > dl:has(input[name="description"]) {
@@ -567,7 +531,6 @@
   background: var(--th-cl-panelAlt);
   border-top: 0;
   border-radius: 0 0 var(--th-radius-md) var(--th-radius-md);
-  box-shadow: 0 9px 16px var(--th-cl-shadow);
 }
 
 /* Fine séparation interne, sans créer une seconde carte. */
@@ -592,7 +555,6 @@
   border: 1px solid var(--th-cl-bord) !important;
   border-top: 0 !important;
   border-radius: 0 0 var(--th-radius-lg) var(--th-radius-lg) !important;
-  box-shadow: 0 14px 35px var(--th-cl-shadow);
 }
 
 #postingbox + .panel.row2 > .inner {
@@ -605,13 +567,11 @@
   margin: 0 !important;
   padding: 12px 0 0 !important;
   box-sizing: border-box;
-
   display: flex;
   align-items: center;
   justify-content: flex-end;
   flex-wrap: wrap;
   gap: 8px;
-
   border: 0 !important;
   border-top: 1px solid var(--th-cl-bord) !important;
   text-align: initial !important;
@@ -627,21 +587,17 @@
   margin: 0 !important;
   padding: 8px 16px !important;
   box-sizing: border-box;
-
   color: var(--th-cl-txt) !important;
   background: var(--th-cl-cardAlt) !important;
   border: 1px solid var(--th-cl-bord) !important;
   border-radius: var(--th-radius-sm) !important;
-
   font: 700 12px var(--fst3) !important;
   text-transform: none;
   cursor: pointer;
-
   transition:
     color var(--th-trans-fast),
     background var(--th-trans-fast),
     border-color var(--th-trans-fast),
-    box-shadow var(--th-trans-fast),
     transform var(--th-trans-fast) !important;
 }
 
@@ -649,7 +605,6 @@
   color: var(--th-cl-acc3) !important;
   background: var(--th-cl-accSoft) !important;
   border-color: var(--th-cl-acc2) !important;
-  box-shadow: 0 5px 14px var(--th-cl-shadow);
   transform: translateY(-1px);
 }
 
@@ -659,7 +614,6 @@
   color: var(--th-cl-tle) !important;
   background: var(--th-grad-chip) !important;
   border-color: transparent !important;
-  box-shadow: 0 5px 14px var(--th-cl-shadow);
 }
 
 #postingbox + .panel.row2 .submit-buttons input[name="post"]:hover,
@@ -667,7 +621,6 @@
   color: var(--th-cl-tle) !important;
   background: var(--th-grad-chip) !important;
   border-color: transparent !important;
-  box-shadow: 0 7px 18px var(--th-cl-shadowStrong);
 }
 
 #postingbox + .panel.row2 .submit-buttons .info {
