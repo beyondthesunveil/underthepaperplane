@@ -1483,3 +1483,50 @@
   box-shadow: 0 7px 18px var(--th-cl-shadowStrong);
   transform: translateY(-1px);
 }
+
+.utppVB_participant-tooltip {
+  position: fixed;
+  z-index: 99999;
+  padding: 7px 10px;
+  color: var(--th-cl-bg);
+  background: var(--th-cl-tle);
+  border-radius: var(--th-radius-xs);
+  box-shadow:
+    0 6px 16px
+    var(--th-cl-shadowStrong);
+  font: 600 10px var(--fst3);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform:
+    translateY(4px)
+    scale(0.97);
+  transition:
+    opacity var(--th-trans-fast),
+    transform var(--th-trans-fast);
+}
+
+.utppVB_participant-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: inherit;
+  transform:
+    translate(-50%, -50%)
+    rotate(45deg);
+}
+
+.utppVB_participant-tooltip.is-below::after {
+  top: 0;
+}
+
+.utppVB_participant-tooltip.is-visible {
+  opacity: 1;
+  transform:
+    translateY(0)
+    scale(1);
+}
