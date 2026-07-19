@@ -448,18 +448,17 @@
 
 /* Compteurs de caractères et de mots */
 #postingbox .utppPB_editorStats {
-  min-height: 30px;
-  padding: 5px 9px;
-  position: absolute;
-  right: 13px;
-  bottom: 10px;
-  z-index: 4;
+  min-height: 32px;
+  margin-right: auto;
+  padding: 6px 10px;
+  position: static;
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  order: -1;
   color: var(--th-cl-sub);
-  background: color-mix(in srgb, var(--th-cl-panel) 92%, transparent);
+  background: var(--th-cl-panel);
   border: 1px solid var(--th-cl-bord);
   border-radius: 999px;
   font: 10px var(--fst3);
@@ -474,7 +473,9 @@
   white-space: nowrap;
 }
 
-#postingbox .utppPB_editorStat + .utppPB_editorStat::before {
+#postingbox
+  .utppPB_editorStat
+  + .utppPB_editorStat::before {
   content: "";
   width: 3px;
   height: 3px;
