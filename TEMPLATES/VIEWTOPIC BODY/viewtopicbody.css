@@ -1146,12 +1146,12 @@
   display: inline-flex;
   align-items: stretch;
   gap: 6px;
-  margin: 0;
+  margin: -10px 0 15px;
+  float: right;
   padding: 4px;
   background: var(--th-cl-card);
   border: 1px solid var(--th-cl-bord);
-  border-radius: var(--th-radius-md);
-  box-shadow: 0 3px 12px var(--th-cl-shadow);
+  border-radius: 10px;
 }
 
 .utppVB_pages__current {
@@ -1215,6 +1215,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  margin: 0 3px;
   color: var(--th-cl-txt);
   background: var(--th-cl-cardAlt);
   border: 1px solid var(--th-cl-bord);
@@ -1245,8 +1246,8 @@
 }
 
 .utppVB_pages__list a img {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 9px;
   object-fit: contain;
 }
 
