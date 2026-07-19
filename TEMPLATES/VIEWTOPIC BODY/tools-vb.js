@@ -1,20 +1,5 @@
-/**
- * UTPPVB — Outils des sujets Forumactif
- *
- * - Icône Lucide aléatoire du titre
- * - Pagination enrichie
- * - État de surveillance
- * - Participants et tooltips
- * - Réponse rapide moderne
- */
-
 (function () {
   "use strict";
-
-
-  /* ==================================================
-     CONFIGURATION
-     ================================================== */
 
   const RANDOM_ICONS = [
     "sparkles",
@@ -40,11 +25,6 @@
     send: "Envoyer"
   };
 
-
-  /* ==================================================
-     OUTIL DE NORMALISATION
-     ================================================== */
-
   function normalizeText(value) {
     return String(value || "")
       .trim()
@@ -53,17 +33,12 @@
       .replace(/[\u0300-\u036f]/g, "");
   }
 
-
-  /* ==================================================
-     ICÔNE ALÉATOIRE DU TITRE
-     ================================================== */
-
   function setRandomTitleIcons() {
-    const iconElements = document.querySelectorAll(
+    const elements = document.querySelectorAll(
       "[data-random-lucide]"
     );
 
-    iconElements.forEach(function (element) {
+    elements.forEach(function (element) {
       const randomIndex = Math.floor(
         Math.random() * RANDOM_ICONS.length
       );
@@ -74,11 +49,6 @@
       );
     });
   }
-
-
-  /* ==================================================
-     PAGINATION
-     ================================================== */
 
   function enhancePaginations() {
     const paginations = document.querySelectorAll(
@@ -105,7 +75,7 @@
       const pageList =
         document.createElement("div");
 
-      const currentLabel =
+      const currentBlock =
         document.createElement("div");
 
       const label =
@@ -118,7 +88,7 @@
       pageList.className =
         "utppVB_pages__list";
 
-      currentLabel.className =
+      currentBlock.className =
         "utppVB_pages__current";
 
       label.className =
@@ -135,20 +105,15 @@
         currentNumber;
 
 
-      currentLabel.setAttribute(
+      currentBlock.setAttribute(
         "aria-label",
         "Page actuelle : " + currentNumber
       );
 
-      currentLabel.append(
+      currentBlock.append(
         label,
         number
       );
-
-
-      /*
-       * Déplace les liens existants sans les recréer.
-       */
 
       while (pagination.firstChild) {
         pageList.appendChild(
@@ -156,8 +121,9 @@
         );
       }
 
+
       pagination.append(
-        currentLabel,
+        currentBlock,
         pageList
       );
 
@@ -165,11 +131,6 @@
         "true";
     });
   }
-
-
-  /* ==================================================
-     SURVEILLANCE DU SUJET
-     ================================================== */
 
   function updateWatchTopicStates() {
     const watchBlocks = document.querySelectorAll(
@@ -192,12 +153,6 @@
         watchLink.getAttribute("href") || ""
       ).toLowerCase();
 
-
-      /*
-       * Si Forumactif propose d’arrêter la surveillance,
-       * le sujet est actuellement suivi.
-       */
-
       const isWatching =
         linkText.includes("arreter") ||
         linkText.includes("ne plus surveiller") ||
@@ -217,297 +172,89 @@
     });
   }
 
+  function enhanceTopicParticipants() {
+    const participants = document.querySelector(
+      ".sub-header-buttons__right"
+    );
 
-  /* ==================================================
-     PARTICIPANTS DU SUJET
-     ================================================== */
-
-  /* ==================================================
-   PARTICIPANTS DU SUJET
-   ================================================== */
-
-function enhanceTopicParticipants() {
-  const participants = document.querySelector(
-    ".sub-header-buttons__right"
-  );
-
-  /*
-   * Arrêt si le bloc n’existe pas ou s’il a
-   * déjà été transformé.
-   */
-
-  if (
-    !participants ||
-    participants.dataset.participantsReady === "true"
-  ) {
-    return;
-  }
-
-
-  /*
-   * Cette liste contiendra les pseudos et les liens
-   * de profil récupérés depuis {POSTERS_LIST}.
-   */
-
-  const participantNames = [];
-
-
-  /* --------------------------------------------------
-     AVATARS ET PSEUDOS
-     -------------------------------------------------- */
-
-  const participantImages =
-    participants.querySelectorAll("img");
-
-
-  participantImages.forEach(function (image) {
-    /*
-     * Forumactif place généralement l’avatar
-     * dans un lien menant vers le profil.
-     */
-
-    const profileLink =
-      image.closest("a");
-
-    const avatar =
-      profileLink || image.parentElement;
-
-
-    if (!avatar) {
+    if (
+      !participants ||
+      participants.dataset.participantsReady === "true"
+    ) {
       return;
     }
 
+    const participantNames = [];
 
-    /*
-     * Recherche du pseudo dans les informations
-     * générées par Forumactif.
-     */
+    const participantImages =
+      participants.querySelectorAll("img");
 
-    const participantName =
-      image.getAttribute("alt") ||
-      image.getAttribute("title") ||
-      avatar.getAttribute("title") ||
-      (
-        profileLink
-          ? profileLink.textContent.trim()
+
+    participantImages.forEach(function (image) {
+      const profileLink =
+        image.closest("a");
+
+      const avatar =
+        profileLink || image.parentElement;
+
+      if (!avatar) {
+        return;
+      }
+
+
+      const rawName =
+        image.getAttribute("alt") ||
+        image.getAttribute("title") ||
+        avatar.getAttribute("title") ||
+        (
+          profileLink
+            ? profileLink.textContent.trim()
+            : ""
+        ) ||
+        "Voir le profil";
+
+
+      const cleanName = rawName
+        .replace(
+          /^avatar\s+(de|of)\s+/i,
+          ""
+        )
+        .trim();
+
+
+      avatar.classList.add(
+        "utppVB_participant"
+      );
+
+
+      if (!profileLink) {
+        avatar.setAttribute(
+          "tabindex",
+          "0"
+        );
+      }
+
+
+      if (!avatar.getAttribute("aria-label")) {
+        avatar.setAttribute(
+          "aria-label",
+          cleanName
+        );
+      }
+
+
+      image.removeAttribute("title");
+      avatar.removeAttribute("title");
+
+
+      participantNames.push({
+        name: cleanName,
+
+        href: profileLink
+          ? profileLink.getAttribute("href") || ""
           : ""
-      ) ||
-      "Voir le profil";
-
-
-    /*
-     * Certains templates produisent un texte comme
-     * “Avatar de Alice”. On conserve seulement Alice.
-     */
-
-    const cleanName = participantName
-      .replace(
-        /^avatar\s+(de|of)\s+/i,
-        ""
-      )
-      .trim();
-
-
-    /*
-     * Classe utilisée pour mettre en forme l’avatar.
-     */
-
-    avatar.classList.add(
-      "utppVB_participant"
-    );
-
-
-    /*
-     * Rend l’avatar accessible au clavier lorsqu’il
-     * n’est pas déjà contenu dans un lien.
-     */
-
-    if (!profileLink) {
-      avatar.setAttribute(
-        "tabindex",
-        "0"
-      );
-    }
-
-
-    if (!avatar.getAttribute("aria-label")) {
-      avatar.setAttribute(
-        "aria-label",
-        cleanName
-      );
-    }
-
-
-    /*
-     * Suppression des tooltips natifs.
-     */
-
-    image.removeAttribute(
-      "title"
-    );
-
-    avatar.removeAttribute(
-      "title"
-    );
-
-
-    /*
-     * Enregistre le pseudo et son éventuel lien.
-     */
-
-    participantNames.push({
-      name: cleanName,
-
-      href: profileLink
-        ? profileLink.getAttribute("href") || ""
-        : ""
+      });
     });
-  });
-
-
-  /* --------------------------------------------------
-     SUPPRESSION DU COMPTEUR NATIF
-     -------------------------------------------------- */
-
-  /*
-   * Forumactif génère souvent “2 participants”
-   * sous forme de texte brut. Le TreeWalker permet
-   * de le retrouver sans toucher aux avatars.
-   */
-
-  const textNodes = [];
-
-  const walker = document.createTreeWalker(
-    participants,
-    NodeFilter.SHOW_TEXT,
-    {
-      acceptNode: function (node) {
-        /*
-         * Ignore le contenu éventuel d’un avatar
-         * ou d’un lien de profil.
-         */
-
-        const parentElement =
-          node.parentElement;
-
-        const isInsideParticipant =
-          parentElement &&
-          parentElement.closest(
-            ".utppVB_participant"
-          );
-
-
-        if (isInsideParticipant) {
-          return NodeFilter.FILTER_REJECT;
-        }
-
-
-        const containsParticipantCount =
-          /participants?/i.test(
-            node.textContent
-          );
-
-
-        return containsParticipantCount
-          ? NodeFilter.FILTER_ACCEPT
-          : NodeFilter.FILTER_REJECT;
-      }
-    }
-  );
-
-
-  while (walker.nextNode()) {
-    textNodes.push(
-      walker.currentNode
-    );
-  }
-
-
-  /*
-   * Supprime “2 participants”.
-   */
-
-  textNodes.forEach(function (textNode) {
-    textNode.remove();
-  });
-
-
-  /* --------------------------------------------------
-     CRÉATION DE LA LISTE DES PSEUDOS
-     -------------------------------------------------- */
-
-  if (participantNames.length) {
-    const names =
-      document.createElement("span");
-
-
-    names.className =
-      "utppVB_participants-names";
-
-
-    participantNames.forEach(function (participant) {
-      /*
-       * Si un lien de profil existe, le pseudo devient
-       * lui-même cliquable.
-       */
-
-      const nameElement =
-        document.createElement(
-          participant.href
-            ? "a"
-            : "span"
-        );
-
-
-      nameElement.className =
-        "utppVB_participants-name";
-
-      nameElement.textContent =
-        participant.name;
-
-
-      if (participant.href) {
-        nameElement.setAttribute(
-          "href",
-          participant.href
-        );
-      }
-
-
-      names.appendChild(
-        nameElement
-      );
-    });
-
-
-    participants.appendChild(
-      names
-    );
-  }
-
-
-  /*
-   * Active la mise en forme CSS de la capsule.
-   */
-
-  participants.classList.add(
-    "utppVB_participants-ready"
-  );
-
-  participants.dataset.participantsReady =
-    "true";
-}
-
-
-    /* --------------------------------------------------
-       Texte du compteur
-       -------------------------------------------------- */
-
-    /*
-     * {POSTERS_LIST} peut générer le texte
-     * “2 participants” sous forme de nœud texte brut.
-     * Le TreeWalker permet de le placer dans un span.
-     */
 
     const textNodes = [];
 
@@ -516,29 +263,25 @@ function enhanceTopicParticipants() {
       NodeFilter.SHOW_TEXT,
       {
         acceptNode: function (node) {
-          /*
-           * Ignore le texte éventuellement contenu
-           * dans un lien de participant.
-           */
+          const parentElement =
+            node.parentElement;
 
-          const isInsideParticipant =
-            node.parentElement &&
-            node.parentElement.closest(
+          const insideAvatar =
+            parentElement &&
+            parentElement.closest(
               ".utppVB_participant"
             );
 
-          if (isInsideParticipant) {
+          if (insideAvatar) {
             return NodeFilter.FILTER_REJECT;
           }
 
-
-          const isParticipantCount =
+          const containsCounter =
             /participants?/i.test(
               node.textContent
             );
 
-
-          return isParticipantCount
+          return containsCounter
             ? NodeFilter.FILTER_ACCEPT
             : NodeFilter.FILTER_REJECT;
         }
@@ -554,19 +297,50 @@ function enhanceTopicParticipants() {
 
 
     textNodes.forEach(function (textNode) {
-      const count =
+      textNode.remove();
+    });
+
+    if (participantNames.length) {
+      const names =
         document.createElement("span");
 
-      count.className =
-        "utppVB_participants-count";
+      names.className =
+        "utppVB_participants-names";
 
-      count.textContent =
-        textNode.textContent.trim();
 
-      textNode.replaceWith(
-        count
+      participantNames.forEach(function (participant) {
+        const nameElement =
+          document.createElement(
+            participant.href
+              ? "a"
+              : "span"
+          );
+
+        nameElement.className =
+          "utppVB_participants-name";
+
+        nameElement.textContent =
+          participant.name;
+
+
+        if (participant.href) {
+          nameElement.setAttribute(
+            "href",
+            participant.href
+          );
+        }
+
+
+        names.appendChild(
+          nameElement
+        );
+      });
+
+
+      participants.appendChild(
+        names
       );
-    });
+    }
 
 
     participants.classList.add(
@@ -577,11 +351,6 @@ function enhanceTopicParticipants() {
       "true";
   }
 
-
-  /* ==================================================
-     ANCIEN TITRE “RÉPONSE RAPIDE”
-     ================================================== */
-
   function hideLegacyQuickReplyTitle(quickReply) {
     const parent =
       quickReply.parentElement;
@@ -589,7 +358,6 @@ function enhanceTopicParticipants() {
     if (!parent) {
       return;
     }
-
 
     const possibleTitles = parent.querySelectorAll(
       [
@@ -620,18 +388,15 @@ function enhanceTopicParticipants() {
         Node.DOCUMENT_POSITION_FOLLOWING
       );
 
-
       if (!isBeforeQuickReply) {
         return;
       }
-
 
       const normalizedTitle = normalizeText(
         element.textContent
       )
         .replace(/[\s:：\-–—]+$/g, "")
         .trim();
-
 
       const isQuickReplyTitle =
         normalizedTitle === "reponse rapide" ||
@@ -646,16 +411,10 @@ function enhanceTopicParticipants() {
     });
   }
 
-
-  /* ==================================================
-     RÉPONSE RAPIDE MODERNE
-     ================================================== */
-
   function enhanceQuickReply() {
     const quickReply = document.querySelector(
       "#quick_reply"
     );
-
 
     if (
       !quickReply ||
@@ -663,7 +422,6 @@ function enhanceTopicParticipants() {
     ) {
       return;
     }
-
 
     const editorContent = quickReply.querySelector(
       "#textarea_content"
@@ -677,11 +435,6 @@ function enhanceTopicParticipants() {
     hideLegacyQuickReplyTitle(
       quickReply
     );
-
-
-    /* --------------------------------------------------
-       En-tête
-       -------------------------------------------------- */
 
     const header =
       document.createElement("header");
@@ -751,16 +504,10 @@ function enhanceTopicParticipants() {
       heading
     );
 
-
     quickReply.insertBefore(
       header,
       editorContent
     );
-
-
-    /* --------------------------------------------------
-       Boutons
-       -------------------------------------------------- */
 
     const previewButton = quickReply.querySelector(
       'input[type="submit"][name="preview"]'
@@ -808,11 +555,6 @@ function enhanceTopicParticipants() {
       );
     }
 
-
-    /* --------------------------------------------------
-       Placeholder
-       -------------------------------------------------- */
-
     const editorTextareas = quickReply.querySelectorAll(
       ".sceditor-container textarea"
     );
@@ -834,11 +576,6 @@ function enhanceTopicParticipants() {
       "true";
   }
 
-
-  /* ==================================================
-     RENDU DES ICÔNES LUCIDE
-     ================================================== */
-
   function renderLucideIcons() {
     if (
       window.lucide &&
@@ -847,11 +584,6 @@ function enhanceTopicParticipants() {
       window.lucide.createIcons();
     }
   }
-
-
-  /* ==================================================
-     INITIALISATION GÉNÉRALE
-     ================================================== */
 
   function initTopicTools() {
     setRandomTitleIcons();
@@ -862,10 +594,6 @@ function enhanceTopicParticipants() {
     renderLucideIcons();
   }
 
-
-  /*
-   * Fonctionne avec ou sans l’attribut defer.
-   */
 
   if (document.readyState === "loading") {
     document.addEventListener(
