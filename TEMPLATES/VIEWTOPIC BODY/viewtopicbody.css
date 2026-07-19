@@ -22,12 +22,11 @@
   stroke-width: 2;
 }
 .utppVB_titlemap {
-  padding: 0 15px;
+  padding: 0 25px 0 15px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   margin-left: 5px;
-  flex: 1 1 auto;
   border-radius: 5px 0 0 5px;
   background: #c44d58;
   color: var(--manifest-text);
@@ -43,6 +42,8 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  justify-content: end;
+  flex: 1 1 auto;
   border-radius: 0 5px 5px 0;
   margin-left: -5px;
   background: var(--th-cl-panel);
