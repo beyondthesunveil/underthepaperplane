@@ -1400,6 +1400,7 @@
   padding: 8px 9px !important;
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 5px;
   background: var(--th-cl-panelAlt) !important;
