@@ -22,7 +22,8 @@
 }
 
 /* En-tête natif du formulaire */
-#postingbox h3 {
+#postingbox h3,
+#postingbox .utppPB_postingHeader {
   min-height: 104px;
   margin: 0 0 18px;
   padding: 24px 30px 24px 102px;
@@ -37,7 +38,8 @@
   text-transform: uppercase;
 }
 
-#postingbox h3::before {
+#postingbox h3::before,
+#postingbox .utppPB_postingHeader::before {
   content: "";
   width: 52px;
   height: 52px;
@@ -49,7 +51,8 @@
   border-radius: var(--th-radius-md);
 }
 
-#postingbox h3::after {
+#postingbox h3::after,
+#postingbox .utppPB_postingHeader::after {
   content: "";
   width: 21px;
   height: 21px;
@@ -60,6 +63,10 @@
   background: var(--th-cl-tle);
   -webkit-mask: url("https://unpkg.com/lucide-static/icons/square-pen.svg") center / contain no-repeat;
   mask: url("https://unpkg.com/lucide-static/icons/square-pen.svg") center / contain no-repeat;
+}
+
+.utppPB_postingHeaderLegacy {
+  display: none !important;
 }
 
 /* Zone native qui contient les champs et l'éditeur */
@@ -191,7 +198,6 @@
   height: 470px !important;
   min-height: 470px;
   max-height: 470px;
-  margin: 14px 12px 14px 0;
   float: left !important;
   position: relative;
   background: var(--th-cl-panelAlt);
@@ -205,6 +211,10 @@
 #postingbox #message-box {
   width: calc(100% - var(--utppPB-smiley-closed) - var(--utppPB-editor-gap)) !important;
   height: 470px !important;
+  min-height: 470px;
+  max-height: 470px;
+  float: right !important;
+  padding: 0;
   background: var(--th-cl-card);
 }
 
@@ -520,19 +530,22 @@
    ========================================================= */
 
 @media (max-width: 760px) {
-  #postingbox h3 {
+  #postingbox h3,
+  #postingbox .utppPB_postingHeader {
     min-height: 82px;
     padding: 18px 20px 18px 78px;
     font-size: 20px;
   }
 
-  #postingbox h3::before {
+  #postingbox h3::before,
+  #postingbox .utppPB_postingHeader::before {
     width: 44px;
     height: 44px;
     left: 20px;
   }
 
-  #postingbox h3::after {
+  #postingbox h3::after,
+  #postingbox .utppPB_postingHeader::after {
     left: 32px;
   }
 
