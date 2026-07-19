@@ -21,6 +21,7 @@
   display: none;
 }
 
+/* En-tête natif du formulaire */
 #postingbox h3,
 #postingbox .utppPB_postingHeader {
   min-height: 104px;
@@ -69,6 +70,7 @@
   display: none !important;
 }
 
+/* Zone native qui contient les champs et l'éditeur */
 #postingbox fieldset.fields1 {
   margin: 0;
   padding: 0 18px 18px;
@@ -76,6 +78,7 @@
   min-width: 0;
 }
 
+/* Titre + description dans une seule carte */
 #postingbox fieldset.fields1 > dl {
   min-height: 70px;
   margin: 0;
@@ -178,6 +181,7 @@
   padding: 0 10px;
 }
 
+/* Accordéon + message : les éléments restent natifs et côte à côte */
 #postingbox #smiley-box,
 #postingbox #message-box {
   margin-top: 14px;
@@ -209,6 +213,7 @@
 #postingbox #message-box {
   width: calc(100% - var(--utppPB-smiley-closed) - var(--utppPB-editor-gap)) !important;
   height: 470px !important;
+  position: relative;
   padding: 0;
   background: var(--th-cl-card);
 }
@@ -223,6 +228,7 @@
   clear: both;
 }
 
+/* Véritable commande accessible, injectée par le JS */
 #postingbox .utppPB_smileyToggle {
   width: 100%;
   height: 468px;
@@ -338,6 +344,7 @@
   scale: 1.18;
 }
 
+/* Éditeur SCEditor */
 #postingbox #message-box > .left-box,
 #postingbox #message-box > br {
   display: none;
@@ -360,6 +367,7 @@
   border-radius: 0 !important;
 }
 
+/* Toolbar plus légère : groupes nets, boutons plats et aérés */
 #postingbox .sceditor-toolbar {
   min-height: 66px;
   padding: 10px !important;
@@ -438,6 +446,50 @@
   border-top: 1px solid var(--th-cl-bord) !important;
 }
 
+/* Compteurs de caractères et de mots */
+#postingbox .utppPB_editorStats {
+  min-height: 30px;
+  padding: 5px 9px;
+  position: absolute;
+  right: 13px;
+  bottom: 10px;
+  z-index: 4;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--th-cl-sub);
+  background: color-mix(in srgb, var(--th-cl-panel) 92%, transparent);
+  border: 1px solid var(--th-cl-bord);
+  border-radius: 999px;
+  font: 10px var(--fst3);
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+
+#postingbox .utppPB_editorStat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+#postingbox .utppPB_editorStat + .utppPB_editorStat::before {
+  content: "";
+  width: 3px;
+  height: 3px;
+  margin-right: 5px;
+  align-self: center;
+  background: var(--th-cl-acc2);
+  border-radius: 50%;
+}
+
+#postingbox .utppPB_editorStat strong {
+  color: var(--th-cl-acc3);
+  font-size: 11px;
+  font-weight: 800;
+}
+
 #postingbox .sceditor-dropdown {
   color: var(--th-cl-txt) !important;
   background: var(--th-cl-card) !important;
@@ -445,6 +497,7 @@
   border-radius: var(--th-radius-sm) !important;
 }
 
+/* Motif d'édition éventuel */
 #postingbox dl:has(input[name="edit_reason"]) {
   clear: both;
   margin-top: 14px !important;
@@ -452,6 +505,7 @@
   border-radius: var(--th-radius-md) !important;
 }
 
+/* Boutons désormais intégrés au bloc global */
 #postingbox fieldset.submit-buttons {
   width: 97%;
   min-height: 76px;
@@ -513,6 +567,10 @@
   font: 12px/1.5 var(--fte2);
   text-align: right;
 }
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
 
 @media (max-width: 760px) {
   #postingbox h3,
