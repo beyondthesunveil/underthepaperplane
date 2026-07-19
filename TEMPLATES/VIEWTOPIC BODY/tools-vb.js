@@ -184,9 +184,123 @@ function enhanceTopicParticipants() {
     return;
   }
 
+  let tooltip = document.querySelector(
+    "#utppVB-participant-tooltip"
+  );
+
+  if (!tooltip) {
+    tooltip = document.createElement("div");
+
+    tooltip.id =
+      "utppVB-participant-tooltip";
+
+    tooltip.className =
+      "utppVB_participant-tooltip";
+
+    tooltip.setAttribute(
+      "role",
+      "tooltip"
+    );
+
+    tooltip.hidden = true;
+
+    document.body.appendChild(
+      tooltip
+    );
+  }
+
+  function showTooltip(poster) {
+    const participantName =
+      poster.dataset.participantName;
+
+    if (!participantName) {
+      return;
+    }
+
+    tooltip.textContent =
+      participantName;
+
+    tooltip.hidden = false;
+
+    tooltip.classList.remove(
+      "is-visible",
+      "is-below"
+    );
+
+
+    requestAnimationFrame(function () {
+      const posterRect =
+        poster.getBoundingClientRect();
+
+      const tooltipRect =
+        tooltip.getBoundingClientRect();
+
+      const gap = 10;
+      const edge = 8;
+
+      let left =
+        posterRect.left +
+        posterRect.width / 2 -
+        tooltipRect.width / 2;
+
+      left = Math.max(
+        edge,
+        Math.min(
+          left,
+          window.innerWidth -
+          tooltipRect.width -
+          edge
+        )
+      );
+
+      let top =
+        posterRect.top -
+        tooltipRect.height -
+        gap;
+
+      if (top < edge) {
+        top =
+          posterRect.bottom + gap;
+
+        tooltip.classList.add(
+          "is-below"
+        );
+      }
+
+
+      tooltip.style.left =
+        left + "px";
+
+      tooltip.style.top =
+        top + "px";
+
+      tooltip.classList.add(
+        "is-visible"
+      );
+    });
+  }
+
+  function hideTooltip() {
+    tooltip.classList.remove(
+      "is-visible",
+      "is-below"
+    );
+
+    window.setTimeout(function () {
+      if (
+        !tooltip.classList.contains(
+          "is-visible"
+        )
+      ) {
+        tooltip.hidden = true;
+      }
+    }, 180);
+  }
+
   const posters = participants.querySelectorAll(
     ".posts-users-list > .poster[title]"
   );
+
 
   posters.forEach(function (poster) {
     const participantName = (
@@ -195,6 +309,7 @@ function enhanceTopicParticipants() {
 
     const profileLink =
       poster.querySelector("a");
+
 
     if (!participantName) {
       return;
@@ -207,13 +322,47 @@ function enhanceTopicParticipants() {
       "title"
     );
 
+    poster.addEventListener(
+      "mouseenter",
+      function () {
+        showTooltip(poster);
+      }
+    );
+
+    poster.addEventListener(
+      "mouseleave",
+      hideTooltip
+    );
+
+    poster.addEventListener(
+      "focusin",
+      function () {
+        showTooltip(poster);
+      }
+    );
+
+    poster.addEventListener(
+      "focusout",
+      hideTooltip
+    );
+
+
     if (profileLink) {
-      if (!profileLink.getAttribute("aria-label")) {
+      if (
+        !profileLink.getAttribute(
+          "aria-label"
+        )
+      ) {
         profileLink.setAttribute(
           "aria-label",
           participantName
         );
       }
+
+      profileLink.setAttribute(
+        "aria-describedby",
+        tooltip.id
+      );
     } else {
       poster.setAttribute(
         "tabindex",
@@ -224,8 +373,14 @@ function enhanceTopicParticipants() {
         "aria-label",
         participantName
       );
+
+      poster.setAttribute(
+        "aria-describedby",
+        tooltip.id
+      );
     }
   });
+
 
   participants.classList.add(
     "utppVB_participants-ready"
