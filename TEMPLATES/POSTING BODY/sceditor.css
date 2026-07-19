@@ -14,7 +14,6 @@
   background: var(--th-cl-card);
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-md);
-  box-shadow: 0 5px 16px var(--th-cl-shadow);
 }
 
 #postingbox fieldset.fields1 > dl:has(input[name="subject"]) > dt,
@@ -83,8 +82,7 @@
 
   transition:
     background var(--th-trans-fast),
-    border-color var(--th-trans-fast),
-    box-shadow var(--th-trans-fast);
+    border-color var(--th-trans-fast);
 }
 
 #postingbox input[name="subject"] {
@@ -100,7 +98,6 @@
 #postingbox input[name="description"]:focus {
   background: var(--th-cl-card) !important;
   border-color: var(--th-cl-acc2) !important;
-  box-shadow: 0 0 0 3px var(--th-cl-accFade) !important;
 }
 
 #postingbox select[name="topic_color"] {
@@ -130,7 +127,6 @@
 
 #postingbox select[name="topic_color"]:focus {
   border-color: var(--th-cl-acc2);
-  box-shadow: 0 0 0 3px var(--th-cl-accFade);
 }
 
 /* ================================================================
@@ -153,7 +149,6 @@
   background: var(--th-cl-panelAlt);
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-md);
-  box-shadow: 0 6px 18px var(--th-cl-shadow);
   font: 10px/1.6 var(--fst3);
   text-align: center;
 }
@@ -173,7 +168,6 @@
   background: var(--th-cl-card);
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-md);
-  box-shadow: 0 6px 18px var(--th-cl-shadow);
 }
 
 /* Clearfix du fieldset natif, sans changer son display. */
@@ -284,14 +278,12 @@
   transition:
     background var(--th-trans-fast),
     border-color var(--th-trans-fast),
-    box-shadow var(--th-trans-fast),
     transform var(--th-trans-fast);
 }
 
 #postingbox #smileyContainer img:hover {
   background: var(--th-cl-accSoft);
   border-color: var(--th-cl-acc2);
-  box-shadow: 0 4px 10px var(--th-cl-shadow);
   transform: translateY(-2px) scale(1.08);
 }
 
@@ -357,9 +349,6 @@
   background: var(--th-cl-cardAlt) !important;
   border: 1px solid var(--th-cl-bord) !important;
   border-radius: var(--th-radius-md) !important;
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.08),
-    0 5px 16px var(--th-cl-shadow) !important;
 }
 
 #postingbox #message-box .sceditor-toolbar {
@@ -382,7 +371,6 @@
   background: var(--th-cl-card) !important;
   border: 1px solid var(--th-cl-bord) !important;
   border-radius: var(--th-radius-sm) !important;
-  box-shadow: 0 2px 7px var(--th-cl-shadow);
 }
 
 #postingbox #message-box .sceditor-button {
@@ -479,6 +467,97 @@
 }
 
 /* ================================================================
+   TOOLBAR FINALE — PALETTE MULTILIGNE SANS OMBRE
+   ================================================================ */
+
+#postingbox #message-box .sceditor-toolbar {
+  min-height: 0;
+  padding: 10px 12px !important;
+
+  display: flex !important;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap !important;
+  gap: 7px;
+
+  overflow: visible;
+  background: var(--th-cl-panelAlt) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--th-cl-bord) !important;
+  scrollbar-width: auto;
+}
+
+#postingbox #message-box .sceditor-group {
+  min-height: 38px;
+  margin: 0 !important;
+  padding: 4px !important;
+  box-sizing: border-box;
+
+  display: inline-flex !important;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 2px;
+
+  background: var(--th-cl-card) !important;
+  border: 1px solid var(--th-cl-bord) !important;
+  border-radius: 10px !important;
+}
+
+#postingbox #message-box .sceditor-button {
+  width: 30px !important;
+  height: 30px !important;
+  margin: 0 !important;
+  flex: 0 0 30px;
+
+  display: grid !important;
+  place-items: center;
+
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  border-radius: 7px !important;
+  opacity: 0.72;
+
+  transition:
+    background var(--th-trans-fast),
+    border-color var(--th-trans-fast),
+    opacity var(--th-trans-fast),
+    transform var(--th-trans-fast) !important;
+}
+
+#postingbox #message-box .sceditor-button:hover,
+#postingbox #message-box .sceditor-button.hover {
+  background: var(--th-cl-accFade) !important;
+  border-color: var(--th-cl-acc2) !important;
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+#postingbox #message-box .sceditor-button.active,
+#postingbox #message-box .sceditor-button-source.active,
+#postingbox #message-box .sceditor-button-source.hover {
+  background: var(--th-cl-accSoft) !important;
+  border-color: var(--th-cl-acc2) !important;
+  opacity: 1;
+}
+
+#postingbox #message-box .sceditor-button.disabled {
+  background: transparent !important;
+  border-color: transparent !important;
+  opacity: 0.25;
+  transform: none;
+}
+
+@media (max-width: 650px) {
+  #postingbox #message-box .sceditor-toolbar {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--th-cl-acc2) transparent;
+  }
+}
+
+/* ================================================================
    AJUSTEMENT FINAL — MÉTADONNÉES RACCORDÉES À L’ÉDITEUR
    ================================================================ */
 
@@ -506,119 +585,6 @@
 }
 
 /* ================================================================
-   TOOLBAR SCEDITOR — RUBAN COMPACT ET MODERNE
-   ================================================================ */
-
-#postingbox #message-box .sceditor-toolbar {
-  min-height: 48px;
-  padding: 7px 9px !important;
-
-  display: flex !important;
-  align-items: center;
-  flex-wrap: nowrap !important;
-  gap: 5px;
-
-  overflow-x: auto;
-  overflow-y: hidden;
-  overscroll-behavior-inline: contain;
-  scrollbar-width: thin;
-  scrollbar-color: var(--th-cl-acc2) transparent;
-
-  background: var(--th-cl-panelAlt) !important;
-  border-bottom: 1px solid var(--th-cl-bord) !important;
-}
-
-#postingbox #message-box .sceditor-toolbar::-webkit-scrollbar {
-  height: 5px;
-}
-
-#postingbox #message-box .sceditor-toolbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-#postingbox #message-box .sceditor-toolbar::-webkit-scrollbar-thumb {
-  background: var(--th-cl-acc2);
-  border-radius: 999px;
-}
-
-/* Chaque famille d’outils devient un segment stable du ruban. */
-#postingbox #message-box .sceditor-group {
-  min-height: 34px;
-  margin: 0 !important;
-  padding: 3px !important;
-  box-sizing: border-box;
-
-  display: inline-flex !important;
-  align-items: center;
-  flex: 0 0 auto;
-  gap: 1px;
-
-  background: var(--th-cl-card) !important;
-  border: 1px solid var(--th-cl-bord) !important;
-  border-radius: 10px !important;
-  box-shadow: 0 2px 7px var(--th-cl-shadow);
-}
-
-#postingbox #message-box .sceditor-button {
-  width: 29px !important;
-  height: 28px !important;
-  margin: 0 !important;
-  flex: 0 0 29px;
-
-  display: grid !important;
-  place-items: center;
-
-  background: transparent !important;
-  border: 0 !important;
-  border-radius: 7px !important;
-  opacity: 0.72;
-
-  transition:
-    color var(--th-trans-fast),
-    background var(--th-trans-fast),
-    box-shadow var(--th-trans-fast),
-    opacity var(--th-trans-fast),
-    transform var(--th-trans-fast) !important;
-}
-
-#postingbox #message-box .sceditor-button:hover,
-#postingbox #message-box .sceditor-button.hover {
-  background: var(--th-cl-accFade) !important;
-  box-shadow: inset 0 0 0 1px var(--th-cl-acc2);
-  opacity: 1;
-  transform: translateY(-1px);
-}
-
-#postingbox #message-box .sceditor-button.active {
-  background: var(--th-grad-chip) !important;
-  box-shadow: 0 3px 8px var(--th-cl-shadow);
-  opacity: 1;
-}
-
-#postingbox #message-box .sceditor-button.disabled {
-  opacity: 0.25;
-  box-shadow: none;
-  transform: none;
-}
-
-/* Le groupe du mode source reste visuellement distinct lorsqu’il est actif. */
-#postingbox #message-box .sceditor-button-source.active,
-#postingbox #message-box .sceditor-button-source.hover {
-  background: var(--th-cl-accSoft) !important;
-  box-shadow: inset 0 0 0 1px var(--th-cl-acc2);
-}
-
-@media (max-width: 850px) {
-  #postingbox #message-box .sceditor-toolbar {
-    scroll-snap-type: inline proximity;
-  }
-
-  #postingbox #message-box .sceditor-group {
-    scroll-snap-align: start;
-  }
-}
-
-/* ================================================================
    COMPOSEUR UNIFIÉ : POSTINGBOX + PIED DE BOUTONS
    ================================================================ */
 
@@ -630,7 +596,6 @@
   border: 1px solid var(--th-cl-bord) !important;
   border-bottom: 0 !important;
   border-radius: var(--th-radius-lg) var(--th-radius-lg) 0 0 !important;
-  box-shadow: 0 14px 35px var(--th-cl-shadow);
 }
 
 #postingbox > .inner {
@@ -676,7 +641,6 @@
   height: 42px;
   background: var(--th-grad-chip);
   border-radius: 14px;
-  box-shadow: 0 5px 14px var(--th-cl-shadow);
 }
 
 #postingbox > .inner > .h3::after {
@@ -701,7 +665,6 @@
   background: var(--th-cl-panelAlt);
   border-bottom: 0;
   border-radius: var(--th-radius-md) var(--th-radius-md) 0 0;
-  box-shadow: 0 5px 16px var(--th-cl-shadow);
 }
 
 #postingbox fieldset.fields1 > dl:has(input[name="description"]) {
@@ -712,7 +675,6 @@
   background: var(--th-cl-panelAlt);
   border-top: 0;
   border-radius: 0 0 var(--th-radius-md) var(--th-radius-md);
-  box-shadow: 0 9px 16px var(--th-cl-shadow);
 }
 
 /* Fine séparation interne, sans créer une seconde carte. */
@@ -737,7 +699,6 @@
   border: 1px solid var(--th-cl-bord) !important;
   border-top: 0 !important;
   border-radius: 0 0 var(--th-radius-lg) var(--th-radius-lg) !important;
-  box-shadow: 0 14px 35px var(--th-cl-shadow);
 }
 
 #postingbox + .panel.row2 > .inner {
@@ -772,21 +733,17 @@
   margin: 0 !important;
   padding: 8px 16px !important;
   box-sizing: border-box;
-
   color: var(--th-cl-txt) !important;
   background: var(--th-cl-cardAlt) !important;
   border: 1px solid var(--th-cl-bord) !important;
   border-radius: var(--th-radius-sm) !important;
-
   font: 700 12px var(--fst3) !important;
   text-transform: none;
   cursor: pointer;
-
   transition:
     color var(--th-trans-fast),
     background var(--th-trans-fast),
     border-color var(--th-trans-fast),
-    box-shadow var(--th-trans-fast),
     transform var(--th-trans-fast) !important;
 }
 
@@ -794,17 +751,14 @@
   color: var(--th-cl-acc3) !important;
   background: var(--th-cl-accSoft) !important;
   border-color: var(--th-cl-acc2) !important;
-  box-shadow: 0 5px 14px var(--th-cl-shadow);
   transform: translateY(-1px);
 }
 
-/* Action principale : envoyer/publier. */
 #postingbox + .panel.row2 .submit-buttons input[name="post"],
 #postingbox + .panel.row2 .submit-buttons input[name="publish"] {
   color: var(--th-cl-tle) !important;
   background: var(--th-grad-chip) !important;
   border-color: transparent !important;
-  box-shadow: 0 5px 14px var(--th-cl-shadow);
 }
 
 #postingbox + .panel.row2 .submit-buttons input[name="post"]:hover,
@@ -812,7 +766,6 @@
   color: var(--th-cl-tle) !important;
   background: var(--th-grad-chip) !important;
   border-color: transparent !important;
-  box-shadow: 0 7px 18px var(--th-cl-shadowStrong);
 }
 
 #postingbox + .panel.row2 .submit-buttons .info {
