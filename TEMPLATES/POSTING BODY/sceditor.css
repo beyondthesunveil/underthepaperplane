@@ -191,6 +191,7 @@
   height: 470px !important;
   min-height: 470px;
   max-height: 470px;
+  margin: 14px 12px 14px 0;
   float: left !important;
   position: relative;
   background: var(--th-cl-panelAlt);
@@ -204,10 +205,6 @@
 #postingbox #message-box {
   width: calc(100% - var(--utppPB-smiley-closed) - var(--utppPB-editor-gap)) !important;
   height: 470px !important;
-  min-height: 470px;
-  max-height: 470px;
-  float: right !important;
-  padding: 0;
   background: var(--th-cl-card);
 }
 
