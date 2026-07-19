@@ -10,7 +10,8 @@
   }
 
   function hideDuplicatePostingHeadings(
-    referenceHeading
+    referenceHeading,
+    postingBox
   ) {
     const referenceText = normalizeText(
       referenceHeading.textContent
@@ -20,30 +21,84 @@
       return;
     }
 
-    document
-      .querySelectorAll(
-        [
-          "h1",
-          "h2",
-          "h3",
-          ".page-title",
-          ".topic-title"
-        ].join(",")
-      )
-      .forEach(function (heading) {
-        const headingText = normalizeText(
-          heading.textContent
+    const searchRoot =
+      postingBox.parentElement ||
+      document.body;
+
+    searchRoot
+      .querySelectorAll("*")
+      .forEach(function (element) {
+        const belongsToReference =
+          element === referenceHeading ||
+          referenceHeading.contains(element) ||
+          element.closest(
+            ".utppPB_postingHeader"
+          ) === referenceHeading;
+
+        const isCompactElement =
+          element.children.length <= 1;
+
+        const elementText = normalizeText(
+          element.textContent
         );
 
         if (
-          heading !== referenceHeading &&
-          headingText === referenceText
+          !belongsToReference &&
+          isCompactElement &&
+          elementText === referenceText
         ) {
-          heading.classList.add(
+          element.classList.add(
             "utppPB_postingHeaderLegacy"
           );
         }
       });
+  }
+
+  function watchForDuplicatePostingHeadings(
+    referenceHeading,
+    postingBox
+  ) {
+    if (
+      !window.MutationObserver ||
+      postingBox.dataset
+        .headerObserverReady === "true"
+    ) {
+      return;
+    }
+
+    let scheduled = false;
+
+    const searchRoot =
+      postingBox.parentElement ||
+      document.body;
+
+    const observer =
+      new MutationObserver(function () {
+        if (scheduled) {
+          return;
+        }
+
+        scheduled = true;
+
+        window.requestAnimationFrame(
+          function () {
+            hideDuplicatePostingHeadings(
+              referenceHeading,
+              postingBox
+            );
+
+            scheduled = false;
+          }
+        );
+      });
+
+    observer.observe(searchRoot, {
+      childList: true,
+      subtree: true
+    });
+
+    postingBox.dataset.headerObserverReady =
+      "true";
   }
 
   function enhancePostingHeader() {
@@ -53,7 +108,8 @@
 
     if (
       !postingBox ||
-      postingBox.dataset.headerReady === "true"
+      postingBox.dataset.headerReady ===
+        "true"
     ) {
       return;
     }
@@ -74,10 +130,17 @@
       );
 
       hideDuplicatePostingHeadings(
-        internalHeading
+        internalHeading,
+        postingBox
       );
 
-      postingBox.dataset.headerReady = "true";
+      watchForDuplicatePostingHeadings(
+        internalHeading,
+        postingBox
+      );
+
+      postingBox.dataset.headerReady =
+        "true";
 
       return;
     }
@@ -129,7 +192,8 @@
       ];
 
     if (!nativeHeading) {
-      postingBox.dataset.headerReady = "true";
+      postingBox.dataset.headerReady =
+        "true";
 
       return;
     }
@@ -152,9 +216,18 @@
       postingBox.firstChild
     );
 
-    hideDuplicatePostingHeadings(header);
+    hideDuplicatePostingHeadings(
+      header,
+      postingBox
+    );
 
-    postingBox.dataset.headerReady = "true";
+    watchForDuplicatePostingHeadings(
+      header,
+      postingBox
+    );
+
+    postingBox.dataset.headerReady =
+      "true";
   }
 
   function initSmileyAccordion() {
