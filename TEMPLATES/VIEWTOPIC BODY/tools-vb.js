@@ -1,5 +1,21 @@
+/**
+ * UTPPVB — Outils des pages de sujet Forumactif
+ *
+ * - Icône Lucide aléatoire du titre
+ * - Pagination enrichie
+ * - État de surveillance
+ * - Participants avec tooltips
+ * - Masquage du bloc avec un seul participant
+ * - Réponse rapide moderne
+ */
+
 (function () {
   "use strict";
+
+
+  /* ==================================================
+     CONFIGURATION
+     ================================================== */
 
   const RANDOM_ICONS = [
     "sparkles",
@@ -16,6 +32,7 @@
     "scan-eye"
   ];
 
+
   const QUICK_REPLY_COPY = {
     eyebrow: "Discussion",
     title: "Écrire une réponse",
@@ -25,6 +42,11 @@
     send: "Envoyer"
   };
 
+
+  /* ==================================================
+     NORMALISATION DU TEXTE
+     ================================================== */
+
   function normalizeText(value) {
     return String(value || "")
       .trim()
@@ -33,10 +55,16 @@
       .replace(/[\u0300-\u036f]/g, "");
   }
 
+
+  /* ==================================================
+     ICÔNE ALÉATOIRE DU TITRE
+     ================================================== */
+
   function setRandomTitleIcons() {
     const elements = document.querySelectorAll(
       "[data-random-lucide]"
     );
+
 
     elements.forEach(function (element) {
       const randomIndex = Math.floor(
@@ -50,27 +78,46 @@
     });
   }
 
+
+  /* ==================================================
+     PAGINATION
+     ================================================== */
+
   function enhancePaginations() {
     const paginations = document.querySelectorAll(
       ".utppVB_pages"
     );
 
+
     paginations.forEach(function (pagination) {
+      /*
+       * Empêche une double transformation.
+       */
+
       if (
         pagination.dataset.paginationReady === "true"
       ) {
         return;
       }
 
+
+      /*
+       * Forumactif place normalement la page actuelle
+       * dans une balise <strong>.
+       */
+
       const currentPage =
         pagination.querySelector("strong");
+
 
       if (!currentPage) {
         return;
       }
 
+
       const currentNumber =
         currentPage.textContent.trim();
+
 
       const pageList =
         document.createElement("div");
@@ -110,10 +157,17 @@
         "Page actuelle : " + currentNumber
       );
 
+
       currentBlock.append(
         label,
         number
       );
+
+
+      /*
+       * Déplace la pagination générée par Forumactif
+       * sans recréer ni casser ses liens.
+       */
 
       while (pagination.firstChild) {
         pageList.appendChild(
@@ -127,31 +181,47 @@
         pageList
       );
 
+
       pagination.dataset.paginationReady =
         "true";
     });
   }
+
+
+  /* ==================================================
+     SURVEILLANCE DU SUJET
+     ================================================== */
 
   function updateWatchTopicStates() {
     const watchBlocks = document.querySelectorAll(
       ".utppVB_watchtopicBG"
     );
 
+
     watchBlocks.forEach(function (watchBlock) {
       const watchLink =
         watchBlock.querySelector("a");
+
 
       if (!watchLink) {
         return;
       }
 
+
       const linkText = normalizeText(
         watchLink.textContent
       );
 
+
       const linkHref = (
         watchLink.getAttribute("href") || ""
       ).toLowerCase();
+
+
+      /*
+       * Si Forumactif propose d’arrêter la surveillance,
+       * cela signifie que le sujet est actuellement suivi.
+       */
 
       const isWatching =
         linkText.includes("arreter") ||
@@ -165,6 +235,7 @@
         isWatching
       );
 
+
       watchLink.setAttribute(
         "aria-pressed",
         String(isWatching)
@@ -172,231 +243,409 @@
     });
   }
 
-function enhanceTopicParticipants() {
-  const participants = document.querySelector(
-    ".sub-header-buttons__right"
-  );
 
-  if (
-    !participants ||
-    participants.dataset.participantsReady === "true"
-  ) {
-    return;
-  }
+  /* ==================================================
+     PARTICIPANTS DU SUJET
+     ================================================== */
 
-  let tooltip = document.querySelector(
-    "#utppVB-participant-tooltip"
-  );
-
-  if (!tooltip) {
-    tooltip = document.createElement("div");
-
-    tooltip.id =
-      "utppVB-participant-tooltip";
-
-    tooltip.className =
-      "utppVB_participant-tooltip";
-
-    tooltip.setAttribute(
-      "role",
-      "tooltip"
+  function enhanceTopicParticipants() {
+    const participants = document.querySelector(
+      ".sub-header-buttons__right"
     );
 
-    tooltip.hidden = true;
 
-    document.body.appendChild(
-      tooltip
-    );
-  }
+    /*
+     * Arrêt si le bloc n’existe pas ou s’il a
+     * déjà été transformé.
+     */
 
-  function showTooltip(poster) {
-    const participantName =
-      poster.dataset.participantName;
-
-    if (!participantName) {
+    if (
+      !participants ||
+      participants.dataset.participantsReady === "true"
+    ) {
       return;
     }
 
-    tooltip.textContent =
-      participantName;
 
-    tooltip.hidden = false;
+    /*
+     * Forumactif génère chaque membre dans :
+     *
+     * <div class="poster" title="Pseudo">
+     *   <a href="/profil"></a>
+     * </div>
+     */
 
-    tooltip.classList.remove(
-      "is-visible",
-      "is-below"
+    const posters = participants.querySelectorAll(
+      ".posts-users-list > .poster"
     );
 
 
-    requestAnimationFrame(function () {
-      const posterRect =
-        poster.getBoundingClientRect();
+    /*
+     * Si une seule personne participe au sujet,
+     * masque complètement le bloc.
+     */
 
-      const tooltipRect =
-        tooltip.getBoundingClientRect();
+    if (posters.length <= 1) {
+      participants.hidden = true;
 
-      const gap = 10;
-      const edge = 8;
+      participants.dataset.participantsReady =
+        "true";
 
-      let left =
-        posterRect.left +
-        posterRect.width / 2 -
-        tooltipRect.width / 2;
+      return;
+    }
 
-      left = Math.max(
-        edge,
-        Math.min(
-          left,
-          window.innerWidth -
-          tooltipRect.width -
-          edge
-        )
+
+    /*
+     * Masque le compteur natif :
+     * “2 participants”, “3 participants”, etc.
+     */
+
+    const nativeCount = participants.querySelector(
+      ".poster-count"
+    );
+
+
+    if (nativeCount) {
+      nativeCount.hidden = true;
+    }
+
+
+    /* --------------------------------------------------
+       CRÉATION DU TOOLTIP
+       -------------------------------------------------- */
+
+    /*
+     * Un seul tooltip est créé dans <body>.
+     * Il ne pourra pas être coupé par un overflow
+     * provenant du template Forumactif.
+     */
+
+    let tooltip = document.querySelector(
+      "#utppVB-participant-tooltip"
+    );
+
+
+    if (!tooltip) {
+      tooltip =
+        document.createElement("div");
+
+
+      tooltip.id =
+        "utppVB-participant-tooltip";
+
+      tooltip.className =
+        "utppVB_participant-tooltip";
+
+
+      tooltip.setAttribute(
+        "role",
+        "tooltip"
       );
 
-      let top =
-        posterRect.top -
-        tooltipRect.height -
-        gap;
 
-      if (top < edge) {
-        top =
-          posterRect.bottom + gap;
+      tooltip.hidden = true;
+
+
+      document.body.appendChild(
+        tooltip
+      );
+    }
+
+
+    /* --------------------------------------------------
+       AFFICHAGE DU TOOLTIP
+       -------------------------------------------------- */
+
+    function showTooltip(poster) {
+      const participantName =
+        poster.dataset.participantName;
+
+
+      if (!participantName) {
+        return;
+      }
+
+
+      tooltip.textContent =
+        participantName;
+
+      tooltip.hidden =
+        false;
+
+
+      tooltip.classList.remove(
+        "is-visible",
+        "is-below"
+      );
+
+
+      /*
+       * Attend que le navigateur calcule les dimensions
+       * du tooltip avant de le positionner.
+       */
+
+      requestAnimationFrame(function () {
+        const posterRect =
+          poster.getBoundingClientRect();
+
+        const tooltipRect =
+          tooltip.getBoundingClientRect();
+
+
+        const gap = 10;
+        const edge = 8;
+
+
+        /*
+         * Centre horizontalement le tooltip.
+         */
+
+        let left =
+          posterRect.left +
+          posterRect.width / 2 -
+          tooltipRect.width / 2;
+
+
+        /*
+         * Empêche le tooltip de sortir de l’écran.
+         */
+
+        left = Math.max(
+          edge,
+          Math.min(
+            left,
+            window.innerWidth -
+            tooltipRect.width -
+            edge
+          )
+        );
+
+
+        /*
+         * Position normale : au-dessus de l’avatar.
+         */
+
+        let top =
+          posterRect.top -
+          tooltipRect.height -
+          gap;
+
+
+        /*
+         * S’il manque de la place au-dessus,
+         * positionne le tooltip sous l’avatar.
+         */
+
+        if (top < edge) {
+          top =
+            posterRect.bottom +
+            gap;
+
+          tooltip.classList.add(
+            "is-below"
+          );
+        }
+
+
+        tooltip.style.left =
+          left + "px";
+
+        tooltip.style.top =
+          top + "px";
+
 
         tooltip.classList.add(
-          "is-below"
-        );
-      }
-
-
-      tooltip.style.left =
-        left + "px";
-
-      tooltip.style.top =
-        top + "px";
-
-      tooltip.classList.add(
-        "is-visible"
-      );
-    });
-  }
-
-  function hideTooltip() {
-    tooltip.classList.remove(
-      "is-visible",
-      "is-below"
-    );
-
-    window.setTimeout(function () {
-      if (
-        !tooltip.classList.contains(
           "is-visible"
-        )
-      ) {
-        tooltip.hidden = true;
-      }
-    }, 180);
-  }
-
-  const posters = participants.querySelectorAll(
-    ".posts-users-list > .poster[title]"
-  );
-
-
-  posters.forEach(function (poster) {
-    const participantName = (
-      poster.getAttribute("title") || ""
-    ).trim();
-
-    const profileLink =
-      poster.querySelector("a");
-
-
-    if (!participantName) {
-      return;
+        );
+      });
     }
 
-    poster.dataset.participantName =
-      participantName;
 
-    poster.removeAttribute(
-      "title"
-    );
+    /* --------------------------------------------------
+       MASQUAGE DU TOOLTIP
+       -------------------------------------------------- */
 
-    poster.addEventListener(
-      "mouseenter",
-      function () {
-        showTooltip(poster);
+    function hideTooltip() {
+      tooltip.classList.remove(
+        "is-visible",
+        "is-below"
+      );
+
+
+      /*
+       * Laisse le temps à la transition CSS
+       * de se terminer avant de masquer l’élément.
+       */
+
+      window.setTimeout(function () {
+        if (
+          !tooltip.classList.contains(
+            "is-visible"
+          )
+        ) {
+          tooltip.hidden =
+            true;
+        }
+      }, 180);
+    }
+
+
+    /* --------------------------------------------------
+       PRÉPARATION DES AVATARS
+       -------------------------------------------------- */
+
+    posters.forEach(function (poster) {
+      const participantName = (
+        poster.getAttribute("title") || ""
+      ).trim();
+
+
+      /*
+       * Ignore un avatar sans pseudo exploitable.
+       */
+
+      if (!participantName) {
+        return;
       }
-    );
-
-    poster.addEventListener(
-      "mouseleave",
-      hideTooltip
-    );
-
-    poster.addEventListener(
-      "focusin",
-      function () {
-        showTooltip(poster);
-      }
-    );
-
-    poster.addEventListener(
-      "focusout",
-      hideTooltip
-    );
 
 
-    if (profileLink) {
-      if (
-        !profileLink.getAttribute(
-          "aria-label"
-        )
-      ) {
+      const profileLink =
+        poster.querySelector("a");
+
+
+      /*
+       * Copie le pseudo dans un attribut personnalisé
+       * utilisé par le tooltip.
+       */
+
+      poster.dataset.participantName =
+        participantName;
+
+
+      /*
+       * Supprime le tooltip natif du navigateur.
+       */
+
+      poster.removeAttribute(
+        "title"
+      );
+
+
+      /* Souris */
+
+      poster.addEventListener(
+        "mouseenter",
+        function () {
+          showTooltip(
+            poster
+          );
+        }
+      );
+
+
+      poster.addEventListener(
+        "mouseleave",
+        hideTooltip
+      );
+
+
+      /* Navigation au clavier */
+
+      poster.addEventListener(
+        "focusin",
+        function () {
+          showTooltip(
+            poster
+          );
+        }
+      );
+
+
+      poster.addEventListener(
+        "focusout",
+        hideTooltip
+      );
+
+
+      /*
+       * Accessibilité du lien de profil.
+       */
+
+      if (profileLink) {
+        if (
+          !profileLink.getAttribute(
+            "aria-label"
+          )
+        ) {
+          profileLink.setAttribute(
+            "aria-label",
+            participantName
+          );
+        }
+
+
         profileLink.setAttribute(
+          "aria-describedby",
+          tooltip.id
+        );
+      } else {
+        /*
+         * Si aucun lien n’est généré, rend l’avatar
+         * accessible au clavier.
+         */
+
+        poster.setAttribute(
+          "tabindex",
+          "0"
+        );
+
+
+        poster.setAttribute(
           "aria-label",
           participantName
         );
+
+
+        poster.setAttribute(
+          "aria-describedby",
+          tooltip.id
+        );
       }
-
-      profileLink.setAttribute(
-        "aria-describedby",
-        tooltip.id
-      );
-    } else {
-      poster.setAttribute(
-        "tabindex",
-        "0"
-      );
-
-      poster.setAttribute(
-        "aria-label",
-        participantName
-      );
-
-      poster.setAttribute(
-        "aria-describedby",
-        tooltip.id
-      );
-    }
-  });
+    });
 
 
-  participants.classList.add(
-    "utppVB_participants-ready"
-  );
+    /*
+     * Active la présentation CSS.
+     */
 
-  participants.dataset.participantsReady =
-    "true";
-}
+    participants.classList.add(
+      "utppVB_participants-ready"
+    );
+
+
+    participants.dataset.participantsReady =
+      "true";
+  }
+
+
+  /* ==================================================
+     ANCIEN TITRE “RÉPONSE RAPIDE”
+     ================================================== */
 
   function hideLegacyQuickReplyTitle(quickReply) {
     const parent =
       quickReply.parentElement;
 
+
     if (!parent) {
       return;
     }
+
+
+    /*
+     * Recherche les différents formats de titre
+     * susceptibles d’être générés par Forumactif.
+     */
 
     const possibleTitles = parent.querySelectorAll(
       [
@@ -422,20 +671,36 @@ function enhanceTopicParticipants() {
           quickReply
         );
 
+
+      /*
+       * Vérifie que le titre est placé avant
+       * le formulaire.
+       */
+
       const isBeforeQuickReply = Boolean(
         position &
         Node.DOCUMENT_POSITION_FOLLOWING
       );
 
+
       if (!isBeforeQuickReply) {
         return;
       }
 
+
+      /*
+       * Supprime les accents et la ponctuation finale.
+       */
+
       const normalizedTitle = normalizeText(
         element.textContent
       )
-        .replace(/[\s:：\-–—]+$/g, "")
+        .replace(
+          /[\s:：\-–—]+$/g,
+          ""
+        )
         .trim();
+
 
       const isQuickReplyTitle =
         normalizedTitle === "reponse rapide" ||
@@ -450,10 +715,21 @@ function enhanceTopicParticipants() {
     });
   }
 
+
+  /* ==================================================
+     RÉPONSE RAPIDE MODERNE
+     ================================================== */
+
   function enhanceQuickReply() {
     const quickReply = document.querySelector(
       "#quick_reply"
     );
+
+
+    /*
+     * Arrêt si le formulaire n’existe pas
+     * ou s’il a déjà été transformé.
+     */
 
     if (
       !quickReply ||
@@ -462,18 +738,29 @@ function enhanceTopicParticipants() {
       return;
     }
 
+
     const editorContent = quickReply.querySelector(
       "#textarea_content"
     );
+
 
     if (!editorContent) {
       return;
     }
 
 
+    /*
+     * Masque l’ancien titre “Réponse rapide:”.
+     */
+
     hideLegacyQuickReplyTitle(
       quickReply
     );
+
+
+    /* --------------------------------------------------
+       CRÉATION DE L’EN-TÊTE
+       -------------------------------------------------- */
 
     const header =
       document.createElement("header");
@@ -518,6 +805,7 @@ function enhanceTopicParticipants() {
       "true"
     );
 
+
     icon.innerHTML =
       '<i data-lucide="message-circle-more"></i>';
 
@@ -538,15 +826,26 @@ function enhanceTopicParticipants() {
       subtitle
     );
 
+
     header.append(
       icon,
       heading
     );
 
+
+    /*
+     * Place l’en-tête avant SCEditor.
+     */
+
     quickReply.insertBefore(
       header,
       editorContent
     );
+
+
+    /* --------------------------------------------------
+       BOUTONS
+       -------------------------------------------------- */
 
     const previewButton = quickReply.querySelector(
       'input[type="submit"][name="preview"]'
@@ -556,6 +855,7 @@ function enhanceTopicParticipants() {
       'input[type="submit"][name="post"]'
     );
 
+
     const actions = sendButton
       ? sendButton.closest("div")
       : null;
@@ -564,6 +864,7 @@ function enhanceTopicParticipants() {
     if (previewButton) {
       previewButton.value =
         QUICK_REPLY_COPY.preview;
+
 
       previewButton.classList.add(
         "utppVB_quickreply-preview"
@@ -575,11 +876,16 @@ function enhanceTopicParticipants() {
       sendButton.value =
         QUICK_REPLY_COPY.send;
 
+
       sendButton.classList.add(
         "utppVB_quickreply-send"
       );
     }
 
+
+    /*
+     * Retire les styles inline du bloc des boutons.
+     */
 
     if (
       actions &&
@@ -589,20 +895,28 @@ function enhanceTopicParticipants() {
         "utppVB_quickreply-actions"
       );
 
+
       actions.removeAttribute(
         "style"
       );
     }
 
+
+    /* --------------------------------------------------
+       PLACEHOLDER
+       -------------------------------------------------- */
+
     const editorTextareas = quickReply.querySelectorAll(
       ".sceditor-container textarea"
     );
+
 
     editorTextareas.forEach(function (textarea) {
       textarea.setAttribute(
         "placeholder",
         QUICK_REPLY_COPY.placeholder
       );
+
 
       textarea.setAttribute(
         "aria-label",
@@ -615,7 +929,17 @@ function enhanceTopicParticipants() {
       "true";
   }
 
+
+  /* ==================================================
+     RENDU DES ICÔNES LUCIDE
+     ================================================== */
+
   function renderLucideIcons() {
+    /*
+     * Évite une erreur si Lucide n’est pas chargé
+     * sur une page particulière.
+     */
+
     if (
       window.lucide &&
       typeof window.lucide.createIcons === "function"
@@ -623,6 +947,11 @@ function enhanceTopicParticipants() {
       window.lucide.createIcons();
     }
   }
+
+
+  /* ==================================================
+     INITIALISATION GÉNÉRALE
+     ================================================== */
 
   function initTopicTools() {
     setRandomTitleIcons();
@@ -633,6 +962,10 @@ function enhanceTopicParticipants() {
     renderLucideIcons();
   }
 
+
+  /*
+   * Fonctionne avec ou sans l’attribut defer.
+   */
 
   if (document.readyState === "loading") {
     document.addEventListener(
