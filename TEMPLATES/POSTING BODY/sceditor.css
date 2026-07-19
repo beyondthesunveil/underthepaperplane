@@ -453,10 +453,10 @@
 }
 
 #postingbox fieldset.submit-buttons {
-  width: 100%;
+  width: 97%;
   min-height: 76px;
-  margin: 0;
-  padding: 14px 18px;
+  margin: 0 auto;
+  padding: 14px 0;
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
@@ -464,8 +464,6 @@
   justify-content: flex-end;
   gap: 8px;
   clear: both;
-  background: var(--th-cl-cardAlt);
-  border: 0;
   border-top: 1px solid var(--th-cl-bord);
 }
 
