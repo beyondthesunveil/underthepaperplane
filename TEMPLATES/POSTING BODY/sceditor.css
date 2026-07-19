@@ -484,17 +484,12 @@
 
 /* Carte principale. */
 #postingbox {
-  margin: 22px 0 0 !important;
   overflow: visible;
   background: var(--th-cl-card) !important;
-  border: 1px solid var(--th-cl-bord) !important;
-  border-bottom: 0 !important;
-  border-radius: var(--th-radius-lg) var(--th-radius-lg) 0 0 !important;
-  box-shadow: 0 14px 35px var(--th-cl-shadow);
+  border-radius: 10px;
 }
 
 #postingbox > .inner {
-  padding: 0 18px 18px !important;
   overflow: visible;
 }
 
