@@ -8,6 +8,7 @@
   display: flex;
   box-sizing: border-box;
 }
+
 .utppVB_titleicon {
   width: 40px;
   display: grid;
@@ -16,11 +17,13 @@
   background: var(--newspaper-ink);
   border-radius: 5px;
 }
+
 .utppVB_titleicon svg {
   width: 18px;
   height: 18px;
   stroke-width: 2;
 }
+
 .utppVB_titlemap {
   padding: 0 25px 0 15px;
   box-sizing: border-box;
@@ -36,6 +39,7 @@
   overflow: hidden;
   clip-path: polygon(0 0, 100% 0, calc(100% - var(--cut-size)) 100%, 0 100%);
 }
+
 .utppVB_brdcrmbtrail {
   height: var(--title-height);
   padding: 0 15px 0 28px;
@@ -52,11 +56,13 @@
   text-transform: lowercase;
   clip-path: polygon(var(--cut-size) 0, 100% 0, 100% 100%, 0 100%);
 }
+
 .utppVB_brdcrmbtrail a {
   color: var(--th-cl-acc3);
   font-style: italic;
   transition: var(--th-trans-fast);
 }
+
 .utppVB_brdcrmbtrail a:hover {
   background: var(--th-grad-chip);
   background-clip: text;
@@ -65,13 +71,12 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* ----- début bloc sujet ----- */
-
 .utppVB_postprofile .row1,
 .utppVB_postprofile .row2 {
   background: transparent !important;
   box-shadow: none !important;
 }
+
 .post {
   border: none;
   background-position: 0;
@@ -82,7 +87,7 @@
   box-shadow: none;
   margin: 24px 0;
 }
-/* bloc qui gère l'ensemble de la structure */
+
 .utppVB_blockmember {
   display: flex;
   flex-wrap: wrap;
@@ -93,17 +98,19 @@
   justify-content: space-between;
   box-sizing: border-box;
 }
-/* bloc qui va gérer l'affichage de la bande gauche avec l'avatar, le rang, le bloc des infos */
+
 .utppVB_blockperso {
   width: 270px;
   background-color: var(--th-cl-panelAlt);
   border-radius: 0 0 0 var(--th-radius-xs);
   border-right: 1px solid var(--th-cl-bord);
 }
+
 .utppVB_posttracker {
   position: sticky;
   top: 50px;
 }
+
 .utppVB_postname {
   width: 240px;
   border: 1px solid var(--th-cl-bord);
@@ -112,22 +119,26 @@
   border-radius: 5px;
   text-align: center;
 }
+
 .utppVB_postname strong {
   color: var(--th-cl-tle);
   display: inline-block;
   font: 15px var(--fst3);
   text-transform: uppercase;
 }
+
 .short-pseudo {
   border-bottom: 1px solid currentColor;
   width: 220px;
 }
+
 .long-pseudo {
   border-bottom: 1px solid currentColor;
   padding: 4px 8px;
   transition: all var(--th-trans-fast);
   width: 220px;
 }
+
 .utppVB_posteravatar {
   margin: 15px auto;
   border: 5px solid var(--manifest-panel-soft);
@@ -138,11 +149,13 @@
   overflow: hidden;
   outline-offset: 5px;
 }
+
 .utppVB_posteravatar img {
   max-width: 222px !important;
   margin: 0;
   object-fit: cover;
 }
+
 .utppVB_rank {
   font: 15px var(--fst1);
   color: var(--th-cl-font);
@@ -150,6 +163,7 @@
   margin: 10px auto 0;
   width: 240px;
 }
+
 .utppVB_rank > span {
   display: block;
   font: 11px var(--fte1);
@@ -159,11 +173,13 @@
   border-radius: 5px;
   margin-top: 10px;
 }
+
 .group-label {
   text-align: center;
   margin: 0 auto;
   width: 100%;
 }
+
 .utppVB_charafields {
   margin: 10px;
   height: 195px;
@@ -176,11 +192,13 @@
   gap: 5px;
   border: 1px solid var(--th-cl-bord);
 }
+
 .utppVB_charafield {
   font: 11px var(--fte2);
   padding: 3px 0px;
   border-bottom: 1px solid var(--th-cl-bord);
 }
+
 .utppVB_charalabel {
   font: 10px var(--fst4);
   letter-spacing: 1px;
@@ -188,31 +206,35 @@
   color: var(--th-cl-desc3);
   opacity: 0.8;
 }
+
 .utppVB_characontent {
   color: var(--th-cl-font);
   text-align: right;
   max-width: 120px;
 }
+
 .utppVB_characontent img {
   object-fit: cover !important;
   width: 183px !important;
 }
-/* bloc qui va gérer l'affichage général de la mise en page du texte, la date, les boutons edit */
+
 .utppVB_blockcontent {
   width: 888px;
   background-color: var(--th-cl-cardAlt);
   border-radius: 0 0 var(--th-radius-xs) 0;
 }
-/* affichage des boutons d'édition */
+
 .utppVB_btnedit {
   margin: 6px;
 }
+
 .profile-icons {
   display: flex;
   gap: 6px;
   margin: 0 !important;
   justify-content: center;
 }
+
 .profile-icons a {
   width: 25px;
   height: 25px;
@@ -225,19 +247,24 @@
   position: relative;
   transition: var(--th-trans-med);
 }
+
 .profile-icons a::before {
   font-size: 13px;
   color: var(--th-cl-font);
 }
+
 .icon-quote::before {
   content: "❝";
 }
+
 .icon-edit::before {
   content: "✎";
 }
+
 .icon-delete::before {
   content: "✕";
 }
+
 .icon-ip::before {
   content: "⛨";
 }
@@ -248,9 +275,11 @@
   transform: translateY(-2px);
   color: var(--th-cl-font);
 }
+
 .profile-icons a:hover::before {
   color: var(--th-cl-desc3);
 }
+
 .utppVB_content {
   padding: 40px;
   text-align: justify;
@@ -262,10 +291,12 @@
   min-height: 735px;
   border-radius: 5px;
 }
+
 .utppVB_content img {
   max-width: 600px;
   object-fit: cover;
 }
+
 .utppVB_modoaction {
   height: 60px;
   display: flex;
@@ -276,6 +307,7 @@
   background: var(--newspaper-paper);
   border: 1px solid var(--th-cl-bord);
 }
+
 .quickmod {
   display: flex;
   align-items: center;
@@ -286,6 +318,7 @@
   border: none;
   backdrop-filter: none;
 }
+
 .quickmod label {
   font: 12px var(--fst4);
   color: var(--th-cl-sub);
@@ -293,6 +326,7 @@
   letter-spacing: 1px;
   margin: 0;
 }
+
 .quickmod select {
   padding: 8px 12px;
   background: var(--th-cl-cardAlt);
@@ -301,6 +335,7 @@
   color: var(--th-cl-txt);
   font: 13px var(--th-font-main);
 }
+
 .quickmod .button2 {
   padding: 8px 14px;
   border: none;
@@ -311,10 +346,12 @@
   cursor: pointer;
   transition: var(--th-trans-fast);
 }
+
 .quickmod .button2:hover {
   transform: translateY(-1px);
   opacity: 0.9;
 }
+
 .utppVB_btnaction {
   display: flex;
   align-items: center;
@@ -325,6 +362,7 @@
   border: none;
   backdrop-filter: none;
 }
+
 .utppVB_btnaction a {
   width: 42px;
   height: 42px;
@@ -341,13 +379,16 @@
   position: relative;
   text-decoration: none;
 }
+
 .utppVB_btnaction a:hover {
   background: var(--th-cl-accSoft);
   transform: translateY(-2px);
 }
+
 .utppVB_btnaction a img {
   display: none;
 }
+
 .utppVB_btnaction a::before {
   content: "";
   width: 18px;
@@ -360,6 +401,7 @@
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
 }
+
 .utppVB_btnaction a::after {
   content: attr(title);
   position: absolute;
@@ -377,60 +419,76 @@
   transition: var(--th-trans-fast);
   box-shadow: 0 10px 30px var(--th-cl-shadowStrong);
 }
+
 .utppVB_btnaction a:hover::after {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+
 .utppVB_btnaction a[href*="mode=delete"] {
   color: var(--th-cl-desc3);
 }
+
 .utppVB_btnaction a[href*="delete"]::after {
   content: "Supprimer le sujet";
 }
+
 .utppVB_btnaction a[href*="mode=delete"]::before {
   mask-image: url("https://unpkg.com/lucide-static/icons/trash-2.svg");
   -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/trash-2.svg");
 }
+
 .utppVB_btnaction a[href*="mode=move"]::before {
   mask-image: url("https://unpkg.com/lucide-static/icons/move-right.svg");
   -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/move-right.svg");
 }
+
 .utppVB_btnaction a[href*="move"]::after {
   content: "Déplacer le sujet";
 }
+
 .utppVB_btnaction a[href*="mode=lock"]::before {
   mask-image: url("https://unpkg.com/lucide-static/icons/lock.svg");
   -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/lock.svg");
 }
+
 .utppVB_btnaction a[href*="lock"]::after {
   content: "Verrouiller le sujet";
 }
+
 .utppVB_btnaction a[href*="mode=unlock"]::before {
   mask-image: url("https://unpkg.com/lucide-static/icons/lock-open.svg");
   -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/lock-open.svg");
 }
+
 .utppVB_btnaction a[href*="unlock"]::after {
   content: "Déverrouiller le sujet";
 }
+
 .utppVB_btnaction a[href*="mode=split"]::before {
   mask-image: url("https://unpkg.com/lucide-static/icons/split.svg");
   -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/split.svg");
 }
+
 .utppVB_btnaction a[href*="split"]::after {
   content: "Diviser le sujet";
 }
+
 .utppVB_btnaction a[href*="/merge"]::before {
   mask-image: url("https://unpkg.com/lucide-static/icons/combine.svg");
   -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/combine.svg");
 }
+
 .utppVB_btnaction a[href*="/merge"]::after {
   content: "Fusionner les sujets";
 }
+
 .utppVB_btnaction a[href*="mode=trash"]::before,
 .utppVB_btnaction a[href*="mode=bin"]::before {
   mask-image: url("https://unpkg.com/lucide-static/icons/archive.svg");
   -webkit-mask-image: url("https://unpkg.com/lucide-static/icons/archive.svg");
 }
+
 .utppVB_btnaction a[href*="trash"]::after {
   content: "Corbeille";
 }
@@ -445,6 +503,7 @@
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-sm);
 }
+
 .utppVB_topicre {
   margin: 10px;
   border-radius: var(--th-radius-sm);
@@ -457,6 +516,7 @@
   background: var(--th-grad-panel);
   height: 20px;
 }
+
 .utppVB_prflstuff {
   width: 500px;
   display: flex;
@@ -476,8 +536,6 @@
   font: 13px var(--fst4) !important;
   transition: var(--th-trans-med) !important;
 }
-
-/* ================ SYSTÊME D'ONGLETS =============== */
 
 .utppVB_tabsystem {
   box-sizing: border-box;
@@ -665,8 +723,6 @@
   color: var(--th-cl-acc2);
 }
 
-/* ===================== BOUTONS LIENS ==================== */
-
 .utppVB_contFields {
   display: flex;
   align-items: center;
@@ -781,8 +837,6 @@
   transform: translateX(-50%) translateY(0);
 }
 
-/* ================ SUBHEADER ============== */
-
 .sub-header-buttons {
   width: 100%;
   margin: 16px 0 25px;
@@ -846,10 +900,6 @@
   height: 14px;
   object-fit: contain;
 }
-
-/* ================================================================
-   PARTICIPANTS DU SUJET — enrichis par le JS
-   ================================================================ */
 
 .sub-header-buttons__right.utppVB_participants-ready {
   padding: 0 20px;
@@ -946,30 +996,22 @@
     font-family: "Roboto Condensed", sans-serif;
 }
 
-/* ================================================================
-   FAVORIS
-   ================================================================ */
-
 #fa-topic-fav-button {
   min-height: 34px;
   padding: 7px 12px;
   box-sizing: border-box;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
-
   color: var(--th-cl-txt);
   background: var(--th-cl-card);
   border: 1px solid var(--th-cl-bord);
   border-radius: var(--th-radius-sm);
-
   font: 13px/1.2 var(--fst3);
   text-transform: lowercase;
   white-space: nowrap;
   cursor: pointer;
-
   transition:
     color var(--th-trans-fast),
     background var(--th-trans-fast),
@@ -1009,10 +1051,6 @@
 #fa-topic-fav-button.is-favorite svg {
   fill: currentColor;
 }
-
-/* ================================================================
-   SURVEILLANCE — cible exacte : .utppVB_watchtopicBG
-   ================================================================ */
 
 .utppVB_watchtopicBG {
   min-height: 34px;
@@ -1080,7 +1118,6 @@
   transform: scale(1.12);
 }
 
-/* Le lien propose d'arrêter : la surveillance est donc active. */
 .utppVB_watchtopicBG.is-watching > a {
   color: var(--th-cl-acc3) !important;
   background: var(--th-cl-accSoft) !important;
@@ -1104,10 +1141,6 @@
 .utppVB_watchtopicBG.is-watching > a:hover::before {
   transform: scale(1.12) rotate(-5deg);
 }
-
-/* ================================================================
-   PAGINATION ENRICHIE PAR utppvb-topic-tools.js
-   ================================================================ */
 
 .utppVB_pages {
   display: inline-flex;
@@ -1160,7 +1193,7 @@
   align-items: center;
   gap: 4px;
   padding-left: 11px;
-  font-size: 0; /* Cache la ponctuation brute produite par Forumactif. */
+  font-size: 0; 
 }
 
 .utppVB_pages__list::before {
@@ -1221,8 +1254,6 @@
 .utppVB_pages__list a::after {
   font-size: 15px;
 }
-
-/* ==================== BLOC PERMISSIONS ==================== */
 
 .utppVB_permblock {
   color: var(--th-cl-txt);
@@ -1285,10 +1316,6 @@
   color: var(--th-cl-tle);
   font-weight: 700;
 }
-
-/* ================================================================
-   RÉPONSE RAPIDE — COMPOSEUR DE MESSAGERIE
-   ================================================================ */
 
 .utppVB_quickreply-legacy-title {
   display: none !important;
@@ -1535,4 +1562,66 @@
   transform:
     translateY(0)
     scale(1);
+}
+
+#quick_reply #textarea_content {
+  position: relative;
+}
+
+#quick_reply .utppVB_quickreply-stats {
+  min-height: 30px;
+  padding: 5px 9px;
+  position: absolute;
+  right: 13px;
+  bottom: 10px;
+  z-index: 5;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--th-cl-sub);
+  background: color-mix(
+    in srgb,
+    var(--th-cl-panel) 92%,
+    transparent
+  );
+  border: 1px solid var(--th-cl-bord);
+  border-radius: 999px;
+  font: 10px var(--fst3);
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+
+#quick_reply .utppVB_quickreply-stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+#quick_reply
+  .utppVB_quickreply-stat
+  + .utppVB_quickreply-stat::before {
+  content: "";
+  width: 3px;
+  height: 3px;
+  margin-right: 5px;
+  align-self: center;
+  background: var(--th-cl-acc2);
+  border-radius: 50%;
+}
+
+#quick_reply
+  .utppVB_quickreply-stat strong {
+  color: var(--th-cl-acc3);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+@media (max-width: 500px) {
+  #quick_reply .utppVB_quickreply-stats {
+    right: 8px;
+    bottom: 8px;
+    font-size: 9px;
+  }
 }
