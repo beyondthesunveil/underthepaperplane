@@ -172,184 +172,68 @@
     });
   }
 
-  function enhanceTopicParticipants() {
-    const participants = document.querySelector(
-      ".sub-header-buttons__right"
-    );
+function enhanceTopicParticipants() {
+  const participants = document.querySelector(
+    ".sub-header-buttons__right"
+  );
 
-    if (
-      !participants ||
-      participants.dataset.participantsReady === "true"
-    ) {
+  if (
+    !participants ||
+    participants.dataset.participantsReady === "true"
+  ) {
+    return;
+  }
+
+  const posters = participants.querySelectorAll(
+    ".posts-users-list > .poster[title]"
+  );
+
+  posters.forEach(function (poster) {
+    const participantName = (
+      poster.getAttribute("title") || ""
+    ).trim();
+
+    const profileLink =
+      poster.querySelector("a");
+
+    if (!participantName) {
       return;
     }
 
-    const participantNames = [];
+    poster.dataset.participantName =
+      participantName;
 
-    const participantImages =
-      participants.querySelectorAll("img");
+    poster.removeAttribute(
+      "title"
+    );
 
-
-    participantImages.forEach(function (image) {
-      const profileLink =
-        image.closest("a");
-
-      const avatar =
-        profileLink || image.parentElement;
-
-      if (!avatar) {
-        return;
-      }
-
-
-      const rawName =
-        image.getAttribute("alt") ||
-        image.getAttribute("title") ||
-        avatar.getAttribute("title") ||
-        (
-          profileLink
-            ? profileLink.textContent.trim()
-            : ""
-        ) ||
-        "Voir le profil";
-
-
-      const cleanName = rawName
-        .replace(
-          /^avatar\s+(de|of)\s+/i,
-          ""
-        )
-        .trim();
-
-
-      avatar.classList.add(
-        "utppVB_participant"
-      );
-
-
-      if (!profileLink) {
-        avatar.setAttribute(
-          "tabindex",
-          "0"
-        );
-      }
-
-
-      if (!avatar.getAttribute("aria-label")) {
-        avatar.setAttribute(
+    if (profileLink) {
+      if (!profileLink.getAttribute("aria-label")) {
+        profileLink.setAttribute(
           "aria-label",
-          cleanName
+          participantName
         );
       }
+    } else {
+      poster.setAttribute(
+        "tabindex",
+        "0"
+      );
 
-
-      image.removeAttribute("title");
-      avatar.removeAttribute("title");
-
-
-      participantNames.push({
-        name: cleanName,
-
-        href: profileLink
-          ? profileLink.getAttribute("href") || ""
-          : ""
-      });
-    });
-
-    const textNodes = [];
-
-    const walker = document.createTreeWalker(
-      participants,
-      NodeFilter.SHOW_TEXT,
-      {
-        acceptNode: function (node) {
-          const parentElement =
-            node.parentElement;
-
-          const insideAvatar =
-            parentElement &&
-            parentElement.closest(
-              ".utppVB_participant"
-            );
-
-          if (insideAvatar) {
-            return NodeFilter.FILTER_REJECT;
-          }
-
-          const containsCounter =
-            /participants?/i.test(
-              node.textContent
-            );
-
-          return containsCounter
-            ? NodeFilter.FILTER_ACCEPT
-            : NodeFilter.FILTER_REJECT;
-        }
-      }
-    );
-
-
-    while (walker.nextNode()) {
-      textNodes.push(
-        walker.currentNode
+      poster.setAttribute(
+        "aria-label",
+        participantName
       );
     }
+  });
 
+  participants.classList.add(
+    "utppVB_participants-ready"
+  );
 
-    textNodes.forEach(function (textNode) {
-      textNode.remove();
-    });
-
-    if (participantNames.length) {
-      const names =
-        document.createElement("span");
-
-      names.className =
-        "utppVB_participants-names";
-
-
-      participantNames.forEach(function (participant) {
-        const nameElement =
-          document.createElement(
-            participant.href
-              ? "a"
-              : "span"
-          );
-
-        nameElement.className =
-          "utppVB_participants-name";
-
-        nameElement.textContent =
-          participant.name;
-
-
-        if (participant.href) {
-          nameElement.setAttribute(
-            "href",
-            participant.href
-          );
-        }
-
-
-        names.appendChild(
-          nameElement
-        );
-      });
-
-
-      participants.appendChild(
-        names
-      );
-    }
-
-
-    participants.classList.add(
-      "utppVB_participants-ready"
-    );
-
-    participants.dataset.participantsReady =
-      "true";
-  }
+  participants.dataset.participantsReady =
+    "true";
+}
 
   function hideLegacyQuickReplyTitle(quickReply) {
     const parent =
