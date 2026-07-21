@@ -304,7 +304,7 @@ html[data-utppuc-layout="worked"]
   :has(.utppUC_forum[data-forum-url^="/f29-"])
 ) .utppUC_forum {
   min-width: 0;
-  min-height: 390px;
+  min-height: 300px;
   padding: 16px 18px 0;
   display: grid;
   grid-template-rows: 18px minmax(0,1fr);
@@ -400,7 +400,10 @@ html[data-utppuc-layout="worked"]
   margin: 0;
   grid-row: 2;
   display: grid;
-  grid-template-rows: auto minmax(70px,1fr) 76px 34px;
+  grid-template-columns: minmax(0,1fr);
+  grid-template-rows: auto minmax(58px,1fr) 64px 30px;
+  align-items: stretch;
+  gap: 0;
 }
 
 html[data-utppuc-layout="worked"]
@@ -418,6 +421,8 @@ html[data-utppuc-layout="worked"]
 ) .utppUC_identity {
   min-width: 0;
   margin-top: 18px;
+  grid-column: 1;
+  grid-row: 1;
   display: grid;
   grid-template-columns: 62px minmax(0,1fr);
   grid-template-rows: auto auto auto;
@@ -462,6 +467,7 @@ html[data-utppuc-layout="worked"]
   grid-column: 2;
   grid-row: 1;
   overflow: hidden;
+  color: var(--utppUC_ivory) !important;
   font: 700 23px/1 "Playfair Display SC", Georgia, serif;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -525,11 +531,26 @@ html[data-utppuc-layout="worked"]
 .utppUC_category:is(
   [data-category-id="c3"],
   :has(.utppUC_forum[data-forum-url^="/f29-"])
+) .utppUC_subforums a {
+  padding: 4px 7px;
+  color: #c5beba !important;
+  background: #252525;
+  font: 700 6px Arial, sans-serif;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category:is(
+  [data-category-id="c3"],
+  :has(.utppUC_forum[data-forum-url^="/f29-"])
 ) .utppUC_description {
   min-width: 0;
   margin: 0;
   padding-top: 18px;
+  grid-column: 1;
   grid-row: 2;
+  align-self: stretch;
   display: -webkit-box;
   overflow: hidden;
   color: #b8b0ab;
@@ -543,11 +564,22 @@ html[data-utppuc-layout="worked"]
 .utppUC_category:is(
   [data-category-id="c3"],
   :has(.utppUC_forum[data-forum-url^="/f29-"])
+) .utppUC_description p {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category:is(
+  [data-category-id="c3"],
+  :has(.utppUC_forum[data-forum-url^="/f29-"])
 ) .utppUC_lastPost {
   min-width: 0;
-  min-height: 76px;
+  min-height: 64px;
   margin: 0 -18px;
   padding: 10px 14px;
+  grid-column: 1;
   grid-row: 3;
   display: grid;
   grid-template-columns: 52px minmax(0,1fr) 16px;
@@ -648,9 +680,10 @@ html[data-utppuc-layout="worked"]
   :has(.utppUC_forum[data-forum-url^="/f29-"])
 ) .utppUC_stats {
   min-width: 0;
-  min-height: 34px;
+  min-height: 30px;
   margin: 0 -18px;
   padding: 8px 14px;
+  grid-column: 1;
   grid-row: 4;
   display: flex;
   flex-direction: row;
