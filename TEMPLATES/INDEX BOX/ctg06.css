@@ -1,0 +1,740 @@
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) {
+  --utppUC_nsBg: #111111;
+  --utppUC_nsPanel: #181818;
+  --utppUC_nsAlt: #202020;
+  --utppUC_nsLine: #303030;
+  --utppUC_nsRust: #9d4027;
+  --utppUC_nsRustDark: #54251a;
+  --utppUC_nsRustSoft: #c98570;
+  --utppUC_nsIvory: #eee9e5;
+  --utppUC_nsText: #c5bdb8;
+  --utppUC_nsMuted: #918984;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f11-"] {
+  --utppUC_nsChannel: "Canal A";
+  --utppUC_nsSignal: "PLAY";
+  --utppUC_nsMeta: "Jouer · discuter · souffler";
+  --utppUC_nsAccess: "Ouvert en continu";
+  --utppUC_nsLast: "En cours de lecture";
+}
+
+html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f12-"] {
+  --utppUC_nsChannel: "Canal B";
+  --utppUC_nsSignal: "MAKE";
+  --utppUC_nsMeta: "Imaginer · composer · exposer";
+  --utppUC_nsAccess: "Atelier ouvert";
+  --utppUC_nsLast: "En cours de création";
+}
+
+html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f13-"] {
+  --utppUC_nsChannel: "Canal C";
+  --utppUC_nsSignal: "CODE";
+  --utppUC_nsMeta: "Coder · apprendre · transmettre";
+  --utppUC_nsAccess: "Accès public";
+  --utppUC_nsLast: "Dernier ajout";
+}
+
+/* Entête horizontale ---------------------------------------------------- */
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_header {
+  min-height: 142px;
+  padding: 22px 28px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 104px minmax(0,1fr) 250px;
+  align-items: center;
+  gap: 30px;
+  background: linear-gradient(105deg, rgba(157,64,39,.24), transparent 49%), var(--utppUC_nsPanel);
+  border: 0;
+  border-top: 1px solid #53352d;
+  border-bottom: 1px solid var(--utppUC_nsLine);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_header::before {
+  content: "";
+  width: 410px;
+  height: 410px;
+  position: absolute;
+  top: -334px;
+  right: 310px;
+  z-index: -1;
+  background: transparent;
+  border: 1px solid rgba(157,64,39,.3);
+  border-radius: 50%;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerSide {
+  align-self: stretch;
+  padding: 12px 22px 12px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border: 0;
+  border-right: 1px solid #4a332d;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerSide span {
+  color: var(--utppUC_nsRustSoft);
+  font: 700 7px Arial, sans-serif;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-size: 0;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerSide span::before {
+  content: "Off";
+  font-size: 7px;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerSide span::after {
+  content: "Duty";
+  margin-top: 5px;
+  display: block;
+  color: var(--utppUC_nsIvory);
+  font: 700 20px/1 "Playfair Display SC", Georgia, serif;
+  letter-spacing: 0;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerSide i {
+  margin-top: 11px;
+  color: var(--utppUC_nsMuted);
+  font: italic 7px Arial, sans-serif;
+  font-size: 0;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerSide i::before {
+  content: "24/7";
+  font-size: 7px;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerCopy {
+  min-width: 0;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerCopy > span {
+  display: block;
+  color: var(--utppUC_nsRust);
+  font: 700 8px Arial, sans-serif;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+  font-size: 0;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerCopy > span::before {
+  content: "Section 06 · programme libre après la fermeture";
+  font-size: 8px;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerCopy > div {
+  margin-top: 7px;
+  overflow: visible;
+  color: var(--utppUC_nsIvory);
+  font: 700 41px/1 "Playfair Display SC", Georgia, serif;
+  letter-spacing: -.035em;
+  text-overflow: clip;
+  text-transform: uppercase;
+  white-space: normal;
+  font-size: 0;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerCopy > div::before {
+  content: "After hours";
+  font-size: 41px;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerCopy p {
+  max-width: 720px;
+  margin-top: 10px;
+  display: block;
+  color: var(--utppUC_nsText);
+  font: italic 9px/1.45 Arial, sans-serif;
+  font-size: 0;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerCopy p::before {
+  content: "On joue, on crée, on partage — et, pour une fois, personne ne demande de rester sérieux.";
+  font-size: 9px;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerMeta {
+  min-width: 0;
+  padding: 15px 0 15px 21px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  border: 0;
+  border-left: 1px solid var(--utppUC_nsLine);
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerMeta span {
+  padding: 0;
+  display: block;
+  color: var(--utppUC_nsRustSoft);
+  background: transparent;
+  font: 700 6px Arial, sans-serif;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-size: 0;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerMeta span:first-child::before {
+  content: "Programme de nuit";
+  font-size: 6px;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerMeta span:first-child::after {
+  content: "Hors-RP";
+  margin-top: 7px;
+  display: block;
+  color: var(--utppUC_nsIvory);
+  font: 700 21px/1 "Playfair Display SC", Georgia, serif;
+  letter-spacing: 0;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerMeta span:nth-child(2) {
+  display: none;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerMeta strong {
+  display: none;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerMeta i {
+  margin-top: 12px;
+  padding-top: 10px;
+  color: var(--utppUC_nsMuted);
+  border: 0;
+  border-top: 1px solid #4a332d;
+  font: 700 6px Arial, sans-serif;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  font-size: 0;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerMeta i::before {
+  content: "03";
+  margin-right: 7px;
+  color: var(--utppUC_nsRustSoft);
+  font: 700 14px "Playfair Display SC", Georgia, serif;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerMeta i::after {
+  content: "canaux ouverts";
+  font-size: 6px;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerGhost {
+  right: 18px;
+  bottom: -42px;
+  z-index: -1;
+  display: block;
+  color: rgba(255,255,255,.025);
+  font: 700 92px/1 Arial, sans-serif;
+  pointer-events: none;
+  font-size: 0;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_headerGhost::before {
+  content: "06";
+  font-size: 92px;
+}
+
+/* Panorama -------------------------------------------------------------- */
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_directory {
+  min-height: 470px;
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: minmax(0,1.55fr) minmax(0,1.05fr) minmax(0,.75fr);
+  grid-template-rows: minmax(438px,1fr) 36px;
+  gap: 0 10px;
+  background: transparent;
+  border: 0;
+  overflow: visible;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum[data-forum-url^="/f11-"] { grid-column: 1; grid-row: 1; }
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum[data-forum-url^="/f12-"] { grid-column: 2; grid-row: 1; }
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum[data-forum-url^="/f13-"] { grid-column: 3; grid-row: 1; }
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_directory::after {
+  content: "DIFFUSION LIBRE · AUCUNE INTERRUPTION PROGRAMMÉE                                      La nuit appartient à ceux qui restent.                                      ON AIR";
+  min-width: 0;
+  min-height: 36px;
+  padding: 0 15px;
+  grid-column: 1 / 4;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: var(--utppUC_nsMuted);
+  background: #151515;
+  border: 1px solid var(--utppUC_nsLine);
+  font: 700 6px Arial, sans-serif;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  white-space: pre;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum {
+  min-width: 0;
+  min-height: 438px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--utppUC_nsPanel);
+  border: 1px solid #2c2c2c;
+  overflow: hidden;
+  isolation: isolate;
+  translate: 0;
+  transition: background 240ms ease, border-color 240ms ease;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum:hover,
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum:focus-within {
+  background: #1c1b1a;
+  border-color: #4b342d;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum::before {
+  content: "";
+  width: auto;
+  height: 3px;
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 5;
+  background: var(--utppUC_nsRust);
+  scale: 0 1;
+  transform-origin: left;
+  transition: scale 440ms cubic-bezier(.16,1,.3,1);
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum:hover::before,
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum:focus-within::before {
+  scale: 1;
+}
+
+/* Affiche PLAY / MAKE / CODE ------------------------------------------- */
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_status {
+  min-height: 150px;
+  padding: 18px 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  color: var(--utppUC_nsRustSoft);
+  background: linear-gradient(125deg, rgba(157,64,39,.28), transparent 64%), #151515;
+  border: 0;
+  border-bottom: 1px solid var(--utppUC_nsLine);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_status::before {
+  content: "";
+  width: 220px;
+  height: 220px;
+  position: absolute;
+  top: -142px;
+  right: -43px;
+  z-index: -1;
+  border: 1px solid rgba(157,64,39,.4);
+  border-radius: 50%;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_status::after {
+  content: "";
+  width: 66px;
+  height: 25px;
+  position: absolute;
+  right: 20px;
+  bottom: 18px;
+  background:
+    linear-gradient(to top, var(--utppUC_nsRust) 0 7px, transparent 7px) 0 100%/6px 100% no-repeat,
+    linear-gradient(to top, var(--utppUC_nsRust) 0 17px, transparent 17px) 12px 100%/6px 100% no-repeat,
+    linear-gradient(to top, var(--utppUC_nsRust) 0 11px, transparent 11px) 24px 100%/6px 100% no-repeat,
+    linear-gradient(to top, var(--utppUC_nsRust) 0 24px, transparent 24px) 36px 100%/6px 100% no-repeat,
+    linear-gradient(to top, var(--utppUC_nsRust) 0 14px, transparent 14px) 48px 100%/6px 100% no-repeat,
+    linear-gradient(to top, var(--utppUC_nsRust) 0 6px, transparent 6px) 60px 100%/6px 100% no-repeat;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_statusIcon {
+  display: none;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_status span {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  font-size: 0;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_status span::before {
+  content: var(--utppUC_nsChannel);
+  font: 700 6px Arial, sans-serif;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_status span::after {
+  content: var(--utppUC_nsSignal);
+  margin-top: auto;
+  color: var(--utppUC_nsIvory);
+  font: 900 48px/.85 Arial, sans-serif;
+  letter-spacing: -.08em;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum[data-forum-url^="/f12-"] .utppUC_status {
+  background: linear-gradient(125deg, rgba(238,233,229,.08), transparent 64%), #151515;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum[data-forum-url^="/f12-"] .utppUC_status span::after {
+  font-size: 42px;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum[data-forum-url^="/f13-"] .utppUC_status {
+  background: repeating-linear-gradient(135deg, transparent 0 18px, rgba(157,64,39,.065) 19px 20px), #151515;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum[data-forum-url^="/f13-"] .utppUC_status span::after {
+  font-size: 33px;
+}
+
+/* Contenu : display:contents permet de réordonner sans changer le HTML. */
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_content {
+  min-width: 0;
+  min-height: 286px;
+  margin: 0;
+  padding: 18px 20px 16px;
+  position: relative;
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  grid-template-rows: auto auto minmax(0,1fr) auto auto auto;
+  gap: 0;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_content::before {
+  content: none;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_identity {
+  display: contents;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_identity::before {
+  content: none;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_identity > small {
+  min-width: 0;
+  grid-column: 1;
+  grid-row: 1;
+  overflow: hidden;
+  color: var(--utppUC_nsRust);
+  font: 700 7px Arial, sans-serif;
+  letter-spacing: .11em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-size: 0;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_identity > small::before {
+  content: var(--utppUC_nsMeta);
+  font-size: 7px;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_identity > small::after {
+  content: var(--utppUC_nsAccess);
+  position: absolute;
+  right: 20px;
+  color: var(--utppUC_nsMuted);
+  font-size: 7px;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_title {
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 9px;
+  grid-column: 1 / 3;
+  grid-row: 2;
+  overflow: hidden;
+  color: var(--utppUC_nsIvory) !important;
+  font: 700 29px/1 "Playfair Display SC", Georgia, serif;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_description {
+  min-width: 0;
+  margin-top: 13px;
+  grid-column: 1 / 3;
+  grid-row: 3;
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--utppUC_nsText);
+  font: italic 9px/1.5 Arial, sans-serif;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_description p {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_subforums {
+  margin-top: 14px;
+  padding: 0;
+  grid-column: 1 / 3;
+  grid-row: 4;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border: 0;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_subforums a {
+  padding: 6px 9px;
+  color: #c5bfbb !important;
+  background: #242424;
+  border: 0;
+  font: 700 6px Arial, sans-serif;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_lastPost {
+  min-width: 0;
+  margin: 18px -20px 0;
+  padding: 15px 20px 12px;
+  grid-column: 1 / 3;
+  grid-row: 5;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 18px;
+  align-items: center;
+  gap: 10px;
+  background: rgba(32,32,32,.42);
+  border: 0;
+  border-top: 1px solid var(--utppUC_nsLine);
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_lastPost::before,
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_avatar {
+  display: none;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_lastPostCopy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_lastPostCopy small {
+  padding: 0;
+  color: var(--utppUC_nsRust);
+  background: transparent;
+  font-size: 0;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_lastPostCopy small::before {
+  content: var(--utppUC_nsLast);
+  font: 700 6px Arial, sans-serif;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_latestTopic {
+  margin-top: 5px;
+  color: var(--utppUC_nsIvory);
+  font: 700 11px/1.1 "Playfair Display SC", Georgia, serif;
+  text-transform: uppercase;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_user {
+  margin-top: 5px;
+  color: var(--utppUC_nsMuted);
+  font: italic 6px Arial, sans-serif;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_lastPostArrow {
+  width: auto;
+  height: auto;
+  color: var(--utppUC_nsRust) !important;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  font-size: 20px;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_stats {
+  min-width: 0;
+  min-height: 36px;
+  margin: 0 -20px -16px;
+  padding: 11px 20px 13px;
+  grid-column: 1 / 3;
+  grid-row: 6;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 9px;
+  color: var(--utppUC_nsMuted);
+  background: rgba(32,32,32,.42);
+  border: 0;
+  border-top: 1px solid var(--utppUC_nsLine);
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_stats span {
+  color: var(--utppUC_nsMuted);
+  font-size: 6px;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_stats strong {
+  min-width: 0;
+  margin: 0 4px 0 0;
+  color: var(--utppUC_nsRustSoft);
+  font: 700 10px "Playfair Display SC", Georgia, serif;
+}
+
+/* Ajustements proportionnels des canaux B et C ------------------------- */
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum[data-forum-url^="/f12-"] .utppUC_title {
+  font-size: 25px;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum[data-forum-url^="/f13-"] .utppUC_content {
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum[data-forum-url^="/f13-"] .utppUC_identity > small::after {
+  display: none;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum[data-forum-url^="/f13-"] .utppUC_title {
+  font-size: 21px;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum[data-forum-url^="/f13-"] .utppUC_description {
+  font-size: 8px;
+  -webkit-line-clamp: 3;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_forum[data-forum-url^="/f13-"] .utppUC_stats {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 5px;
+}
+
+@media (max-width: 980px) {
+  html[data-utppuc-layout="worked"]
+  .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) {
+    overflow-x: auto;
+  }
+
+  html[data-utppuc-layout="worked"]
+  .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_header,
+  html[data-utppuc-layout="worked"]
+  .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) .utppUC_directory {
+    min-width: 1120px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-utppuc-layout="worked"]
+  .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) *,
+  html[data-utppuc-layout="worked"]
+  .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) *::before,
+  html[data-utppuc-layout="worked"]
+  .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f11-"]) *::after {
+    transition-duration: .01ms !important;
+  }
+}
