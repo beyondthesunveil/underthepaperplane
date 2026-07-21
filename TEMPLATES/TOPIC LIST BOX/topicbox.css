@@ -332,7 +332,13 @@
   white-space: nowrap;
 }
 .utppTL_lastReply i { margin-top: 4px; overflow: hidden; color: var(--tl-muted); font: italic 6px Arial, sans-serif; text-overflow: ellipsis; white-space: nowrap; }
-.utppTL_lastReply b { color: var(--tl-rust); font: 400 19px/1 Arial, sans-serif; }
+.utppTL_lastReplyGo {
+  color: var(--tl-rust) !important;
+  font: 400 19px/1 Arial, sans-serif;
+  transition: translate 180ms ease;
+}
+.utppTL_lastReplyGo:hover,
+.utppTL_lastReplyGo:focus-visible { translate: 3px -3px; }
 
 /* Annonces et notes ---------------------------------------------------- */
 
