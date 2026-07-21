@@ -257,27 +257,6 @@ html[data-utppuc-layout="worked"]
   font: italic 7px Arial, sans-serif;
 }
 
-html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c2"],
-  :has(.utppUC_forum[data-forum-url^="/f24-"])
-) .utppUC_headerGhost {
-  right: -12px;
-  bottom: -35px;
-  color: rgba(255,255,255,.025);
-  font-size: 0;
-  rotate: 0deg;
-}
-
-html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c2"],
-  :has(.utppUC_forum[data-forum-url^="/f24-"])
-) .utppUC_headerGhost::before {
-  content: "P";
-  font: 700 150px/1 "Playfair Display SC", Georgia, serif;
-}
-
 /* Grille des dossiers ---------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
