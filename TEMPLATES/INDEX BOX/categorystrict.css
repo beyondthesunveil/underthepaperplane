@@ -1,0 +1,393 @@
+html[data-utppuc-layout="worked"] .utppUC_category {
+  --utppUC_panel: #191919;
+  --utppUC_panelAlt: #222222;
+  --utppUC_line: #303030;
+  --utppUC_rust: #8b3d25;
+  --utppUC_rustDark: #572619;
+  --utppUC_rustSoft: #c98670;
+  --utppUC_ivory: #eee9e5;
+  --utppUC_text: #b9b1ad;
+  --utppUC_muted: #aaa29d;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_header {
+  min-height: 108px;
+  padding: 15px 28px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 28px;
+  background:
+    linear-gradient(105deg, rgba(139, 61, 37, .25), transparent 46%),
+    #181818;
+  border-top: 1px solid #49342e;
+  border-bottom: 1px solid var(--utppUC_line);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_header::before {
+  width: 240px;
+  height: 240px;
+  top: -183px;
+  right: 260px;
+  border-color: rgba(139, 61, 37, .3);
+}
+
+html[data-utppuc-layout="worked"] .utppUC_headerSide {
+  display: none;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_headerCopy > span {
+  color: var(--utppUC_rust);
+  font: 700 7px Arial, sans-serif;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_headerCopy > div {
+  margin-top: 4px;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_headerCopy .hierarchy,
+html[data-utppuc-layout="worked"] .utppUC_headerCopy h2,
+html[data-utppuc-layout="worked"] .utppUC_headerCopy h2.hierarchy {
+  font: 700 32px/1 "Playfair Display SC", Georgia, serif;
+  letter-spacing: -.04em;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_headerCopy p {
+  max-width: 760px;
+  margin-top: 7px;
+  color: #bcb4af;
+  font: italic 9px/1.4 Arial, sans-serif;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_headerMeta {
+  min-width: 175px;
+  padding: 11px 13px;
+  position: relative;
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 12px;
+  color: var(--utppUC_ivory);
+  background: #24201f;
+  border: 1px solid #4b342d;
+  overflow: hidden;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_headerMeta::before,
+html[data-utppuc-layout="worked"] .utppUC_headerMeta::after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  top: calc(50% - 6px);
+  background: #181818;
+  border-radius: 50%;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_headerMeta::before { left: -6px; }
+html[data-utppuc-layout="worked"] .utppUC_headerMeta::after { right: -6px; }
+
+html[data-utppuc-layout="worked"] .utppUC_headerMeta i {
+  padding-top: 6px;
+  border-top: 1px dashed #574a45;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_headerGhost {
+  right: 225px;
+  bottom: 2px;
+  color: rgba(255, 255, 255, .04);
+  font-size: 32px;
+  rotate: -5deg;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_directory {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  background: var(--utppUC_panel);
+  border: 1px solid #292929;
+  counter-reset: utppUC_forumNumber;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_forum {
+  min-height: 126px;
+  margin: 0;
+  padding: 12px 14px;
+  position: relative;
+  display: grid;
+  grid-template-rows: 15px minmax(0, 1fr);
+  background: var(--utppUC_panel);
+  border: 0;
+  border-bottom: 1px solid var(--utppUC_line);
+  overflow: hidden;
+  counter-increment: utppUC_forumNumber;
+  transition: background 260ms ease;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_forum:last-child {
+  border-bottom: 0;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_forum:hover,
+html[data-utppuc-layout="worked"] .utppUC_forum:focus-within {
+  background: #1d1b1a;
+  border-color: var(--utppUC_line);
+}
+
+html[data-utppuc-layout="worked"] .utppUC_forum::before {
+  width: 3px;
+  inset: 0 auto 0 0;
+  z-index: 4;
+  background: var(--utppUC_rust);
+}
+
+html[data-utppuc-layout="worked"] .utppUC_status {
+  grid-row: 1;
+  display: flex;
+  justify-content: space-between;
+  color: #7f7874;
+  font: 700 6px Arial, sans-serif;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_statusIcon {
+  position: absolute;
+  right: 14px;
+  top: 11px;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_status span {
+  font-size: 0;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_status span::before {
+  content: "Programme " counter(utppUC_forumNumber, decimal-leading-zero);
+  font-size: 6px;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_content {
+  min-width: 0;
+  margin-top: 0;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 74px 230px minmax(0, 1fr) 275px;
+  grid-template-rows: minmax(68px, 1fr) 30px;
+  align-items: center;
+  gap: 0 13px;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_content::before {
+  content: "PROGRAM";
+  grid-column: 1;
+  grid-row: 1 / 3;
+  align-self: center;
+  justify-self: center;
+  color: rgba(255, 255, 255, .055);
+  font: 900 29px/.8 Arial, sans-serif;
+  letter-spacing: -.06em;
+  writing-mode: vertical-rl;
+  rotate: 180deg;
+  transition: color 300ms ease;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_forum:hover .utppUC_content::before {
+  color: rgba(139, 61, 37, .2);
+}
+
+html[data-utppuc-layout="worked"] .utppUC_identity {
+  min-width: 0;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 9px;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_identity::before {
+  content: counter(utppUC_forumNumber, decimal-leading-zero);
+  width: 40px;
+  height: 40px;
+  grid-column: 1;
+  grid-row: 1 / 3;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--utppUC_rust);
+  font: 700 14px "Playfair Display SC", Georgia, serif;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_identity > small {
+  grid-column: 2;
+  grid-row: 2;
+  margin-top: 3px;
+  color: var(--utppUC_muted);
+  font-size: 6px;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_title {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  margin: 0;
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_subforums {
+  margin: 0;
+  padding-top: 7px;
+  grid-column: 2 / 4;
+  grid-row: 2;
+  display: none;
+  align-self: end;
+  border-top: 1px solid var(--utppUC_line);
+}
+
+html[data-utppuc-layout="worked"] .utppUC_description {
+  min-width: 0;
+  margin: 0;
+  grid-column: 3;
+  grid-row: 1;
+  align-self: center;
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--utppUC_text);
+  font: italic 8px/1.4 Arial, sans-serif;
+  text-align: justify;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_lastPost {
+  min-width: 0;
+  min-height: 68px;
+  padding: 10px 12px;
+  position: relative;
+  grid-column: 4;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 25px;
+  gap: 10px;
+  background:
+    linear-gradient(120deg, rgba(139, 61, 37, .18), transparent 58%),
+    #171717;
+  border: 0;
+  border-bottom: 1px dashed #443a36;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_lastPost::before {
+  content: "LIVE";
+  position: absolute;
+  right: -5px;
+  bottom: -13px;
+  z-index: -1;
+  color: rgba(255, 255, 255, .035);
+  font: 900 42px/1 Arial, sans-serif;
+  letter-spacing: -.08em;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_avatar,
+html[data-utppuc-layout="worked"] .utppUC_avatar img {
+  width: 48px;
+  height: 48px;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_avatar img {
+  border: 3px solid #302b29;
+  border-radius: 50%;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_forum:hover .utppUC_avatar img {
+  border-color: var(--utppUC_rust);
+}
+
+html[data-utppuc-layout="worked"] .utppUC_lastPostCopy small {
+  width: fit-content;
+  padding: 3px 5px;
+  color: #d5a08d;
+  background: rgba(139, 61, 37, .18);
+}
+
+html[data-utppuc-layout="worked"] .utppUC_latestTopic {
+  font-size: 10px;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_user {
+  font-size: 6px;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_lastPostArrow {
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  color: #fff !important;
+  background: var(--utppUC_rust);
+  border-radius: 50%;
+  font-size: 11px;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_stats {
+  min-width: 0;
+  height: 30px;
+  padding: 0 10px;
+  grid-column: 4;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background: #171717;
+  border: 0;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_stats span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 5px;
+}
+
+html[data-utppuc-layout="worked"] .utppUC_stats strong {
+  min-width: 0;
+  margin: 0;
+  color: #d9a08d;
+  font: 700 10px "Playfair Display SC", Georgia, serif;
+}
+
+@media (max-width: 980px) {
+  html[data-utppuc-layout="worked"] .utppUC_category {
+    overflow-x: auto;
+  }
+
+  html[data-utppuc-layout="worked"] .utppUC_header,
+  html[data-utppuc-layout="worked"] .utppUC_directory {
+    min-width: 900px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-utppuc-layout="worked"] .utppUC_category *,
+  html[data-utppuc-layout="worked"] .utppUC_category *::before,
+  html[data-utppuc-layout="worked"] .utppUC_category *::after {
+    transition-duration: .01ms !important;
+  }
+}
+
+@media (max-width: 560px) {
+  html:not([data-utppuc-layout]) .utppUC_content,
+  html[data-utppuc-layout="classic"] .utppUC_content {
+    grid-template-columns: 1fr;
+    grid-template-areas: "identity" "description" "lastpost" "stats";
+  }
+}
