@@ -1,8 +1,5 @@
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) {
   --utppUC_panel: #191919;
   --utppUC_panelAlt: #222222;
   --utppUC_line: #303030;
@@ -14,7 +11,7 @@ html[data-utppuc-layout="worked"]
 
 /* Métadonnées stables par URL ------------------------------------------- */
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] {
   --utppUC_districtNumber: "01";
   --utppUC_districtDirection: "Secteur central";
   --utppUC_districtSubtitle: "Point névralgique · activité permanente";
@@ -59,10 +56,7 @@ html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f63-"] {
 /* En-tête cartographique ------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_header {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_header {
   min-height: 150px;
   padding: 22px 28px;
   display: grid;
@@ -77,10 +71,7 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_header::before {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_header::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -97,10 +88,7 @@ html[data-utppuc-layout="worked"]
 
 /* Le bloc latéral devient le cartouche de coordonnées. */
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerSide {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerSide {
   width: 124px;
   height: 86px;
   padding: 12px 10px;
@@ -114,24 +102,15 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerSide span,
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerSide span,
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerSide i {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerSide i {
   margin: 0;
   font-size: 0;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerSide span::before {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerSide span::before {
   content: "39.9526° N";
   font: 700 6px Arial, sans-serif;
   letter-spacing: .1em;
@@ -139,10 +118,7 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerSide span::after {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerSide span::after {
   content: "";
   width: 46px;
   height: 1px;
@@ -154,10 +130,7 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerSide i::before {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerSide i::before {
   content: "75.1652° W";
   font: 700 6px Arial, sans-serif;
   letter-spacing: .1em;
@@ -165,19 +138,13 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerCopy > span {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerCopy > span {
   color: var(--utppUC_rust);
   font-size: 0;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerCopy > span::before {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerCopy > span::before {
   content: "Zone de jeu 04 · cartographie urbaine";
   font: 700 7px Arial, sans-serif;
   letter-spacing: .17em;
@@ -185,15 +152,9 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerCopy .hierarchy,
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerCopy .hierarchy,
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerCopy h2 {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerCopy h2 {
   margin-top: 4px;
   color: var(--utppUC_ivory);
   font: 700 38px/1 "Playfair Display SC", Georgia, serif;
@@ -201,10 +162,7 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerCopy p {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerCopy p {
   margin-top: 9px;
   display: block;
   color: #bcb4af;
@@ -212,20 +170,14 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerCopy p::before {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerCopy p::before {
   content: "Sept secteurs, des milliers de trajectoires et une ville qui ne dort jamais tout à fait.";
   font: italic 9px/1.4 Arial, sans-serif;
 }
 
 /* Les deux compteurs et le statut utilisent les trois éléments existants. */
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerMeta {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerMeta {
   min-width: 0;
   padding: 0;
   display: grid;
@@ -237,23 +189,14 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerMeta::before,
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerMeta::before,
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerMeta::after {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerMeta::after {
   content: none;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerMeta span {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerMeta span {
   padding: 9px 8px;
   display: block;
   color: #89827e;
@@ -263,10 +206,7 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerMeta span:first-child::before {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerMeta span:first-child::before {
   content: "Heure locale\A 22:47";
   white-space: pre;
   font: 700 6px/2 Arial, sans-serif;
@@ -275,10 +215,7 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerMeta span:nth-child(2)::before {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerMeta span:nth-child(2)::before {
   content: "Température\A 24°C";
   white-space: pre;
   font: 700 6px/2 Arial, sans-serif;
@@ -287,10 +224,7 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerMeta i {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerMeta i {
   grid-column: 1 / -1;
   padding-top: 8px;
   color: #bfa399;
@@ -301,10 +235,7 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerMeta i::before {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerMeta i::before {
   content: "●  Activité urbaine élevée";
   font: 700 6px Arial, sans-serif;
   letter-spacing: .08em;
@@ -313,10 +244,7 @@ html[data-utppuc-layout="worked"]
 
 /* Le mot fantôme devient une skyline abstraite. */
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_headerGhost {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_headerGhost {
   width: 125px;
   height: 48px;
   right: 285px;
@@ -337,10 +265,7 @@ html[data-utppuc-layout="worked"]
 /* Carte urbaine ---------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_directory {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_directory {
   margin-top: 12px;
   display: grid;
   grid-template-columns: 370px repeat(3, minmax(0,1fr));
@@ -352,10 +277,7 @@ html[data-utppuc-layout="worked"]
 
 /* Remise à zéro commune des sept blocs. */
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum {
   min-width: 0;
   min-height: 0;
   margin: 0;
@@ -369,24 +291,18 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum::before {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum::before {
   content: none;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_content::before {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_content::before {
   content: none;
 }
 
 /* Secteur vedette : f2 --------------------------------------------------- */
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] {
   grid-column: 1;
   grid-row: 1 / 3;
   min-height: 592px;
@@ -400,7 +316,7 @@ html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] {
   isolation: isolate;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_status {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_status {
   padding: 18px 20px 0;
   grid-row: 1;
   display: flex;
@@ -410,29 +326,29 @@ html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_
   text-transform: uppercase;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_statusIcon {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_statusIcon {
   display: none;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_status span {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_status span {
   width: 100%;
   display: flex;
   justify-content: space-between;
   font-size: 0;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_status span::before {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_status span::before {
   content: "Secteur central";
   font-size: 7px;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_status span::after {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_status span::after {
   content: "01";
   color: #fff;
   font: 700 34px/.8 "Playfair Display SC", Georgia, serif;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_content {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_content {
   min-width: 0;
   margin: 0;
   padding: 20px;
@@ -444,31 +360,31 @@ html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_
   gap: 0;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_identity {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_identity {
   min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_identity::before {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_identity::before {
   content: none;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_identity > small {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_identity > small {
   order: 1;
   color: #d49b88;
   font-size: 0;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_identity > small::before {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_identity > small::before {
   content: var(--utppUC_districtSubtitle);
   font: 700 6px Arial, sans-serif;
   letter-spacing: .13em;
   text-transform: uppercase;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_title {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_title {
   order: 2;
   margin-top: 7px;
   color: #fff !important;
@@ -476,7 +392,7 @@ html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_
   white-space: normal;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_subforums {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_subforums {
   order: 4;
   margin-top: 13px;
   padding: 0;
@@ -486,14 +402,14 @@ html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_
   border: 0;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_subforums a {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_subforums a {
   padding: 5px 9px;
   color: #fff !important;
   background: rgba(255,255,255,.1);
   border-bottom: 1px solid var(--utppUC_rust);
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_description {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_description {
   margin-top: 12px;
   order: 3;
   display: -webkit-box;
@@ -504,13 +420,13 @@ html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_
   -webkit-line-clamp: 4;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_description p {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_description p {
   margin: 0;
   color: inherit;
   font: inherit;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_lastPost {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_lastPost {
   min-width: 0;
   min-height: 72px;
   margin-top: 18px;
@@ -525,42 +441,42 @@ html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_
   border-left: 3px solid var(--utppUC_rust);
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_lastPost::before {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_lastPost::before {
   content: none;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_avatar,
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_avatar img {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_avatar,
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_avatar img {
   width: 48px;
   height: 48px;
   border: 0;
   border-radius: 0;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_lastPostCopy small {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_lastPostCopy small {
   padding: 0;
   color: #d49b88;
   background: transparent;
   font-size: 0;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_lastPostCopy small::before {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_lastPostCopy small::before {
   content: "Dernière scène ouverte";
   font: 700 5px Arial, sans-serif;
   letter-spacing: .1em;
   text-transform: uppercase;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_latestTopic {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_latestTopic {
   color: #fff;
   font-size: 10px;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_user {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_user {
   font-size: 6px;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_lastPostArrow {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_lastPostArrow {
   width: auto;
   height: auto;
   color: #d49b88 !important;
@@ -569,7 +485,7 @@ html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_
   font-size: 17px;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_stats {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_stats {
   min-width: 0;
   height: auto;
   margin-top: 12px;
@@ -584,12 +500,12 @@ html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_
   border: 0;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_stats span {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_stats span {
   color: #928a86;
   font-size: 6px;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_stats strong {
+html[data-utppuc-layout="worked"] .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum[data-forum-url^="/f2-"] .utppUC_stats strong {
   min-width: 0;
   margin: 0;
   color: #fff;
@@ -599,10 +515,7 @@ html[data-utppuc-layout="worked"] .utppUC_forum[data-forum-url^="/f2-"] .utppUC_
 /* Six districts secondaires --------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) {
   padding: 14px 14px 0;
   display: grid;
   grid-template-rows: 18px minmax(0,1fr);
@@ -612,10 +525,7 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"])::after {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"])::after {
   content: "";
   width: 40px;
   height: 2px;
@@ -627,18 +537,12 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]):hover::after {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]):hover::after {
   width: calc(100% - 28px);
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_status {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_status {
   grid-row: 1;
   display: flex;
   color: #756e6a;
@@ -648,18 +552,12 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_statusIcon {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_statusIcon {
   display: none;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_status span {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_status span {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -667,29 +565,20 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_status span::before {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_status span::before {
   content: "District " var(--utppUC_districtNumber);
   font-size: 5px;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_status span::after {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_status span::after {
   content: var(--utppUC_districtDirection);
   color: var(--utppUC_rust);
   font-size: 5px;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_content {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_content {
   min-width: 0;
   margin: 0;
   grid-row: 2;
@@ -701,10 +590,7 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_identity {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_identity {
   min-width: 0;
   margin-top: 10px;
   grid-column: 1;
@@ -715,18 +601,12 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_identity::before {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_identity::before {
   content: none;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_title {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_title {
   order: 1;
   margin: 0;
   max-width: 100%;
@@ -738,10 +618,7 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_identity > small {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_identity > small {
   order: 2;
   margin-top: 5px;
   color: var(--utppUC_muted);
@@ -749,19 +626,13 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_identity > small::before {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_identity > small::before {
   content: var(--utppUC_districtSubtitle);
   font: italic 6px Arial, sans-serif;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_subforums {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_subforums {
   order: 3;
   margin-top: 10px;
   padding: 0;
@@ -772,10 +643,7 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_subforums a {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_subforums a {
   padding: 4px 6px;
   color: #bbb3ae !important;
   background: #252525;
@@ -783,10 +651,7 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_description {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_description {
   min-width: 0;
   margin: 0;
   padding-top: 11px;
@@ -803,20 +668,14 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_description p {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_description p {
   margin: 0;
   color: inherit;
   font: inherit;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_lastPost {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_lastPost {
   min-width: 0;
   min-height: 56px;
   margin: 0 -14px;
@@ -833,23 +692,14 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_lastPost::before {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_lastPost::before {
   content: none;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_avatar,
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_avatar,
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_avatar img {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_avatar img {
   width: 36px;
   height: 36px;
   border: 0;
@@ -857,40 +707,25 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_lastPostCopy small,
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_lastPostCopy small,
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_lastPostArrow {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_lastPostArrow {
   display: none;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_latestTopic {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_latestTopic {
   color: var(--utppUC_ivory);
   font-size: 8px;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_user {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_user {
   font-size: 5px;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_stats {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_stats {
   min-width: 0;
   min-height: 28px;
   margin: 0 -14px;
@@ -909,19 +744,13 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_stats span {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_stats span {
   color: #756e6a;
   font-size: 5px;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category:is(
-  [data-category-id="c4"],
-  :has(.utppUC_forum[data-forum-url^="/f2-"])
-) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_stats strong {
+.utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_forum:not([data-forum-url^="/f2-"]) .utppUC_stats strong {
   min-width: 0;
   margin: 0;
   color: var(--utppUC_ivory);
@@ -932,43 +761,25 @@ html[data-utppuc-layout="worked"]
 
 @media (max-width: 980px) {
   html[data-utppuc-layout="worked"]
-  .utppUC_category:is(
-    [data-category-id="c4"],
-    :has(.utppUC_forum[data-forum-url^="/f2-"])
-  ) {
+  .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) {
     overflow-x: auto;
   }
 
   html[data-utppuc-layout="worked"]
-  .utppUC_category:is(
-    [data-category-id="c4"],
-    :has(.utppUC_forum[data-forum-url^="/f2-"])
-  ) .utppUC_header,
+  .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_header,
   html[data-utppuc-layout="worked"]
-  .utppUC_category:is(
-    [data-category-id="c4"],
-    :has(.utppUC_forum[data-forum-url^="/f2-"])
-  ) .utppUC_directory {
+  .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) .utppUC_directory {
     min-width: 1120px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html[data-utppuc-layout="worked"]
-  .utppUC_category:is(
-    [data-category-id="c4"],
-    :has(.utppUC_forum[data-forum-url^="/f2-"])
-  ) *,
+  .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) *,
   html[data-utppuc-layout="worked"]
-  .utppUC_category:is(
-    [data-category-id="c4"],
-    :has(.utppUC_forum[data-forum-url^="/f2-"])
-  ) *::before,
+  .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) *::before,
   html[data-utppuc-layout="worked"]
-  .utppUC_category:is(
-    [data-category-id="c4"],
-    :has(.utppUC_forum[data-forum-url^="/f2-"])
-  ) *::after {
+  .utppUC_category[data-category-id]:has(.utppUC_forum[data-forum-url^="/f2-"]) *::after {
     transition-duration: .01ms !important;
   }
 }
