@@ -25,6 +25,7 @@ html[data-utppuc-layout="worked"]
   grid-template-columns: 88px minmax(0, 1fr) 240px;
   align-items: center;
   gap: 24px;
+  margin: 10px 0;
   background: linear-gradient(90deg, rgba(139,61,37,.12), transparent 38%), #181818;
   border: 0;
   border-top: 5px solid var(--utppUC_rust);
