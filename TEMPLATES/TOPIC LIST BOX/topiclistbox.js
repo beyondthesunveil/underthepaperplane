@@ -33,7 +33,7 @@
      ========================================================= */
 
   /**
-   * Uniformise une chaîne :
+   * Uniformise une valeur :
    * — passage en minuscules ;
    * — suppression des accents.
    */
@@ -45,13 +45,20 @@
   }
 
 
+  /* =========================================================
+     DÉTECTION DE L’ÉTAT DU SUJET
+     ========================================================= */
+
   /**
-   * Détermine l’état visuel d’un sujet à partir des
-   * informations natives transmises par ForumActif.
+   * Détermine l’état du sujet grâce aux informations
+   * natives fournies par ForumActif.
    */
   function detectTopicState(topic) {
-    const folderAlt = topic.dataset.topicFolderAlt || "";
-    const folderImage = topic.dataset.topicFolderImage || "";
+    const folderAlt =
+      topic.dataset.topicFolderAlt || "";
+
+    const folderImage =
+      topic.dataset.topicFolderImage || "";
 
     const source = normalise(
       folderAlt + " " + folderImage
@@ -59,18 +66,25 @@
 
     /*
      * L’état verrouillé est prioritaire.
+     *
+     * Un sujet peut être à la fois nouveau et verrouillé :
+     * dans ce cas, on conserve visuellement le verrou.
      */
     if (
-      /lock|locked|verrou|ferme|closed/.test(source)
+      /lock|locked|verrou|verrouille|ferme|closed/.test(
+        source
+      )
     ) {
       return "locked";
     }
 
     /*
-     * Sujet populaire.
+     * Sujet populaire ou actif.
      */
     if (
-      /hot|popular|populaire|chaud|flame/.test(source)
+      /hot|popular|populaire|chaud|flame/.test(
+        source
+      )
     ) {
       return "hot";
     }
@@ -79,42 +93,63 @@
      * Sujet contenant un nouveau message.
      */
     if (
-      /unread|new|nouveau|nouveaux|non[-_ ]?lu/.test(source)
+      /unread|new|nouveau|nouveaux|non[-_ ]?lu/.test(
+        source
+      )
     ) {
       return "new";
     }
 
     /*
-     * État par défaut.
+     * État par défaut : sujet déjà lu.
      */
     return "read";
   }
 
 
+  /* =========================================================
+     DÉTECTION DES ANNONCES ET NOTES
+     ========================================================= */
+
   /**
-   * Détermine le type d’annonce ou de note.
+   * Détermine la nature d’une transmission prioritaire :
+   * — annonce globale ;
+   * — annonce ;
+   * — note ;
+   * — autre sujet prioritaire.
    */
   function detectPriority(topic) {
     const folderAlt =
       topic.dataset.topicFolderAlt || "";
 
-    const source = normalise(folderAlt);
+    const folderImage =
+      topic.dataset.topicFolderImage || "";
 
-    if (/global/.test(source)) {
+    const source = normalise(
+      folderAlt + " " + folderImage
+    );
+
+    if (
+      /global/.test(source)
+    ) {
       return {
         label: "Annonce globale",
         meta: "Priorité absolue"
       };
     }
 
-    if (/announce|annonce/.test(source)) {
+    if (
+      /announce|annonce/.test(source)
+    ) {
       return {
         label: "Annonce du forum",
         meta: "Prioritaire"
       };
     }
 
-    if (/sticky|post[-_ ]?it|note/.test(source)) {
+    if (
+      /sticky|post[-_ ]?it|note/.test(source)
+    ) {
       return {
         label: "Note du forum",
         meta: "À conserver"
@@ -133,11 +168,20 @@
      ========================================================= */
 
   /**
-   * LAST_POST_IMG contient le véritable lien vers le dernier
-   * message. Le template le conserve dans un élément masqué.
+   * ForumActif génère le véritable lien vers le dernier message
+   * dans la variable LAST_POST_IMG.
    *
-   * Cette fonction récupère ce lien pour l’appliquer à toute
-   * la zone du dernier message.
+   * Le template conserve ce lien dans :
+   *
+   * .utppTL_nativeLastPost
+   *
+   * Cette fonction récupère son adresse et l’applique uniquement
+   * à la flèche :
+   *
+   * .utppTL_lastReplyGo
+   *
+   * Le conteneur .utppTL_lastReply reste volontairement un div,
+   * afin d’éviter d’imbriquer plusieurs liens HTML.
    */
   function enhanceLastReply(topic) {
     const nativeLastPostLink =
@@ -145,32 +189,44 @@
         ".utppTL_nativeLastPost a"
       );
 
-    const lastReplyLink =
+    const lastReplyGo =
       topic.querySelector(
-        ".utppTL_lastReply"
+        ".utppTL_lastReplyGo"
       );
 
     if (
-      nativeLastPostLink &&
-      lastReplyLink &&
-      nativeLastPostLink.href
+      !nativeLastPostLink ||
+      !lastReplyGo
     ) {
-      lastReplyLink.href =
-        nativeLastPostLink.href;
+      return;
+    }
+
+    const nativeHref =
+      nativeLastPostLink.getAttribute("href");
+
+    if (nativeHref) {
+      lastReplyGo.setAttribute(
+        "href",
+        nativeHref
+      );
     }
   }
 
 
   /* =========================================================
-     AMÉLIORATION D’UN SUJET
+     ICÔNE D’ÉTAT
      ========================================================= */
 
-  function enhanceTopic(topic) {
+  /**
+   * Crée l’icône Lucide correspondant à l’état détecté.
+   */
+  function enhanceTopicState(topic) {
     const stateName =
       detectTopicState(topic);
 
     const state =
-      TOPIC_STATES[stateName];
+      TOPIC_STATES[stateName] ||
+      TOPIC_STATES.read;
 
     const stateElement =
       topic.querySelector(
@@ -178,9 +234,7 @@
       );
 
     /*
-     * Inscrit l’état détecté sur la carte.
-     *
-     * Résultat possible :
+     * L’état est enregistré sur la carte pour le CSS :
      *
      * data-topic-state="new"
      * data-topic-state="read"
@@ -190,66 +244,80 @@
     topic.dataset.topicState =
       stateName;
 
-    /*
-     * Création de l’icône Lucide.
-     */
-    if (stateElement) {
-      stateElement.innerHTML =
-        '<i data-lucide="' +
-        state.icon +
-        '"></i>';
-
-      stateElement.setAttribute(
-        "aria-label",
-        state.label
-      );
-
-      stateElement.setAttribute(
-        "title",
-        state.label
-      );
-
-      stateElement.removeAttribute(
-        "aria-hidden"
-      );
+    if (!stateElement) {
+      return;
     }
 
+    stateElement.innerHTML =
+      '<i data-lucide="' +
+      state.icon +
+      '"></i>';
+
+    stateElement.setAttribute(
+      "aria-label",
+      state.label
+    );
+
+    stateElement.setAttribute(
+      "title",
+      state.label
+    );
+
+    stateElement.removeAttribute(
+      "aria-hidden"
+    );
+  }
+
+
+  /* =========================================================
+     INFORMATIONS DES TRANSMISSIONS PRIORITAIRES
+     ========================================================= */
+
+  function enhancePriority(topic) {
     /*
-     * Les informations de priorité sont appliquées
-     * uniquement aux annonces et aux notes.
+     * Cette fonction ne concerne que les cartes présentes
+     * dans la section des annonces et notes.
      */
     if (
-      topic.closest(
+      !topic.closest(
         ".utppTL_featuredGrid"
       )
     ) {
-      const priority =
-        detectPriority(topic);
-
-      const priorityLabel =
-        topic.querySelector(
-          "[data-utpptl-priority-label]"
-        );
-
-      const priorityMeta =
-        topic.querySelector(
-          "[data-utpptl-priority-meta]"
-        );
-
-      if (priorityLabel) {
-        priorityLabel.textContent =
-          priority.label;
-      }
-
-      if (priorityMeta) {
-        priorityMeta.textContent =
-          priority.meta;
-      }
+      return;
     }
 
-    /*
-     * Application du véritable lien du dernier message.
-     */
+    const priority =
+      detectPriority(topic);
+
+    const priorityLabel =
+      topic.querySelector(
+        "[data-utpptl-priority-label]"
+      );
+
+    const priorityMeta =
+      topic.querySelector(
+        "[data-utpptl-priority-meta]"
+      );
+
+    if (priorityLabel) {
+      priorityLabel.textContent =
+        priority.label;
+    }
+
+    if (priorityMeta) {
+      priorityMeta.textContent =
+        priority.meta;
+    }
+  }
+
+
+  /* =========================================================
+     AMÉLIORATION D’UNE CARTE
+     ========================================================= */
+
+  function enhanceTopic(topic) {
+    enhanceTopicState(topic);
+    enhancePriority(topic);
     enhanceLastReply(topic);
   }
 
@@ -296,8 +364,8 @@
       );
 
     /*
-     * Le script s’arrête silencieusement lorsqu’il ne se trouve
-     * pas sur une page contenant une liste de sujets.
+     * Le script s’arrête silencieusement s’il n’est pas
+     * exécuté sur une liste de sujets.
      */
     if (!pages.length) {
       return;
@@ -308,8 +376,8 @@
     });
 
     /*
-     * Lucide est lancé après la création dynamique
-     * de toutes les icônes.
+     * Lucide doit intervenir après l’insertion dynamique
+     * des icônes d’état.
      */
     renderLucideIcons();
   }
