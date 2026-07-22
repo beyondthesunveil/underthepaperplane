@@ -52,6 +52,7 @@ html[data-utppuc-layout="worked"]
 
   overflow: hidden;
   isolation: isolate;
+  margin-top:10px;
 }
 
 html[data-utppuc-layout="worked"]
