@@ -1,211 +1,531 @@
+/* ==========================================================================
+   LOGBOOK — COCKPIT PERSONNEL
+   ========================================================================== */
+
 #logbook-root,
 #logbook-toggle {
-  --logbook-font: var(--th-font-main, Arial, sans-serif);
+  --logbook-font: Arial, sans-serif;
+  --logbook-serif:
+    "Playfair Display SC",
+    Georgia,
+    serif;
 
-  --logbook-bg: var(--th-cl-panel, #151a1a);
-  --logbook-bg-alt: var(--th-cl-panelAlt, #1d2928);
-  --logbook-card: var(--th-cl-card, #181f1f);
-  --logbook-card-alt: var(--th-cl-cardAlt, #111717);
+  --logbook-bg: #111111;
+  --logbook-panel: #181818;
+  --logbook-panel-alt: #151515;
+  --logbook-card: #1c1c1c;
+  --logbook-card-alt: #222222;
 
-  --logbook-text: var(--th-cl-txt, #e5ded4);
-  --logbook-title: var(--th-cl-tle, #f6f1e9);
-  --logbook-sub: var(--th-cl-sub, #aeb8b6);
-  --logbook-font-light: var(--th-cl-font, #f1f1f1);
+  --logbook-line: #303030;
+  --logbook-line-soft: #272727;
+  --logbook-line-rust: #49342e;
 
-  --logbook-border: var(--th-cl-bord, rgba(188, 227, 225, 0.13));
-  --logbook-accent-light: var(--th-cl-acc1, #bce3e1);
-  --logbook-accent: var(--th-cl-acc2, #52a8a5);
-  --logbook-desc: var(--th-cl-desc2, #d69b45);
+  --logbook-rust: #8b3d25;
+  --logbook-rust-light: #b35437;
+  --logbook-rust-dark: #572619;
 
-  --logbook-accent-soft: var(--th-cl-accFade, rgba(82, 168, 165, 0.18));
-  --logbook-desc-soft: var(--th-cl-descFade, rgba(214, 155, 69, 0.17));
+  --logbook-ivory: #eee9e5;
+  --logbook-text: #c8c0bb;
+  --logbook-muted: #aaa29d;
+  --logbook-soft: #756f6b;
 
-  --logbook-head: var(
-    --th-grad-head,
-    linear-gradient(135deg, #102423, #183836 55%, #4d2f11)
-  );
+  --logbook-rust-fade: rgba(139, 61, 37, 0.16);
+  --logbook-rust-fade-strong: rgba(139, 61, 37, 0.26);
 
-  --logbook-chip: var(
-    --th-grad-chip,
-    linear-gradient(135deg, #52a8a5, #d69b45)
-  );
+  --logbook-shadow: rgba(0, 0, 0, 0.4);
+  --logbook-shadow-strong: rgba(0, 0, 0, 0.68);
 
-  --logbook-shadow: var(--th-cl-shadow, rgba(0, 0, 0, 0.42));
-  --logbook-shadow-strong: var(--th-cl-shadowStrong, rgba(0, 0, 0, 0.62));
-
-  --logbook-radius-sm: var(--th-radius-sm, 8px);
-  --logbook-radius-md: var(--th-radius-md, 14px);
-  --logbook-radius-lg: var(--th-radius-lg, 24px);
-
-  --logbook-transition: var(--th-trans-fast, 0.18s ease);
+  --logbook-fast: 200ms ease;
+  --logbook-smooth:
+    380ms cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+#logbook-root,
+#logbook-root *,
+#logbook-root *::before,
+#logbook-root *::after,
+#logbook-toggle,
+#logbook-toggle *,
+#logbook-toggle *::before,
+#logbook-toggle *::after {
+  box-sizing: border-box;
+}
+
+
+/* ==========================================================================
+   BOUTON D’OUVERTURE
+   ========================================================================== */
 
 #logbook-toggle {
-  position: relative;
-  width: 35px;
-  height: 35px;
+  width: 38px;
+  height: 38px;
   margin: 0 auto;
-  border: 1px solid var(--th-cl-bord);
-  border-radius: var(--th-radius-md);
-  background: var(--th-cl-panelAlt);
-  color: var(--th-cl-font);
+  padding: 0;
+
+  position: relative;
+
   display: grid;
   place-items: center;
+
+  color: var(--logbook-ivory);
+  background: var(--logbook-panel);
+
+  border: 1px solid var(--logbook-line);
+  border-radius: 50%;
+
   cursor: pointer;
-  transition: .25s;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.015);
+
+  transition:
+    color var(--logbook-fast),
+    background-color var(--logbook-fast),
+    border-color var(--logbook-fast),
+    transform var(--logbook-smooth);
 }
 
-#logbook-toggle:hover {
-  transform: scale(1.08) rotate(-6deg);
-  background: var(--th-grad-chip);
-  color: var(--th-cl-font);
+#logbook-toggle:hover,
+#logbook-toggle:focus-visible {
+  color: #ffffff;
+  background: var(--logbook-rust);
+  border-color: var(--logbook-rust);
+
+  outline: none;
+
+  transform: translateY(-2px) rotate(-7deg);
 }
 
 #logbook-toggle.is-active {
+  color: #ffffff;
+  background: var(--logbook-rust);
+  border-color: var(--logbook-rust);
+
   transform: translateY(-1px);
-  filter: brightness(1.12);
 }
 
 #logbook-toggle svg,
 #logbook-toggle i {
+  width: 19px;
+  height: 19px;
+
   pointer-events: none;
 }
 
-#logbook-toggle svg {
-  width: 18px;
-  height: 18px;
+
+/* Compteur de tâches ----------------------------------------------------- */
+
+#logbook-count {
+  min-width: 17px;
+  height: 17px;
+  padding: 0 5px;
+
+  position: absolute;
+  top: -6px;
+  right: -7px;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  color: #ffffff;
+  background: var(--logbook-rust-light);
+
+  border: 2px solid var(--logbook-bg);
+  border-radius: 999px;
+
+  font: 700 9px/1 Arial, sans-serif;
+
+  pointer-events: none;
 }
 
-/* Fenêtre */
+#logbook-toggle.logbook-has-todo #logbook-count {
+  display: inline-flex !important;
+}
+
+#logbook-toggle.logbook-has-todo svg,
+#logbook-toggle.logbook-has-todo i {
+  animation: logbookTodoPulse 1.25s infinite;
+}
+
+@keyframes logbookTodoPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.65;
+    transform: scale(1.2);
+  }
+}
+
+
+/* ==========================================================================
+   FENÊTRE PRINCIPALE
+   ========================================================================== */
+
 #logbook-root {
+  width: min(480px, calc(100vw - 32px));
+  max-height: calc(100dvh - 120px);
+
   position: fixed;
-  top: 120px;
+  top: 88px;
   right: 78px;
   z-index: 9999;
-  width: min(430px, calc(100vw - 32px));
-  max-height: calc(100vh - 150px);
+
   display: flex;
   flex-direction: column;
+
   overflow: hidden;
-  border: 1px solid var(--logbook-border);
-  border-radius: var(--logbook-radius-lg);
-  background:
-    linear-gradient(135deg, var(--logbook-accent-soft), var(--logbook-desc-soft)),
-    var(--logbook-bg);
+
   color: var(--logbook-text);
-  box-shadow: 0 24px 90px var(--logbook-shadow-strong);
+
+  background:
+    linear-gradient(
+      120deg,
+      rgba(139, 61, 37, 0.11),
+      transparent 32%
+    ),
+    var(--logbook-bg);
+
+  border: 1px solid #292929;
+  border-left: 3px solid var(--logbook-rust);
+  border-radius: 0;
+
+  box-shadow:
+    0 30px 100px var(--logbook-shadow-strong),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.012);
+
   font-family: var(--logbook-font);
+
+  opacity: 1;
+  visibility: visible;
+
+  transform: translateY(0) scale(1);
   transform-origin: top right;
+
   transition:
-    opacity .22s ease,
-    transform .22s ease,
-    visibility .22s ease;
+    opacity 220ms ease,
+    transform var(--logbook-smooth),
+    visibility 0s linear 0s;
+}
+
+#logbook-root::before {
+  content: "LB";
+
+  position: absolute;
+  top: -30px;
+  right: -10px;
+  z-index: 0;
+
+  color: rgba(255, 255, 255, 0.018);
+
+  font:
+    700 140px/1
+    var(--logbook-serif);
+
+  pointer-events: none;
 }
 
 #logbook-root.logbook-closed {
   opacity: 0;
   visibility: hidden;
+
+  transform: translateY(14px) scale(0.97);
+
   pointer-events: none;
-  transform: translateY(10px) scale(.97);
+
+  transition:
+    opacity 200ms ease,
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0s linear 320ms;
 }
 
+
+/* ==========================================================================
+   EN-TÊTE
+   ========================================================================== */
+
 #logbook-header {
+  min-height: 96px;
+  padding: 21px 22px;
+
+  position: relative;
+  z-index: 2;
+
   flex: 0 0 auto;
+
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 14px;
-  padding: 18px 20px;
-  background: var(--logbook-head);
-  color: var(--logbook-font-light);
-  border-bottom: 1px solid var(--logbook-border);
+  gap: 16px;
+
+  color: var(--logbook-ivory);
+
+  background:
+    linear-gradient(
+      105deg,
+      rgba(87, 38, 25, 0.88),
+      rgba(24, 24, 24, 0.97) 70%
+    );
+
+  border-bottom: 1px solid var(--logbook-line);
+}
+
+#logbook-header::after {
+  content: "";
+
+  width: 92px;
+  height: 1px;
+
+  position: absolute;
+  right: 72px;
+  bottom: 17px;
+
+  background: var(--logbook-rust);
 }
 
 #logbook-header strong {
   display: block;
-  color: var(--logbook-font-light);
-  font-size: 18px;
+
+  color: var(--logbook-ivory);
+
+  font:
+    700 27px/1
+    var(--logbook-serif);
+
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  letter-spacing: .18em;
 }
 
 #logbook-header span {
+  margin-top: 10px;
+
   display: block;
-  margin-top: 7px;
-  color: var(--logbook-accent-light);
-  font-size: 11px;
+
+  color: #d19a87;
+
+  font: 700 7px/1 Arial, sans-serif;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  letter-spacing: .1em;
-  opacity: .82;
 }
+
+
+/* Fermeture -------------------------------------------------------------- */
 
 #logbook-close {
-  border: 0;
-  background: transparent;
-  color: var(--logbook-font-light);
-  font-size: 30px;
-  line-height: 1;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  place-items: center;
+
+  color: var(--logbook-ivory);
+  background: rgba(255, 255, 255, 0.035);
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+
   cursor: pointer;
-  opacity: .75;
+
+  font-size: 0;
+  line-height: 1;
+
+  opacity: 0.82;
+
   transition:
-    opacity var(--logbook-transition),
-    transform var(--logbook-transition);
+    opacity var(--logbook-fast),
+    background-color var(--logbook-fast),
+    border-color var(--logbook-fast),
+    transform var(--logbook-smooth);
 }
 
-#logbook-close:hover {
-  opacity: 1;
-  transform: rotate(6deg);
+#logbook-close::before,
+#logbook-close::after {
+  content: "";
+
+  width: 13px;
+  height: 1px;
+
+  position: absolute;
+
+  background: currentColor;
 }
+
+#logbook-close::before {
+  transform: rotate(45deg);
+}
+
+#logbook-close::after {
+  transform: rotate(-45deg);
+}
+
+#logbook-close:hover,
+#logbook-close:focus-visible {
+  opacity: 1;
+
+  background: var(--logbook-rust);
+  border-color: var(--logbook-rust);
+
+  outline: none;
+
+  transform: rotate(90deg);
+}
+
+
+/* ==========================================================================
+   ONGLETS
+   ========================================================================== */
 
 #logbook-tabs {
+  min-height: 58px;
+  padding: 12px 14px;
+
+  position: relative;
+  z-index: 2;
+
   flex: 0 0 auto;
+
   display: flex;
+  align-items: center;
   gap: 7px;
-  padding: 11px 12px;
+
   overflow-x: auto;
-  border-bottom: 1px solid var(--logbook-border);
-  background: var(--logbook-bg-alt);
+  overflow-y: hidden;
+
+  background: var(--logbook-panel-alt);
+
+  border-bottom: 1px solid var(--logbook-line);
+
+  scrollbar-width: none;
 }
 
 #logbook-tabs::-webkit-scrollbar {
-  height: 0;
+  display: none;
 }
 
 .logbook-tab {
-  border: 1px solid var(--logbook-border);
-  border-radius: 999px;
-  padding: 7px 10px;
-  background: var(--logbook-card-alt);
-  color: var(--logbook-sub);
+  min-height: 32px;
+  padding: 8px 11px;
+
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  color: #928a85;
+  background: #1c1c1c;
+
+  border: 1px solid var(--logbook-line);
+  border-radius: 0;
+
   cursor: pointer;
-  font-size: 11px;
-  font-weight: 800;
+
+  font: 700 8px/1 Arial, sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   white-space: nowrap;
+
   transition:
-    background var(--logbook-transition),
-    color var(--logbook-transition),
-    border-color var(--logbook-transition),
-    transform var(--logbook-transition);
+    color var(--logbook-fast),
+    background-color var(--logbook-fast),
+    border-color var(--logbook-fast),
+    transform var(--logbook-smooth);
 }
 
-.logbook-tab:hover {
-  transform: translateY(-1px);
-  border-color: var(--logbook-accent);
-  background: var(--logbook-accent-soft);
-  color: var(--logbook-title);
+.logbook-tab::before {
+  content: "";
+
+  width: 4px;
+  height: 4px;
+
+  background: #5c5652;
+
+  transform: rotate(45deg);
+
+  transition: background-color var(--logbook-fast);
+}
+
+.logbook-tab:hover,
+.logbook-tab:focus-visible {
+  color: #ffffff;
+  background: #292321;
+  border-color: var(--logbook-line-rust);
+
+  outline: none;
+
+  transform: translateY(-2px);
+}
+
+.logbook-tab:hover::before,
+.logbook-tab:focus-visible::before {
+  background: var(--logbook-rust);
 }
 
 .logbook-tab.is-active {
-  border-color: transparent;
-  background: var(--logbook-chip);
-  color: #111;
+  color: #ffffff;
+  background: var(--logbook-rust);
+
+  border-color: var(--logbook-rust);
 }
 
+.logbook-tab.is-active::before {
+  background: var(--logbook-ivory);
+}
+
+
+/* ==========================================================================
+   CORPS DÉFILANT
+   ========================================================================== */
+
 #logbook-body {
-  flex: 1;
   min-height: 0;
-  overflow: auto;
   padding: 14px;
+
+  position: relative;
+  z-index: 1;
+
+  flex: 1 1 auto;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background:
+    linear-gradient(
+      rgba(255, 255, 255, 0.012) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.012) 1px,
+      transparent 1px
+    ),
+    var(--logbook-bg);
+
+  background-size: 38px 38px;
+
+  scrollbar-color: var(--logbook-rust) transparent;
+  scrollbar-width: thin;
+}
+
+#logbook-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+#logbook-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#logbook-body::-webkit-scrollbar-thumb {
+  background: var(--logbook-rust);
 }
 
 .logbook-panel {
@@ -214,199 +534,364 @@
 
 .logbook-panel.is-active {
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
+
+/* ==========================================================================
+   CARTES GÉNÉRALES
+   ========================================================================== */
+
 .logbook-card {
-  border: 1px solid var(--logbook-border);
-  border-radius: var(--logbook-radius-md);
-  background: var(--logbook-card);
+  position: relative;
+
   overflow: hidden;
+
+  color: var(--logbook-text);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(139, 61, 37, 0.07),
+      transparent 46%
+    ),
+    var(--logbook-card);
+
+  border: 1px solid var(--logbook-line-soft);
+  border-radius: 0;
+
+  transition:
+    background-color var(--logbook-fast),
+    border-color var(--logbook-fast),
+    transform var(--logbook-smooth);
+}
+
+.logbook-card::before {
+  content: "";
+
+  width: 3px;
+
+  position: absolute;
+  inset: 0 auto 0 0;
+
+  background: var(--logbook-rust);
+
+  transform: scaleY(0.28);
+  transform-origin: bottom;
+
+  transition: transform var(--logbook-smooth);
+}
+
+.logbook-card:hover {
+  background-color: #211f1e;
+  border-color: var(--logbook-line-rust);
+
+  transform: translateY(-2px);
+}
+
+.logbook-card:hover::before {
+  transform: scaleY(1);
 }
 
 .logbook-card-head {
-  padding: 12px 13px 8px;
+  padding: 14px 15px 10px;
 }
 
 .logbook-label {
-  margin-bottom: 4px;
-  color: var(--logbook-sub);
-  font-size: 10px;
+  margin-bottom: 6px;
+
+  color: var(--logbook-rust-light);
+
+  font: 700 7px/1 Arial, sans-serif;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  letter-spacing: .12em;
 }
 
 .logbook-title {
-  color: var(--logbook-title);
-  font-size: 14px;
-  font-weight: 900;
+  color: var(--logbook-ivory);
+
+  font:
+    700 18px/1
+    var(--logbook-serif);
+
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 
 .logbook-text {
-  padding: 0 13px 13px;
+  margin: 0;
+  padding: 0 15px 15px;
+
   color: var(--logbook-text);
-  font-size: 12px;
-  line-height: 1.55;
+
+  font: 400 10px/1.55 Arial, sans-serif;
 }
 
+
+/* ==========================================================================
+   PASSEPORT
+   ========================================================================== */
+
 .logbook-passport {
+  min-height: 104px;
+  padding: 17px;
+
+  position: relative;
+
   display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
-  gap: 14px;
-  padding: 14px;
+  grid-template-columns: 76px minmax(0, 1fr);
   align-items: center;
+  gap: 16px;
+
+  border-bottom: 1px solid var(--logbook-line-soft);
+}
+
+.logbook-passport::after {
+  content: "IDENTITÉ VÉRIFIÉE";
+
+  position: absolute;
+  top: 14px;
+  right: 15px;
+
+  color: var(--logbook-rust-light);
+
+  font: 700 6px/1 Arial, sans-serif;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
 }
 
 .logbook-avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  overflow: hidden;
+  width: 68px;
+  height: 68px;
+
   display: grid;
   place-items: center;
+
+  overflow: hidden;
+
+  color: var(--logbook-ivory);
   background:
-    linear-gradient(135deg, var(--logbook-accent-soft), var(--logbook-desc-soft)),
+    linear-gradient(
+      135deg,
+      var(--logbook-rust-fade),
+      transparent
+    ),
     var(--logbook-card-alt);
-  color: var(--logbook-title);
-  font-size: 20px;
-  font-weight: 900;
-  outline: 1px solid var(--logbook-border);
+
+  border: 2px solid #202020;
+  border-radius: 50%;
+
+  outline: 1px solid var(--logbook-line-rust);
   outline-offset: 4px;
+
+  font:
+    700 18px/1
+    var(--logbook-serif);
 }
 
 .logbook-avatar img {
   width: 100%;
   height: 100%;
+
   display: block;
+
   object-fit: cover;
+  object-position: center;
+
+  filter: grayscale(1) contrast(1.08);
+
+  transition:
+    filter 260ms ease,
+    transform var(--logbook-smooth);
+}
+
+.logbook-card:hover .logbook-avatar img {
+  filter: grayscale(0);
+  transform: scale(1.05);
 }
 
 .logbook-username {
-  color: var(--logbook-title);
-  font-size: 17px;
-  font-weight: 900;
+  margin-top: 18px;
+
+  color: var(--logbook-ivory);
+
+  font:
+    700 22px/1
+    var(--logbook-serif);
+
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 
 .logbook-userid {
-  margin-top: 4px;
-  color: var(--logbook-sub);
-  font-size: 11px;
+  margin-top: 7px;
+
+  color: var(--logbook-muted);
+
+  font: italic 8px/1.2 Arial, sans-serif;
 }
 
+
+/* ==========================================================================
+   CHAMPS
+   ========================================================================== */
+
 .logbook-field {
+  padding: 14px 16px 16px;
+
   display: grid;
-  gap: 6px;
-  padding: 0 14px 14px;
+  gap: 8px;
+}
+
+.logbook-field + .logbook-field {
+  padding-top: 0;
 }
 
 .logbook-field label {
-  color: var(--logbook-sub);
-  font-size: 10px;
+  color: var(--logbook-rust-light);
+
+  font: 700 7px/1 Arial, sans-serif;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  letter-spacing: .11em;
 }
 
 .logbook-field textarea,
-.logbook-field select {
+.logbook-field select,
+.logbook-form input[type="text"],
+.logbook-form input[type="url"],
+.logbook-form textarea,
+.logbook-form select,
+.logbook-mini-select {
   width: 100%;
-  border: 1px solid var(--logbook-border);
-  border-radius: var(--logbook-radius-sm);
+
+  color: var(--logbook-ivory);
   background: var(--logbook-card-alt);
-  color: var(--logbook-title);
-  font-family: inherit;
-  font-size: 12px;
+
+  border: 1px solid var(--logbook-line);
+  border-radius: 0;
+
   outline: none;
+
+  font-family: var(--logbook-font);
+  font-size: 10px;
+
+  transition:
+    color var(--logbook-fast),
+    background-color var(--logbook-fast),
+    border-color var(--logbook-fast),
+    box-shadow var(--logbook-fast);
+}
+
+.logbook-field textarea,
+.logbook-form textarea {
+  resize: vertical;
+
+  padding: 11px 12px;
+
+  line-height: 1.55;
 }
 
 .logbook-field textarea {
-  min-height: 84px;
-  resize: vertical;
-  padding: 10px 11px;
-  line-height: 1.5;
+  min-height: 92px;
 }
 
-.logbook-field select {
-  padding: 9px 10px;
+.logbook-form textarea {
+  min-height: 76px;
+}
+
+.logbook-field select,
+.logbook-form input[type="text"],
+.logbook-form input[type="url"],
+.logbook-form select {
+  min-height: 38px;
+  padding: 9px 11px;
 }
 
 .logbook-field textarea:focus,
-.logbook-field select:focus {
-  border-color: var(--logbook-accent);
-  box-shadow: 0 0 0 3px var(--logbook-accent-soft);
+.logbook-field select:focus,
+.logbook-form input:focus,
+.logbook-form textarea:focus,
+.logbook-form select:focus,
+.logbook-mini-select:focus {
+  background: #202020;
+  border-color: var(--logbook-rust);
+
+  box-shadow: inset 3px 0 0 var(--logbook-rust);
 }
 
+.logbook-field textarea::placeholder,
+.logbook-form input::placeholder,
+.logbook-form textarea::placeholder {
+  color: var(--logbook-soft);
+  opacity: 0.8;
+}
+
+
+/* ==========================================================================
+   CONTENUS VIDES
+   ========================================================================== */
+
 .logbook-placeholder {
-  padding: 14px;
-  border: 1px dashed var(--logbook-border);
-  border-radius: var(--logbook-radius-md);
-  color: var(--logbook-sub);
-  font-size: 12px;
-  line-height: 1.55;
-  background: rgba(255, 255, 255, .03);
+  min-height: 110px;
+  padding: 30px 20px;
+
+  display: grid;
+  place-items: center;
+
+  color: var(--logbook-muted);
+  background: rgba(255, 255, 255, 0.018);
+
+  border: 1px dashed var(--logbook-line);
+  border-radius: 0;
+
+  font: italic 9px/1.55 Arial, sans-serif;
+  text-align: center;
 }
 
 #logbook-notepad {
-  min-height: 260px;
+  min-height: 270px;
 }
 
+
+/* ==========================================================================
+   FORMULAIRES
+   ========================================================================== */
+
 .logbook-form {
+  padding: 14px;
+
   display: grid;
   gap: 10px;
-  padding: 14px;
-  border-top: 1px solid var(--logbook-border);
+
+  background: var(--logbook-panel-alt);
+
+  border-top: 1px solid var(--logbook-line);
 }
 
 .logbook-grid {
   display: grid;
-  grid-template-columns: 1fr 130px;
-  gap: 10px;
+  grid-template-columns: minmax(0, 1fr) 130px;
+  gap: 9px;
 }
 
-.logbook-form input[type="text"],
-.logbook-form input[type="url"],
-.logbook-form textarea,
-.logbook-form select {
-  width: 100%;
-  border: 1px solid var(--logbook-border);
-  border-radius: var(--logbook-radius-sm);
-  background: var(--logbook-card-alt);
-  color: var(--logbook-title);
-  font-family: inherit;
-  font-size: 12px;
-  outline: none;
-}
-
-.logbook-form input[type="text"],
-.logbook-form input[type="url"],
-.logbook-form select {
-  padding: 9px 10px;
-}
-
-.logbook-form textarea {
-  min-height: 70px;
-  resize: vertical;
-  padding: 10px 11px;
-  line-height: 1.5;
-}
-
-.logbook-form input:focus,
-.logbook-form textarea:focus,
-.logbook-form select:focus {
-  border-color: var(--logbook-accent);
-  box-shadow: 0 0 0 3px var(--logbook-accent-soft);
-}
-
-.logbook-check {
+.logbook-check,
+.logbook-entry-check {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  color: var(--logbook-sub);
-  font-size: 11px;
+  gap: 8px;
+
+  color: var(--logbook-muted);
+
   cursor: pointer;
+
+  font: 400 9px/1.3 Arial, sans-serif;
 }
 
-.logbook-check input {
-  accent-color: var(--logbook-accent);
+.logbook-check input,
+.logbook-entry-check input {
+  width: 14px;
+  height: 14px;
+
+  accent-color: var(--logbook-rust);
 }
 
 .logbook-actions {
@@ -416,44 +901,139 @@
   gap: 10px;
 }
 
-.logbook-submit {
-  border: 0;
-  border-radius: 999px;
-  padding: 9px 13px;
-  background: var(--logbook-chip);
-  color: #111;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 11px;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: .08em;
+.logbook-form-buttons {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
 }
 
-.logbook-submit:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 18px var(--logbook-shadow);
+
+/* Bouton principal ------------------------------------------------------- */
+
+.logbook-submit {
+  min-height: 34px;
+  padding: 9px 13px;
+
+  color: #ffffff;
+  background:
+    linear-gradient(
+      90deg,
+      var(--logbook-rust-dark),
+      var(--logbook-rust)
+    );
+
+  border: 1px solid var(--logbook-rust);
+  border-radius: 0;
+
+  cursor: pointer;
+
+  font: 700 7px/1 Arial, sans-serif;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+
+  transition:
+    background-color var(--logbook-fast),
+    border-color var(--logbook-fast),
+    transform var(--logbook-smooth);
 }
+
+.logbook-submit:hover,
+.logbook-submit:focus-visible {
+  background: var(--logbook-rust-light);
+  border-color: var(--logbook-rust-light);
+
+  outline: none;
+
+  transform: translateY(-2px);
+}
+
+
+/* Bouton secondaire ------------------------------------------------------ */
+
+.logbook-secondary {
+  min-height: 34px;
+  padding: 8px 12px;
+
+  color: var(--logbook-muted);
+  background: var(--logbook-card-alt);
+
+  border: 1px solid var(--logbook-line);
+  border-radius: 0;
+
+  cursor: pointer;
+
+  font: 700 7px/1 Arial, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  transition:
+    color var(--logbook-fast),
+    background-color var(--logbook-fast),
+    border-color var(--logbook-fast),
+    transform var(--logbook-fast);
+}
+
+.logbook-secondary:hover,
+.logbook-secondary:focus-visible {
+  color: #ffffff;
+  background: #292321;
+  border-color: var(--logbook-line-rust);
+
+  outline: none;
+
+  transform: translateY(-1px);
+}
+
+
+/* ==========================================================================
+   LISTES ET ENTRÉES
+   ========================================================================== */
 
 .logbook-list {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .logbook-entry {
+  padding: 13px;
+
+  position: relative;
+
   display: grid;
-  gap: 9px;
-  padding: 12px;
-  border: 1px solid var(--logbook-border);
-  border-radius: var(--logbook-radius-md);
+  gap: 10px;
+
+  color: var(--logbook-text);
   background: var(--logbook-card);
+
+  border: 1px solid var(--logbook-line-soft);
+  border-left: 3px solid #3b3836;
+  border-radius: 0;
+
+  transition:
+    background-color var(--logbook-fast),
+    border-color var(--logbook-fast),
+    transform var(--logbook-smooth);
+}
+
+.logbook-entry:hover {
+  background: #211f1e;
+  border-color: var(--logbook-line-rust);
+  border-left-color: var(--logbook-rust);
+
+  transform: translateX(3px);
 }
 
 .logbook-entry.is-turn {
-  border-color: var(--logbook-desc);
   background:
-    linear-gradient(135deg, var(--logbook-desc-soft), transparent),
+    linear-gradient(
+      90deg,
+      var(--logbook-rust-fade-strong),
+      transparent 68%
+    ),
     var(--logbook-card);
+
+  border-color: var(--logbook-rust);
+  border-left-color: var(--logbook-rust);
 }
 
 .logbook-entry-top {
@@ -464,287 +1044,362 @@
 }
 
 .logbook-entry-title {
-  color: var(--logbook-title);
-  font-size: 13px;
-  font-weight: 900;
-  line-height: 1.35;
+  color: var(--logbook-ivory);
+
+  font:
+    700 12px/1.25
+    var(--logbook-serif);
+
   text-decoration: none;
+  text-transform: uppercase;
+
+  transition: color var(--logbook-fast);
 }
 
-.logbook-entry-title:hover {
-  color: var(--logbook-accent-light);
+.logbook-entry-title:hover,
+.logbook-entry-title:focus-visible {
+  color: #d99a84;
+
+  outline: none;
 }
 
 .logbook-entry-note {
   color: var(--logbook-text);
-  font-size: 12px;
-  line-height: 1.5;
-  white-space: pre-wrap;
+
+  font: 400 9px/1.55 Arial, sans-serif;
+
   overflow-wrap: anywhere;
+  white-space: pre-wrap;
 }
 
 .logbook-entry-meta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 7px;
-}
-
-.logbook-priority,
-.logbook-turn-chip {
-  display: inline-flex;
-  align-items: center;
-  min-height: 20px;
-  padding: 3px 7px;
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-}
-
-.logbook-priority {
-  background: var(--logbook-accent-soft);
-  color: var(--logbook-accent-light);
-}
-
-.logbook-priority[data-priority="low"] {
-  opacity: .75;
-}
-
-.logbook-priority[data-priority="normal"] {
-  background: var(--logbook-accent-soft);
-  color: var(--logbook-accent-light);
-}
-
-.logbook-priority[data-priority="urgent"] {
-  background: var(--logbook-desc-soft);
-  color: var(--logbook-desc);
-}
-
-.logbook-turn-chip {
-  background: var(--logbook-desc);
-  color: #111;
+  gap: 6px;
 }
 
 .logbook-entry-footer {
+  padding-top: 9px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+
+  border-top: 1px solid var(--logbook-line-soft);
 }
 
-.logbook-entry-check {
+.logbook-entry-buttons {
+  flex: 0 0 auto;
+
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  color: var(--logbook-sub);
-  font-size: 11px;
-  cursor: pointer;
+  gap: 6px;
 }
 
-.logbook-entry-check input {
-  accent-color: var(--logbook-desc);
+
+/* ==========================================================================
+   BADGES
+   ========================================================================== */
+
+.logbook-priority,
+.logbook-turn-chip,
+.logbook-spark-type,
+.logbook-spark-status {
+  min-height: 21px;
+  padding: 5px 7px;
+
+  display: inline-flex;
+  align-items: center;
+
+  border: 1px solid var(--logbook-line);
+  border-radius: 0;
+
+  font: 700 6px/1 Arial, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.logbook-priority,
+.logbook-spark-type {
+  color: #c3bbb6;
+  background: #252525;
+}
+
+.logbook-priority[data-priority="low"] {
+  opacity: 0.6;
+}
+
+.logbook-priority[data-priority="normal"] {
+  color: #c3bbb6;
+  background: #252525;
+}
+
+.logbook-priority[data-priority="urgent"],
+.logbook-turn-chip {
+  color: #ffffff;
+  background: var(--logbook-rust);
+
+  border-color: var(--logbook-rust);
+}
+
+.logbook-spark-status {
+  color: #d1c9c4;
+  background: #252525;
+}
+
+.logbook-spark-status[data-status="a-proposer"] {
+  color: #c3bbb6;
+  background: #252525;
+}
+
+.logbook-spark-status[data-status="propose"] {
+  color: #e0aa97;
+  background: var(--logbook-rust-fade);
+
+  border-color: var(--logbook-line-rust);
+}
+
+.logbook-spark-status[data-status="valide"] {
+  color: #ffffff;
+  background: var(--logbook-rust);
+
+  border-color: var(--logbook-rust);
+}
+
+.logbook-spark-status[data-status="abandonne"] {
+  opacity: 0.48;
+  filter: grayscale(1);
+}
+
+
+/* ==========================================================================
+   ÉTINCELLES
+   ========================================================================== */
+
+.logbook-spark-target {
+  color: var(--logbook-ivory);
+
+  font:
+    700 12px/1.3
+    var(--logbook-serif);
+
+  text-transform: uppercase;
+}
+
+.logbook-spark-target span {
+  color: var(--logbook-muted);
+
+  font:
+    italic 8px/1.2
+    Arial,
+    sans-serif;
+
+  text-transform: none;
+}
+
+
+/* Sélecteur compact ------------------------------------------------------ */
+
+.logbook-mini-select {
+  width: auto;
+  min-height: 30px;
+  padding: 6px 9px;
+
+  font-size: 8px;
+}
+
+
+/* ==========================================================================
+   ACTIONS D’ENTRÉE
+   ========================================================================== */
+
+.logbook-edit {
+  min-height: 27px;
+  padding: 6px 8px;
+
+  color: var(--logbook-muted);
+  background: var(--logbook-card-alt);
+
+  border: 1px solid var(--logbook-line);
+  border-radius: 0;
+
+  cursor: pointer;
+
+  font: 700 6px/1 Arial, sans-serif;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+
+  transition:
+    color var(--logbook-fast),
+    background-color var(--logbook-fast),
+    border-color var(--logbook-fast);
+}
+
+.logbook-edit:hover,
+.logbook-edit:focus-visible {
+  color: #ffffff;
+  background: #292321;
+  border-color: var(--logbook-rust);
+
+  outline: none;
 }
 
 .logbook-delete {
-  border: 0;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+
+  display: grid;
+  place-items: center;
+
+  color: var(--logbook-muted);
   background: transparent;
-  color: var(--logbook-sub);
+
+  border: 1px solid transparent;
+  border-radius: 50%;
+
   cursor: pointer;
-  font-size: 18px;
+
+  font-size: 15px;
   line-height: 1;
-  opacity: .65;
+
+  opacity: 0.65;
+
+  transition:
+    color var(--logbook-fast),
+    background-color var(--logbook-fast),
+    border-color var(--logbook-fast),
+    opacity var(--logbook-fast),
+    transform var(--logbook-fast);
 }
 
-.logbook-delete:hover {
-  color: var(--logbook-desc);
+.logbook-delete:hover,
+.logbook-delete:focus-visible {
+  color: #ffffff;
+  background: var(--logbook-rust);
+  border-color: var(--logbook-rust);
+
   opacity: 1;
+  outline: none;
+
+  transform: rotate(8deg);
 }
+
+
+/* ==========================================================================
+   FORMAT MOBILE
+   ========================================================================== */
 
 @media (max-width: 640px) {
+  #logbook-root {
+    width: auto;
+    max-height: calc(100dvh - 24px);
+
+    top: 12px;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+
+    transform-origin: top right;
+  }
+
+  #logbook-header {
+    min-height: 86px;
+    padding: 18px;
+  }
+
+  #logbook-header strong {
+    font-size: 23px;
+  }
+
+  #logbook-tabs {
+    padding: 10px;
+  }
+
+  .logbook-tab {
+    min-height: 30px;
+    padding: 7px 9px;
+
+    font-size: 7px;
+  }
+
+  #logbook-body {
+    padding: 10px;
+  }
+
+  .logbook-passport {
+    grid-template-columns: 64px minmax(0, 1fr);
+
+    padding: 15px;
+  }
+
+  .logbook-avatar {
+    width: 58px;
+    height: 58px;
+  }
+
+  .logbook-username {
+    font-size: 19px;
+  }
+
   .logbook-grid {
     grid-template-columns: 1fr;
   }
 
   .logbook-actions {
-    align-items: flex-start;
+    align-items: stretch;
     flex-direction: column;
   }
-}
 
-@media (max-width: 640px) {
-  #logbook-root {
-    top: auto;
-    right: 12px;
-    bottom: 12px;
-    left: 12px;
-    width: auto;
-    max-height: 78vh;
-    transform-origin: bottom right;
+  .logbook-form-buttons {
+    width: 100%;
+  }
+
+  .logbook-submit,
+  .logbook-secondary {
+    flex: 1 1 auto;
   }
 }
 
-.logbook-spark-target {
-  color: var(--logbook-title);
-  font-size: 13px;
-  font-weight: 900;
-  line-height: 1.35;
-}
 
-.logbook-spark-target span {
-  color: var(--logbook-sub);
-  font-weight: 700;
-}
+/* ==========================================================================
+   APPAREILS TACTILES
+   ========================================================================== */
 
-.logbook-spark-type,
-.logbook-spark-status {
-  display: inline-flex;
-  align-items: center;
-  min-height: 20px;
-  padding: 3px 7px;
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-}
-
-.logbook-spark-type {
-  background: var(--logbook-accent-soft);
-  color: var(--logbook-accent-light);
-}
-
-.logbook-spark-status {
-  background: var(--logbook-desc-soft);
-  color: var(--logbook-desc);
-}
-
-.logbook-spark-status[data-status="a-proposer"] {
-  background: var(--logbook-accent-soft);
-  color: var(--logbook-accent-light);
-}
-
-.logbook-spark-status[data-status="propose"] {
-  background: var(--logbook-desc-soft);
-  color: var(--logbook-desc);
-}
-
-.logbook-spark-status[data-status="valide"] {
-  background: var(--logbook-chip);
-  color: #111;
-}
-
-.logbook-spark-status[data-status="abandonne"] {
-  opacity: .55;
-}
-
-.logbook-mini-select {
-  border: 1px solid var(--logbook-border);
-  border-radius: 999px;
-  padding: 6px 9px;
-  background: var(--logbook-card-alt);
-  color: var(--logbook-title);
-  font-family: inherit;
-  font-size: 11px;
-  outline: none;
-}
-
-.logbook-mini-select:focus {
-  border-color: var(--logbook-accent);
-  box-shadow: 0 0 0 3px var(--logbook-accent-soft);
-}
-
-#logbook-count {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  min-width: 16px;
-  height: 16px;
-  padding: 0 5px;
-  border-radius: 999px;
-  background: var(--logbook-desc);
-  color: #111;
-  font-size: 10px;
-  font-weight: 900;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  letter-spacing: 0;
-  line-height: 16px;
-  pointer-events: none;
-}
-
-#logbook-toggle.logbook-has-todo #logbook-count {
-  display: inline-flex !important;
-}
-
-#logbook-toggle.logbook-has-todo svg,
-#logbook-toggle.logbook-has-todo i {
-  animation: logbookTodoPulse 1.2s infinite;
-}
-
-@keyframes logbookTodoPulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  50% {
-    transform: scale(1.18);
-    opacity: .72;
+@media (hover: none) {
+  .logbook-card:hover,
+  .logbook-entry:hover {
+    transform: none;
   }
 }
 
-.logbook-form-buttons {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
 
-.logbook-secondary {
-  border: 1px solid var(--logbook-border);
-  border-radius: 999px;
-  padding: 8px 12px;
-  background: var(--logbook-card-alt);
-  color: var(--logbook-sub);
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .07em;
-}
+/* ==========================================================================
+   MOUVEMENTS RÉDUITS
+   ========================================================================== */
 
-.logbook-secondary:hover {
-  border-color: var(--logbook-accent);
-  color: var(--logbook-title);
-  background: var(--logbook-accent-soft);
-}
-
-.logbook-entry-buttons {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  flex: 0 0 auto;
-}
-
-.logbook-edit {
-  border: 1px solid var(--logbook-border);
-  border-radius: 999px;
-  padding: 5px 8px;
-  background: var(--logbook-card-alt);
-  color: var(--logbook-sub);
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 10px;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-}
-
-.logbook-edit:hover {
-  border-color: var(--logbook-accent);
-  color: var(--logbook-title);
-  background: var(--logbook-accent-soft);
+@media (prefers-reduced-motion: reduce) {
+  #logbook-toggle,
+  #logbook-root,
+  #logbook-close,
+  .logbook-tab,
+  .logbook-card,
+  .logbook-avatar img,
+  .logbook-field textarea,
+  .logbook-field select,
+  .logbook-form input,
+  .logbook-form textarea,
+  .logbook-form select,
+  .logbook-mini-select,
+  .logbook-submit,
+  .logbook-secondary,
+  .logbook-entry,
+  .logbook-entry-title,
+  .logbook-edit,
+  .logbook-delete {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
