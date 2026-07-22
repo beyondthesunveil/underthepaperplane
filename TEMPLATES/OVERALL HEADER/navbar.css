@@ -239,91 +239,866 @@
   text-transform: uppercase;
 }
 
+/* ==========================================================================
+   DOCK DE NAVIGATION — CENTRE DE CONTRÔLE
+   À placer après le CSS individuel de chaque module
+   ========================================================================== */
+
+.utpp-navigMod,
+.utpp-navigMod *,
+.utpp-navigMod *::before,
+.utpp-navigMod *::after {
+  box-sizing: border-box;
+}
+
 .utpp-navigMod {
+  --utppNav-bg: #111111;
+  --utppNav-panel: #181818;
+  --utppNav-panelHover: #211f1e;
+  --utppNav-line: #303030;
+  --utppNav-lineRust: #49342e;
+
+  --utppNav-rust: #8b3d25;
+  --utppNav-rustLight: #b35437;
+  --utppNav-rustDark: #572619;
+
+  --utppNav-ivory: #eee9e5;
+  --utppNav-muted: #aaa29d;
+  --utppNav-soft: #756f6b;
+
+  --utppNav-size: 38px;
+  --utppNav-gap: 6px;
+
   min-width: 0;
-  flex: 0 0 auto;
+  max-width: 100%;
   margin-left: auto;
+  padding: 7px;
+
+  position: relative;
+  isolation: isolate;
+
+  flex: 0 1 auto;
+
   display: flex;
   align-items: center;
   justify-content: flex-end;
   flex-wrap: nowrap;
-  gap: 9px;
+  gap: var(--utppNav-gap);
+
+  color: var(--utppNav-ivory);
+
+  background:
+    linear-gradient(
+      105deg,
+      rgba(139, 61, 37, 0.11),
+      transparent 34%
+    ),
+    rgba(17, 17, 17, 0.96);
+
+  border: 1px solid var(--utppNav-line);
+  border-top: 2px solid var(--utppNav-rust);
+
+  box-shadow:
+    0 12px 34px rgba(0, 0, 0, 0.34),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.012);
+
+  backdrop-filter: blur(14px);
+
+  overflow-x: auto;
+  overflow-y: visible;
+
+  scrollbar-width: none;
 }
 
-.utpp-navigMod > a,
-.utpp-navigMod > button,
-.utpp-navigMod > #notiffi_button,
+.utpp-navigMod::-webkit-scrollbar {
+  display: none;
+}
+
+.utpp-navigMod::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 45px,
+      rgba(255, 255, 255, 0.018) 46px
+    );
+
+  pointer-events: none;
+}
+
+
+/* ==========================================================================
+   BASE COMMUNE DES CONTRÔLES
+   ========================================================================== */
+
+.utpp-navigMod > :is(
+  a,
+  button,
+  #notiffi_button
+),
 .utpp-navigMod > [data-theme-controls] > button {
+  width: var(--utppNav-size) !important;
+  height: var(--utppNav-size) !important;
+  min-width: var(--utppNav-size) !important;
+  min-height: var(--utppNav-size) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
   position: relative !important;
-  width: 35px;
-  height: 35px;
-  min-width: 35px;
-  flex: 0 0 35px;
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  border: 0;
-  border-radius: 10px !important;
-  color: var(--th-cl-font) !important;
-  background: var(--th-cl-cardAlt) !important;
+  isolation: isolate;
+
+  flex: 0 0 var(--utppNav-size) !important;
+
+  display: inline-grid !important;
+  place-items: center !important;
+
+  color: var(--utppNav-muted) !important;
+  background:
+    linear-gradient(
+      to top,
+      rgba(139, 61, 37, 0.18) 0 2px,
+      transparent 2px
+    ),
+    var(--utppNav-panel) !important;
+
+  border: 1px solid var(--utppNav-line) !important;
+  border-radius: 0 !important;
+
+  outline: none !important;
   box-shadow: none !important;
+
   cursor: pointer;
-  text-decoration: none;
   appearance: none;
+  text-decoration: none !important;
+
+  overflow: visible;
+
+  transform: translateY(0);
+
   transition:
-    transform var(--th-trans-fast),
-    background var(--th-trans-fast),
-    box-shadow var(--th-trans-fast);
+    color 200ms ease,
+    background-color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 340ms cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-.utpp-navigMod > a:hover,
-.utpp-navigMod > button:hover,
-.utpp-navigMod > #notiffi_button:hover,
-.utpp-navigMod > [data-theme-controls] > button:hover {
+
+/* Petit repère technique dans l’angle ----------------------------------- */
+
+.utpp-navigMod > :is(
+  a,
+  button,
+  #notiffi_button
+),
+.utpp-navigMod > [data-theme-controls] > button {
+  clip-path:
+    polygon(
+      0 0,
+      calc(100% - 6px) 0,
+      100% 6px,
+      100% 100%,
+      0 100%
+    );
+}
+
+
+/* Survol et focus -------------------------------------------------------- */
+
+.utpp-navigMod > :is(
+  a,
+  button,
+  #notiffi_button
+):hover,
+.utpp-navigMod > :is(
+  a,
+  button,
+  #notiffi_button
+):focus-visible,
+.utpp-navigMod > [data-theme-controls] > button:hover,
+.utpp-navigMod > [data-theme-controls] > button:focus-visible {
+  color: #ffffff !important;
+
+  background:
+    linear-gradient(
+      to top,
+      var(--utppNav-rust) 0 3px,
+      transparent 3px
+    ),
+    var(--utppNav-panelHover) !important;
+
+  border-color: var(--utppNav-lineRust) !important;
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.32),
+    inset 0 0 0 1px rgba(139, 61, 37, 0.08) !important;
+
+  transform: translateY(-3px);
+}
+
+
+/* ==========================================================================
+   ÉTATS ACTIFS
+   ========================================================================== */
+
+.utpp-navigMod > :is(
+  a,
+  button,
+  #notiffi_button
+)[aria-expanded="true"],
+.utpp-navigMod > :is(
+  a,
+  button,
+  #notiffi_button
+).is-active,
+.utpp-navigMod > :is(
+  a,
+  button,
+  #notiffi_button
+).active,
+.utpp-navigMod > :is(
+  a,
+  button,
+  #notiffi_button
+).open,
+.utpp-navigMod > [data-theme-controls] > button.is-active {
+  color: #ffffff !important;
+  background:
+    linear-gradient(
+      135deg,
+      var(--utppNav-rustDark),
+      var(--utppNav-rust)
+    ) !important;
+
+  border-color: var(--utppNav-rust) !important;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.36),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+
   transform: translateY(-2px);
-  background: var(--th-grad-chip) !important;
 }
 
-.utpp-headerNavbar > #manifest-toggle > svg,
+
+/* États liés à des panneaux sans aria-expanded -------------------------- */
+
+html:has(#notiffi_panel.open)
+.utpp-navigMod > #notiffi_button,
+
+html:has(#notiffi_panel.active)
+.utpp-navigMod > #notiffi_button,
+
+html:has(#fa-pins-panel.open)
+.utpp-navigMod > #fa-pins-button,
+
+html:has(#fa-pins-panel.active)
+.utpp-navigMod > #fa-pins-button {
+  color: #ffffff !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--utppNav-rustDark),
+      var(--utppNav-rust)
+    ) !important;
+
+  border-color: var(--utppNav-rust) !important;
+
+  transform: translateY(-2px);
+}
+
+
+/* ==========================================================================
+   ICÔNES
+   ========================================================================== */
+
 .utpp-navigMod > button > svg,
 .utpp-navigMod > a > svg,
+.utpp-navigMod > button > i,
 .utpp-navigMod > a > i,
 .utpp-navigMod > [data-theme-controls] > button svg,
 .utpp-navigMod > [data-theme-controls] > button i {
-  display: block;
-  width: 19px;
-  height: 19px;
-  flex: 0 0 auto;
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+  place-items: center;
+
+  flex: 0 0 18px;
+
+  color: inherit !important;
+
+  font-size: 16px;
+  line-height: 1;
+
+  pointer-events: none;
+
+  stroke-width: 1.8;
 }
+
+.utpp-navigMod .bi::before,
+.utpp-navigMod [class*="ion-"]::before {
+  margin: 0;
+
+  display: block;
+
+  color: inherit;
+
+  font-size: 16px;
+  line-height: 1;
+}
+
+
+/* ==========================================================================
+   NOTIFICATIONS
+   ========================================================================== */
 
 .utpp-navigMod > #notiffi_button {
   font-size: 0;
 }
 
+.utpp-navigMod > #notiffi_button::before {
+  content: "";
+
+  width: 17px;
+  height: 17px;
+
+  position: relative;
+  z-index: 1;
+
+  display: block;
+
+  background-color: currentColor;
+
+  -webkit-mask-image:
+    url("https://unpkg.com/lucide-static/icons/bell.svg");
+  mask-image:
+    url("https://unpkg.com/lucide-static/icons/bell.svg");
+
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-size: contain;
+  mask-size: contain;
+
+  transition:
+    transform 260ms ease;
+}
+
+.utpp-navigMod > #notiffi_button:hover::before {
+  transform: rotate(-10deg);
+}
+
 .utpp-navigMod > #notiffi_button .ntf_button-text {
-  position: absolute !important;
   width: 1px !important;
   height: 1px !important;
-  padding: 0 !important;
   margin: -1px !important;
+  padding: 0 !important;
+
+  position: absolute !important;
+
   overflow: hidden !important;
+
   clip: rect(0, 0, 0, 0) !important;
   clip-path: inset(50%) !important;
+
   border: 0 !important;
+
   white-space: nowrap !important;
 }
 
+
+/* ==========================================================================
+   COMPTEURS
+   ========================================================================== */
+
+.utpp-navigMod :is(
+  .unread_count,
+  #newspaper-count,
+  #logbook-count,
+  #frqcy-badge,
+  #fa-pins-count,
+  #KRSN-count
+) {
+  min-width: 17px !important;
+  height: 17px !important;
+  padding: 0 5px !important;
+
+  position: absolute !important;
+  top: -7px !important;
+  right: -7px !important;
+  z-index: 10;
+
+  display: none;
+
+  place-items: center;
+
+  color: #ffffff !important;
+  background: var(--utppNav-rustLight) !important;
+
+  border: 2px solid var(--utppNav-bg) !important;
+  border-radius: 999px !important;
+
+  font: 700 9px/13px Arial, sans-serif !important;
+  text-align: center;
+
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.42) !important;
+
+  pointer-events: none;
+}
+
+
+/* Affichage uniquement avec une valeur ---------------------------------- */
+
+.utpp-navigMod .unread_count:not(:empty),
+.utpp-navigMod #newspaper-count:not(:empty),
+.utpp-navigMod #logbook-count:not(:empty),
+.utpp-navigMod #fa-pins-count:not(:empty),
+.utpp-navigMod #KRSN-count:not(:empty),
+.utpp-navigMod
+#frqcy-toggle.frqcy-has-unread
+#frqcy-badge,
+.utpp-navigMod
+#frqcy-toggle.frqcy-has-mention
+#frqcy-badge,
+.utpp-navigMod
+#logbook-toggle.logbook-has-todo
+#logbook-count {
+  display: grid !important;
+}
+
+
+/* Notification prioritaire ---------------------------------------------- */
+
+.utpp-navigMod
+#frqcy-toggle.frqcy-has-mention
+#frqcy-badge {
+  color: var(--utppNav-rustDark) !important;
+  background: var(--utppNav-ivory) !important;
+}
+
+
+/* ==========================================================================
+   CONTRÔLE DU THÈME
+   ========================================================================== */
+
 .utpp-navigMod > [data-theme-controls] {
-  min-width: 35px;
-  flex: 0 0 35px;
+  width: var(--utppNav-size);
+  min-width: var(--utppNav-size);
+  height: var(--utppNav-size);
+
+  flex: 0 0 var(--utppNav-size);
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-.utpp-navigMod > [data-theme-controls] > button {
+.utpp-navigMod
+> [data-theme-controls]
+> .color-scheme-toggle {
+  position: relative !important;
+  overflow: hidden;
+}
+
+.utpp-navigMod
+.color-scheme-toggle
+.icon {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  color: inherit;
+}
+
+.utpp-navigMod
+.color-scheme-toggle
+.icon i {
   margin: 0 !important;
+}
+
+
+/* ==========================================================================
+   SÉPARATEURS ENTRE GROUPES
+   ========================================================================== */
+
+.utpp-navigMod > a[href="#top"] {
+  margin-left: 10px !important;
+}
+
+.utpp-navigMod > a[href="#top"]::before {
+  content: "";
+
+  width: 1px;
+  height: 24px;
+
+  position: absolute;
+  top: 6px;
+  left: -9px;
+
+  background: var(--utppNav-line);
+
+  pointer-events: none;
+}
+
+.utpp-navigMod > #switcheroo {
+  min-width: 0;
+  margin-left: 10px;
+  padding-left: 10px;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  border-left: 1px solid var(--utppNav-line);
+}
+
+
+/* ==========================================================================
+   SWITCHEROO
+   Les sélecteurs internes sont sans effet si ta version utilise d’autres noms.
+   ========================================================================== */
+
+.utpp-navigMod
+#switcheroo
+.switcheroo__squircles {
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  list-style: none;
+}
+
+.utpp-navigMod
+#switcheroo
+.switcheroo__squircle {
+  width: 34px;
+  height: 34px;
+  margin: 0;
+
+  position: relative;
+
+  flex: 0 0 34px;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--utppNav-panel);
+
+  border: 1px solid var(--utppNav-line);
+  border-radius: 0;
+
+  overflow: hidden;
+
+  transition:
+    border-color 200ms ease,
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.utpp-navigMod
+#switcheroo
+.switcheroo__squircle:hover {
+  border-color: var(--utppNav-rust);
+
+  transform: translateY(-2px);
+}
+
+.utpp-navigMod
+#switcheroo
+.switcheroo__avatar,
+.utpp-navigMod
+#switcheroo
+.switcheroo__avatar img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+.utpp-navigMod
+#switcheroo
+.switcheroo__avatar img {
+  filter: grayscale(1) contrast(1.08);
+
+  transition:
+    filter 240ms ease,
+    transform 340ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.utpp-navigMod
+#switcheroo
+.switcheroo__squircle:hover
+.switcheroo__avatar img {
+  filter: grayscale(0);
+
+  transform: scale(1.05);
+}
+
+
+/* ==========================================================================
+   INFOBULLES PERSONNALISÉES
+   ========================================================================== */
+
+@media (hover: hover) and (min-width: 821px) {
+  .utpp-navigMod > :is(
+    a,
+    button,
+    #notiffi_button
+  )[title]::after,
+  .utpp-navigMod
+  > [data-theme-controls]
+  > button[title]::after {
+    content: attr(title);
+
+    width: max-content;
+    max-width: 190px;
+    padding: 7px 9px;
+
+    position: absolute;
+    top: calc(100% + 11px);
+    left: 50%;
+    z-index: 100;
+
+    color: var(--utppNav-ivory);
+    background: #111111;
+
+    border: 1px solid var(--utppNav-lineRust);
+    border-radius: 0;
+
+    font: 700 7px/1 Arial, sans-serif;
+    letter-spacing: 0.09em;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.48);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+      translate(-50%, -5px);
+
+    pointer-events: none;
+
+    transition:
+      opacity 180ms ease,
+      transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0s linear 240ms;
+  }
+
+  .utpp-navigMod > :is(
+    a,
+    button,
+    #notiffi_button
+  )[title]:hover::after,
+  .utpp-navigMod > :is(
+    a,
+    button,
+    #notiffi_button
+  )[title]:focus-visible::after,
+  .utpp-navigMod
+  > [data-theme-controls]
+  > button[title]:hover::after,
+  .utpp-navigMod
+  > [data-theme-controls]
+  > button[title]:focus-visible::after {
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+      translate(-50%, 0);
+
+    transition:
+      opacity 180ms ease,
+      transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0s;
+  }
+
+
+  /* Alignement des infobulles situées en fin de barre ------------------- */
+
+  .utpp-navigMod > :is(
+    #utppUC-layout-toggle,
+    a[href="#bottom"]
+  )::after,
+  .utpp-navigMod
+  > [data-theme-controls]
+  > button::after {
+    right: 0;
+    left: auto;
+
+    transform: translate(0, -5px);
+  }
+
+  .utpp-navigMod > :is(
+    #utppUC-layout-toggle,
+    a[href="#bottom"]
+  ):hover::after,
+  .utpp-navigMod > :is(
+    #utppUC-layout-toggle,
+    a[href="#bottom"]
+  ):focus-visible::after,
+  .utpp-navigMod
+  > [data-theme-controls]
+  > button:hover::after,
+  .utpp-navigMod
+  > [data-theme-controls]
+  > button:focus-visible::after {
+    transform: translate(0, 0);
+  }
+}
+
+
+/* ==========================================================================
+   CLAVIER
+   ========================================================================== */
+
+.utpp-navigMod > #notiffi_button:focus-visible {
+  color: #ffffff !important;
+
+  background:
+    linear-gradient(
+      to top,
+      var(--utppNav-rust) 0 3px,
+      transparent 3px
+    ),
+    var(--utppNav-panelHover) !important;
+
+  border-color: var(--utppNav-rust) !important;
+
+  outline:
+    2px solid rgba(179, 84, 55, 0.42) !important;
+
+  outline-offset: 2px !important;
+}
+
+
+/* ==========================================================================
+   ÉCRANS INTERMÉDIAIRES
+   ========================================================================== */
+
+@media (max-width: 1180px) {
+  .utpp-navigMod {
+    --utppNav-size: 35px;
+    --utppNav-gap: 4px;
+
+    padding: 6px;
+  }
+
+  .utpp-navigMod > #switcheroo {
+    margin-left: 7px;
+    padding-left: 7px;
+  }
+
+  .utpp-navigMod > a[href="#top"] {
+    margin-left: 7px !important;
+  }
+
+  .utpp-navigMod > a[href="#top"]::before {
+    left: -6px;
+  }
+}
+
+
+/* ==========================================================================
+   MOBILE
+   ========================================================================== */
+
+@media (max-width: 760px) {
+  .utpp-navigMod {
+    width: 100%;
+    margin: 0;
+    padding: 6px;
+
+    justify-content: flex-start;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-snap-type: x proximity;
+  }
+
+  .utpp-navigMod > :is(
+    a,
+    button,
+    #notiffi_button
+  ),
+  .utpp-navigMod > [data-theme-controls],
+  .utpp-navigMod > #switcheroo {
+    scroll-snap-align: start;
+  }
+
+  .utpp-navigMod > #switcheroo {
+    flex: 0 0 auto;
+  }
+}
+
+
+/* ==========================================================================
+   APPAREILS TACTILES
+   ========================================================================== */
+
+@media (hover: none) {
+  .utpp-navigMod > :is(
+    a,
+    button,
+    #notiffi_button
+  ):hover,
+  .utpp-navigMod
+  > [data-theme-controls]
+  > button:hover {
+    transform: none;
+  }
+}
+
+
+/* ==========================================================================
+   MOUVEMENTS RÉDUITS
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .utpp-navigMod > :is(
+    a,
+    button,
+    #notiffi_button
+  ),
+  .utpp-navigMod
+  > [data-theme-controls]
+  > button,
+  .utpp-navigMod
+  #switcheroo
+  .switcheroo__squircle,
+  .utpp-navigMod
+  #switcheroo
+  .switcheroo__avatar img {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 .utpp-headerNavbar span[id$="-count"],
