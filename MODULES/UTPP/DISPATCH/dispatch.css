@@ -20,14 +20,12 @@
   --rpg-soft: #756f6b;
   --rpg-width: 470px;
 
-  width: min(
-    var(--th-panel-width, var(--rpg-width)),
-    calc(100vw - 32px)
+  width: 500px;
   );
 
   position: fixed;
-  top: 20px;
-  right: 78px;
+  top: 50px;
+  right: 0;
   z-index: 9999;
 
   color: var(--rpg-ivory);
