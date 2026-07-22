@@ -76,54 +76,39 @@ html[data-utppuc-layout="worked"]
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.24);
   text-align: center;
-}
 
-html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c1"]
-.utppUC_headerSide::after {
+    &::after {
   content: "";
-
   width: 30px;
   height: 2px;
-
   position: absolute;
   right: -17px;
   bottom: 12px;
-
   background: var(--utppUC_ivory);
 }
 
-html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c1"]
-.utppUC_headerSide span {
+    & span {
   color: rgba(255, 255, 255, 0.72);
-
   font: 700 6px/1 Arial, sans-serif;
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
-html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c1"]
-.utppUC_headerSide i {
+    & i {
   margin-top: 7px;
-
   color: var(--utppUC_ivory);
-
   font-size: 0;
   font-style: normal;
 }
 
-html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c1"]
-.utppUC_headerSide i::before {
+    & i::before {
   content: "01";
-
   font:
     700 29px/0.95
     "Playfair Display SC",
     Georgia,
     serif;
+}
 }
 
 
