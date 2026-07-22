@@ -1,9 +1,13 @@
 /* ==========================================================================
    CATÉGORIE C2 — PERSONNAGES
+   Ciblage : identifiant c2 ou présence du forum f24
    ========================================================================== */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"] {
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+) {
   --utppUC_panel: #191919;
   --utppUC_panelAlt: #212121;
   --utppUC_line: #303030;
@@ -19,7 +23,10 @@ html[data-utppuc-layout="worked"]
    ========================================================================== */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_header {
   min-height: 148px;
   padding: 22px 28px;
@@ -48,7 +55,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_header::before {
   content: "";
 
@@ -61,6 +71,7 @@ html[data-utppuc-layout="worked"]
   z-index: 0;
 
   background: transparent;
+
   border: 1px solid rgba(139, 61, 37, 0.35);
   border-radius: 0;
 
@@ -70,7 +81,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_header > * {
   position: relative;
   z-index: 1;
@@ -82,7 +96,10 @@ html[data-utppuc-layout="worked"]
    -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerSide {
   width: 88px;
   height: 88px;
@@ -102,7 +119,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerSide::after {
   content: "";
 
@@ -117,17 +137,26 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerSide span,
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerSide i {
   font-size: 0;
   font-style: normal;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerSide span::before {
   content: "Dossier";
 
@@ -137,13 +166,19 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerSide i {
   margin-top: 8px;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerSide i::before {
   content: "02";
 
@@ -156,17 +191,23 @@ html[data-utppuc-layout="worked"]
 
 
 /* --------------------------------------------------------------------------
-   Texte de l’en-tête
+   Texte principal de l’en-tête
    -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerCopy {
   min-width: 0;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerCopy > [data-utppuc-field="eyebrow"] {
   display: block;
 
@@ -178,7 +219,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerCopy > [data-utppuc-field="eyebrow"]::before {
   content: "Registre des identités · archives confidentielles";
 
@@ -186,7 +230,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_categoryTitle {
   min-width: 0;
   margin-top: 4px;
@@ -198,13 +245,19 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_categoryTitle > * {
   display: none;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_categoryTitle::before {
   content: "PERSONNAGES";
 
@@ -222,7 +275,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_categoryDescription {
   margin-top: 8px;
 
@@ -234,7 +290,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_categoryDescription::before {
   content:
     "Créer, présenter et faire évoluer les visages qui peuplent notre univers.";
@@ -248,7 +307,10 @@ html[data-utppuc-layout="worked"]
    -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerMeta {
   min-width: 0;
   padding-left: 18px;
@@ -266,16 +328,25 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerMeta::before,
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerMeta::after {
   content: none;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerMeta span {
   padding: 7px 8px;
 
@@ -289,7 +360,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerMeta span:first-child::before {
   content: "04 espaces";
 
@@ -299,7 +373,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerMeta span:nth-child(2)::before {
   content: "Gestion active";
 
@@ -309,7 +386,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerMeta i {
   grid-column: 1 / -1;
   padding-top: 8px;
@@ -324,7 +404,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerMeta i::before {
   content: "Identité · évolution · mémoire";
 
@@ -337,7 +420,10 @@ html[data-utppuc-layout="worked"]
    -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerGhost {
   position: absolute;
   right: -12px;
@@ -354,7 +440,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_headerGhost::before {
   content: "P";
 
@@ -371,7 +460,10 @@ html[data-utppuc-layout="worked"]
    ========================================================================== */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_directory {
   margin-top: 12px;
 
@@ -387,11 +479,14 @@ html[data-utppuc-layout="worked"]
 
 
 /* --------------------------------------------------------------------------
-   Contenu propre à chaque forum
+   Contenu personnalisé des forums
    -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_forum[data-forum-url^="/f24-"] {
   --utppUC_forumTitle: "SCÉNARIOS";
   --utppUC_forumSubtitle: "VISAGES ATTENDUS";
@@ -402,7 +497,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_forum[data-forum-url^="/f25-"] {
   --utppUC_forumTitle: "PRÉSENTATIONS";
   --utppUC_forumSubtitle: "DÉCLARER SON IDENTITÉ";
@@ -413,7 +511,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_forum[data-forum-url^="/f26-"] {
   --utppUC_forumTitle: "GESTION";
   --utppUC_forumSubtitle: "TABLEAUX DE BORD";
@@ -424,7 +525,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_forum[data-forum-url^="/f45-"] {
   --utppUC_forumTitle: "CARNETS DE BORD";
   --utppUC_forumSubtitle: "LIENS ET CHRONOLOGIES";
@@ -440,7 +544,10 @@ html[data-utppuc-layout="worked"]
    -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_forum {
   min-width: 0;
   min-height: 280px;
@@ -464,7 +571,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_forum::before {
   content: "";
 
@@ -483,14 +593,20 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_forum:hover {
   background: #1c1b1b;
   border-color: #3b302d;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_forum:hover::before {
   transform: scaleY(1);
 }
@@ -501,7 +617,10 @@ html[data-utppuc-layout="worked"]
    -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_status {
   grid-row: 1;
 
@@ -517,16 +636,25 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_statusIcon {
   display: none;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_statusText,
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_status > span {
   width: 100%;
 
@@ -538,10 +666,16 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_statusText::before,
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_status > span::before {
   content:
     "Archive "
@@ -555,10 +689,16 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_statusText::after,
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_status > span::after {
   content: var(--utppUC_forumStatus);
 
@@ -575,7 +715,10 @@ html[data-utppuc-layout="worked"]
    ========================================================================== */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_content {
   min-width: 0;
   margin: 0;
@@ -595,7 +738,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_content::before {
   content:
     counter(utppUC_characterForum, decimal-leading-zero);
@@ -631,13 +777,19 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_content::after {
   content: none;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_forum:hover
 .utppUC_content::before {
   color: #ffffff;
@@ -651,16 +803,25 @@ html[data-utppuc-layout="worked"]
    -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_identity {
   display: contents;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_identity::before,
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_identity::after {
   content: none;
 }
@@ -671,7 +832,10 @@ html[data-utppuc-layout="worked"]
    -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_title {
   min-width: 0;
   margin: 12px 0 0;
@@ -695,7 +859,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_title::before {
   content: var(--utppUC_forumTitle);
 
@@ -718,13 +885,19 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_title::after {
   content: none;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_title:hover {
   color: #d69883;
 }
@@ -735,7 +908,10 @@ html[data-utppuc-layout="worked"]
    -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_identity > small {
   min-width: 0;
   margin: 5px 0 0;
@@ -752,7 +928,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_identity > small::before {
   content: var(--utppUC_forumSubtitle);
 
@@ -767,7 +946,10 @@ html[data-utppuc-layout="worked"]
    -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_description {
   min-width: 0;
   margin: 0;
@@ -787,13 +969,19 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_description > * {
   display: none;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_description::before {
   content: var(--utppUC_forumDescription);
 
@@ -815,7 +1003,10 @@ html[data-utppuc-layout="worked"]
    -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_subforums {
   min-width: 0;
   margin-top: 10px;
@@ -839,16 +1030,25 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_subforums strong,
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_subforums br {
   display: none;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_subforums a {
   padding: 5px 8px;
 
@@ -871,7 +1071,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_subforums a:hover {
   color: #ffffff;
   background: var(--utppUC_rust);
@@ -884,7 +1087,10 @@ html[data-utppuc-layout="worked"]
    ========================================================================== */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_lastPost {
   min-width: 0;
   min-height: 78px;
@@ -906,10 +1112,16 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_lastPost::before,
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_lastPost::after {
   content: none;
 }
@@ -920,7 +1132,10 @@ html[data-utppuc-layout="worked"]
    -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_avatar {
   width: 44px;
   height: 44px;
@@ -934,7 +1149,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_avatar img {
   width: 44px;
   height: 44px;
@@ -957,7 +1175,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_lastPost:hover
 .utppUC_avatar img {
   filter: grayscale(0);
@@ -970,7 +1191,10 @@ html[data-utppuc-layout="worked"]
    -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_lastPostCopy {
   min-width: 0;
 
@@ -981,7 +1205,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_lastPostCopy small {
   margin: 0;
   padding: 0;
@@ -993,7 +1220,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_lastPostCopy small::before {
   content: var(--utppUC_lastLabel);
 
@@ -1003,7 +1233,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_latestTopic {
   width: 100%;
   min-width: 0;
@@ -1026,7 +1259,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_user {
   width: 100%;
   min-width: 0;
@@ -1041,14 +1277,20 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_user * {
   color: inherit;
   font: inherit;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_lastPostArrow {
   display: none;
 }
@@ -1059,7 +1301,10 @@ html[data-utppuc-layout="worked"]
    -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_stats {
   min-width: 0;
   min-height: 78px;
@@ -1087,16 +1332,25 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_stats::before,
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_stats::after {
   content: none;
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_stats span {
   display: flex;
   align-items: baseline;
@@ -1108,7 +1362,10 @@ html[data-utppuc-layout="worked"]
 }
 
 html[data-utppuc-layout="worked"]
-.utppUC_category[data-category-id="c2"]
+.utppUC_category:is(
+  [data-category-id="c2"],
+  :has(.utppUC_forum[data-forum-url^="/f24-"])
+)
 .utppUC_stats strong {
   min-width: 0;
   margin: 0;
@@ -1125,15 +1382,24 @@ html[data-utppuc-layout="worked"]
 
 @media (max-width: 980px) {
   html[data-utppuc-layout="worked"]
-  .utppUC_category[data-category-id="c2"] {
+  .utppUC_category:is(
+    [data-category-id="c2"],
+    :has(.utppUC_forum[data-forum-url^="/f24-"])
+  ) {
     overflow-x: auto;
   }
 
   html[data-utppuc-layout="worked"]
-  .utppUC_category[data-category-id="c2"]
+  .utppUC_category:is(
+    [data-category-id="c2"],
+    :has(.utppUC_forum[data-forum-url^="/f24-"])
+  )
   .utppUC_header,
   html[data-utppuc-layout="worked"]
-  .utppUC_category[data-category-id="c2"]
+  .utppUC_category:is(
+    [data-category-id="c2"],
+    :has(.utppUC_forum[data-forum-url^="/f24-"])
+  )
   .utppUC_directory {
     min-width: 920px;
   }
@@ -1146,11 +1412,20 @@ html[data-utppuc-layout="worked"]
 
 @media (prefers-reduced-motion: reduce) {
   html[data-utppuc-layout="worked"]
-  .utppUC_category[data-category-id="c2"] *,
+  .utppUC_category:is(
+    [data-category-id="c2"],
+    :has(.utppUC_forum[data-forum-url^="/f24-"])
+  ) *,
   html[data-utppuc-layout="worked"]
-  .utppUC_category[data-category-id="c2"] *::before,
+  .utppUC_category:is(
+    [data-category-id="c2"],
+    :has(.utppUC_forum[data-forum-url^="/f24-"])
+  ) *::before,
   html[data-utppuc-layout="worked"]
-  .utppUC_category[data-category-id="c2"] *::after {
+  .utppUC_category:is(
+    [data-category-id="c2"],
+    :has(.utppUC_forum[data-forum-url^="/f24-"])
+  ) *::after {
     transition-duration: 0.01ms !important;
   }
 }
