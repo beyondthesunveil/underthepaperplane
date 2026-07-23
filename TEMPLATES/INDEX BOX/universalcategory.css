@@ -214,12 +214,6 @@ html[data-utppuc-layout="classic"] {
       border-color 260ms ease;
   }
 
-  .utppUC_forum:hover,
-  .utppUC_forum:focus-within {
-    background: #1c1b1a;
-    border-color: #4b342d;
-  }
-
   .utppUC_forum::before {
     content: "";
     width: 60px;
@@ -255,7 +249,7 @@ html[data-utppuc-layout="classic"] {
     grid-template-columns:
       minmax(220px, .72fr)
       minmax(225px, 1fr)
-      minmax(205px, .78fr)
+      auto
       auto;
     align-items: center;
     gap: 20px;
@@ -290,16 +284,19 @@ html[data-utppuc-layout="classic"] {
   }
 
   .utppUC_description {
-    color: var(--utppUC_text);
-    font: italic 8px/1.5 Arial, sans-serif;
+  padding-right: 10px;
+  color: var(--utppUC_text);
+  font: italic 10px / 1.5 Arial, sans-serif;
+  text-align: justify;
   }
 
   .utppUC_subforums {
     margin-top: 10px;
     display: flex;
+    font-size: 0;
     align-items: center;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 3px;
   }
 
   .utppUC_subforums:empty {
@@ -311,21 +308,19 @@ html[data-utppuc-layout="classic"] {
   }
 
   .utppUC_subforums a {
-    padding: 5px 8px;
-    color: #c5bfbb;
-    background: #242424;
-    font: 700 5px Arial, sans-serif;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-    transition:
-      color 180ms ease,
-      background 180ms ease;
+  padding: 0 0 5px 0;
+  border-bottom: 1px solid var(--utppUC_rust);
+  color: #c5bfbb;
+  font: 700 8px Arial, sans-serif;
+  text-transform: uppercase;
+  transition: color 180ms ease, background 180ms ease;
   }
 
   .utppUC_subforums a:hover,
   .utppUC_subforums a:focus-visible {
-    color: #fff;
-    background: var(--utppUC_rust);
+  color: #fff;
+  padding: 5px 8px;
+  background: var(--utppUC_rust);
   }
 
   .utppUC_lastPost {
@@ -385,17 +380,6 @@ html[data-utppuc-layout="classic"] {
     font: italic 5px Arial, sans-serif;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-
-  .utppUC_lastPostArrow {
-    color: var(--utppUC_rust) !important;
-    font: 400 16px/1 Arial, sans-serif;
-    transition: translate 180ms ease;
-  }
-
-  .utppUC_lastPostArrow:hover,
-  .utppUC_lastPostArrow:focus-visible {
-    translate: 3px -3px;
   }
 
   .utppUC_stats {
