@@ -687,6 +687,10 @@ html[data-utppuc-layout="worked"]
    CARNET DE ROUTE
    ========================================================================== */
 
+/* ==========================================================================
+   CARNET DE ROUTE
+   ========================================================================== */
+
 html[data-utppuc-layout="worked"]
 .utppUC_category[data-category-id]:has(
   .utppUC_forum[data-forum-url^="/f7-"]
@@ -713,6 +717,9 @@ html[data-utppuc-layout="worked"]
   border: 0;
 }
 
+
+/* Axe central : il s’arrête désormais avant New Jersey. */
+
 html[data-utppuc-layout="worked"]
 .utppUC_category[data-category-id]:has(
   .utppUC_forum[data-forum-url^="/f7-"]
@@ -724,7 +731,7 @@ html[data-utppuc-layout="worked"]
 
   position: absolute;
   top: 0;
-  bottom: 0;
+  bottom: calc(142px + 8px);
   left: calc(50% - 1px);
   z-index: 1;
 
@@ -740,6 +747,9 @@ html[data-utppuc-layout="worked"]
   pointer-events: none;
 }
 
+
+/* Étiquette centrale. */
+
 html[data-utppuc-layout="worked"]
 .utppUC_category[data-category-id]:has(
   .utppUC_forum[data-forum-url^="/f7-"]
@@ -750,7 +760,7 @@ html[data-utppuc-layout="worked"]
   padding: 6px 7px;
 
   position: absolute;
-  top: calc(50% - 30px);
+  top: calc(50% - 101px);
   left: 50%;
   z-index: 5;
 
@@ -814,6 +824,8 @@ html[data-utppuc-layout="worked"]
 .utppUC_forum[data-forum-url^="/f23-"] {
   grid-column: 1 / 4;
   grid-row: 3;
+
+  z-index: 2;
 }
 
 
@@ -834,9 +846,12 @@ html[data-utppuc-layout="worked"]
   padding: 0;
 
   position: relative;
+  z-index: 2;
 
   display: grid !important;
-  grid-template-columns: 96px minmax(0, 1fr) !important;
+  grid-template-columns:
+    96px
+    minmax(0, 1fr) !important;
 
   color: #ffffff;
   background: var(--utppUC_ouPanel);
@@ -873,6 +888,8 @@ html[data-utppuc-layout="worked"]
    CONNEXIONS À LA ROUTE
    ========================================================================== */
 
+/* Réinitialisation indispensable des positions héritées. */
+
 html[data-utppuc-layout="worked"]
 .utppUC_category[data-category-id]:has(
   .utppUC_forum[data-forum-url^="/f7-"]
@@ -885,11 +902,16 @@ html[data-utppuc-layout="worked"]
 
   position: absolute;
   top: 50%;
+  right: auto;
+  bottom: auto;
+  left: auto;
   z-index: 3;
 
   background: var(--utppUC_ouRust);
 
   transform: none;
+
+  pointer-events: none;
 }
 
 html[data-utppuc-layout="worked"]
@@ -904,6 +926,9 @@ html[data-utppuc-layout="worked"]
 
   position: absolute;
   top: calc(50% - 5px);
+  right: auto;
+  bottom: auto;
+  left: auto;
   z-index: 4;
 
   background: var(--utppUC_ouBg);
@@ -913,6 +938,8 @@ html[data-utppuc-layout="worked"]
   transform: rotate(45deg);
 
   transition: background-color 240ms ease;
+
+  pointer-events: none;
 }
 
 html[data-utppuc-layout="worked"]
@@ -924,7 +951,9 @@ html[data-utppuc-layout="worked"]
 }
 
 
-/* Forums de gauche ------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   Cartes de gauche : le connecteur sort uniquement par la droite
+   -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
 .utppUC_category[data-category-id]:has(
@@ -936,7 +965,10 @@ html[data-utppuc-layout="worked"]
   .utppUC_forum[data-forum-url^="/f7-"]
 )
 .utppUC_forum[data-forum-url^="/f8-"]::before {
-  right: -19px;
+  top: 50% !important;
+  right: -19px !important;
+  bottom: auto !important;
+  left: auto !important;
 }
 
 html[data-utppuc-layout="worked"]
@@ -949,11 +981,16 @@ html[data-utppuc-layout="worked"]
   .utppUC_forum[data-forum-url^="/f7-"]
 )
 .utppUC_forum[data-forum-url^="/f8-"]::after {
-  right: -25px;
+  top: calc(50% - 5px) !important;
+  right: -25px !important;
+  bottom: auto !important;
+  left: auto !important;
 }
 
 
-/* Forums de droite ------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   Cartes de droite : le connecteur sort uniquement par la gauche
+   -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
 .utppUC_category[data-category-id]:has(
@@ -965,7 +1002,10 @@ html[data-utppuc-layout="worked"]
   .utppUC_forum[data-forum-url^="/f7-"]
 )
 .utppUC_forum[data-forum-url^="/f9-"]::before {
-  left: -19px;
+  top: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: -19px !important;
 }
 
 html[data-utppuc-layout="worked"]
@@ -978,11 +1018,16 @@ html[data-utppuc-layout="worked"]
   .utppUC_forum[data-forum-url^="/f7-"]
 )
 .utppUC_forum[data-forum-url^="/f9-"]::after {
-  left: -25px;
+  top: calc(50% - 5px) !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: -25px !important;
 }
 
 
-/* Terminus --------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   Terminus : connexion verticale uniquement au-dessus de New Jersey
+   -------------------------------------------------------------------------- */
 
 html[data-utppuc-layout="worked"]
 .utppUC_category[data-category-id]:has(
@@ -992,8 +1037,12 @@ html[data-utppuc-layout="worked"]
   width: 1px;
   height: 19px;
 
-  top: -19px;
-  left: 50%;
+  top: -19px !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: 50% !important;
+
+  transform: translateX(-50%) !important;
 }
 
 html[data-utppuc-layout="worked"]
@@ -1001,8 +1050,14 @@ html[data-utppuc-layout="worked"]
   .utppUC_forum[data-forum-url^="/f7-"]
 )
 .utppUC_forum[data-forum-url^="/f23-"]::after {
-  top: -25px;
-  left: calc(50% - 5px);
+  top: -25px !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: 50% !important;
+
+  transform:
+    translateX(-50%)
+    rotate(45deg) !important;
 }
 
 
