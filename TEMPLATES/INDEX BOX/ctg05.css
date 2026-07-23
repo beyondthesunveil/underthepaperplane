@@ -1399,6 +1399,7 @@ html[data-utppuc-layout="worked"]
 
 /* ==========================================================================
    SOUS-FORUMS
+   Affiche les liens réels ou génère les deux libellés de la maquette
    ========================================================================== */
 
 html[data-utppuc-layout="worked"]
@@ -1410,6 +1411,8 @@ html[data-utppuc-layout="worked"]
   min-width: 0 !important;
   max-width: none !important;
   height: auto !important;
+  min-height: 17px;
+
   margin: 7px 0 0 !important;
   padding: 0 !important;
 
@@ -1419,7 +1422,7 @@ html[data-utppuc-layout="worked"]
   justify-self: start !important;
 
   display: flex !important;
-  flex-flow: row wrap !important;
+  flex-flow: row nowrap !important;
   align-items: center !important;
   justify-content: flex-start !important;
   gap: 5px !important;
@@ -1428,10 +1431,12 @@ html[data-utppuc-layout="worked"]
 
   color: transparent;
 
-  font-size: 0 !important;
-  line-height: 1 !important;
+  background: transparent;
 
   border: 0;
+
+  font-size: 0 !important;
+  line-height: 0 !important;
 }
 
 html[data-utppuc-layout="worked"]
@@ -1447,6 +1452,12 @@ html[data-utppuc-layout="worked"]
   display: none !important;
 }
 
+
+/* ==========================================================================
+   LIENS RÉELS
+   Utilisés lorsque Forumactif fournit effectivement des sous-forums
+   ========================================================================== */
+
 html[data-utppuc-layout="worked"]
 .utppUC_category[data-category-id]:has(
   .utppUC_forum[data-forum-url^="/f7-"]
@@ -1456,6 +1467,7 @@ html[data-utppuc-layout="worked"]
   min-width: 0 !important;
   max-width: none !important;
   height: auto !important;
+
   margin: 0 !important;
   padding: 5px 7px !important;
 
@@ -1524,6 +1536,62 @@ html[data-utppuc-layout="worked"]
   background: var(--utppUC_ouRust);
 }
 
+
+/* ==========================================================================
+   LIBELLÉS GÉNÉRÉS
+   Reproduit la maquette lorsque le conteneur ne possède aucun lien réel
+   ========================================================================== */
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(
+  .utppUC_forum[data-forum-url^="/f7-"]
+)
+.utppUC_subforums:not(:has(a))::before,
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(
+  .utppUC_forum[data-forum-url^="/f7-"]
+)
+.utppUC_subforums:not(:has(a))::after {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: 5px 7px !important;
+
+  flex: 0 0 auto !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  color: #ffffff;
+  background: #282828;
+
+  border: 0;
+
+  font: 700 6px/1 Arial, sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(
+  .utppUC_forum[data-forum-url^="/f7-"]
+)
+.utppUC_subforums:not(:has(a))::before {
+  content: var(--utppUC_ouSubforum1) !important;
+}
+
+html[data-utppuc-layout="worked"]
+.utppUC_category[data-category-id]:has(
+  .utppUC_forum[data-forum-url^="/f7-"]
+)
+.utppUC_subforums:not(:has(a))::after {
+  content: var(--utppUC_ouSubforum2) !important;
+}
 
 /* ==========================================================================
    DERNIER MESSAGE
