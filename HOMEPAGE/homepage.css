@@ -8,11 +8,10 @@
   --hp-ivory: #eee9e5;
   --hp-muted: #aaa29d;
   width: 1200px;
-  height: 450px;
-  margin: 0;
+  height: 500px;
+  margin: 0 auto;
   box-sizing: border-box;
   color: var(--hp-ivory);
-  background: var(--hp-bg);
   overflow: hidden;
   font-family: Arial, sans-serif;
 }
@@ -58,10 +57,7 @@
   position: relative;
   overflow: hidden;
   color: var(--hp-ivory);
-  font:
-    700 30px/1 "Playfair Display SC",
-    Georgia,
-    serif;
+  font: 700 30px/1 "Playfair Display SC", Georgia, serif;
   letter-spacing: -0.04em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -72,15 +68,13 @@
   position: relative;
   flex: 0 0 auto;
   color: rgba(255, 255, 255, 0.7);
-  font:
-    700 7px Arial,
-    sans-serif;
+  font: 700 7px Arial, sans-serif;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 .utppHP_layout {
-  height: 364px;
+  height: 430px;
   margin-top: 12px;
   padding: 10px;
   display: grid;
@@ -113,7 +107,6 @@
   gap: 10px;
 }
 
-/* Liens utiles */
 .utppHP_links {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -125,29 +118,21 @@
   place-items: center;
   color: #c8c2be;
   background: #161616;
-  font:
-    700 8px Arial,
-    sans-serif;
+  font: 700 8px Arial, sans-serif;
   text-transform: uppercase;
-  transition:
-    color 220ms ease,
-    background 220ms ease;
+  transition: color 220ms ease, background 220ms ease;
 }
 .utppHP_links a:hover {
   color: #fff;
   background: var(--hp-rust);
 }
 
-/* Titres avec filets */
 .utppHP_ruleTitle {
   display: flex;
   align-items: center;
   gap: 7px;
   color: var(--hp-ivory);
-  font:
-    700 17px/1 "Bebas Neue",
-    Impact,
-    sans-serif;
+  font: 700 17px/1 "Bebas Neue", Impact, sans-serif;
   text-transform: uppercase;
 }
 .utppHP_ruleTitle::before {
@@ -159,16 +144,12 @@
 .utppHP_ruleTitle span {
   order: -1;
   color: var(--hp-rust);
-  font:
-    700 7px Arial,
-    sans-serif;
+  font: 700 7px Arial, sans-serif;
   letter-spacing: 0.1em;
 }
 .utppHP_microTitle {
   color: var(--hp-muted);
-  font:
-    700 8px Arial,
-    sans-serif;
+  font: 700 8px Arial, sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -177,7 +158,6 @@
   color: var(--hp-rust);
 }
 
-/* Staff */
 .utppHP_staff {
   min-height: 0;
 }
@@ -205,28 +185,20 @@
   gap: 2px;
 }
 .utppHP_staffCopy strong {
-  font:
-    700 14px "Playfair Display SC",
-    Georgia,
-    serif;
+  font: 700 14px "Playfair Display SC", Georgia, serif;
   text-transform: uppercase;
 }
 .utppHP_staffCopy span {
   color: var(--hp-rust);
-  font:
-    700 7px Arial,
-    sans-serif;
+  font: 700 7px Arial, sans-serif;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 .utppHP_staffCopy p {
   color: var(--hp-muted);
-  font:
-    italic 8px/1.3 Arial,
-    sans-serif;
+  font: italic 8px/1.3 Arial, sans-serif;
 }
 
-/* Prédéfinis */
 .utppHP_wanted {
   min-height: 0;
 }
@@ -251,9 +223,7 @@
   display: block;
   object-fit: cover;
   filter: grayscale(1) contrast(1.08);
-  transition:
-    filter 300ms ease,
-    scale 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: filter 300ms ease, scale 420ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .utppHP_wantedGrid a:hover img {
   filter: grayscale(0);
@@ -268,9 +238,7 @@
   align-items: center;
   color: var(--hp-muted);
   border-top: 1px solid var(--hp-line);
-  font:
-    700 8px Arial,
-    sans-serif;
+  font: 700 8px Arial, sans-serif;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -285,13 +253,14 @@
 .utppHP_prelinkList {
   margin-top: 7px;
   overflow: auto;
-  height: 70px;
+  height: 133px;
   gap: 5px;
 }
 .utppHP_prelinkList a {
-  height: 29px;
+  height: 30px;
   min-width: 0;
   padding: 5px 7px;
+  margin: 0 0 5px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -300,10 +269,7 @@
   background: #151515;
   border-left: 2px solid var(--hp-rust);
   overflow: hidden;
-  transition:
-    color 240ms ease,
-    background 240ms ease,
-    translate 240ms ease;
+  transition: color 240ms ease, background 240ms ease, translate 240ms ease;
 }
 .utppHP_prelinkList a::after {
   content: "";
@@ -328,9 +294,7 @@
 .utppHP_prelinkList strong {
   overflow: hidden;
   width: 100%;
-  font:
-    700 7px Arial,
-    sans-serif;
+  font: 700 7px Arial, sans-serif;
   text-overflow: ellipsis;
   text-transform: uppercase;
   white-space: nowrap;
@@ -339,9 +303,7 @@
   overflow: hidden;
   width: 100%;
   color: var(--hp-muted);
-  font:
-    italic 6px Arial,
-    sans-serif;
+  font: italic 6px Arial, sans-serif;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -349,7 +311,6 @@
   color: #d8cfca;
 }
 
-/* Contexte central */
 .utppHP_context {
   min-width: 0;
   display: grid;
@@ -382,10 +343,7 @@
   bottom: 3px;
   z-index: 1;
   color: rgba(255, 255, 255, 0.75);
-  font:
-    700 42px/1 "Playfair Display SC",
-    Georgia,
-    serif;
+  font: 700 42px/1 "Playfair Display SC", Georgia, serif;
   letter-spacing: -0.08em;
 }
 .utppHP_contextCopy {
@@ -397,9 +355,7 @@
 }
 .utppHP_contextEyebrow {
   color: var(--hp-rust);
-  font:
-    700 7px Arial,
-    sans-serif;
+  font: 700 7px Arial, sans-serif;
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
@@ -407,10 +363,7 @@
   padding-bottom: 7px;
   position: relative;
   color: var(--hp-ivory);
-  font:
-    700 18px/1 "Playfair Display SC",
-    Georgia,
-    serif;
+  font: 700 18px/1 "Playfair Display SC", Georgia, serif;
   text-transform: uppercase;
 }
 .utppHP_contextTitle::after {
@@ -430,9 +383,7 @@
   display: -webkit-box;
   overflow: hidden;
   color: #d0cbc7;
-  font:
-    italic 9px/1.4 Arial,
-    sans-serif;
+  font: italic 9px/1.4 Arial, sans-serif;
   text-align: justify;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 6;
@@ -443,9 +394,7 @@
   align-items: center;
   gap: 5px;
   color: var(--hp-rust);
-  font:
-    700 7px Arial,
-    sans-serif;
+  font: 700 7px Arial, sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -457,7 +406,6 @@
   translate: 3px 0;
 }
 
-/* Accordéon */
 .utppHP_feature {
   min-width: 0;
   min-height: 0;
@@ -514,16 +462,13 @@
 }
 .utppHP_featureButton svg {
   width: 14px;
-  transition:
-    scale 500ms cubic-bezier(0.16, 1, 0.3, 1),
+  transition: scale 500ms cubic-bezier(0.16, 1, 0.3, 1),
     rotate 500ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .utppHP_featureButton span {
   writing-mode: vertical-rl;
   rotate: 180deg;
-  font:
-    700 6px Arial,
-    sans-serif;
+  font: 700 6px Arial, sans-serif;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   transition: opacity 180ms ease;
@@ -545,9 +490,7 @@
   opacity: 0;
   visibility: hidden;
   translate: 20px 5px;
-  transition:
-    opacity 260ms ease,
-    translate 720ms cubic-bezier(0.16, 1, 0.3, 1),
+  transition: opacity 260ms ease, translate 720ms cubic-bezier(0.16, 1, 0.3, 1),
     visibility 0s linear 300ms;
 }
 .utppHP_featureItem.is-active .utppHP_featureContent {
@@ -558,24 +501,17 @@
 }
 .utppHP_featureContent small {
   color: #d38a70;
-  font:
-    700 6px Arial,
-    sans-serif;
+  font: 700 6px Arial, sans-serif;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 .utppHP_featureContent strong {
-  font:
-    700 14px "Playfair Display SC",
-    Georgia,
-    serif;
+  font: 700 14px "Playfair Display SC", Georgia, serif;
   text-transform: uppercase;
 }
 .utppHP_featureContent p {
   color: #d5cfcb;
-  font:
-    italic 7px/1.3 Arial,
-    sans-serif;
+  font: italic 7px/1.3 Arial, sans-serif;
 }
 .utppHP_featureContent > a {
   width: 21px;
@@ -591,14 +527,14 @@
   width: 11px;
 }
 
-/* Colonne droite */
-.utppHP_honored,
 .utppHP_gazette {
+  margin: -35px 0;
   padding-bottom: 8px;
+  height: 150px;
   border-bottom: 1px solid var(--hp-line);
 }
 .utppHP_honoredGrid {
-  height: 97px;
+  height: 70px;
   margin-top: 8px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -616,9 +552,7 @@
   display: block;
   object-fit: cover;
   filter: grayscale(1) contrast(1.08);
-  transition:
-    filter 300ms ease,
-    scale 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: filter 300ms ease, scale 420ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .utppHP_honoredGrid span {
   position: absolute;
@@ -635,25 +569,18 @@
   text-transform: uppercase;
   opacity: 0;
   translate: 0 7px;
-  transition:
-    opacity 260ms ease,
-    translate 380ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 260ms ease, translate 380ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .utppHP_honoredGrid span strong {
   width: 100%;
   overflow: hidden;
-  font:
-    700 10px "Playfair Display SC",
-    Georgia,
-    serif;
+  font: 700 10px "Playfair Display SC", Georgia, serif;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .utppHP_honoredGrid span small {
   color: #d6aaa0;
-  font:
-    700 6px/1.3 Arial,
-    sans-serif;
+  font: 700 6px/1.3 Arial, sans-serif;
   letter-spacing: 0.08em;
 }
 .utppHP_honoredGrid a:hover img {
@@ -669,26 +596,19 @@
   margin-top: 9px;
   display: block;
   color: var(--hp-rust);
-  font:
-    700 6px Arial,
-    sans-serif;
+  font: 700 6px Arial, sans-serif;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 .utppHP_gazette > strong {
   margin: 4px 0;
   display: block;
-  font:
-    700 14px "Playfair Display SC",
-    Georgia,
-    serif;
+  font: 700 14px "Playfair Display SC", Georgia, serif;
   text-transform: uppercase;
 }
 .utppHP_gazette p {
   color: #c6c0bc;
-  font:
-    italic 9px/1.4 Arial,
-    sans-serif;
+  font: italic 9px/1.4 Arial, sans-serif;
   text-align: justify;
 }
 .utppHP_gazette > a {
@@ -697,9 +617,7 @@
   align-items: center;
   gap: 4px;
   color: var(--hp-rust);
-  font:
-    700 6px Arial,
-    sans-serif;
+  font: 700 6px Arial, sans-serif;
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -707,7 +625,6 @@
   width: 10px;
 }
 
-/* Tooltip global des prédéfinis */
 .utppHP_wantedTooltip {
   max-width: 190px;
   padding: 8px 10px;
@@ -720,9 +637,7 @@
   opacity: 0;
   visibility: hidden;
   translate: 0 4px;
-  transition:
-    opacity 160ms ease,
-    translate 220ms cubic-bezier(0.16, 1, 0.3, 1),
+  transition: opacity 160ms ease, translate 220ms cubic-bezier(0.16, 1, 0.3, 1),
     visibility 0s linear 180ms;
 }
 .utppHP_wantedTooltip.is-visible {
@@ -734,19 +649,14 @@
 .utppHP_wantedTooltip strong {
   display: block;
   color: #fff;
-  font:
-    700 10px "Playfair Display SC",
-    Georgia,
-    serif;
+  font: 700 10px "Playfair Display SC", Georgia, serif;
   text-transform: uppercase;
 }
 .utppHP_wantedTooltip span {
   margin-top: 3px;
   display: block;
   color: #aaa29d;
-  font:
-    italic 7px Arial,
-    sans-serif;
+  font: italic 7px Arial, sans-serif;
 }
 .utppHP_disclaimer {
   padding: 7px 8px;
@@ -756,9 +666,7 @@
 .utppHP_disclaimer p {
   margin-top: 6px;
   color: #8f8985;
-  font:
-    italic 8px/1.45 Arial,
-    sans-serif;
+  font: italic 8px/1.45 Arial, sans-serif;
 }
 
 @media (max-width: 920px) {
@@ -777,4 +685,216 @@
   .utppHP_home *::after {
     transition-duration: 0.01ms !important;
   }
+}
+
+.utppHP_layout {
+  grid-template-columns: 275px minmax(0, 1fr) 192px;
+}
+
+.utppHP_wantedGrid {
+  height: 36px;
+  grid-template-columns: repeat(6, 36px);
+}
+
+.utppHP_wantedGrid a {
+  width: 36px;
+  height: 36px;
+}
+
+.utppHP_featureRow {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 200px;
+  gap: 10px;
+}
+
+.utppHP_feature,
+.utppHP_feature[data-active="1"],
+.utppHP_feature[data-active="2"],
+.utppHP_feature[data-active="3"] {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  gap: 5px;
+  grid-template-columns: none;
+  transition: none;
+}
+
+.utppHP_featureItem {
+  min-width: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 34px;
+  transform: translateZ(0);
+  will-change: flex-grow, flex-basis;
+  transition: flex-grow 780ms cubic-bezier(0.22, 1, 0.36, 1),
+    flex-basis 780ms cubic-bezier(0.22, 1, 0.36, 1), filter 500ms ease;
+}
+
+.utppHP_featureItem.is-active {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+}
+
+.utppHP_featureItem:not(.is-active) {
+  filter: saturate(0.72) brightness(0.86);
+}
+
+.utppHP_featureItem:not(.is-active):hover {
+  filter: saturate(0.95) brightness(1);
+}
+
+.utppHP_featureItem::before {
+  opacity: 0.72;
+  transition: opacity 650ms ease;
+}
+
+.utppHP_featureItem.is-active::before {
+  opacity: 1;
+}
+
+.utppHP_featureButton span {
+  translate: 0 0;
+  transition: opacity 180ms ease, translate 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.utppHP_featureItem.is-active .utppHP_featureButton span {
+  opacity: 0;
+  translate: 0 7px;
+}
+
+.utppHP_featureContent {
+  opacity: 0;
+  visibility: hidden;
+  translate: 14px 4px;
+  transition: opacity 180ms ease, translate 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 220ms;
+}
+
+.utppHP_featureItem.is-active .utppHP_featureContent {
+  opacity: 1;
+  visibility: visible;
+  translate: 0;
+  transition-delay: 210ms, 110ms, 0s;
+}
+
+.utppHP_pulse {
+  min-width: 0;
+  min-height: 0;
+  padding: 11px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: var(--hp-ivory);
+  background: linear-gradient(160deg, rgba(139, 61, 37, 0.27), transparent 54%),
+    #151515;
+  border: 1px solid #282828;
+  overflow: hidden;
+}
+
+.utppHP_pulse::before {
+  content: "";
+  width: 105px;
+  height: 105px;
+  position: absolute;
+  right: -58px;
+  bottom: -52px;
+  border: 1px solid rgba(139, 61, 37, 0.42);
+  border-radius: 50%;
+  box-shadow: 0 0 0 14px rgba(139, 61, 37, 0.05),
+    0 0 0 29px rgba(139, 61, 37, 0.025);
+  pointer-events: none;
+}
+
+.utppHP_pulseTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--hp-rust);
+}
+
+.utppHP_pulseTop span {
+  font: 700 7px Arial, sans-serif;
+  letter-spacing: 0.1em;
+}
+
+.utppHP_pulseTop svg {
+  width: 15px;
+  height: 15px;
+  stroke-width: 1.5;
+}
+
+.utppHP_pulseEyebrow {
+  margin-top: 20px;
+  color: var(--hp-rust);
+  font: 700 6px Arial, sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.utppHP_pulseTitle {
+  margin-top: 5px;
+  display: block;
+  font: 700 15px/1.05 "Playfair Display SC", Georgia, serif;
+  text-transform: uppercase;
+}
+
+.utppHP_pulseChapter {
+  margin-top: 5px !important;
+  color: var(--hp-muted);
+  font: italic 7px/1.3 Arial, sans-serif;
+}
+
+.utppHP_pulseMeta {
+  margin-top: auto;
+  display: grid;
+  gap: 4px;
+}
+
+.utppHP_pulseMeta span {
+  min-width: 0;
+  padding: 5px 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #bbb4af;
+  background: rgba(255, 255, 255, 0.035);
+  font: 700 6px Arial, sans-serif;
+  text-transform: uppercase;
+}
+
+.utppHP_pulseMeta svg {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 auto;
+  color: var(--hp-rust);
+}
+
+.utppHP_pulse > a {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+  color: var(--hp-rust);
+  font: 700 6px Arial, sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 220ms ease;
+}
+
+.utppHP_pulse > a svg {
+  width: 11px;
+  transition: translate 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.utppHP_pulse > a:hover {
+  color: var(--hp-ivory);
+}
+
+.utppHP_pulse > a:hover svg {
+  translate: 3px -3px;
 }
