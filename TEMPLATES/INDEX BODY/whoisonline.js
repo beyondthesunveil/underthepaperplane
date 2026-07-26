@@ -3,21 +3,27 @@
 
   function onReady(callback) {
     if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", callback, { once: true });
+      document.addEventListener(
+        "DOMContentLoaded",
+        callback,
+        { once: true }
+      );
       return;
     }
 
     callback();
   }
 
-  function readNumber(selector) {
-    const element = document.querySelector(selector);
+  function readNumber(selector, root) {
+    const searchRoot = root || document;
+    const element = searchRoot.querySelector(selector);
 
     if (!element) {
       return null;
     }
 
     const digits = element.textContent.replace(/[^\d]/g, "");
+
     return digits ? Number(digits) : null;
   }
 
@@ -28,12 +34,18 @@
       return;
     }
 
-    element.textContent = new Intl.NumberFormat("fr-FR").format(value);
+    element.textContent =
+      new Intl.NumberFormat("fr-FR").format(value);
   }
 
   function moveActions() {
-    const source = document.querySelector("#utppQE_actionSource");
-    const target = document.querySelector("#utppQE_actionTarget");
+    const source = document.querySelector(
+      "#utppQE_actionSource"
+    );
+
+    const target = document.querySelector(
+      "#utppQE_actionTarget"
+    );
 
     if (!source || !target) {
       return;
@@ -64,82 +76,157 @@
     render();
   }
 
-  function hydrateStatistics() {
+  function getStatistics(root) {
+    const searchRoot = root || document;
+
     const users =
-      readNumber(".mod-stats-users strong") ??
-      readNumber("#utppQE_nativeUsers");
+      readNumber(
+        ".mod-stats-users strong",
+        searchRoot
+      ) ??
+      readNumber(
+        "#utppQE_nativeUsers",
+        searchRoot
+      );
 
     const posts =
-      readNumber(".mod-stats-posts strong") ??
-      readNumber("#utppQE_nativePosts");
+      readNumber(
+        ".mod-stats-posts strong",
+        searchRoot
+      ) ??
+      readNumber(
+        "#utppQE_nativePosts",
+        searchRoot
+      );
 
-    const topics = readNumber(".mod-stats-topics strong");
+    const topics = readNumber(
+      ".mod-stats-topics strong",
+      searchRoot
+    );
+
+    return {
+      users,
+      posts,
+      topics
+    };
+  }
+
+  function displayStatistics(statistics) {
+    const { users, posts, topics } = statistics;
 
     writeNumber("#utppQE_totalUsers", users);
     writeNumber("#utppQE_totalPosts", posts);
     writeNumber("#utppQE_totalTopics", topics);
 
-    const memberNumber = document.querySelector("#utppQE_memberNumber");
+    const memberNumber = document.querySelector(
+      "#utppQE_memberNumber"
+    );
 
     if (memberNumber && Number.isFinite(users)) {
-      memberNumber.textContent = String(users).padStart(4, "0");
+      memberNumber.textContent =
+        String(users).padStart(4, "0");
     }
 
     return Number.isFinite(topics);
   }
 
-  function hydrateStatisticsWhenAvailable() {
-    let attempts = 0;
+  async function fetchStatisticsFromRawIndex() {
+    try {
+      const response = await fetch("/", {
+        credentials: "same-origin",
+        cache: "no-store"
+      });
 
-    const hydrate = function () {
-      attempts += 1;
-
-      const topicsFound = hydrateStatistics();
-
-      if (!topicsFound && attempts < 40) {
-        window.setTimeout(hydrate, 250);
+      if (!response.ok) {
+        return null;
       }
-    };
 
-    hydrate();
+      const html = await response.text();
+
+      const rawDocument =
+        new DOMParser().parseFromString(
+          html,
+          "text/html"
+        );
+
+      return getStatistics(rawDocument);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  async function hydrateStatisticsWhenAvailable() {
+    for (let attempt = 0; attempt < 20; attempt += 1) {
+      const currentStatistics =
+        getStatistics(document);
+
+      if (displayStatistics(currentStatistics)) {
+        return;
+      }
+
+      if (attempt === 0 || attempt === 10) {
+        const fetchedStatistics =
+          await fetchStatisticsFromRawIndex();
+
+        if (
+          fetchedStatistics &&
+          displayStatistics(fetchedStatistics)
+        ) {
+          return;
+        }
+      }
+
+      await new Promise(function (resolve) {
+        window.setTimeout(resolve, 500);
+      });
+    }
   }
 
   function isProfileLink(link) {
     try {
-      return /^\/u\d+\/?$/.test(
-        new URL(link.href, location.origin).pathname
+      const url = new URL(
+        link.href,
+        location.origin
       );
+
+      return /^\/u\d+\/?$/.test(url.pathname);
     } catch (error) {
       return false;
     }
   }
 
   function simplifyNewestUser() {
-    const container = document.querySelector("#newest_user");
+    const container = document.querySelector(
+      "#newest_user"
+    );
 
     if (!container) {
       return;
     }
 
-    const profileLink = Array.from(
-      container.querySelectorAll("a[href]")
-    ).find(isProfileLink);
+    const profileLink = Array
+      .from(container.querySelectorAll("a[href]"))
+      .find(isProfileLink);
 
     if (profileLink) {
       container.replaceChildren(profileLink);
     }
   }
 
-  function simplifyProfileList(selector, emptyMessage) {
-    const container = document.querySelector(selector);
+  function simplifyProfileList(
+    selector,
+    emptyMessage
+  ) {
+    const container =
+      document.querySelector(selector);
 
     if (!container) {
       return;
     }
 
-    const profileLinks = Array.from(
-      container.querySelectorAll("a[href]")
-    ).filter(isProfileLink);
+    const profileLinks = Array
+      .from(container.querySelectorAll("a[href]"))
+      .filter(isProfileLink);
 
     if (!profileLinks.length) {
       if (!container.textContent.trim()) {
@@ -149,11 +236,14 @@
       return;
     }
 
-    const fragment = document.createDocumentFragment();
+    const fragment =
+      document.createDocumentFragment();
 
     profileLinks.forEach(function (link, index) {
       if (index > 0) {
-        fragment.appendChild(document.createTextNode(", "));
+        fragment.appendChild(
+          document.createTextNode(", ")
+        );
       }
 
       fragment.appendChild(link);
@@ -206,12 +296,19 @@
         card.dataset.utppqeGroup || ""
       );
 
-      const matchingLink = legendLinks.find(function (link) {
-        return normalizeName(link.textContent).includes(expectedName);
-      });
+      const matchingLink =
+        legendLinks.find(function (link) {
+          return normalizeName(
+            link.textContent
+          ).includes(expectedName);
+        });
 
       if (!matchingLink) {
-        card.setAttribute("aria-disabled", "true");
+        card.setAttribute(
+          "aria-disabled",
+          "true"
+        );
+
         return;
       }
 
@@ -219,12 +316,15 @@
       card.removeAttribute("aria-disabled");
 
       const coloredElement =
-        matchingLink.querySelector("[style*='color']") ||
-        matchingLink;
+        matchingLink.querySelector(
+          "[style*='color']"
+        ) || matchingLink;
 
       const groupColor =
         coloredElement.style.color ||
-        window.getComputedStyle(coloredElement).color;
+        window
+          .getComputedStyle(coloredElement)
+          .color;
 
       if (groupColor) {
         card.style.setProperty(
@@ -250,12 +350,13 @@
       return;
     }
 
-    const formatter = new Intl.DateTimeFormat("en-US", {
-      timeZone: "America/New_York",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true
-    });
+    const formatter =
+      new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/New_York",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+      });
 
     const update = function () {
       const philadelphiaTime = formatter
@@ -265,25 +366,70 @@
 
       if (metaTime) {
         metaTime.textContent =
-          "Philadelphie, " + philadelphiaTime;
+          "Philadelphie, " +
+          philadelphiaTime;
       }
 
       if (visualTime) {
-        visualTime.textContent = philadelphiaTime.replace(
-          /\s[AP]M$/,
-          ""
-        );
+        visualTime.textContent =
+          philadelphiaTime.replace(
+            /\s[AP]M$/,
+            ""
+          );
       }
     };
 
     update();
-    window.setInterval(update, 60000);
+
+    window.setInterval(
+      update,
+      60000
+    );
+  }
+
+  function secureCityImage() {
+    const image = document.querySelector(
+      ".utppQE_cityVisual > img"
+    );
+
+    if (!image) {
+      return;
+    }
+
+    const fallback =
+      "https://placehold.co/520x260/5b2b20/d8cbc4?text=Philadelphia";
+
+    const useFallback = function () {
+      if (image.src === fallback) {
+        return;
+      }
+
+      image.src = fallback;
+    };
+
+    image.addEventListener(
+      "error",
+      useFallback,
+      { once: true }
+    );
+
+    if (
+      image.complete &&
+      image.naturalWidth === 0
+    ) {
+      useFallback();
+    }
   }
 
   onReady(function () {
-    const qeel = document.querySelector(".utppQE_qeel");
+    const qeel = document.querySelector(
+      ".utppQE_qeel"
+    );
 
-    if (!qeel || qeel.dataset.utppqeReady === "true") {
+    if (
+      !qeel ||
+      qeel.dataset.utppqeReady === "true"
+    ) {
       return;
     }
 
@@ -294,6 +440,7 @@
     simplifyForumactifContent();
     connectGroupLinks();
     updatePhiladelphiaTime();
+    secureCityImage();
     refreshLucide();
   });
 })();
