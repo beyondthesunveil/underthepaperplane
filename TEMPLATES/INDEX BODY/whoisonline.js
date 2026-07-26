@@ -84,6 +84,96 @@
     if (memberNumber && Number.isFinite(users)) {
       memberNumber.textContent = String(users).padStart(4, "0");
     }
+
+    return Number.isFinite(topics);
+  }
+
+  function hydrateStatisticsWhenAvailable() {
+    let attempts = 0;
+
+    const hydrate = function () {
+      attempts += 1;
+
+      const topicsFound = hydrateStatistics();
+
+      if (!topicsFound && attempts < 40) {
+        window.setTimeout(hydrate, 250);
+      }
+    };
+
+    hydrate();
+  }
+
+  function isProfileLink(link) {
+    try {
+      return /^\/u\d+\/?$/.test(
+        new URL(link.href, location.origin).pathname
+      );
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function simplifyNewestUser() {
+    const container = document.querySelector("#newest_user");
+
+    if (!container) {
+      return;
+    }
+
+    const profileLink = Array.from(
+      container.querySelectorAll("a[href]")
+    ).find(isProfileLink);
+
+    if (profileLink) {
+      container.replaceChildren(profileLink);
+    }
+  }
+
+  function simplifyProfileList(selector, emptyMessage) {
+    const container = document.querySelector(selector);
+
+    if (!container) {
+      return;
+    }
+
+    const profileLinks = Array.from(
+      container.querySelectorAll("a[href]")
+    ).filter(isProfileLink);
+
+    if (!profileLinks.length) {
+      if (!container.textContent.trim()) {
+        container.textContent = emptyMessage;
+      }
+
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+
+    profileLinks.forEach(function (link, index) {
+      if (index > 0) {
+        fragment.appendChild(document.createTextNode(", "));
+      }
+
+      fragment.appendChild(link);
+    });
+
+    container.replaceChildren(fragment);
+  }
+
+  function simplifyForumactifContent() {
+    simplifyNewestUser();
+
+    simplifyProfileList(
+      "#logged_in_user_list",
+      "La ville semble déserte."
+    );
+
+    simplifyProfileList(
+      ".utppQE_recentNames",
+      "Aucun passage enregistré récemment."
+    );
   }
 
   function normalizeName(value) {
@@ -95,17 +185,26 @@
   }
 
   function connectGroupLinks() {
-    const source = document.querySelector("#utppQE_groupLegendSource");
+    const source = document.querySelector(
+      "#utppQE_groupLegendSource"
+    );
 
     if (!source) {
       return;
     }
 
-    const legendLinks = Array.from(source.querySelectorAll("a[href]"));
-    const cards = document.querySelectorAll("[data-utppqe-group]");
+    const legendLinks = Array.from(
+      source.querySelectorAll("a[href]")
+    );
+
+    const cards = document.querySelectorAll(
+      "[data-utppqe-group]"
+    );
 
     cards.forEach(function (card) {
-      const expectedName = normalizeName(card.dataset.utppqeGroup || "");
+      const expectedName = normalizeName(
+        card.dataset.utppqeGroup || ""
+      );
 
       const matchingLink = legendLinks.find(function (link) {
         return normalizeName(link.textContent).includes(expectedName);
@@ -120,14 +219,18 @@
       card.removeAttribute("aria-disabled");
 
       const coloredElement =
-        matchingLink.querySelector("[style*='color']") || matchingLink;
+        matchingLink.querySelector("[style*='color']") ||
+        matchingLink;
 
       const groupColor =
         coloredElement.style.color ||
         window.getComputedStyle(coloredElement).color;
 
       if (groupColor) {
-        card.style.setProperty("--utppQE_groupColor", groupColor);
+        card.style.setProperty(
+          "--utppQE_groupColor",
+          groupColor
+        );
       }
     });
 
@@ -135,8 +238,13 @@
   }
 
   function updatePhiladelphiaTime() {
-    const metaTime = document.querySelector("#utppQE_phillyTime");
-    const visualTime = document.querySelector("#utppQE_visualTime");
+    const metaTime = document.querySelector(
+      "#utppQE_phillyTime"
+    );
+
+    const visualTime = document.querySelector(
+      "#utppQE_visualTime"
+    );
 
     if (!metaTime && !visualTime) {
       return;
@@ -156,11 +264,15 @@
         .toUpperCase();
 
       if (metaTime) {
-        metaTime.textContent = "Philadelphie, " + philadelphiaTime;
+        metaTime.textContent =
+          "Philadelphie, " + philadelphiaTime;
       }
 
       if (visualTime) {
-        visualTime.textContent = philadelphiaTime.replace(/\s[AP]M$/, "");
+        visualTime.textContent = philadelphiaTime.replace(
+          /\s[AP]M$/,
+          ""
+        );
       }
     };
 
@@ -178,7 +290,8 @@
     qeel.dataset.utppqeReady = "true";
 
     moveActions();
-    hydrateStatistics();
+    hydrateStatisticsWhenAvailable();
+    simplifyForumactifContent();
     connectGroupLinks();
     updatePhiladelphiaTime();
     refreshLucide();
