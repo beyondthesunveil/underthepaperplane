@@ -47,7 +47,11 @@
   justify-content: space-between;
   gap: 20px;
   background:
-    linear-gradient(90deg, rgba(157, 64, 39, 0.13), transparent 55%),
+    linear-gradient(
+      90deg,
+      rgba(157, 64, 39, 0.13),
+      transparent 55%
+    ),
     #171717;
   border-top: 1px solid #52342c;
   border-bottom: 1px solid var(--utppQE_line);
@@ -108,7 +112,7 @@
 }
 
 /* ==========================================================================
-   COMPOSITION HORIZONTALE
+   COMPOSITION
    ========================================================================== */
 
 .utppQE_layout {
@@ -227,7 +231,10 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(transparent 45%, rgba(17, 17, 17, 0.9));
+  background: linear-gradient(
+    transparent 45%,
+    rgba(17, 17, 17, 0.9)
+  );
   pointer-events: none;
   opacity: 0;
   transition: opacity 200ms ease;
@@ -333,7 +340,9 @@
   overflow: auto;
   color: var(--utppQE_muted);
   font: italic 7px/1.55 Arial, sans-serif;
-  scrollbar-color: var(--utppQE_rust) var(--utppQE_panelAlt);
+  scrollbar-color:
+    var(--utppQE_rust)
+    var(--utppQE_panelAlt);
   scrollbar-width: thin;
 }
 
@@ -348,7 +357,7 @@
 }
 
 /* ==========================================================================
-   BARRE D’ACTIONS DÉPLACÉE DEPUIS INDEX_BOX
+   BARRE D’ACTIONS
    ========================================================================== */
 
 .utppQE_actionSource {
@@ -367,16 +376,16 @@
   margin-bottom: 0;
 }
 
-.utppQE_actionTarget .utppQE_actionSource {
+.utppQE_qeel .utppQE_actionTarget .utppQE_actionSource {
   width: 100%;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
 }
 
-.utppQE_actionLinks {
-  display: flex;
+.utppQE_qeel .utppQE_actionLinks {
+  display: flex !important;
   align-items: center;
   gap: 6px;
 }
@@ -385,14 +394,14 @@
   margin-left: auto;
 }
 
-.utppQE_actionLinks a {
+.utppQE_qeel .utppQE_actionLinks a {
   width: 34px;
   height: 34px;
   position: relative;
-  display: grid;
+  display: grid !important;
   place-items: center;
-  color: #c4b488;
-  background: #242424;
+  color: #c4b488 !important;
+  background: #242424 !important;
   border: 1px solid #2d2d2d;
   border-radius: 9px;
   transition:
@@ -402,10 +411,10 @@
     translate 180ms ease;
 }
 
-.utppQE_actionLinks a:hover,
-.utppQE_actionLinks a:focus-visible {
-  color: var(--utppQE_ivory);
-  background: var(--utppQE_rustDark);
+.utppQE_qeel .utppQE_actionLinks a:hover,
+.utppQE_qeel .utppQE_actionLinks a:focus-visible {
+  color: var(--utppQE_ivory) !important;
+  background: var(--utppQE_rustDark) !important;
   border-color: rgba(201, 133, 112, 0.35);
   translate: 0 -2px;
   outline: none;
@@ -457,7 +466,7 @@
 }
 
 /* ==========================================================================
-   CENTRE — VILLE ET GROUPES
+   CENTRE
    ========================================================================== */
 
 .utppQE_center {
@@ -466,8 +475,17 @@
 }
 
 .utppQE_cityVisual {
+  height: 174px !important;
   min-height: 174px;
+  flex: 0 0 174px !important;
   position: relative;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(157, 64, 39, 0.3),
+      transparent 65%
+    ),
+    #241b19;
   overflow: hidden;
   isolation: isolate;
 }
@@ -478,15 +496,24 @@
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(90deg, rgba(17, 17, 17, 0.45), transparent 50%),
-    linear-gradient(transparent 43%, rgba(17, 17, 17, 0.88));
+    linear-gradient(
+      90deg,
+      rgba(17, 17, 17, 0.45),
+      transparent 50%
+    ),
+    linear-gradient(
+      transparent 43%,
+      rgba(17, 17, 17, 0.88)
+    );
 }
 
-.utppQE_cityVisual img {
+.utppQE_qeel .utppQE_cityVisual > img {
   width: 100%;
   height: 174px;
-  display: block;
+  display: block !important;
   object-fit: cover;
+  visibility: visible !important;
+  opacity: 1 !important;
   filter: grayscale(0.45) sepia(0.16) contrast(1.08);
   transition:
     filter 500ms ease,
@@ -532,21 +559,23 @@
   letter-spacing: 0.12em;
 }
 
-.utppQE_groups {
+.utppQE_qeel .utppQE_groups {
   margin-top: 8px;
-  display: grid;
+  display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 6px;
 }
 
-.utppQE_group {
+.utppQE_qeel .utppQE_group {
   min-height: 38px;
   padding: 7px 9px;
   position: relative;
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   justify-content: center;
-  background: var(--utppQE_panelAlt);
+  color: inherit !important;
+  background: var(--utppQE_panelAlt) !important;
+  text-decoration: none !important;
   overflow: hidden;
   isolation: isolate;
   cursor: pointer;
@@ -564,15 +593,17 @@
   position: absolute;
   inset: 0 auto 0 0;
   z-index: -1;
-  background: var(--utppQE_groupColor, var(--utppQE_rust));
+  background:
+    var(--utppQE_groupColor, var(--utppQE_rust));
   scale: 1 0;
   transform-origin: bottom;
-  transition: scale 360ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    scale 360ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.utppQE_group:hover,
-.utppQE_group:focus-visible {
-  background: #272321;
+.utppQE_qeel .utppQE_group:hover,
+.utppQE_qeel .utppQE_group:focus-visible {
+  background: #272321 !important;
 }
 
 .utppQE_group:hover::before,
@@ -725,7 +756,9 @@
   overflow: auto;
   color: var(--utppQE_muted);
   font: italic 7px/1.55 Arial, sans-serif;
-  scrollbar-color: var(--utppQE_rust) var(--utppQE_panelAlt);
+  scrollbar-color:
+    var(--utppQE_rust)
+    var(--utppQE_panelAlt);
   scrollbar-width: thin;
 }
 
