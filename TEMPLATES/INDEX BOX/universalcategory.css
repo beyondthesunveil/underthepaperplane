@@ -249,23 +249,26 @@ html[data-utppuc-layout="classic"] {
   font-size: 6px;
 }
 
-  .utppUC_content {
-    min-width: 0;
-    margin-top: 11px;
-    position: relative;
-    display: grid;
-    grid-template-columns:
-      minmax(220px, .72fr)
-      minmax(225px, 1fr)
-      auto
-      auto;
-    align-items: center;
-    gap: 20px;
-  }
+html[data-utppuc-layout="classic"] .utppUC_content {
+  min-width: 0;
+  margin-top: 11px;
+  position: relative;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 340px)
+    minmax(0, 1fr)    
+    105px
+    235px;
+  grid-template-areas:
+    "identity description stats lastpost";
+  align-items: center;
+  gap: 20px;
+}
 
-  .utppUC_identity {
-    min-width: 0;
-  }
+.utppUC_identity {
+  min-width: 0;
+  grid-area: identity;
+}
 
   .utppUC_identity > small {
   display: block;
@@ -294,12 +297,13 @@ html[data-utppuc-layout="classic"] {
     color: var(--utppUC_rustSoft);
   }
 
-  .utppUC_description {
+.utppUC_description {
   padding-right: 10px;
   color: var(--utppUC_text);
   font: italic 10px / 1.5 Arial, sans-serif;
+  grid-area: description;
   text-align: justify;
-  }
+}
 
   .utppUC_subforums {
     margin-top: 10px;
@@ -336,6 +340,7 @@ html[data-utppuc-layout="classic"] {
 
   .utppUC_lastPost {
     min-width: 0;
+    grid-area: lastpost;
     padding-left: 18px;
     display: grid;
     grid-template-columns: 42px minmax(0, 1fr) 14px;
@@ -394,7 +399,7 @@ html[data-utppuc-layout="classic"] {
   }
 
   .utppUC_stats {
-    min-width: 73px;
+    grid-area: stats;
     padding-left: 15px;
     display: flex;
     flex-direction: column;
@@ -417,6 +422,14 @@ html[data-utppuc-layout="classic"] {
     color: var(--utppUC_rustSoft);
     font: 700 8px Arial, sans-serif;
   }
+
+html[data-utppuc-layout="classic"] .utppUC_identity,
+html[data-utppuc-layout="classic"] .utppUC_description,
+html[data-utppuc-layout="classic"] .utppUC_stats,
+html[data-utppuc-layout="classic"] .utppUC_lastpost {
+  min-width: 0;
+  width: 100%;
+}
 
 /* ===================== RENOMMAGE INDIVIDUEL ===================== */
 
