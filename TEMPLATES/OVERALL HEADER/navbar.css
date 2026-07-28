@@ -655,29 +655,22 @@ html:has(#fa-pins-panel.active)
 
 .utpp-navigMod > a[href="#top"]::before {
   content: "";
-
   width: 1px;
   height: 24px;
-
   position: absolute;
   top: 6px;
   left: -9px;
-
   background: var(--utppNav-line);
-
   pointer-events: none;
 }
 
 .utpp-navigMod > #switcheroo {
   min-width: 0;
-  margin-left: 10px;
-  padding-left: 10px;
-
+  margin-left: 5px;
+  padding-left: 15px;
   position: relative;
-
   display: flex;
   align-items: center;
-
   border-left: 1px solid var(--utppNav-line);
 }
 
