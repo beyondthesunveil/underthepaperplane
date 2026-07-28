@@ -241,12 +241,11 @@ html[data-utppuc-layout="classic"] {
     flex: 0 0 16px;
   }
 
-.utppUC_statusText span {
+.utppUC_statusText {
   font-size: 0;
 }
 
-.utppUC_statusText span::before {
-  content: "Programme " counter(utppUC_forumNumber, decimal-leading-zero);
+.utppUC_statusText::before {
   font-size: 6px;
 }
 
@@ -416,102 +415,9 @@ html[data-utppuc-layout="classic"] {
     font: 700 8px Arial, sans-serif;
   }
 
-  @media (max-width: 1190px) {
-    .utppUC_category {
-      width: 100%;
-    }
-  }
+/* ===================== RENOMMAGE INDIVIDUEL ===================== */
 
-  @media (max-width: 760px) {
-    .utppUC_header {
-      grid-template-columns: 78px minmax(0, 1fr);
-    }
-
-    .utppUC_headerMeta {
-      display: none;
-    }
-  }
-
-  @media (max-width: 780px) {
-    .utppUC_content {
-      grid-template-columns:
-        minmax(210px, .8fr)
-        minmax(0, 1.2fr)
-        auto;
-    }
-
-    .utppUC_lastPost {
-      grid-column: 1 / 3;
-      padding: 11px 0 0;
-      border-top: 1px solid var(--utppUC_line);
-      border-left: 0;
-    }
-
-    .utppUC_stats {
-      grid-column: 3;
-      grid-row: 2;
-    }
-  }
-
-  @media (max-width: 560px) {
-    .utppUC_category {
-      padding: 8px;
-    }
-
-    .utppUC_header {
-      padding: 16px;
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-
-    .utppUC_headerSide {
-      padding: 0 0 9px;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      border-right: 0;
-      border-bottom: 1px solid #4a332d;
-    }
-
-    .utppUC_headerSide i {
-      margin: 0;
-    }
-
-    .utppUC_headerCopy > div {
-      white-space: normal;
-    }
-
-    .utppUC_headerCopy .hierarchy,
-    .utppUC_headerCopy h2,
-    .utppUC_headerCopy h2.hierarchy {
-      font-size: 25px;
-      white-space: normal;
-    }
-
-    .utppUC_forum {
-      padding: 12px;
-    }
-
-    .utppUC_content {
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    .utppUC_lastPost,
-    .utppUC_stats {
-      grid-column: 1;
-      grid-row: auto;
-    }
-
-    .utppUC_lastPost {
-      padding-top: 12px;
-    }
-
-    .utppUC_stats {
-      padding: 10px 0 0;
-      flex-direction: row;
-      border-top: 1px solid var(--utppUC_line);
-      border-left: 0;
-    }
-  }
+.utppUC_forum:has(a[href^="/f1-"])
+.utppUC_statusText::before {
+  content: "Archives fondamentales";
 }
