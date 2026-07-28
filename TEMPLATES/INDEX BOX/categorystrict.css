@@ -161,11 +161,11 @@ html[data-utppuc-layout="worked"] .utppUC_statusIcon {
   top: 11px;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_status span {
+html[data-utppuc-layout="worked"] .utppUC_statusText span {
   font-size: 0;
 }
 
-html[data-utppuc-layout="worked"] .utppUC_status span::before {
+html[data-utppuc-layout="worked"] .utppUC_statusText span::before {
   content: "Programme " counter(utppUC_forumNumber, decimal-leading-zero);
   font-size: 6px;
 }
