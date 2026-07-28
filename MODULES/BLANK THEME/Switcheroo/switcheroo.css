@@ -48,8 +48,9 @@
 
 .switcheroo__squircle.active,
 .switcheroo__squircle.active img {
-  outline-color: var(--th-cl-font);
-  cursor: default;
+  outline-color: var(--utppNav-rust);
+  cursor: default; 
+  margin: 0 10px 0 5px;
 }
 
 /* ----- AJOUTER UN COMPTE ----- */
