@@ -241,6 +241,15 @@ html[data-utppuc-layout="classic"] {
     flex: 0 0 16px;
   }
 
+.utppUC_statusText span {
+  font-size: 0;
+}
+
+.utppUC_statusText span::before {
+  content: "Programme " counter(utppUC_forumNumber, decimal-leading-zero);
+  font-size: 6px;
+}
+
   .utppUC_content {
     min-width: 0;
     margin-top: 11px;
