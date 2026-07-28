@@ -268,12 +268,15 @@ html[data-utppuc-layout="classic"] {
   }
 
   .utppUC_identity > small {
-    display: block;
-    color: var(--utppUC_muted);
-    font: italic 6px Arial, sans-serif;
-    letter-spacing: .08em;
-    text-transform: uppercase;
+  display: block;
+  font-size:0;
   }
+.utppUC_identity > small::before {
+  color: var(--utppUC_muted);
+  font: italic 6px Arial, sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
 
   .utppUC_title {
     width: fit-content;
@@ -428,6 +431,10 @@ html[data-utppuc-layout="classic"] {
 .utppUC_forum:has(a[href^="/f2-"])
 .utppUC_statusText::before {
   content: "center city";
+}
+.utppUC_forum:has(a[href^="/f2-"])
+.utppUC_identity > small::before {
+  content: "every light hides a confession no one intends to make";
 }
 .utppUC_forum:has(a[href^="/f4-"])
 .utppUC_statusText::before {
