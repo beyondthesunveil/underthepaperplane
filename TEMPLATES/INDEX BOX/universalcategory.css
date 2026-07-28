@@ -417,7 +417,39 @@ html[data-utppuc-layout="classic"] {
 
 /* ===================== RENOMMAGE INDIVIDUEL ===================== */
 
+  /* ADMINISTRATION */
 .utppUC_forum:has(a[href^="/f1-"])
 .utppUC_statusText::before {
   content: "Archives fondamentales";
+}
+
+  /* PHILADELPHIE */
+
+.utppUC_forum:has(a[href^="/f2-"])
+.utppUC_statusText::before {
+  content: "center city";
+}
+.utppUC_forum:has(a[href^="/f4-"])
+.utppUC_statusText::before {
+  content: "north philadelphia";
+}
+  .utppUC_forum:has(a[href^="/f6-"])
+.utppUC_statusText::before {
+  content: "northwest philadelphia";
+}
+  .utppUC_forum:has(a[href^="/f3-"])
+.utppUC_statusText::before {
+  content: "the northeast";
+}
+  .utppUC_forum:has(a[href^="/f5-"])
+.utppUC_statusText::before {
+  content: "south philadelphia";
+}
+  .utppUC_forum:has(a[href^="/f65-"])
+.utppUC_statusText::before {
+  content: "west philadelphia";
+}
+  .utppUC_forum:has(a[href^="/f63-"])
+.utppUC_statusText::before {
+  content: "southwest philadelphia";
 }
