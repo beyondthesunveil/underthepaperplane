@@ -696,6 +696,7 @@ html:has(#fa-pins-panel.active)
 .switcheroo__squircle {
   position: relative;
   flex: 0 0 31px;
+  margin: 0 4px;
   display: grid;
   place-items: center;
   background: var(--utppNav-panel);
@@ -723,9 +724,8 @@ html:has(#fa-pins-panel.active)
 .switcheroo__avatar img {
   width: 100%;
   height: 100%;
-
+  border-radius:0;
   display: block;
-
   object-fit: cover;
 }
 
@@ -733,7 +733,6 @@ html:has(#fa-pins-panel.active)
 #switcheroo
 .switcheroo__avatar img {
   filter: grayscale(1) contrast(1.08);
-
   transition:
     filter 240ms ease,
     transform 340ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -743,9 +742,7 @@ html:has(#fa-pins-panel.active)
 #switcheroo
 .switcheroo__squircle:hover
 .switcheroo__avatar img {
-  filter: grayscale(0);
-
-  transform: scale(1.05);
+  border-radius:10px;
 }
 
 
