@@ -279,15 +279,32 @@ html[data-utppuc-layout="classic"] {
     max-width: 100%;
     margin-top: 4px;
     display: block;
-    color: var(--utppUC_ivory);
+    /* color: var(--utppUC_ivory); */
     font: 700 22px/1.02 "Playfair Display SC", Georgia, serif;
     text-transform: uppercase;
     transition: color 180ms ease;
+
+    color: var(--utppUC_ivory);
+
+  background-image: linear-gradient(
+    to left,
+    var(--utppUC_rustSoft) 0 50%,
+    var(--utppUC_ivory) 50% 100%
+  );
+  background-size: 200% 100%;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  transition: background-position 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .utppUC_title:hover,
   .utppUC_title:focus-visible {
-    color: var(--utppUC_rustSoft);
+  background-position: 100% 0;
   }
 
   .utppUC_description {
@@ -430,7 +447,7 @@ html[data-utppuc-layout="classic"] {
 }
 .utppUC_forum:has(a[href^="/f2-"])
 .utppUC_identity > small::before {
-  content: "every light hides a confession no one intends to make";
+  content: "where the skyline watches like a patient god";
 }
 .utppUC_forum:has(a[href^="/f4-"])
 .utppUC_statusText::before {
