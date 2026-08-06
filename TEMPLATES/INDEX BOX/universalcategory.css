@@ -312,6 +312,8 @@ html[data-utppuc-layout="classic"] {
   color: var(--utppUC_text);
   font: italic 10px / 1.5 Arial, sans-serif;
   text-align: justify;
+  overflow:auto;
+  height:55px;
   }
 
   .utppUC_subforums {
@@ -417,7 +419,7 @@ html[data-utppuc-layout="classic"] {
 
   .utppUC_stats span {
     color: var(--utppUC_muted);
-    font: 700 5px Arial, sans-serif;
+    font: 700 8px Arial, sans-serif;
     letter-spacing: .07em;
     text-transform: uppercase;
     white-space: nowrap;
@@ -428,7 +430,7 @@ html[data-utppuc-layout="classic"] {
     margin-right: 4px;
     display: inline-block;
     color: var(--utppUC_rustSoft);
-    font: 700 8px Arial, sans-serif;
+    font: 700 10px Arial, sans-serif;
   }
 
 /* ===================== RENOMMAGE INDIVIDUEL ===================== */
