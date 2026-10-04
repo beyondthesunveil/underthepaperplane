@@ -1,3 +1,13 @@
+/* ==========================================================================
+   UTPP — HEADER NAVBAR V3
+   Navigation regroupée + recherche + control center + Switcheroo
+   ========================================================================== */
+
+
+/* ==========================================================================
+   01. RESET LOCAL
+   ========================================================================== */
+
 .utpp-headerNavbar,
 .utpp-headerNavbar *,
 .utpp-headerNavbar *::before,
@@ -12,38 +22,35 @@
   list-style: none;
 }
 
-.utpp-headerNavbar button {
-  font: inherit;
-}
+
+/* ==========================================================================
+   02. NAVBAR PRINCIPALE
+   ========================================================================== */
 
 .utpp-headerNavbar {
   --utppNav-bg: #111111;
   --utppNav-panel: #181818;
   --utppNav-panelHover: #211f1e;
-
   --utppNav-line: #303030;
   --utppNav-lineRust: #49342e;
-
   --utppNav-rust: #8b3d25;
   --utppNav-rustLight: #b35437;
   --utppNav-rustDark: #572619;
-
   --utppNav-ivory: #eee9e5;
   --utppNav-muted: #aaa29d;
   --utppNav-soft: #756f6b;
-
   --utppNav-size: 38px;
   --utppNav-gap: 6px;
-
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  z-index: 990;
 
   width: 98%;
   height: 50px;
 
   padding: 0 20px;
+
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  z-index: 990;
 
   display: flex;
   align-items: center;
@@ -51,8 +58,6 @@
   gap: 10px;
 
   overflow: visible;
-
-  color: var(--th-cl-font);
 
   background: var(--th-cl-bord);
 
@@ -64,6 +69,11 @@
   transform: translateX(-50%);
 }
 
+
+/* ==========================================================================
+   03. MANIFEST
+   ========================================================================== */
+
 .utpp-headerNavbar > #manifest-toggle {
   width: 35px !important;
   height: 35px !important;
@@ -71,14 +81,15 @@
   min-width: 35px !important;
   min-height: 35px !important;
 
+  margin: 0 !important;
+  padding: 0 !important;
+
   flex: 0 0 35px;
 
   position: relative !important;
 
   display: inline-grid !important;
   place-items: center !important;
-
-  padding: 0 !important;
 
   color: var(--th-cl-font) !important;
   background: var(--th-cl-cardAlt) !important;
@@ -90,6 +101,7 @@
   box-shadow: none !important;
 
   cursor: pointer;
+
   appearance: none;
 
   transition:
@@ -110,6 +122,11 @@
   stroke-width: 1.8;
 }
 
+
+/* ==========================================================================
+   04. NAVIGATION
+   ========================================================================== */
+
 .utpp-navigBar {
   min-width: 0;
 
@@ -118,31 +135,24 @@
   display: flex;
   align-items: center;
 
-  gap: 9px;
-
   overflow: visible !important;
 }
 
-.utpp-navigBar > ul {
-  width: auto !important;
-  min-width: 0 !important;
+.utpp-navPrimary {
+  min-width: 0;
 
   display: flex;
   align-items: center;
 
-  flex-wrap: nowrap;
-
-  gap: 7px;
+  gap: 8px;
 
   overflow: visible;
 }
 
-.utpp-navigBar > ul > li {
-  flex: 0 0 auto;
 
-  display: flex;
-  align-items: center;
-}
+/* ==========================================================================
+   05. PROFIL
+   ========================================================================== */
 
 .utpp-navProfile {
   flex: 0 0 auto;
@@ -151,6 +161,8 @@
   align-items: center;
 
   gap: 7px;
+
+  margin-right: 5px;
 
   color: var(--th-cl-font);
 
@@ -215,17 +227,18 @@
   color: var(--th-cl-font);
 }
 
-.utpp-navigBar a.mainmenu img {
-  display: none !important;
-}
 
-.utpp-navigBar a.mainmenu,
-.utpp-navigBar .utpp-contextLink {
-  position: relative;
+/* ==========================================================================
+   06. LIENS PRINCIPAUX
+   ========================================================================== */
 
+.utpp-navPrimary a.mainmenu,
+.utpp-navPrimary .utpp-contextLink {
   max-height: 32px;
 
   padding: 5px 10px;
+
+  position: relative;
 
   display: inline-flex;
   align-items: center;
@@ -233,7 +246,7 @@
 
   color: var(--th-cl-bg);
 
-  background-color: var(--th-cl-acc3);
+  background: var(--th-cl-acc3);
 
   border-radius: 5px;
 
@@ -251,15 +264,20 @@
     background var(--th-trans-fast);
 }
 
-.utpp-navigBar a.mainmenu:hover,
-.utpp-navigBar .utpp-contextLink:hover {
+.utpp-navPrimary a.mainmenu img {
+  display: none !important;
+}
+
+.utpp-navPrimary a.mainmenu:hover,
+.utpp-navPrimary .utpp-contextLink:hover,
+.utpp-navPrimary a.mainmenu.utpp-activeLink {
   color: var(--th-cl-acc3);
 
   background: none !important;
 }
 
-.utpp-navigBar a.mainmenu::after,
-.utpp-navigBar .utpp-contextLink::after {
+.utpp-navPrimary a.mainmenu::after,
+.utpp-navPrimary .utpp-contextLink::after {
   content: "";
 
   width: 0;
@@ -278,25 +296,19 @@
   transition: width var(--th-trans-fast);
 }
 
-.utpp-navigBar a.mainmenu:hover::after,
-.utpp-navigBar .utpp-contextLink:hover::after {
+.utpp-navPrimary a.mainmenu:hover::after,
+.utpp-navPrimary a.mainmenu.utpp-activeLink::after,
+.utpp-navPrimary .utpp-contextLink:hover::after {
   width: 100%;
 }
 
-.utpp-navigBar a.mainmenu.utpp-activeLink {
-  color: var(--th-cl-acc3);
 
-  background: none !important;
-}
+/* ==========================================================================
+   07. SUJET ACTUEL
+   ========================================================================== */
 
-.utpp-navigBar a.mainmenu.utpp-activeLink::after {
-  width: 100%;
-}
-
-.utpp-navigBar .utpp-contextLink {
-  max-width: 220px;
-
-  margin-right: 3px;
+.utpp-navPrimary .utpp-contextLink {
+  max-width: 180px;
 
   overflow: hidden;
 
@@ -309,23 +321,17 @@
   text-overflow: ellipsis;
 }
 
-.utpp-navigBar a.mainmenu[href="/calendar"],
-.utpp-navigBar a.mainmenu[href$="/calendar"],
-.utpp-navigBar a.mainmenu[href="/gallery/index.htm"],
-.utpp-navigBar a.mainmenu[href$="/gallery/index.htm"],
-.utpp-navigBar a.mainmenu[href="/images"],
-.utpp-navigBar a.mainmenu[href$="/images"],
-.utpp-navigBar a.mainmenu[href="/discover"],
-.utpp-navigBar a.mainmenu[href$="/discover"],
-.utpp-navigBar a.mainmenu[href="/faq"],
-.utpp-navigBar a.mainmenu[href$="/faq"] {
-  display: none !important;
-}
+
+/* ==========================================================================
+   08. GROUPES NAVIGATION
+   ========================================================================== */
 
 .utpp-navGroup {
   height: 50px;
 
   position: relative;
+
+  flex: 0 0 auto;
 
   display: flex;
   align-items: center;
@@ -336,15 +342,17 @@
 
   padding: 5px 11px;
 
+  position: relative;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
   gap: 6px;
 
-  color: var(--th-cl-font);
+  color: var(--th-cl-bg);
 
-  background: transparent;
+  background: var(--th-cl-acc3);
 
   border: 0;
   border-radius: 5px;
@@ -361,30 +369,61 @@
   white-space: nowrap;
 
   transition:
-    color 180ms ease,
-    background 180ms ease;
+    color var(--th-trans-fast),
+    background var(--th-trans-fast);
+}
+
+.utpp-navGroup-toggle::after {
+  content: "";
+
+  width: 0;
+  height: 2px;
+
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+
+  background: var(--th-grad-chip);
+
+  border-radius: 999px;
+
+  transform: translateX(-50%);
+
+  transition: width var(--th-trans-fast);
 }
 
 .utpp-navGroup-toggle svg {
   width: 12px;
   height: 12px;
 
-  stroke-width: 1.7;
+  stroke-width: 1.8;
 
   transition: transform 220ms ease;
 }
 
 .utpp-navGroup:hover > .utpp-navGroup-toggle,
-.utpp-navGroup.is-open > .utpp-navGroup-toggle {
+.utpp-navGroup.is-open > .utpp-navGroup-toggle,
+.utpp-navGroup.has-active > .utpp-navGroup-toggle {
   color: var(--th-cl-acc3);
 
-  background: rgba(255, 255, 255, .025);
+  background: none;
+}
+
+.utpp-navGroup:hover > .utpp-navGroup-toggle::after,
+.utpp-navGroup.is-open > .utpp-navGroup-toggle::after,
+.utpp-navGroup.has-active > .utpp-navGroup-toggle::after {
+  width: 100%;
 }
 
 .utpp-navGroup:hover > .utpp-navGroup-toggle svg,
 .utpp-navGroup.is-open > .utpp-navGroup-toggle svg {
   transform: rotate(180deg);
 }
+
+
+/* ==========================================================================
+   09. PONT INVISIBLE NAV
+   ========================================================================== */
 
 .utpp-navGroup::after {
   content: "";
@@ -397,15 +436,19 @@
   left: 0;
 }
 
+
+/* ==========================================================================
+   10. PANNEAU NAV
+   ========================================================================== */
+
 .utpp-navGroup-panel {
   width: 255px;
 
-  padding: 9px;
+  padding: 10px;
 
   position: absolute;
   top: calc(100% + 8px);
   left: 0;
-
   z-index: 1100;
 
   background: var(--utppNav-panel);
@@ -424,7 +467,7 @@
   transition:
     opacity 160ms ease,
     transform 220ms cubic-bezier(.16, 1, .3, 1),
-    visibility 0s linear 250ms;
+    visibility 0s linear 240ms;
 }
 
 .utpp-navGroup-panel::before {
@@ -435,7 +478,7 @@
 
   position: absolute;
   top: -1px;
-  left: 13px;
+  left: 12px;
 
   background: var(--th-grad-chip);
 }
@@ -452,13 +495,18 @@
   transition-delay: 0s;
 }
 
+
+/* ==========================================================================
+   11. LIENS DANS LES SOUS-MENUS
+   ========================================================================== */
+
 .utpp-navGroup-panel a.mainmenu {
   width: 100%;
 
-  min-height: 39px;
+  min-height: 40px;
   max-height: none;
 
-  padding: 8px 10px !important;
+  padding: 9px 10px !important;
 
   display: flex !important;
   align-items: center;
@@ -471,9 +519,9 @@
   border: 0 !important;
   border-radius: 0 !important;
 
-  font: 700 8px/1 var(--fst3) !important;
+  font: 700 8px/1.2 var(--fst3) !important;
 
-  letter-spacing: .65px;
+  letter-spacing: .6px;
 
   text-align: left;
 
@@ -496,6 +544,282 @@
   background: rgba(139, 61, 37, .10) !important;
 }
 
+
+/* ==========================================================================
+   12. RECHERCHE — OUTIL SÉPARÉ
+   ========================================================================== */
+
+.utpp-searchTool {
+  height: 50px;
+
+  position: relative;
+
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+
+  margin-left: auto;
+}
+
+#utpp-search-toggle {
+  width: 35px !important;
+  height: 35px !important;
+
+  min-width: 35px !important;
+  min-height: 35px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  position: relative;
+
+  display: inline-grid;
+  place-items: center;
+
+  color: var(--th-cl-acc3);
+
+  background: transparent;
+
+  border: 1px solid var(--th-cl-acc3);
+  border-radius: 5px;
+
+  outline: none;
+
+  cursor: pointer;
+
+  transition:
+    color var(--th-trans-fast),
+    background var(--th-trans-fast),
+    transform var(--th-trans-fast);
+}
+
+#utpp-search-toggle:hover,
+.utpp-searchTool.is-open > #utpp-search-toggle {
+  color: var(--th-cl-bg);
+
+  background: var(--th-cl-acc3);
+
+  transform: translateY(-1px);
+}
+
+#utpp-search-toggle svg {
+  width: 16px;
+  height: 16px;
+
+  stroke-width: 1.8;
+}
+
+.utpp-searchTool::after {
+  content: "";
+
+  width: 280px;
+  height: 16px;
+
+  position: absolute;
+  top: 100%;
+  right: 0;
+}
+
+
+/* ==========================================================================
+   13. PANNEAU RECHERCHE
+   ========================================================================== */
+
+.utpp-searchPanel {
+  width: 280px;
+
+  padding: 13px;
+
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 1120;
+
+  background: var(--utppNav-panel);
+
+  border: 1px solid var(--utppNav-line);
+
+  box-shadow: 0 20px 45px rgba(0, 0, 0, .40);
+
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transform: translateY(-5px);
+
+  transition:
+    opacity 160ms ease,
+    transform 220ms cubic-bezier(.16, 1, .3, 1),
+    visibility 0s linear 240ms;
+}
+
+.utpp-searchTool:hover > .utpp-searchPanel,
+.utpp-searchTool.is-open > .utpp-searchPanel {
+  opacity: 1;
+  visibility: visible;
+
+  pointer-events: auto;
+
+  transform: translateY(0);
+
+  transition-delay: 0s;
+}
+
+.utpp-searchPanel-head {
+  margin-bottom: 11px;
+  padding: 2px 3px 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  border-bottom: 1px solid var(--utppNav-line);
+}
+
+.utpp-searchPanel-head strong {
+  color: var(--utppNav-ivory);
+
+  font: 700 8px/1 var(--fst3);
+
+  letter-spacing: .12em;
+}
+
+.utpp-searchPanel-head span {
+  color: var(--utppNav-soft);
+
+  font: 600 7px/1 var(--fst3);
+
+  letter-spacing: .05em;
+
+  text-transform: uppercase;
+}
+
+
+/* ==========================================================================
+   14. CHAMP DE RECHERCHE
+   ========================================================================== */
+
+.utpp-searchForm {
+  width: 100%;
+
+  display: flex;
+  align-items: stretch;
+}
+
+.utpp-searchForm input {
+  min-width: 0;
+  height: 37px;
+
+  flex: 1 1 auto;
+
+  padding: 0 11px;
+
+  color: var(--utppNav-ivory);
+
+  background: var(--utppNav-bg);
+
+  border: 1px solid var(--utppNav-line);
+  border-right: 0;
+
+  border-radius: 0;
+
+  outline: none;
+
+  font: 600 8px/1 var(--fst3);
+
+  letter-spacing: .04em;
+
+  transition: border-color 180ms ease;
+}
+
+.utpp-searchForm input::placeholder {
+  color: var(--utppNav-soft);
+}
+
+.utpp-searchForm input:focus {
+  border-color: var(--th-cl-acc3);
+}
+
+.utpp-searchForm button {
+  width: 37px;
+  height: 37px;
+
+  flex: 0 0 37px;
+
+  display: grid;
+  place-items: center;
+
+  color: var(--utppNav-muted);
+
+  background: var(--utppNav-panelHover);
+
+  border: 1px solid var(--utppNav-line);
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.utpp-searchForm button:hover {
+  color: #fff;
+
+  background: rgba(139, 61, 37, .13);
+
+  border-color: var(--utppNav-lineRust);
+}
+
+.utpp-searchForm button svg {
+  width: 15px;
+  height: 15px;
+}
+
+
+/* ==========================================================================
+   15. RECHERCHE AVANCÉE
+   ========================================================================== */
+
+.utpp-searchAdvanced {
+  margin-top: 9px;
+  padding: 8px 4px 1px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+
+  color: var(--utppNav-soft);
+
+  text-decoration: none;
+
+  font: 700 7px/1 var(--fst3);
+
+  letter-spacing: .07em;
+
+  text-transform: uppercase;
+
+  transition: color 180ms ease;
+}
+
+.utpp-searchAdvanced:hover {
+  color: var(--th-cl-acc3);
+}
+
+.utpp-searchAdvanced svg {
+  width: 12px;
+  height: 12px;
+}
+
+
+/* ==========================================================================
+   16. DOCK MODULES
+   ========================================================================== */
+
 .utpp-navigMod {
   min-width: 0;
 
@@ -509,6 +833,11 @@
 
   overflow: visible;
 }
+
+
+/* ==========================================================================
+   17. BOUTONS DU DOCK
+   ========================================================================== */
 
 .utpp-navigMod > #notiffi_button,
 .utpp-controlCenter-toggle,
@@ -591,21 +920,35 @@
     0 8px 22px rgba(0, 0, 0, .32),
     inset 0 0 0 1px rgba(139, 61, 37, .08) !important;
 
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
-.utpp-headerNavbar svg {
-  width: 18px;
-  height: 18px;
 
-  pointer-events: none;
+/* ==========================================================================
+   18. ICÔNES DU DOCK
+   ========================================================================== */
+
+.utpp-navigMod > button > svg,
+.utpp-navigMod > a > svg,
+.utpp-controlCenter-toggle > svg,
+.utpp-quickTools svg,
+.utpp-switcher-toggle svg {
+  width: 18px !important;
+  height: 18px !important;
+
+  margin: 0 !important;
+
+  color: inherit !important;
 
   stroke-width: 1.8;
+
+  pointer-events: none;
 }
 
-.utpp-headerNavbar i {
-  line-height: 1;
-}
+
+/* ==========================================================================
+   19. NOTIFFI
+   ========================================================================== */
 
 .utpp-navigMod > #notiffi_button {
   font-size: 0;
@@ -662,19 +1005,24 @@
   white-space: nowrap !important;
 }
 
+
+/* ==========================================================================
+   20. COMPTEURS
+   ========================================================================== */
+
 .utpp-headerNavbar span[id$="-count"],
 .utpp-headerNavbar span[id$="-badge"],
-.utpp-headerNavbar .unread_count {
+.utpp-navigMod .unread_count {
   min-width: 17px !important;
   height: 17px !important;
 
   padding: 0 5px !important;
 
   position: absolute !important;
-  top: -6px !important;
-  right: -6px !important;
+  top: -7px !important;
+  right: -7px !important;
 
-  z-index: 10;
+  z-index: 20;
 
   display: none;
 
@@ -698,18 +1046,23 @@
 
 .utpp-headerNavbar span[id$="-count"]:not(:empty),
 .utpp-headerNavbar span[id$="-badge"]:not(:empty),
-.utpp-headerNavbar .unread_count:not(:empty),
-.utpp-headerNavbar #frqcy-toggle.frqcy-has-unread #frqcy-badge,
-.utpp-headerNavbar #frqcy-toggle.frqcy-has-mention #frqcy-badge,
-.utpp-headerNavbar #logbook-toggle.logbook-has-todo #logbook-count {
+.utpp-navigMod .unread_count:not(:empty),
+.utpp-navigMod #frqcy-toggle.frqcy-has-unread #frqcy-badge,
+.utpp-navigMod #frqcy-toggle.frqcy-has-mention #frqcy-badge,
+.utpp-navigMod #logbook-toggle.logbook-has-todo #logbook-count {
   display: grid !important;
 }
 
-.utpp-headerNavbar #frqcy-toggle.frqcy-has-mention #frqcy-badge {
+.utpp-navigMod #frqcy-toggle.frqcy-has-mention #frqcy-badge {
   color: var(--utppNav-rustDark) !important;
 
   background: var(--utppNav-ivory) !important;
 }
+
+
+/* ==========================================================================
+   21. ÉTAT NOTIFFI
+   ========================================================================== */
 
 html:has(#notiffi_panel.open)
 .utpp-navigMod > #notiffi_button,
@@ -727,6 +1080,292 @@ html:has(#notiffi_panel.active)
 
   border-color: var(--utppNav-rust) !important;
 }
+
+
+/* ==========================================================================
+   22. CONTROL CENTER
+   ========================================================================== */
+
+.utpp-controlCenter {
+  height: 50px;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.utpp-controlCenter::after {
+  content: "";
+
+  width: 340px;
+  height: 16px;
+
+  position: absolute;
+  top: 100%;
+  right: 0;
+}
+
+
+/* ==========================================================================
+   23. PANNEAU CONTROL CENTER
+   ========================================================================== */
+
+.utpp-controlCenter-panel {
+  width: 340px;
+
+  padding: 14px;
+
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 1110;
+
+  background: var(--utppNav-panel);
+
+  border: 1px solid var(--utppNav-line);
+
+  box-shadow: 0 22px 55px rgba(0, 0, 0, .45);
+
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transform: translateY(-6px);
+
+  transition:
+    opacity 160ms ease,
+    transform 220ms cubic-bezier(.16, 1, .3, 1),
+    visibility 0s linear 250ms;
+}
+
+.utpp-controlCenter:hover > .utpp-controlCenter-panel,
+.utpp-controlCenter.is-open > .utpp-controlCenter-panel {
+  opacity: 1;
+  visibility: visible;
+
+  pointer-events: auto;
+
+  transform: translateY(0);
+
+  transition-delay: 0s;
+}
+
+
+/* ==========================================================================
+   24. HEADER CONTROL CENTER
+   ========================================================================== */
+
+.utpp-controlCenter-head {
+  min-height: 34px;
+
+  margin-bottom: 11px;
+  padding: 2px 2px 10px;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  border-bottom: 1px solid var(--utppNav-line);
+}
+
+.utpp-controlCenter-head > div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.utpp-controlCenter-head strong {
+  color: var(--utppNav-ivory);
+
+  font: 700 8px/1 var(--fst3);
+
+  letter-spacing: .12em;
+}
+
+.utpp-controlCenter-head > div span,
+.utpp-controlCenter-caption {
+  color: var(--utppNav-soft);
+
+  font: 600 7px/1 var(--fst3);
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+}
+
+.utpp-controlCenter-caption {
+  padding-top: 1px;
+
+  letter-spacing: .16em;
+}
+
+
+/* ==========================================================================
+   25. GRILLE MODULES
+   ========================================================================== */
+
+.utpp-controlCenter-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 72px);
+  grid-auto-rows: 72px;
+
+  justify-content: space-between;
+
+  gap: 8px;
+}
+
+.utpp-controlCenter-grid > :is(button, a) {
+  width: 72px !important;
+  height: 72px !important;
+
+  min-width: 72px !important;
+  min-height: 72px !important;
+
+  margin: 0 !important;
+  padding: 7px 3px !important;
+
+  position: relative !important;
+
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  color: var(--utppNav-muted) !important;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(139, 61, 37, .14) 0 2px,
+      transparent 2px
+    ),
+    var(--utppNav-panelHover) !important;
+
+  border: 1px solid var(--utppNav-line) !important;
+  border-radius: 0 !important;
+
+  outline: none !important;
+
+  cursor: pointer;
+
+  appearance: none;
+
+  text-decoration: none !important;
+
+  overflow: visible;
+
+  transform: translateY(0);
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 260ms cubic-bezier(.16, 1, .3, 1) !important;
+}
+
+.utpp-controlCenter-grid > :is(button, a):hover,
+.utpp-controlCenter-grid > :is(button, a):focus-visible,
+.utpp-controlCenter-grid > :is(button, a)[aria-expanded="true"],
+.utpp-controlCenter-grid > :is(button, a).active,
+.utpp-controlCenter-grid > :is(button, a).is-active,
+.utpp-controlCenter-grid > :is(button, a).open {
+  color: #fff !important;
+
+  background:
+    linear-gradient(
+      to top,
+      var(--utppNav-rust) 0 3px,
+      transparent 3px
+    ),
+    var(--utppNav-panelHover) !important;
+
+  border-color: var(--utppNav-lineRust) !important;
+
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .25) !important;
+
+  transform: translateY(-2px) !important;
+}
+
+.utpp-controlCenter-grid > :is(button, a) > svg,
+.utpp-controlCenter-grid > :is(button, a) > i {
+  width: 19px !important;
+  height: 19px !important;
+
+  margin: 0 !important;
+
+  display: grid;
+  place-items: center;
+
+  flex: 0 0 19px;
+
+  color: inherit !important;
+
+  font-size: 17px;
+
+  line-height: 1;
+
+  pointer-events: none;
+}
+
+
+/* ==========================================================================
+   26. LABELS MODULES
+   ========================================================================== */
+
+.utpp-toolLabel {
+  width: 100%;
+
+  overflow: hidden;
+
+  color: inherit;
+
+  font: 700 6.3px/1.15 var(--fst3);
+
+  letter-spacing: .035em;
+
+  text-align: center;
+  text-overflow: ellipsis;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  pointer-events: none;
+}
+
+
+/* ==========================================================================
+   27. FAVORIS ACTIF
+   ========================================================================== */
+
+html:has(#fa-pins-panel.open)
+.utpp-controlCenter-grid > #fa-pins-button,
+
+html:has(#fa-pins-panel.active)
+.utpp-controlCenter-grid > #fa-pins-button {
+  color: #fff !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--utppNav-rustDark),
+      var(--utppNav-rust)
+    ) !important;
+
+  border-color: var(--utppNav-rust) !important;
+}
+
+
+/* ==========================================================================
+   28. QUICK TOOLS — RESTENT À PART
+   ========================================================================== */
 
 .utpp-quickTools {
   display: flex;
@@ -769,237 +1408,37 @@ html:has(#notiffi_panel.active)
   margin: 0 !important;
 }
 
-.utpp-controlCenter {
-  height: 50px;
+
+/* ==========================================================================
+   29. SÉPARATEUR QUICK TOOLS
+   ========================================================================== */
+
+.utpp-quickTools {
+  margin-left: 4px;
+  padding-left: 10px;
 
   position: relative;
-
-  display: flex;
-  align-items: center;
 }
 
-.utpp-controlCenter::after {
+.utpp-quickTools::before {
   content: "";
 
-  width: 330px;
-  height: 16px;
+  width: 1px;
+  height: 24px;
 
   position: absolute;
-  top: 100%;
-  right: 0;
-}
+  top: 7px;
+  left: 0;
 
-.utpp-controlCenter-panel {
-  width: 330px;
-
-  padding: 13px;
-
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-
-  z-index: 1100;
-
-  background: var(--utppNav-panel);
-
-  border: 1px solid var(--utppNav-line);
-
-  box-shadow: 0 22px 55px rgba(0, 0, 0, .45);
-
-  opacity: 0;
-  visibility: hidden;
-
-  pointer-events: none;
-
-  transform: translateY(-6px);
-
-  transition:
-    opacity 160ms ease,
-    transform 220ms cubic-bezier(.16, 1, .3, 1),
-    visibility 0s linear 250ms;
-}
-
-.utpp-controlCenter:hover > .utpp-controlCenter-panel,
-.utpp-controlCenter.is-open > .utpp-controlCenter-panel {
-  opacity: 1;
-  visibility: visible;
-
-  pointer-events: auto;
-
-  transform: translateY(0);
-
-  transition-delay: 0s;
-}
-
-.utpp-controlCenter-head {
-  min-height: 43px;
-
-  margin-bottom: 10px;
-  padding: 0 3px 11px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  border-bottom: 1px solid var(--utppNav-line);
-}
-
-.utpp-controlCenter-head > div {
-  display: flex;
-  flex-direction: column;
-
-  gap: 4px;
-}
-
-.utpp-controlCenter-head strong {
-  color: var(--utppNav-ivory);
-
-  font: 700 8px/1 var(--fst3);
-
-  letter-spacing: .12em;
-}
-
-.utpp-controlCenter-head span {
-  color: var(--utppNav-soft);
-
-  font: 600 7px/1 var(--fst3);
-
-  letter-spacing: .08em;
-
-  text-transform: uppercase;
-}
-
-.utpp-controlCenter-head > svg {
-  width: 17px;
-  height: 17px;
-
-  color: var(--utppNav-rustLight);
-
-  stroke-width: 1.5;
-}
-
-.utpp-controlCenter-grid {
-  display: grid;
-
-  grid-template-columns: repeat(4, 1fr);
-
-  gap: 6px;
-}
-
-.utpp-controlCenter-grid > :is(button, a) {
-  min-width: 0 !important;
-  height: 72px !important;
-
-  margin: 0 !important;
-  padding: 8px 4px !important;
-
-  position: relative !important;
-
-  display: flex !important;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  gap: 8px;
-
-  color: var(--utppNav-muted) !important;
-
-  background: var(--utppNav-panelHover) !important;
-
-  border: 1px solid var(--utppNav-line) !important;
-  border-radius: 0 !important;
-
-  outline: none !important;
-
-  box-shadow: none !important;
-
-  cursor: pointer;
-
-  appearance: none;
-
-  text-decoration: none !important;
-
-  overflow: visible;
-
-  transform: translateY(0);
-
-  transition:
-    color 180ms ease,
-    background 180ms ease,
-    border-color 180ms ease,
-    transform 260ms cubic-bezier(.16, 1, .3, 1) !important;
-}
-
-.utpp-controlCenter-grid > :is(button, a):hover,
-.utpp-controlCenter-grid > :is(button, a):focus-visible,
-.utpp-controlCenter-grid > :is(button, a)[aria-expanded="true"],
-.utpp-controlCenter-grid > :is(button, a).is-active,
-.utpp-controlCenter-grid > :is(button, a).active,
-.utpp-controlCenter-grid > :is(button, a).open {
-  color: #fff !important;
-
-  background: rgba(139, 61, 37, .13) !important;
-
-  border-color: var(--utppNav-lineRust) !important;
-
-  transform: translateY(-2px) !important;
-}
-
-.utpp-controlCenter-grid > :is(button, a) > svg,
-.utpp-controlCenter-grid > :is(button, a) > i {
-  width: 18px !important;
-  height: 18px !important;
-
-  margin: 0 !important;
-
-  flex: 0 0 18px;
-
-  display: grid;
-  place-items: center;
-
-  color: inherit !important;
-
-  font-size: 16px;
+  background: var(--utppNav-line);
 
   pointer-events: none;
 }
 
-.utpp-toolLabel {
-  max-width: 68px;
 
-  overflow: hidden;
-
-  color: inherit;
-
-  font: 700 6.7px/1.2 var(--fst3);
-
-  letter-spacing: .05em;
-
-  text-align: center;
-  text-overflow: ellipsis;
-  text-transform: uppercase;
-
-  white-space: nowrap;
-
-  pointer-events: none;
-}
-
-html:has(#fa-pins-panel.open)
-.utpp-controlCenter-grid > #fa-pins-button,
-
-html:has(#fa-pins-panel.active)
-.utpp-controlCenter-grid > #fa-pins-button {
-  color: #fff !important;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--utppNav-rustDark),
-      var(--utppNav-rust)
-    ) !important;
-
-  border-color: var(--utppNav-rust) !important;
-}
+/* ==========================================================================
+   30. SWITCHEROO WRAPPER
+   ========================================================================== */
 
 .utpp-switcher {
   height: 50px;
@@ -1025,6 +1464,11 @@ html:has(#fa-pins-panel.active)
   top: 100%;
   right: 0;
 }
+
+
+/* ==========================================================================
+   31. BOUTON SWITCHEROO
+   ========================================================================== */
 
 .utpp-switcher-toggle {
   overflow: hidden !important;
@@ -1053,10 +1497,10 @@ html:has(#fa-pins-panel.active)
 
   object-fit: cover;
 
-  filter: grayscale(.85) contrast(1.04);
+  filter: grayscale(1) contrast(1.08);
 
   transition:
-    filter 180ms ease,
+    filter 220ms ease,
     transform 260ms ease;
 }
 
@@ -1064,8 +1508,13 @@ html:has(#fa-pins-panel.active)
 .utpp-switcher.is-open .utpp-switcher-current img {
   filter: grayscale(0);
 
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
+
+
+/* ==========================================================================
+   32. PANNEAU SWITCHEROO
+   ========================================================================== */
 
 .utpp-switcher-panel {
   width: 300px;
@@ -1075,8 +1524,7 @@ html:has(#fa-pins-panel.active)
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-
-  z-index: 1100;
+  z-index: 1120;
 
   background: var(--utppNav-panel);
 
@@ -1109,6 +1557,11 @@ html:has(#fa-pins-panel.active)
   transition-delay: 0s;
 }
 
+
+/* ==========================================================================
+   33. HEADER SWITCHEROO
+   ========================================================================== */
+
 .utpp-switcher-head {
   margin-bottom: 6px;
   padding: 7px 8px 11px;
@@ -1139,6 +1592,11 @@ html:has(#fa-pins-panel.active)
   text-transform: uppercase;
 }
 
+
+/* ==========================================================================
+   34. NAV SWITCHEROO
+   ========================================================================== */
+
 .utpp-switcher #switcheroo {
   width: 100% !important;
   min-width: 0 !important;
@@ -1164,6 +1622,11 @@ html:has(#fa-pins-panel.active)
 
   list-style: none;
 }
+
+
+/* ==========================================================================
+   35. PERSONNAGES SWITCHEROO
+   ========================================================================== */
 
 .utpp-switcher
 .switcheroo__squircle[data-action="switcheroo"] {
@@ -1192,8 +1655,6 @@ html:has(#fa-pins-panel.active)
 
   cursor: pointer;
 
-  transform: translateX(0);
-
   transition:
     color 180ms ease,
     background 180ms ease,
@@ -1218,6 +1679,11 @@ html:has(#fa-pins-panel.active)
 
   border-color: rgba(139, 61, 37, .18) !important;
 }
+
+
+/* ==========================================================================
+   36. AVATAR SWITCHEROO
+   ========================================================================== */
 
 .utpp-switcher .switcheroo__avatar {
   width: 40px !important;
@@ -1245,7 +1711,7 @@ html:has(#fa-pins-panel.active)
 
   border-radius: 0 !important;
 
-  filter: grayscale(.85) contrast(1.04);
+  filter: grayscale(1) contrast(1.08);
 
   transition:
     filter 180ms ease,
@@ -1264,6 +1730,11 @@ html:has(#fa-pins-panel.active)
   transform: scale(1.03);
 }
 
+
+/* ==========================================================================
+   37. PSEUDOS SWITCHEROO
+   ========================================================================== */
+
 .utpp-switcher .switcheroo__popper {
   min-width: 0;
 
@@ -1279,8 +1750,6 @@ html:has(#fa-pins-panel.active)
   transform: none !important;
 
   pointer-events: none !important;
-
-  color: inherit !important;
 
   background: none !important;
 
@@ -1333,6 +1802,11 @@ html:has(#fa-pins-panel.active)
   text-transform: uppercase;
 }
 
+
+/* ==========================================================================
+   38. SUPPRESSION SWITCHEROO
+   ========================================================================== */
+
 .utpp-switcher .switcheroo__delete {
   width: 18px;
   height: 18px;
@@ -1371,6 +1845,11 @@ html:has(#fa-pins-panel.active)
 
   border-color: var(--utppNav-rust);
 }
+
+
+/* ==========================================================================
+   39. BOUTON + SWITCHEROO
+   ========================================================================== */
 
 .utpp-switcher .switcheroo__squircle--button {
   width: 100% !important;
@@ -1428,12 +1907,6 @@ html:has(#fa-pins-panel.active)
 
 .utpp-switcher
 .switcheroo__squircle--button
-.switcheroo__popper {
-  display: block !important;
-}
-
-.utpp-switcher
-.switcheroo__squircle--button
 .switcheroo__popper-text {
   color: var(--utppNav-muted) !important;
 
@@ -1446,17 +1919,22 @@ html:has(#fa-pins-panel.active)
   color: var(--utppNav-ivory) !important;
 }
 
-.utpp-switcher .switcheroo.dragged,
-.utpp-switcher .switcheroo.dragged .switcheroo__squircle {
-  cursor: grabbing;
-}
+
+/* ==========================================================================
+   40. FOCUS
+   ========================================================================== */
 
 .utpp-headerNavbar button:focus-visible,
 .utpp-headerNavbar a:focus-visible,
 .utpp-navigMod > #notiffi_button:focus-visible {
-  outline: 2px solid rgba(179, 84, 55, .45) !important;
+  outline: 2px solid rgba(179, 84, 55, .42) !important;
   outline-offset: 2px !important;
 }
+
+
+/* ==========================================================================
+   41. ÉCRANS INTERMÉDIAIRES
+   ========================================================================== */
 
 @media (max-width: 1180px) {
 
@@ -1471,20 +1949,29 @@ html:has(#fa-pins-panel.active)
     --utppNav-gap: 4px;
   }
 
+  .utpp-navPrimary {
+    gap: 5px;
+  }
+
   .utpp-navProfileName {
-    max-width: 120px;
+    max-width: 110px;
 
     overflow: hidden;
 
     text-overflow: ellipsis;
   }
 
-  .utpp-navigBar a.mainmenu,
+  .utpp-navPrimary a.mainmenu,
   .utpp-navGroup-toggle {
     padding-inline: 8px;
   }
 
 }
+
+
+/* ==========================================================================
+   42. TABLETTE
+   ========================================================================== */
 
 @media (max-width: 860px) {
 
@@ -1497,38 +1984,29 @@ html:has(#fa-pins-panel.active)
 
     padding: 7px 10px;
 
-    gap: 7px;
+    gap: 6px;
   }
 
-  .utpp-headerNavbar > #manifest-toggle {
-    flex: 0 0 35px;
-  }
-
-  .utpp-navigBar {
-    min-width: 0;
-
-    flex: 1 1 0;
-  }
-
+  .utpp-navProfileBracket,
   .utpp-navProfileName {
-    max-width: 90px;
+    display: none;
   }
 
-  .utpp-quickTools {
-    display: none;
+  .utpp-searchPanel {
+    position: fixed;
+
+    top: 78px;
+    right: 150px;
   }
 
   .utpp-controlCenter-panel {
     position: fixed;
 
     top: 78px;
-    right: 60px;
+    right: 55px;
 
-    width: min(330px, calc(100vw - 20px));
-  }
-
-  .utpp-controlCenter::after {
-    width: 50px;
+    width: 340px;
+    max-width: calc(100vw - 20px);
   }
 
   .utpp-switcher-panel {
@@ -1540,61 +2018,59 @@ html:has(#fa-pins-panel.active)
     width: min(300px, calc(100vw - 20px));
   }
 
-  .utpp-switcher::after {
-    width: 50px;
-  }
-
-  .utpp-navGroup-panel {
-    width: 230px;
-  }
-
 }
 
-@media (max-width: 560px) {
+
+/* ==========================================================================
+   43. PETITS ÉCRANS
+   ========================================================================== */
+
+@media (max-width: 680px) {
 
   .utpp-headerNavbar {
     padding-inline: 7px;
-
-    gap: 5px;
   }
 
-  .utpp-navProfileBracket,
-  .utpp-navProfileName {
-    display: none;
-  }
-
-  .utpp-navGroup-toggle {
-    padding-inline: 7px;
-  }
-
-  .utpp-navGroup-toggle span {
-    max-width: 72px;
+  .utpp-navGroup-toggle span,
+  .utpp-navPrimary a.mainmenu {
+    max-width: 88px;
 
     overflow: hidden;
 
     text-overflow: ellipsis;
   }
 
-  .utpp-navigMod {
-    gap: 4px;
+  .utpp-quickTools {
+    display: none;
+  }
+
+  .utpp-searchPanel {
+    right: 60px;
   }
 
 }
 
+
+/* ==========================================================================
+   44. TACTILE
+   ========================================================================== */
+
 @media (hover: none) {
 
+  .utpp-navGroup:hover > .utpp-navGroup-panel,
+  .utpp-searchTool:hover > .utpp-searchPanel,
   .utpp-controlCenter:hover > .utpp-controlCenter-panel,
-  .utpp-switcher:hover > .utpp-switcher-panel,
-  .utpp-navGroup:hover > .utpp-navGroup-panel {
+  .utpp-switcher:hover > .utpp-switcher-panel {
     opacity: 0;
     visibility: hidden;
 
     pointer-events: none;
   }
 
+  .utpp-navGroup.is-open > .utpp-navGroup-panel,
+  .utpp-searchTool.is-open > .utpp-searchPanel,
   .utpp-controlCenter.is-open > .utpp-controlCenter-panel,
-  .utpp-switcher.is-open > .utpp-switcher-panel,
-  .utpp-navGroup.is-open > .utpp-navGroup-panel {
+  .utpp-switcher.is-open > .utpp-switcher-panel {
     opacity: 1;
     visibility: visible;
 
@@ -1602,6 +2078,11 @@ html:has(#fa-pins-panel.active)
   }
 
 }
+
+
+/* ==========================================================================
+   45. MOUVEMENTS RÉDUITS
+   ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -1611,978 +2092,5 @@ html:has(#fa-pins-panel.active)
     animation-duration: .01ms !important;
     transition-duration: .01ms !important;
   }
-}
-
-/* -------------------------------------------------------- > */
-
-/* .utpp-navigBar a.mainmenu[href="/calendar"],
-.utpp-navigBar a.mainmenu[href$="/calendar"],
-.utpp-navigBar a.mainmenu[href="/groups"],
-.utpp-navigBar a.mainmenu[href$="/groups"],
-.utpp-navigBar a.mainmenu[href^="/search"],
-.utpp-navigBar a.mainmenu[href="/gallery/index.htm"],
-.utpp-navigBar a.mainmenu[href$="/gallery/index.htm"],
-.utpp-navigBar a.mainmenu[href="/images"],
-.utpp-navigBar a.mainmenu[href$="/images"],
-.utpp-navigBar a.mainmenu[href="/discover"],
-.utpp-navigBar a.mainmenu[href$="/discover"],
-.utpp-navigBar a.mainmenu[href="/faq"],
-.utpp-navigBar a.mainmenu[href$="/faq"] {
-  display: none !important;
-}
-
-.utpp-headerNavbar,
-.utpp-headerNavbar * {
-  box-sizing: border-box;
-}
-
-.utpp-headerNavbar {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  z-index: 990;
-  width: 98%;
-  height: 50px;
-  padding: 0 20px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  overflow: visible;
-  background: var(--th-cl-bord);
-  border: 1px solid var(--th-cl-bord);
-  border-radius: 14px;
-  backdrop-filter: blur(10px);
-  transform: translateX(-50%);
-}
-
-.utpp-headerNavbar ul,
-.utpp-headerNavbar li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.utpp-headerNavbar > #manifest-toggle {
-  position: relative !important;
-  width: 35px;
-  height: 35px;
-  min-width: 35px;
-  flex: 0 0 35px;
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  border: 0;
-  border-radius: 10px !important;
-  color: var(--th-cl-font) !important;
-  background: var(--th-cl-cardAlt) !important;
-  box-shadow: none !important;
-  cursor: pointer;
-  appearance: none;
-  transition:
-    transform var(--th-trans-fast),
-    background var(--th-trans-fast),
-    box-shadow var(--th-trans-fast);
-}
-
-.utpp-headerNavbar > #manifest-toggle:hover {
-  transform: translateY(-2px);
-  background: var(--th-grad-chip) !important;
-}
-
-.utpp-navigBar {
-  min-width: 0;
-  flex: 1 1 auto;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: none;
-}
-
-.utpp-navigBar::-webkit-scrollbar {
-  display: none;
-}
-
-.utpp-navigBar ul {
-  width: max-content;
-  min-width: max-content;
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 16px;
-}
-
-.utpp-navigBar li {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-}
-
-.utpp-navProfile {
-  flex: 0 0 auto;
-
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  color: var(--th-cl-font);
-  text-decoration: none;
-  font-family: var(--fst3);
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.utpp-navProfile:hover {
-  color: var(--th-cl-acc3);
-}
-
-.utpp-navProfileAvatar {
-  width: 30px;
-  height: 30px;
-  flex: 0 0 30px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.65);
-  border-radius: 50%;
-  background: var(--th-grad-chip);
-}
-
-.utpp-navProfileAvatar img {
-  display: block !important;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.utpp-navProfileFallback {
-  color: var(--th-cl-font);
-  font-size: 0.7rem;
-}
-
-.utpp-navProfileBracket {
-  color: var(--th-cl-sub);
-}
-
-.utpp-navProfileName {
-  color: var(--th-cl-font);
-}
-
-.utpp-navigBar a.mainmenu img {
-  display: none !important;
-}
-
-.utpp-navigBar a.mainmenu,
-.utpp-navigBar .utpp-contextLink {
-  position: relative;
-}
-
-.utpp-navigBar a.mainmenu {
-  max-height: 32px;
-  padding: 5px 10px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  background-color: var(--th-cl-acc3);
-  color: var(--th-cl-bg);
-  text-decoration: none;
-  font: 700 8px/1 var(--fst3);
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  white-space: nowrap;
-  transition:
-    color var(--th-trans-fast),
-    background var(--th-trans-fast);
-}
-
-.utpp-navigBar a.mainmenu:hover,
-.utpp-navigBar .utpp-contextLink:hover {
-  color: var(--th-cl-acc3);
-  background: none !important;
-}
-
-.utpp-navigBar a.mainmenu::after,
-.utpp-navigBar .utpp-contextLink::after {
-  content: "";
-  position: absolute;
-  bottom: -5px;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  border-radius: 999px;
-  background: var(--th-grad-chip);
-  transform: translateX(-50%);
-  transition: width var(--th-trans-fast);
-}
-
-.utpp-navigBar a.mainmenu:hover::after,
-.utpp-navigBar .utpp-contextLink:hover::after {
-  width: 100%;
-}
-
-.utpp-navigBar a.mainmenu.utpp-activeLink {
-  color: var(--th-cl-acc3);
-  background: none !important;
-}
-
-.utpp-navigBar a.mainmenu.utpp-activeLink::after {
-  width: 100%;
-  background: var(--th-grad-chip);
-}
-
-.utpp-navigBar .utpp-contextLink {
-  max-height: 32px;
-  margin-right: 8px;
-  padding: 4px 10px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border: 1px solid var(--th-cl-acc3);
-  border-radius: 5px;
-  background: none !important;
-  color: var(--th-cl-acc3);
-  text-decoration: none;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font: 700 8px/1 var(--fst3);
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-}
-
-.utpp-navigMod,
-.utpp-navigMod *,
-.utpp-navigMod *::before,
-.utpp-navigMod *::after {
-  box-sizing: border-box;
-}
-
-.utpp-navigMod {
-  --utppNav-bg: #111111;
-  --utppNav-panel: #181818;
-  --utppNav-panelHover: #211f1e;
-  --utppNav-line: #303030;
-  --utppNav-lineRust: #49342e;
-  --utppNav-rust: #8b3d25;
-  --utppNav-rustLight: #b35437;
-  --utppNav-rustDark: #572619;
-  --utppNav-ivory: #eee9e5;
-  --utppNav-muted: #aaa29d;
-  --utppNav-soft: #756f6b;
-  --utppNav-size: 38px;
-  --utppNav-gap: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex-wrap: nowrap;
-    gap: var(--utppNav-gap);
-}
-
-.utpp-navigMod::-webkit-scrollbar {
-  display: none;
-}
-
-.utpp-navigMod > :is(
-  a,
-  button,
-  #notiffi_button
-),
-.utpp-navigMod > [data-theme-controls] > button {
-  width: var(--utppNav-size) !important;
-  height: var(--utppNav-size) !important;
-  min-width: var(--utppNav-size) !important;
-  min-height: var(--utppNav-size) !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  position: relative !important;
-  isolation: isolate;
-  flex: 0 0 var(--utppNav-size) !important;
-  display: inline-grid !important;
-  place-items: center !important;
-  color: var(--utppNav-muted) !important;
-  background:
-    linear-gradient(
-      to top,
-      rgba(139, 61, 37, 0.18) 0 2px,
-      transparent 2px
-    ),
-    var(--utppNav-panel) !important;
-  border: 1px solid var(--utppNav-line) !important;
-  border-radius: 0 !important;
-  outline: none !important;
-  box-shadow: none !important;
-  cursor: pointer;
-  appearance: none;
-  text-decoration: none !important;
-  overflow: visible;
-  transform: translateY(0);
-  transition:
-    color 200ms ease,
-    background-color 200ms ease,
-    border-color 200ms ease,
-    box-shadow 200ms ease,
-    transform 340ms cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-.utpp-navigMod > :is(
-  a,
-  button,
-  #notiffi_button
-):hover,
-.utpp-navigMod > :is(
-  a,
-  button,
-  #notiffi_button
-):focus-visible,
-.utpp-navigMod > [data-theme-controls] > button:hover,
-.utpp-navigMod > [data-theme-controls] > button:focus-visible {
-  color: #ffffff !important;
-
-  background:
-    linear-gradient(
-      to top,
-      var(--utppNav-rust) 0 3px,
-      transparent 3px
-    ),
-    var(--utppNav-panelHover) !important;
-
-  border-color: var(--utppNav-lineRust) !important;
-
-  box-shadow:
-    0 8px 22px rgba(0, 0, 0, 0.32),
-    inset 0 0 0 1px rgba(139, 61, 37, 0.08) !important;
-
-  transform: translateY(-3px);
-}
-
-.utpp-navigMod > :is(
-  a,
-  button,
-  #notiffi_button
-)[aria-expanded="true"],
-.utpp-navigMod > :is(
-  a,
-  button,
-  #notiffi_button
-).is-active,
-.utpp-navigMod > :is(
-  a,
-  button,
-  #notiffi_button
-).active,
-.utpp-navigMod > :is(
-  a,
-  button,
-  #notiffi_button
-).open,
-.utpp-navigMod > [data-theme-controls] > button.is-active {
-  color: #ffffff !important;
-  background:
-    linear-gradient(
-      135deg,
-      var(--utppNav-rustDark),
-      var(--utppNav-rust)
-    ) !important;
-
-  border-color: var(--utppNav-rust) !important;
-
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.36),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
-
-  transform: translateY(-2px);
-}
-
-html:has(#notiffi_panel.open)
-.utpp-navigMod > #notiffi_button,
-
-html:has(#notiffi_panel.active)
-.utpp-navigMod > #notiffi_button,
-
-html:has(#fa-pins-panel.open)
-.utpp-navigMod > #fa-pins-button,
-
-html:has(#fa-pins-panel.active)
-.utpp-navigMod > #fa-pins-button {
-  color: #ffffff !important;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--utppNav-rustDark),
-      var(--utppNav-rust)
-    ) !important;
-
-  border-color: var(--utppNav-rust) !important;
-
-  transform: translateY(-2px);
-}
-
-.utpp-navigMod > button > svg,
-.utpp-navigMod > a > svg,
-.utpp-navigMod > button > i,
-.utpp-navigMod > a > i,
-.utpp-navigMod > [data-theme-controls] > button svg,
-.utpp-navigMod > [data-theme-controls] > button i {
-  width: 18px !important;
-  height: 18px !important;
-  margin: 0 !important;
-  position: relative;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  flex: 0 0 18px;
-  color: inherit !important;
-  font-size: 16px;
-  line-height: 1;
-  pointer-events: none;
-  stroke-width: 1.8;
-}
-
-.utpp-navigMod .bi::before,
-.utpp-navigMod [class*="ion-"]::before {
-  margin: 0;
-  display: block;
-  color: inherit;
-  font-size: 16px;
-  line-height: 1;
-}
-
-.utpp-navigMod > #notiffi_button {
-  font-size: 0;
-}
-
-.utpp-navigMod > #notiffi_button::before {
-  content: "";
-  width: 17px;
-  height: 17px;
-  position: relative;
-  z-index: 1;
-  display: block;
-  background-color: currentColor;
-  -webkit-mask-image:
-    url("https://unpkg.com/lucide-static/icons/bell.svg");
-  mask-image:
-    url("https://unpkg.com/lucide-static/icons/bell.svg");
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  transition:
-    transform 260ms ease;
-}
-
-.utpp-navigMod > #notiffi_button:hover::before {
-  transform: rotate(-10deg);
-}
-
-.utpp-navigMod > #notiffi_button .ntf_button-text {
-  width: 1px !important;
-  height: 1px !important;
-  margin: -1px !important;
-  padding: 0 !important;
-  position: absolute !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  clip-path: inset(50%) !important;
-  border: 0 !important;
-  white-space: nowrap !important;
-}
-
-.utpp-navigMod :is(
-  .unread_count,
-  #newspaper-count,
-  #logbook-count,
-  #frqcy-badge,
-  #fa-pins-count,
-  #KRSN-count
-) {
-  min-width: 17px !important;
-  height: 17px !important;
-  padding: 0 5px !important;
-  position: absolute !important;
-  top: -7px !important;
-  right: -7px !important;
-  z-index: 10;
-  display: none;
-  place-items: center;
-  color: #ffffff !important;
-  background: var(--utppNav-rustLight) !important;
-  border: 2px solid var(--utppNav-bg) !important;
-  border-radius: 999px !important;
-  font: 700 9px/13px Arial, sans-serif !important;
-  text-align: center;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.42) !important;
-  pointer-events: none;
-}
-
-.utpp-navigMod .unread_count:not(:empty),
-.utpp-navigMod #newspaper-count:not(:empty),
-.utpp-navigMod #logbook-count:not(:empty),
-.utpp-navigMod #fa-pins-count:not(:empty),
-.utpp-navigMod #KRSN-count:not(:empty),
-.utpp-navigMod
-#frqcy-toggle.frqcy-has-unread
-#frqcy-badge,
-.utpp-navigMod
-#frqcy-toggle.frqcy-has-mention
-#frqcy-badge,
-.utpp-navigMod
-#logbook-toggle.logbook-has-todo
-#logbook-count {
-  display: grid !important;
-}
-
-.utpp-navigMod
-#frqcy-toggle.frqcy-has-mention
-#frqcy-badge {
-  color: var(--utppNav-rustDark) !important;
-  background: var(--utppNav-ivory) !important;
-}
-
-.utpp-navigMod > [data-theme-controls] {
-  width: var(--utppNav-size);
-  min-width: var(--utppNav-size);
-  height: var(--utppNav-size);
-  flex: 0 0 var(--utppNav-size);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.utpp-navigMod
-> [data-theme-controls]
-> .color-scheme-toggle {
-  position: relative !important;
-  overflow: hidden;
-}
-
-.utpp-navigMod
-.color-scheme-toggle
-.icon {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  color: inherit;
-}
-
-.utpp-navigMod
-.color-scheme-toggle
-.icon i {
-  margin: 0 !important;
-}
-
-.utpp-navigMod > a[href="#top"] {
-  margin-left: 10px !important;
-}
-
-.utpp-navigMod > a[href="#top"]::before {
-  content: "";
-  width: 1px;
-  height: 24px;
-  position: absolute;
-  top: 6px;
-  left: -9px;
-  background: var(--utppNav-line);
-  pointer-events: none;
-}
-
-.utpp-navigMod > #switcheroo {
-  min-width: 0;
-  margin-left: 5px;
-  padding-left: 15px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  border-left: 1px solid var(--utppNav-line);
-}
-
-.utpp-navigMod
-#switcheroo
-.switcheroo__squircles {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  list-style: none;
-}
-
-.utpp-navigMod
-#switcheroo
-.switcheroo__squircle {
-  position: relative;
-  flex: 0 0 31px;
-  margin: 0 4px;
-  display: grid;
-  place-items: center;
-  background: var(--utppNav-panel);
-  border: 1px solid var(--utppNav-line);
-  border-radius: 0;
-  overflow: hidden;
-  transition:
-    border-color 200ms ease,
-    transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.utpp-navigMod
-#switcheroo
-.switcheroo__squircle:hover {
-  border-color: var(--utppNav-rust);
-  transform: translateY(-2px);
-}
-
-.utpp-navigMod
-#switcheroo
-.switcheroo__avatar,
-.utpp-navigMod
-#switcheroo
-.switcheroo__avatar img {
-  width: 100%;
-  height: 100%;
-  border-radius:0;
-  display: block;
-  object-fit: cover;
-}
-
-.utpp-navigMod
-#switcheroo
-.switcheroo__avatar img {
-  filter: grayscale(1) contrast(1.08);
-  transition:
-    filter 240ms ease,
-    transform 340ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.utpp-navigMod
-#switcheroo
-.switcheroo__squircle:hover
-.switcheroo__avatar img {
-  border-radius:10px;
-}
-
-@media (hover: hover) and (min-width: 821px) {
-  .utpp-navigMod > :is(
-    a,
-    button,
-    #notiffi_button
-  )[title]::after,
-  .utpp-navigMod
-  > [data-theme-controls]
-  > button[title]::after {
-    content: attr(title);
-
-    width: max-content;
-    max-width: 190px;
-    padding: 7px 9px;
-
-    position: absolute;
-    top: calc(100% + 11px);
-    left: 50%;
-    z-index: 100;
-
-    color: var(--utppNav-ivory);
-    background: #111111;
-
-    border: 1px solid var(--utppNav-lineRust);
-    border-radius: 0;
-
-    font: 700 7px/1 Arial, sans-serif;
-    letter-spacing: 0.09em;
-    text-align: center;
-    text-transform: uppercase;
-    white-space: nowrap;
-
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.48);
-
-    opacity: 0;
-    visibility: hidden;
-
-    transform:
-      translate(-50%, -5px);
-
-    pointer-events: none;
-
-    transition:
-      opacity 180ms ease,
-      transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
-      visibility 0s linear 240ms;
-  }
-
-  .utpp-navigMod > :is(
-    a,
-    button,
-    #notiffi_button
-  )[title]:hover::after,
-  .utpp-navigMod > :is(
-    a,
-    button,
-    #notiffi_button
-  )[title]:focus-visible::after,
-  .utpp-navigMod
-  > [data-theme-controls]
-  > button[title]:hover::after,
-  .utpp-navigMod
-  > [data-theme-controls]
-  > button[title]:focus-visible::after {
-    opacity: 1;
-    visibility: visible;
-
-    transform:
-      translate(-50%, 0);
-
-    transition:
-      opacity 180ms ease,
-      transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
-      visibility 0s;
-  }
-
-  .utpp-navigMod > :is(
-    #utppUC-layout-toggle,
-    a[href="#bottom"]
-  )::after,
-  .utpp-navigMod
-  > [data-theme-controls]
-  > button::after {
-    right: 0;
-    left: auto;
-
-    transform: translate(0, -5px);
-  }
-
-  .utpp-navigMod > :is(
-    #utppUC-layout-toggle,
-    a[href="#bottom"]
-  ):hover::after,
-  .utpp-navigMod > :is(
-    #utppUC-layout-toggle,
-    a[href="#bottom"]
-  ):focus-visible::after,
-  .utpp-navigMod
-  > [data-theme-controls]
-  > button:hover::after,
-  .utpp-navigMod
-  > [data-theme-controls]
-  > button:focus-visible::after {
-    transform: translate(0, 0);
-  }
-}
-
-.utpp-navigMod > #notiffi_button:focus-visible {
-  color: #ffffff !important;
-
-  background:
-    linear-gradient(
-      to top,
-      var(--utppNav-rust) 0 3px,
-      transparent 3px
-    ),
-    var(--utppNav-panelHover) !important;
-
-  border-color: var(--utppNav-rust) !important;
-
-  outline:
-    2px solid rgba(179, 84, 55, 0.42) !important;
-
-  outline-offset: 2px !important;
-}
-
-@media (max-width: 1180px) {
-  .utpp-navigMod {
-    --utppNav-size: 35px;
-    --utppNav-gap: 4px;
-
-    padding: 6px;
-  }
-
-  .utpp-navigMod > #switcheroo {
-    margin-left: 7px;
-    padding-left: 7px;
-  }
-
-  .utpp-navigMod > a[href="#top"] {
-    margin-left: 7px !important;
-  }
-
-  .utpp-navigMod > a[href="#top"]::before {
-    left: -6px;
-  }
-}
-
-@media (max-width: 760px) {
-  .utpp-navigMod {
-    width: 100%;
-    margin: 0;
-    padding: 6px;
-
-    justify-content: flex-start;
-
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    scroll-snap-type: x proximity;
-  }
-
-  .utpp-navigMod > :is(
-    a,
-    button,
-    #notiffi_button
-  ),
-  .utpp-navigMod > [data-theme-controls],
-  .utpp-navigMod > #switcheroo {
-    scroll-snap-align: start;
-  }
-
-  .utpp-navigMod > #switcheroo {
-    flex: 0 0 auto;
-  }
-}
-
-@media (hover: none) {
-  .utpp-navigMod > :is(
-    a,
-    button,
-    #notiffi_button
-  ):hover,
-  .utpp-navigMod
-  > [data-theme-controls]
-  > button:hover {
-    transform: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .utpp-navigMod > :is(
-    a,
-    button,
-    #notiffi_button
-  ),
-  .utpp-navigMod
-  > [data-theme-controls]
-  > button,
-  .utpp-navigMod
-  #switcheroo
-  .switcheroo__squircle,
-  .utpp-navigMod
-  #switcheroo
-  .switcheroo__avatar img {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-.utpp-headerNavbar span[id$="-count"],
-.utpp-headerNavbar span[id$="-badge"],
-.utpp-navigMod .unread_count {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  z-index: 2;
-}
-
-.utpp-navigMod > #switcheroo {
-  min-width: max-content;
-  flex: 0 0 auto;
-
-  display: flex;
-  align-items: center;
-}
-
-@media (max-width: 860px) {
-  body {
-    padding-top: 58px;
-  }
-
-  .utpp-headerNavbar {
-    height: 58px;
-    padding: 7px 10px;
-    align-items: center;
-    flex-direction: row;
-    gap: 8px;
-  }
-
-  .utpp-headerNavbar > #manifest-toggle {
-    flex: 0 0 35px;
-  }
-
-  .utpp-navigBar {
-    min-width: 0;
-    flex: 1 1 0;
-    overflow-x: auto;
-    overflow-y: hidden;
-  }
-
-  .utpp-navigBar ul {
-    width: max-content;
-    min-width: max-content;
-    flex-wrap: nowrap;
-    gap: 12px;
-  }
-
-  .utpp-navigMod {
-    width: auto;
-    min-width: 0;
-    max-width: 65vw;
-    flex: 0 1 auto;
-    margin-left: auto;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    overscroll-behavior-inline: contain;
-  }
-
-  .utpp-navigMod::-webkit-scrollbar {
-    display: none;
-  }
-
-  .utpp-navigMod > a,
-  .utpp-navigMod > button,
-  .utpp-navigMod > #notiffi_button,
-  .utpp-navigMod > [data-theme-controls],
-  .utpp-navigMod > #switcheroo {
-    flex-shrink: 0;
-  }
-
-  .utpp-navProfileName {
-    max-width: 130px;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
-@media (max-width: 560px) {
-  .utpp-headerNavbar {
-    padding-inline: 7px;
-    gap: 6px;
-  }
-
-  .utpp-navigBar {
-    flex: 0 1 34%;
-  }
-
-  .utpp-navigMod {
-    max-width: 58vw;
-    gap: 7px;
-  }
 
-  .utpp-navProfileName {
-    max-width: 90px;
-  }
 }
-*/
