@@ -1,75 +1,7 @@
 (() => {
 
-  /* ==========================================================================
-     CONFIGURATION
-     ========================================================================== */
-
   const NAVBAR_SELECTOR = ".utpp-headerNavbar";
   const GENERATED_SELECTOR = ".utpp-navigBar";
-
-
-  const labels = [
-
-    {
-      label: "home sweet home",
-
-      match: (href, text) =>
-        href === "/" ||
-        href === "/forum" ||
-        href === "/forum.htm" ||
-        text === "accueil"
-    },
-
-    {
-      label: "les habitants de philadelphie",
-
-      match: (href, text) =>
-        href.startsWith("/memberlist") ||
-        text === "membres"
-    },
-
-    {
-      label: "groupes",
-
-      match: (href, text) =>
-        href.startsWith("/groups") ||
-        text === "groupes"
-    },
-
-    {
-      label: "rechercher",
-
-      match: (href, text) =>
-        href.startsWith("/search") ||
-        text === "rechercher"
-    },
-
-    {
-      label: "modifier son profil",
-
-      match: (href, text) =>
-        href.startsWith("/profile") ||
-        text === "profil"
-    },
-
-    {
-      label: "boîte aux lettres",
-
-      match: (href, text) =>
-        href.startsWith("/privmsg") ||
-        text === "messagerie"
-    },
-
-    {
-      label: "à la revoyure",
-
-      match: (href, text, rawHref) =>
-        rawHref.includes("logout=1") ||
-        text.includes("déconnexion") ||
-        text.includes("deconnexion")
-    }
-
-  ];
 
 
   /* ==========================================================================
@@ -77,52 +9,30 @@
      ========================================================================== */
 
   const normalize = (value) => {
-
     return String(value || "")
       .replace(/\u00a0/g, " ")
       .replace(/\s+/g, " ")
       .trim()
       .toLowerCase();
-
   };
 
 
   const getPath = (link) => {
-
-    const rawHref =
-      link?.getAttribute("href") || "";
-
+    const rawHref = link?.getAttribute("href") || "";
 
     try {
-
-      const url =
-        new URL(
-          rawHref,
-          window.location.origin
-        );
-
-
-      return (
-        `${url.pathname}${url.search}`
-      ).toLowerCase();
-
+      const url = new URL(rawHref, window.location.origin);
+      return `${url.pathname}${url.search}`.toLowerCase();
     } catch (e) {
-
       return rawHref.toLowerCase();
-
     }
-
   };
 
 
   const getCleanLabel = (element) => {
-
     if (!element) return "";
 
-
-    const img =
-      element.querySelector?.("img");
-
+    const img = element.querySelector?.("img");
 
     return (
       element.getAttribute?.("title") ||
@@ -133,42 +43,25 @@
       .replace(/\u00a0/g, " ")
       .replace(/\s+/g, " ")
       .trim();
-
   };
 
 
   const normalizePath = (href) => {
-
     try {
-
-      const url =
-        new URL(
-          href,
-          window.location.origin
-        );
-
-
+      const url = new URL(href, window.location.origin);
       return url.pathname.toLowerCase();
-
     } catch (e) {
-
-      return String(
-        href || ""
-      ).toLowerCase();
-
+      return String(href || "").toLowerCase();
     }
-
   };
 
 
   const isHomePath = (path) => {
-
     return (
       path === "/" ||
       path === "/forum" ||
       path === "/forum.htm"
     );
-
   };
 
 
@@ -178,21 +71,13 @@
 
   const createProfile = () => {
 
-    const data =
-      window._userdata || {};
-
+    const data = window._userdata || {};
 
     const loggedIn =
-      Number(
-        data.session_logged_in
-      ) === 1;
-
+      Number(data.session_logged_in) === 1;
 
     const userId =
-      Number(
-        data.user_id
-      );
-
+      Number(data.user_id);
 
     const username =
       loggedIn && data.username
@@ -203,16 +88,13 @@
     const profile =
       document.createElement("a");
 
-
     profile.className =
       "utpp-navProfile";
-
 
     profile.href =
       loggedIn && userId > 0
         ? `/u${userId}`
         : "/login";
-
 
     profile.setAttribute(
       "aria-label",
@@ -225,15 +107,11 @@
     const avatar =
       document.createElement("span");
 
-
     avatar.className =
       "utpp-navProfileAvatar";
 
 
-    if (
-      loggedIn &&
-      data.avatar
-    ) {
+    if (loggedIn && data.avatar) {
 
       avatar.innerHTML =
         data.avatar;
@@ -243,14 +121,11 @@
       const fallback =
         document.createElement("span");
 
-
       fallback.className =
         "utpp-navProfileFallback";
 
-
       fallback.textContent =
         "?";
-
 
       avatar.appendChild(
         fallback
@@ -262,10 +137,8 @@
     const openBracket =
       document.createElement("span");
 
-
     openBracket.className =
       "utpp-navProfileBracket";
-
 
     openBracket.textContent =
       "[";
@@ -274,10 +147,8 @@
     const name =
       document.createElement("span");
 
-
     name.className =
       "utpp-navProfileName";
-
 
     name.textContent =
       username;
@@ -286,10 +157,8 @@
     const closeBracket =
       document.createElement("span");
 
-
     closeBracket.className =
       "utpp-navProfileBracket";
-
 
     closeBracket.textContent =
       "]";
@@ -304,111 +173,158 @@
 
 
     return profile;
-
   };
 
 
-  const addProfile = (generated) => {
+  /* ==========================================================================
+     RENOMMAGE
+     ========================================================================== */
 
-    const oldProfile =
-      generated.querySelector(
-        ".utpp-navProfile"
-      );
+  const renameLink = (link) => {
+
+    const rawHref =
+      (link.getAttribute("href") || "")
+        .toLowerCase();
+
+    const href =
+      getPath(link);
+
+    const original =
+      getCleanLabel(link);
+
+    const text =
+      normalize(original);
 
 
-    const newProfile =
-      createProfile();
+    let finalLabel =
+      original;
 
 
-    if (oldProfile) {
+    if (
+      href === "/" ||
+      href === "/forum" ||
+      href === "/forum.htm" ||
+      text === "accueil"
+    ) {
+      finalLabel =
+        "home sweet home";
+    }
 
-      oldProfile.replaceWith(
-        newProfile
-      );
+    else if (
+      href.startsWith("/memberlist") ||
+      text === "membres"
+    ) {
+      finalLabel =
+        "les habitants de philadelphie";
+    }
 
-      return;
+    else if (
+      href.startsWith("/profile") ||
+      text === "profil"
+    ) {
+      finalLabel =
+        "modifier son profil";
+    }
 
+    else if (
+      href.startsWith("/privmsg") ||
+      text === "messagerie"
+    ) {
+      finalLabel =
+        "boîte aux lettres";
+    }
+
+    else if (
+      rawHref.includes("logout=1") ||
+      text.includes("déconnexion") ||
+      text.includes("deconnexion")
+    ) {
+      finalLabel =
+        "à la revoyure";
+    }
+
+    else if (
+      href.startsWith("/groups") ||
+      text === "groupes"
+    ) {
+      finalLabel =
+        "groupes";
     }
 
 
-    generated.insertBefore(
-      newProfile,
-      generated.firstChild
+    link.textContent =
+      finalLabel;
+
+    link.setAttribute(
+      "title",
+      finalLabel
+    );
+
+    link.setAttribute(
+      "aria-label",
+      finalLabel
     );
 
   };
 
 
   /* ==========================================================================
-     RENOMMER LES LIENS FORUMACTIF
+     ÉTAT ACTIF
      ========================================================================== */
 
-  const renameNavbarLinks = (generated) => {
+  const setActiveLink = (link) => {
 
-    generated
-      .querySelectorAll(
-        "a.mainmenu"
-      )
-      .forEach((link) => {
+    const currentPath =
+      window.location.pathname
+        .toLowerCase();
 
-        const rawHref =
-          (
-            link.getAttribute("href") ||
-            ""
-          ).toLowerCase();
+    const linkPath =
+      normalizePath(
+        link.getAttribute("href")
+      );
 
 
-        const href =
-          getPath(link);
+    const active =
+      linkPath === currentPath ||
+
+      (
+        isHomePath(currentPath) &&
+        isHomePath(linkPath)
+      ) ||
+
+      (
+        currentPath.startsWith("/privmsg") &&
+        linkPath.startsWith("/privmsg")
+      ) ||
+
+      (
+        currentPath.startsWith("/profile") &&
+        linkPath.startsWith("/profile")
+      ) ||
+
+      (
+        currentPath.startsWith("/memberlist") &&
+        linkPath.startsWith("/memberlist")
+      ) ||
+
+      (
+        currentPath.startsWith("/groups") &&
+        linkPath.startsWith("/groups")
+      );
 
 
-        const originalLabel =
-          getCleanLabel(link);
+    link.classList.toggle(
+      "utpp-activeLink",
+      active
+    );
 
 
-        const text =
-          normalize(originalLabel);
-
-
-        const item =
-          labels.find(
-            ({ match }) =>
-              match(
-                href,
-                text,
-                rawHref
-              )
-          );
-
-
-        const finalLabel =
-          item
-            ? item.label
-            : originalLabel;
-
-
-        link.textContent =
-          finalLabel;
-
-
-        link.setAttribute(
-          "title",
-          finalLabel
-        );
-
-
-        link.setAttribute(
-          "aria-label",
-          finalLabel
-        );
-
-      });
-
+    return active;
   };
 
 
   /* ==========================================================================
-     SUJET ACTUEL
+     SUJET COURANT
      ========================================================================== */
 
   const isTopicPage = () => {
@@ -417,45 +333,27 @@
       window.location.pathname
         .toLowerCase();
 
-
-    return /^\/t\d+(p\d+)?(?:-|$)/.test(
-      path
-    );
-
+    return /^\/t\d+(p\d+)?(?:-|$)/.test(path);
   };
 
 
   const getTopicTitle = () => {
 
     const selectors = [
-
       "h1.page-title",
-
       ".topic-title h1",
-
       ".topic-title",
-
       "h1"
-
     ];
 
 
-    for (
-      const selector
-      of selectors
-    ) {
+    for (const selector of selectors) {
 
       const element =
-        document.querySelector(
-          selector
-        );
-
+        document.querySelector(selector);
 
       const text =
-        getCleanLabel(
-          element
-        );
-
+        getCleanLabel(element);
 
       if (text) {
         return text;
@@ -465,193 +363,61 @@
 
 
     return document.title
-      .replace(
-        /\s[-–—]\s.*$/,
-        ""
-      )
-      .replace(
-        /\s+/g,
-        " "
-      )
+      .replace(/\s[-–—]\s.*$/, "")
+      .replace(/\s+/g, " ")
       .trim();
-
   };
 
 
-  const addContextLink = (generated) => {
-
-    const oldContext =
-      generated.querySelector(
-        ".utpp-contextLink"
-      );
-
-
-    if (oldContext) {
-      oldContext.remove();
-    }
-
+  const createContextLink = () => {
 
     if (!isTopicPage()) {
-      return;
+      return null;
     }
 
 
     const topicTitle =
       getTopicTitle();
 
-
     if (!topicTitle) {
-      return;
+      return null;
     }
 
 
-    const contextLink =
+    const context =
       document.createElement("a");
 
-
-    contextLink.className =
+    context.className =
       "utpp-contextLink";
 
-
-    contextLink.href =
+    context.href =
       window.location.href;
 
-
-    contextLink.textContent =
+    context.textContent =
       topicTitle;
 
-
-    contextLink.setAttribute(
+    context.setAttribute(
       "title",
       topicTitle
     );
 
-
-    contextLink.setAttribute(
+    context.setAttribute(
       "aria-current",
       "page"
     );
 
-
-    contextLink.setAttribute(
+    context.setAttribute(
       "aria-label",
       `Sujet actuel : ${topicTitle}`
     );
 
 
-    const profile =
-      generated.querySelector(
-        ".utpp-navProfile"
-      );
-
-
-    if (
-      profile &&
-      profile.nextSibling
-    ) {
-
-      generated.insertBefore(
-        contextLink,
-        profile.nextSibling
-      );
-
-    } else {
-
-      generated.appendChild(
-        contextLink
-      );
-
-    }
-
+    return context;
   };
 
 
   /* ==========================================================================
-     LIEN ACTIF
-     ========================================================================== */
-
-  const setActiveNavbarLink = (generated) => {
-
-    const currentPath =
-      window.location.pathname
-        .toLowerCase();
-
-
-    generated
-      .querySelectorAll(
-        "a.mainmenu"
-      )
-      .forEach((link) => {
-
-        const linkPath =
-          normalizePath(
-            link.getAttribute(
-              "href"
-            )
-          );
-
-
-        const isActive =
-          linkPath === currentPath ||
-
-          (
-            isHomePath(
-              currentPath
-            ) &&
-            isHomePath(
-              linkPath
-            )
-          ) ||
-
-          (
-            currentPath.startsWith(
-              "/privmsg"
-            ) &&
-            linkPath.startsWith(
-              "/privmsg"
-            )
-          ) ||
-
-          (
-            currentPath.startsWith(
-              "/profile"
-            ) &&
-            linkPath.startsWith(
-              "/profile"
-            )
-          ) ||
-
-          (
-            currentPath.startsWith(
-              "/memberlist"
-            ) &&
-            linkPath.startsWith(
-              "/memberlist"
-            )
-          ) ||
-
-          (
-            currentPath.startsWith(
-              "/groups"
-            ) &&
-            linkPath.startsWith(
-              "/groups"
-            )
-          );
-
-
-        link.classList.toggle(
-          "utpp-activeLink",
-          isActive
-        );
-
-      });
-
-  };
-
-
-  /* ==========================================================================
-     CRÉATION DES SOUS-MENUS
+     GROUPE DE NAVIGATION
      ========================================================================== */
 
   const createNavGroup = (
@@ -664,27 +430,21 @@
     }
 
 
-    const item =
-      document.createElement("li");
+    const group =
+      document.createElement("div");
 
-
-    item.className =
+    group.className =
       "utpp-navGroup";
 
 
     const toggle =
-      document.createElement(
-        "button"
-      );
-
+      document.createElement("button");
 
     toggle.className =
       "utpp-navGroup-toggle";
 
-
     toggle.type =
       "button";
-
 
     toggle.setAttribute(
       "aria-expanded",
@@ -693,20 +453,14 @@
 
 
     const text =
-      document.createElement(
-        "span"
-      );
-
+      document.createElement("span");
 
     text.textContent =
       label;
 
 
     const icon =
-      document.createElement(
-        "i"
-      );
-
+      document.createElement("i");
 
     icon.setAttribute(
       "data-lucide",
@@ -715,13 +469,38 @@
 
 
     const panel =
-      document.createElement(
-        "div"
-      );
-
+      document.createElement("div");
 
     panel.className =
       "utpp-navGroup-panel";
+
+
+    let containsActive =
+      false;
+
+
+    links.forEach((link) => {
+
+      if (
+        link.classList.contains(
+          "utpp-activeLink"
+        )
+      ) {
+        containsActive = true;
+      }
+
+      panel.appendChild(
+        link
+      );
+
+    });
+
+
+    if (containsActive) {
+      group.classList.add(
+        "has-active"
+      );
+    }
 
 
     toggle.append(
@@ -729,71 +508,37 @@
       icon
     );
 
-
-    links.forEach((link) => {
-
-      const oldParent =
-        link.parentElement;
-
-
-      panel.appendChild(
-        link
-      );
-
-
-      if (
-        oldParent?.tagName === "LI" &&
-        oldParent.children.length === 0 &&
-        !oldParent.textContent.trim()
-      ) {
-
-        oldParent.remove();
-
-      }
-
-    });
-
-
-    item.append(
+    group.append(
       toggle,
       panel
     );
 
 
-    return item;
-
+    return group;
   };
 
 
-  const buildNavbarMenus = (
-    generated
+  /* ==========================================================================
+     RECONSTRUIRE LA NAVIGATION
+     ========================================================================== */
+
+  const buildNavigation = (
+    generated,
+    searchTool
   ) => {
 
     if (
       generated.dataset
-        .utppMenusBuilt === "true"
+        .utppNavigationBuilt ===
+        "true"
     ) {
-      return;
-    }
-
-
-    const list =
-      generated.querySelector(
-        ":scope > ul"
-      ) ||
-      generated.querySelector(
-        "ul"
-      );
-
-
-    if (!list) {
       return;
     }
 
 
     const links =
       Array.from(
-        list.querySelectorAll(
+        generated.querySelectorAll(
           "a.mainmenu"
         )
       );
@@ -804,19 +549,38 @@
     }
 
 
+    const homeLinks = [];
     const cityLinks = [];
     const accountLinks = [];
+    const logoutLinks = [];
+    const otherLinks = [];
 
 
-    let homeLink = null;
-    let logoutLink = null;
+    let searchHref =
+      "/search";
+
+
+    const ignoredPrefixes = [
+      "/calendar",
+      "/gallery",
+      "/images",
+      "/discover",
+      "/faq"
+    ];
 
 
     links.forEach((link) => {
 
+      renameLink(link);
+      setActiveLink(link);
+
+
       const href =
         getPath(link);
 
+      const rawHref =
+        (link.getAttribute("href") || "")
+          .toLowerCase();
 
       const text =
         normalize(
@@ -824,258 +588,240 @@
         );
 
 
-      const rawHref =
-        (
-          link.getAttribute(
-            "href"
-          ) ||
-          ""
-        ).toLowerCase();
-
-
-      /* ------------------------------------------
-         HOME
-      ------------------------------------------ */
-
       if (
-        href === "/" ||
-        href === "/forum" ||
-        href === "/forum.htm" ||
-        text === "home sweet home"
+        ignoredPrefixes.some(
+          prefix =>
+            href.startsWith(prefix)
+        )
       ) {
-
-        homeLink =
-          link;
-
-
-        link.classList.add(
-          "utpp-navStandalone"
-        );
-
-
         return;
-
       }
 
 
-      /* ------------------------------------------
-         PHILADELPHIE
-      ------------------------------------------ */
+      if (
+        href.startsWith("/search")
+      ) {
+
+        searchHref =
+          link.getAttribute("href") ||
+          "/search";
+
+        return;
+      }
+
 
       if (
-        href.startsWith(
-          "/memberlist"
+        isHomePath(
+          normalizePath(
+            link.getAttribute("href")
+          )
         ) ||
-        href.startsWith(
-          "/groups"
-        ) ||
-        href.startsWith(
-          "/search"
-        )
+        text === "home sweet home"
+      ) {
+
+        homeLinks.push(
+          link
+        );
+
+        return;
+      }
+
+
+      if (
+        href.startsWith("/memberlist") ||
+        href.startsWith("/groups")
       ) {
 
         cityLinks.push(
           link
         );
 
-
         return;
-
       }
 
 
-      /* ------------------------------------------
-         COMPTE
-      ------------------------------------------ */
-
       if (
-        href.startsWith(
-          "/profile"
-        ) ||
-        href.startsWith(
-          "/privmsg"
-        )
+        href.startsWith("/profile") ||
+        href.startsWith("/privmsg")
       ) {
 
         accountLinks.push(
           link
         );
 
-
         return;
-
       }
 
-
-      /* ------------------------------------------
-         LOGOUT
-      ------------------------------------------ */
 
       if (
-        rawHref.includes(
-          "logout=1"
-        ) ||
-        text.includes(
-          "revoyure"
-        ) ||
-        text.includes(
-          "déconnexion"
-        ) ||
-        text.includes(
-          "deconnexion"
-        )
+        rawHref.includes("logout=1") ||
+        text.includes("revoyure") ||
+        text.includes("déconnexion") ||
+        text.includes("deconnexion")
       ) {
 
-        logoutLink =
-          link;
-
-
-        link.classList.add(
-          "utpp-navStandalone"
+        logoutLinks.push(
+          link
         );
 
-
         return;
-
       }
 
 
-      /* ------------------------------------------
-         LIEN INCONNU
-         On le garde visible par sécurité.
-      ------------------------------------------ */
-
-      link.classList.add(
-        "utpp-navStandalone"
+      otherLinks.push(
+        link
       );
 
     });
 
 
-    const cityMenu =
+    const primary =
+      document.createElement("div");
+
+    primary.className =
+      "utpp-navPrimary";
+
+
+    const profile =
+      createProfile();
+
+
+    primary.appendChild(
+      profile
+    );
+
+
+    const context =
+      createContextLink();
+
+
+    if (context) {
+
+      primary.appendChild(
+        context
+      );
+
+    }
+
+
+    homeLinks.forEach(
+      link =>
+        primary.appendChild(link)
+    );
+
+
+    const city =
       createNavGroup(
         "Philadelphie",
         cityLinks
       );
 
 
-    const accountMenu =
+    if (city) {
+
+      primary.appendChild(
+        city
+      );
+
+    }
+
+
+    const account =
       createNavGroup(
         "Mon compte",
         accountLinks
       );
 
 
-    const homeItem =
-      homeLink?.closest("li");
+    if (account) {
 
-
-    if (cityMenu) {
-
-      if (
-        homeItem &&
-        homeItem.parentElement === list
-      ) {
-
-        homeItem.after(
-          cityMenu
-        );
-
-      } else {
-
-        list.prepend(
-          cityMenu
-        );
-
-      }
-
-    }
-
-
-    if (accountMenu) {
-
-      if (
-        cityMenu &&
-        cityMenu.parentElement === list
-      ) {
-
-        cityMenu.after(
-          accountMenu
-        );
-
-      } else {
-
-        list.appendChild(
-          accountMenu
-        );
-
-      }
-
-    }
-
-
-    const logoutItem =
-      logoutLink?.closest("li");
-
-
-    if (
-      logoutItem &&
-      logoutItem.parentElement === list
-    ) {
-
-      list.appendChild(
-        logoutItem
+      primary.appendChild(
+        account
       );
 
     }
 
 
+    otherLinks.forEach(
+      link =>
+        primary.appendChild(link)
+    );
+
+
+    logoutLinks.forEach(
+      link =>
+        primary.appendChild(link)
+    );
+
+
+    generated.replaceChildren(
+      primary
+    );
+
+
     generated.dataset
-      .utppMenusBuilt =
+      .utppNavigationBuilt =
         "true";
+
+
+    const advanced =
+      searchTool?.querySelector(
+        ".utpp-searchAdvanced"
+      );
+
+
+    if (advanced) {
+
+      advanced.href =
+        searchHref;
+
+    }
 
   };
 
 
   /* ==========================================================================
-     PANNEAUX OUVERTS AU CLIC
+     MENUS AU CLIC
      ========================================================================== */
 
-  const closeAllMenus = (
-    exception = null
+  const getDropdowns = () => {
+    return document.querySelectorAll(
+      ".utpp-navGroup, " +
+      ".utpp-searchTool, " +
+      ".utpp-controlCenter, " +
+      ".utpp-switcher"
+    );
+  };
+
+
+  const closeAllDropdowns = (
+    except = null
   ) => {
 
-    document
-      .querySelectorAll(
-        ".utpp-navGroup.is-open, " +
-        ".utpp-controlCenter.is-open, " +
-        ".utpp-switcher.is-open"
-      )
-      .forEach((element) => {
+    getDropdowns()
+      .forEach((dropdown) => {
 
         if (
-          exception &&
-          element === exception
+          except &&
+          dropdown === except
         ) {
           return;
         }
 
 
-        element.classList.remove(
+        dropdown.classList.remove(
           "is-open"
         );
 
 
-        const toggle =
-          element.querySelector(
+        dropdown
+          .querySelector(
             ":scope > button"
+          )
+          ?.setAttribute(
+            "aria-expanded",
+            "false"
           );
-
-
-        toggle?.setAttribute(
-          "aria-expanded",
-          "false"
-        );
 
       });
 
@@ -1083,15 +829,17 @@
 
 
   const bindDropdown = (
-    element
+    dropdown
   ) => {
 
-    if (!element) return;
+    if (!dropdown) {
+      return;
+    }
 
 
     if (
-      element.dataset
-        .utppDropdownBound ===
+      dropdown.dataset
+        .utppBound ===
         "true"
     ) {
       return;
@@ -1099,17 +847,18 @@
 
 
     const toggle =
-      element.querySelector(
+      dropdown.querySelector(
         ":scope > button"
       );
 
 
-    if (!toggle) return;
+    if (!toggle) {
+      return;
+    }
 
 
-    element.dataset
-      .utppDropdownBound =
-        "true";
+    dropdown.dataset.utppBound =
+      "true";
 
 
     toggle.addEventListener(
@@ -1120,46 +869,55 @@
         event.stopPropagation();
 
 
-        const isOpen =
-          element.classList
-            .contains(
-              "is-open"
-            );
+        const currentlyOpen =
+          dropdown.classList
+            .contains("is-open");
 
 
-        closeAllMenus(
-          element
+        closeAllDropdowns(
+          dropdown
         );
 
 
-        element.classList.toggle(
+        dropdown.classList.toggle(
           "is-open",
-          !isOpen
+          !currentlyOpen
         );
 
 
         toggle.setAttribute(
           "aria-expanded",
-          String(
-            !isOpen
-          )
+          String(!currentlyOpen)
         );
+
+
+        if (
+          !currentlyOpen &&
+          dropdown.classList.contains(
+            "utpp-searchTool"
+          )
+        ) {
+
+          setTimeout(() => {
+
+            dropdown
+              .querySelector(
+                'input[type="search"]'
+              )
+              ?.focus();
+
+          }, 30);
+
+        }
 
       });
 
   };
 
 
-  const bindDropdowns = (
-    navbar
-  ) => {
+  const bindDropdowns = () => {
 
-    navbar
-      .querySelectorAll(
-        ".utpp-navGroup, " +
-        ".utpp-controlCenter, " +
-        ".utpp-switcher"
-      )
+    getDropdowns()
       .forEach(
         bindDropdown
       );
@@ -1168,7 +926,7 @@
 
 
   /* ==========================================================================
-     SWITCHEROO — AVATAR DU COMPTE ACTIF
+     SWITCHEROO — AVATAR COURANT
      ========================================================================== */
 
   const setupSwitcherAvatar = (
@@ -1195,13 +953,43 @@
     }
 
 
-    if (
-      switcheroo.dataset
-        .utppAvatarObserver ===
-        "true"
-    ) {
-      return;
-    }
+    const setFallbackAvatar =
+      () => {
+
+        const data =
+          window._userdata || {};
+
+
+        if (!data.avatar) {
+          return;
+        }
+
+
+        const temp =
+          document.createElement("div");
+
+        temp.innerHTML =
+          data.avatar;
+
+
+        const img =
+          temp.querySelector("img");
+
+
+        if (!img) {
+          return;
+        }
+
+
+        current.innerHTML =
+          "";
+
+
+        current.appendChild(
+          img.cloneNode(true)
+        );
+
+      };
 
 
     const updateCurrentAvatar =
@@ -1220,7 +1008,11 @@
 
 
         if (!img) {
+
+          setFallbackAvatar();
+
           return;
+
         }
 
 
@@ -1229,9 +1021,7 @@
 
 
         const clone =
-          img.cloneNode(
-            true
-          );
+          img.cloneNode(true);
 
 
         clone.removeAttribute(
@@ -1252,6 +1042,15 @@
 
 
     updateCurrentAvatar();
+
+
+    if (
+      switcheroo.dataset
+        .utppAvatarObserver ===
+        "true"
+    ) {
+      return;
+    }
 
 
     const observer =
@@ -1277,7 +1076,7 @@
 
 
   /* ==========================================================================
-     FERMETURES GLOBALES
+     ÉVÉNEMENTS GLOBAUX
      ========================================================================== */
 
   const setupGlobalEvents = () => {
@@ -1285,7 +1084,7 @@
     if (
       document.documentElement
         .dataset
-        .utppNavbarGlobalEvents ===
+        .utppNavbarEvents ===
         "true"
     ) {
       return;
@@ -1294,7 +1093,7 @@
 
     document.documentElement
       .dataset
-      .utppNavbarGlobalEvents =
+      .utppNavbarEvents =
         "true";
 
 
@@ -1305,6 +1104,7 @@
         if (
           event.target.closest(
             ".utpp-navGroup, " +
+            ".utpp-searchTool, " +
             ".utpp-controlCenter, " +
             ".utpp-switcher"
           )
@@ -1313,7 +1113,7 @@
         }
 
 
-        closeAllMenus();
+        closeAllDropdowns();
 
       }
     );
@@ -1330,7 +1130,7 @@
         }
 
 
-        closeAllMenus();
+        closeAllDropdowns();
 
       }
     );
@@ -1361,39 +1161,24 @@
       );
 
 
+    const searchTool =
+      navbar.querySelector(
+        ".utpp-searchTool"
+      );
+
+
     if (!generated) {
       return;
     }
 
 
-    addProfile(
-      generated
+    buildNavigation(
+      generated,
+      searchTool
     );
 
 
-    renameNavbarLinks(
-      generated
-    );
-
-
-    addContextLink(
-      generated
-    );
-
-
-    setActiveNavbarLink(
-      generated
-    );
-
-
-    buildNavbarMenus(
-      generated
-    );
-
-
-    bindDropdowns(
-      navbar
-    );
+    bindDropdowns();
 
 
     setupSwitcherAvatar(
@@ -1433,277 +1218,3 @@
   bootNavbar();
 
 })();
-
-/* (() => {
-  const NAVBAR_SELECTOR = ".utpp-headerNavbar";
-  const GENERATED_SELECTOR = ".utpp-navigBar";
-
-  const labels = [
-    {
-      label: "home sweet home",
-      match: (href, text) =>
-        href === "/" ||
-        href === "/forum" ||
-        href === "/forum.htm" ||
-        text === "accueil"
-    },
-    {
-      label: "les habitants de philadelphie",
-      match: (href, text) =>
-        href.startsWith("/memberlist") ||
-        text === "membres"
-    },
-    {
-      label: "modifier son profil",
-      match: (href, text) =>
-        href.startsWith("/profile") ||
-        text === "profil"
-    },
-    {
-      label: "boîte aux lettres",
-      match: (href, text) =>
-        href.startsWith("/privmsg") ||
-        text === "messagerie"
-    },
-    {
-      label: "à la revoyure (se déconnecter)",
-      match: (href, text, rawHref) =>
-        rawHref.includes("logout=1") ||
-        text.includes("déconnexion") ||
-        text.includes("deconnexion")
-    }
-  ];
-
-  const normalize = (value) => {
-    return String(value || "")
-      .replace(/\u00a0/g, " ")
-      .replace(/\s+/g, " ")
-      .trim()
-      .toLowerCase();
-  };
-
-  const getPath = (link) => {
-    const rawHref = link?.getAttribute("href") || "";
-
-    try {
-      const url = new URL(rawHref, window.location.origin);
-      return `${url.pathname}${url.search}`.toLowerCase();
-    } catch (e) {
-      return rawHref.toLowerCase();
-    }
-  };
-
-  const getCleanLabel = (element) => {
-    if (!element) return "";
-
-    const img = element.querySelector?.("img");
-
-    return (
-      element.getAttribute?.("title") ||
-      img?.getAttribute("alt") ||
-      element.textContent ||
-      ""
-    )
-      .replace(/\u00a0/g, " ")
-      .replace(/\s+/g, " ")
-      .trim();
-  };
-
-  const createProfile = () => {
-    const data = window._userdata || {};
-    const loggedIn = Number(data.session_logged_in) === 1;
-    const userId = Number(data.user_id);
-    const username = loggedIn && data.username ? data.username : "Invité";
-
-    const profile = document.createElement("a");
-    profile.className = "utpp-navProfile";
-    profile.href = loggedIn && userId > 0 ? `/u${userId}` : "/login";
-    profile.setAttribute(
-      "aria-label",
-      loggedIn ? `Profil de ${username}` : "Connexion"
-    );
-
-    const avatar = document.createElement("span");
-    avatar.className = "utpp-navProfileAvatar";
-
-    if (loggedIn && data.avatar) {
-      avatar.innerHTML = data.avatar;
-    } else {
-      const fallback = document.createElement("span");
-      fallback.className = "utpp-navProfileFallback";
-      fallback.textContent = "?";
-      avatar.appendChild(fallback);
-    }
-
-    const openBracket = document.createElement("span");
-    openBracket.className = "utpp-navProfileBracket";
-    openBracket.textContent = "[";
-
-    const name = document.createElement("span");
-    name.className = "utpp-navProfileName";
-    name.textContent = username;
-
-    const closeBracket = document.createElement("span");
-    closeBracket.className = "utpp-navProfileBracket";
-    closeBracket.textContent = "]";
-
-    profile.append(avatar, openBracket, name, closeBracket);
-
-    return profile;
-  };
-
-  const addProfile = (generated) => {
-    const oldProfile = generated.querySelector(".utpp-navProfile");
-    const newProfile = createProfile();
-
-    if (oldProfile) {
-      oldProfile.replaceWith(newProfile);
-      return;
-    }
-
-    generated.insertBefore(newProfile, generated.firstChild);
-  };
-
-  const renameNavbarLinks = (generated) => {
-    generated.querySelectorAll("a.mainmenu").forEach((link) => {
-      const rawHref = (link.getAttribute("href") || "").toLowerCase();
-      const href = getPath(link);
-      const originalLabel = getCleanLabel(link);
-      const text = normalize(originalLabel);
-
-      const item = labels.find(({ match }) => match(href, text, rawHref));
-      const finalLabel = item ? item.label : originalLabel;
-
-      link.textContent = finalLabel;
-      link.setAttribute("title", finalLabel);
-      link.setAttribute("aria-label", finalLabel);
-    });
-  };
-
-  const isTopicPage = () => {
-    const path = window.location.pathname.toLowerCase();
-
-    return /^\/t\d+(p\d+)?(?:-|$)/.test(path);
-  };
-
-  const getTopicTitle = () => {
-    const selectors = [
-      "h1.page-title",
-      ".topic-title h1",
-      ".topic-title",
-      "h1"
-    ];
-
-    for (const selector of selectors) {
-      const element = document.querySelector(selector);
-      const text = getCleanLabel(element);
-
-      if (text) {
-        return text;
-      }
-    }
-
-    return document.title
-      .replace(/\s[-–—]\s.*$/, "")
-      .replace(/\s+/g, " ")
-      .trim();
-  };
-
-  const addContextLink = (generated) => {
-    const oldContext = generated.querySelector(".utpp-contextLink");
-
-    if (oldContext) {
-      oldContext.remove();
-    }
-
-    if (!isTopicPage()) return;
-
-    const topicTitle = getTopicTitle();
-
-    if (!topicTitle) return;
-
-    const contextLink = document.createElement("a");
-    contextLink.className = "utpp-contextLink";
-    contextLink.href = window.location.href;
-    contextLink.textContent = topicTitle;
-    contextLink.setAttribute("title", topicTitle);
-    contextLink.setAttribute("aria-current", "page");
-    contextLink.setAttribute("aria-label", `Sujet actuel : ${topicTitle}`);
-
-    const children = Array.from(generated.children);
-
-    const firstMenuBlock = children.find((child) => {
-      return (
-        child.matches?.("a.mainmenu") ||
-        child.querySelector?.("a.mainmenu")
-      );
-    });
-
-    if (firstMenuBlock) {
-      generated.insertBefore(contextLink, firstMenuBlock);
-    } else {
-      generated.appendChild(contextLink);
-    }
-  };
-
-  const normalizePath = (href) => {
-    try {
-      const url = new URL(href, window.location.origin);
-      return url.pathname.toLowerCase();
-    } catch (e) {
-      return String(href || "").toLowerCase();
-    }
-  };
-
-  const isHomePath = (path) => {
-    return path === "/" || path === "/forum" || path === "/forum.htm";
-  };
-
-  const setActiveNavbarLink = (generated) => {
-    const currentPath = window.location.pathname.toLowerCase();
-
-    generated.querySelectorAll("a.mainmenu").forEach((link) => {
-      const linkPath = normalizePath(link.getAttribute("href"));
-
-      const isActive =
-        linkPath === currentPath ||
-        (isHomePath(currentPath) && isHomePath(linkPath)) ||
-        (
-          currentPath.startsWith("/privmsg") &&
-          linkPath.startsWith("/privmsg")
-        ) ||
-        (
-          currentPath.startsWith("/profile") &&
-          linkPath.startsWith("/profile")
-        ) ||
-        (
-          currentPath.startsWith("/memberlist") &&
-          linkPath.startsWith("/memberlist")
-        );
-
-      link.classList.toggle("utpp-activeLink", isActive);
-    });
-  };
-
-  const bootNavbar = () => {
-    const navbar = document.querySelector(NAVBAR_SELECTOR);
-    if (!navbar) return;
-
-    const generated = navbar.querySelector(GENERATED_SELECTOR);
-    if (!generated) return;
-
-    addProfile(generated);
-    renameNavbarLinks(generated);
-    addContextLink(generated);
-    setActiveNavbarLink(generated);
-
-    if (window.lucide && typeof window.lucide.createIcons === "function") {
-      window.lucide.createIcons();
-    }
-  };
-
-  document.addEventListener("DOMContentLoaded", bootNavbar);
-  window.addEventListener("load", bootNavbar);
-
-  bootNavbar();
-})(); */
