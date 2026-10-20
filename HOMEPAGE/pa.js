@@ -1,6 +1,107 @@
 (function () {
   "use strict";
 
+  function initHomepage() {
+    initWeatherModal();
+    initHomepageAccordion();
+    initWantedTooltips();
+    renderLucideIcons();
+  }
+
+  function initWeatherModal() {
+    const modal = document.getElementById(
+      "utppHP_weatherModal"
+    );
+
+    if (
+      !modal ||
+      modal.dataset.initialized === "true"
+    ) {
+      return;
+    }
+
+    const panel = modal.querySelector(
+      ".utppHP_weatherWindow"
+    );
+
+    const openers = document.querySelectorAll(
+      "[data-utpp-weather-open]"
+    );
+
+    const closers = modal.querySelectorAll(
+      "[data-utpp-weather-close]"
+    );
+
+    if (!panel) {
+      return;
+    }
+
+    let previousFocus = null;
+
+    function openWeather() {
+      if (modal.classList.contains("is-open")) {
+        return;
+      }
+
+      previousFocus = document.activeElement;
+
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+
+      panel.focus();
+
+      renderLucideIcons();
+    }
+
+    function closeWeather() {
+      if (!modal.classList.contains("is-open")) {
+        return;
+      }
+
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+
+      if (
+        previousFocus &&
+        typeof previousFocus.focus === "function"
+      ) {
+        previousFocus.focus();
+      }
+    }
+
+    openers.forEach(function (opener) {
+      opener.addEventListener("click", openWeather);
+
+      opener.addEventListener("keydown", function (event) {
+        if (
+          event.key === "Enter" ||
+          event.key === " "
+        ) {
+          event.preventDefault();
+          openWeather();
+        }
+      });
+    });
+
+    closers.forEach(function (closer) {
+      closer.addEventListener("click", closeWeather);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (!modal.classList.contains("is-open")) {
+        return;
+      }
+
+      if (event.key === "Escape") {
+        closeWeather();
+      }
+    });
+
+    modal.dataset.initialized = "true";
+  }
+
   function initHomepageAccordion() {
     const homepage = document.querySelector(
       ".utppHP_home"
@@ -61,51 +162,39 @@
         ".utppHP_featureButton"
       );
 
-      item.addEventListener(
-        "click",
-        function (event) {
+      item.addEventListener("click", function (event) {
+        if (
+          event.target.closest(
+            ".utppHP_featureContent a"
+          )
+        ) {
+          return;
+        }
 
-          if (
-            event.target.closest(
-              ".utppHP_featureContent a"
-            )
-          ) {
-            return;
-          }
+        activateItem(item);
+      });
 
+      item.addEventListener("keydown", function (event) {
+        if (
+          event.key === "Enter" ||
+          event.key === " "
+        ) {
+          event.preventDefault();
           activateItem(item);
         }
-      );
-
-      item.addEventListener(
-        "keydown",
-        function (event) {
-          if (
-            event.key === "Enter" ||
-            event.key === " "
-          ) {
-            event.preventDefault();
-            activateItem(item);
-          }
-        }
-      );
+      });
 
       if (button) {
-        button.addEventListener(
-          "click",
-          function (event) {
-            event.stopPropagation();
-            activateItem(item);
-          }
-        );
+        button.addEventListener("click", function (event) {
+          event.stopPropagation();
+          activateItem(item);
+        });
       }
     });
 
     const initialItem =
       items.find(function (item) {
-        return item.classList.contains(
-          "is-active"
-        );
+        return item.classList.contains("is-active");
       }) || items[0];
 
     if (initialItem) {
@@ -132,18 +221,10 @@
       tooltip = document.createElement("div");
 
       tooltip.id = "utppHP-wanted-tooltip";
-      tooltip.className =
-        "utppHP_wantedTooltip";
+      tooltip.className = "utppHP_wantedTooltip";
 
-      tooltip.setAttribute(
-        "role",
-        "tooltip"
-      );
-
-      tooltip.setAttribute(
-        "aria-hidden",
-        "true"
-      );
+      tooltip.setAttribute("role", "tooltip");
+      tooltip.setAttribute("aria-hidden", "true");
 
       document.body.appendChild(tooltip);
     }
@@ -182,11 +263,8 @@
         top = targetRect.bottom + gap;
       }
 
-      tooltip.style.left =
-        Math.round(left) + "px";
-
-      tooltip.style.top =
-        Math.round(top) + "px";
+      tooltip.style.left = Math.round(left) + "px";
+      tooltip.style.top = Math.round(top) + "px";
     }
 
     function showTooltip(character) {
@@ -200,30 +278,18 @@
 
       tooltip.replaceChildren();
 
-      const title =
-        document.createElement("strong");
-
-      const mention =
-        document.createElement("span");
+      const title = document.createElement("strong");
+      const mention = document.createElement("span");
 
       title.textContent = name;
 
       mention.textContent =
         waiting + " attend ce personnage";
 
-      tooltip.append(
-        title,
-        mention
-      );
+      tooltip.append(title, mention);
 
-      tooltip.classList.add(
-        "is-visible"
-      );
-
-      tooltip.setAttribute(
-        "aria-hidden",
-        "false"
-      );
+      tooltip.classList.add("is-visible");
+      tooltip.setAttribute("aria-hidden", "false");
 
       requestAnimationFrame(function () {
         positionTooltip(character);
@@ -231,20 +297,12 @@
     }
 
     function hideTooltip() {
-      tooltip.classList.remove(
-        "is-visible"
-      );
-
-      tooltip.setAttribute(
-        "aria-hidden",
-        "true"
-      );
+      tooltip.classList.remove("is-visible");
+      tooltip.setAttribute("aria-hidden", "true");
     }
 
     characters.forEach(function (character) {
-      if (
-        character.dataset.tooltipReady === "true"
-      ) {
+      if (character.dataset.tooltipReady === "true") {
         return;
       }
 
@@ -253,43 +311,32 @@
         tooltip.id
       );
 
-      character.addEventListener(
-        "mouseenter",
-        function () {
-          showTooltip(character);
-        }
-      );
+      character.addEventListener("mouseenter", function () {
+        showTooltip(character);
+      });
 
-      character.addEventListener(
-        "mouseleave",
-        hideTooltip
-      );
+      character.addEventListener("mouseleave", hideTooltip);
 
-      character.addEventListener(
-        "focus",
-        function () {
-          showTooltip(character);
-        }
-      );
+      character.addEventListener("focus", function () {
+        showTooltip(character);
+      });
 
-      character.addEventListener(
-        "blur",
-        hideTooltip
-      );
+      character.addEventListener("blur", hideTooltip);
 
       character.dataset.tooltipReady = "true";
     });
 
-    window.addEventListener(
-      "resize",
-      hideTooltip
-    );
+    if (tooltip.dataset.eventsReady !== "true") {
+      window.addEventListener("resize", hideTooltip);
 
-    window.addEventListener(
-      "scroll",
-      hideTooltip,
-      true
-    );
+      window.addEventListener(
+        "scroll",
+        hideTooltip,
+        true
+      );
+
+      tooltip.dataset.eventsReady = "true";
+    }
   }
 
   function renderLucideIcons() {
@@ -299,12 +346,6 @@
     ) {
       window.lucide.createIcons();
     }
-  }
-
-  function initHomepage() {
-    initHomepageAccordion();
-    initWantedTooltips();
-    renderLucideIcons();
   }
 
   if (document.readyState === "loading") {
