@@ -242,167 +242,115 @@
   </div>
 </div>
 
-  <div class="utppHP_weatherModal" id="utppHP_weatherModal" aria-hidden="true">
+  
+<div class="utppHP_weatherModal" id="utppHP_weatherModal" aria-hidden="true">
   <div class="utppHP_weatherOverlay" data-utpp-weather-close></div>
-
   <div class="utppHP_weatherWindow utppHP_weatherEditorialModal" role="dialog" aria-modal="true" aria-labelledby="utppHP_weatherTitle" tabindex="-1">
-    <button type="button" class="utppHP_weatherClose" data-utpp-weather-close aria-label="Fermer le bulletin">
-      <i data-lucide="x"></i>
-    </button>
+    <button class="utppHP_weatherClose" type="button" data-utpp-weather-close aria-label="Fermer la météo"><i data-lucide="x"></i></button>
 
-    <!-- MASTHEAD -->
     <div class="utppHP_weatherMasthead">
-      <div class="utppHP_weatherMastMeta">
-        <span>UTPP</span>
-        <span>Philadelphia Weather Desk</span>
+      <div class="utppHP_weatherMastheadBrand">
+        <span class="utppHP_weatherEyebrow">Philadelphia · Bulletin atmosphérique</span>
+        <span class="utppHP_weatherEdition">Service météorologique municipal</span>
       </div>
-
-      <h2 id="utppHP_weatherTitle">
-        Le bulletin météorologique
-      </h2>
-
-      <div class="utppHP_weatherEdition">
-        <span>Édition 021</span>
-        <span>Philadelphie · Octobre 2026</span>
+      <div class="utppHP_weatherMastheadMeta">
+        <span><i data-lucide="map-pin"></i> Philadelphie, Pennsylvanie</span>
+        <span><i data-lucide="radio-tower"></i> Observatoire urbain</span>
       </div>
     </div>
 
-    <!-- IMAGE EN BANDEAU -->
     <div class="utppHP_weatherHero">
-      <img src="URL_DE_TON_IMAGE_METEO" alt="Philadelphie sous une pluie automnale">
-
+      <img src="https://images.unsplash.com/photo-1519692933481-e162a57d6721?auto=format&fit=crop&w=2000&q=85" alt="Ciel orageux au-dessus d'une ville" />
+      <div class="utppHP_weatherHeroShade"></div>
       <div class="utppHP_weatherHeroCaption">
-        <span>Le temps sur la ville</span>
-        <span>Chroniques météorologiques · Automne 2026</span>
+        <span class="utppHP_weatherHeroLabel">Rapport météorologique</span>
+        <h2 id="utppHP_weatherTitle">Le ciel au-dessus de Philadelphie</h2>
+        <p>La ville change de visage lorsque la pluie s'en mêle.</p>
       </div>
     </div>
 
-    <!-- CORPS ÉDITORIAL -->
     <div class="utppHP_weatherBody">
+      <div class="utppHP_weatherMain">
+        <div class="utppHP_weatherSectionHeading">
+          <span class="utppHP_weatherEyebrow">Conditions actuelles</span>
+          <span class="utppHP_weatherUpdated"><i data-lucide="clock-3"></i> Dernier relevé · 08:42</span>
+        </div>
 
-      <div class="utppHP_weatherMainColumn">
-
-        <!-- CONDITIONS -->
-        <div class="utppHP_weatherSection">
-          <div class="utppHP_weatherSectionLabel">
-            <span>01.</span>
-            <span>Conditions actuelles</span>
+        <div class="utppHP_weatherCurrent">
+          <div class="utppHP_weatherTemperature">
+            <span class="utppHP_weatherTempValue">14°</span>
+            <span class="utppHP_weatherTempDescription">Pluie persistante</span>
+            <span class="utppHP_weatherTempFeels">Ressenti 11°</span>
           </div>
+          <div class="utppHP_weatherCurrentDetails">
+            <div class="utppHP_weatherMetric"><i data-lucide="cloud-rain"></i><span>Précipitations</span><strong>70 %</strong></div>
+            <div class="utppHP_weatherMetric"><i data-lucide="wind"></i><span>Vent</span><strong>18 km/h</strong></div>
+            <div class="utppHP_weatherMetric"><i data-lucide="droplets"></i><span>Humidité</span><strong>86 %</strong></div>
+          </div>
+        </div>
 
-          <div class="utppHP_weatherHeadline">
-            <div>
-              <h3>Pluie persistante</h3>
-              <p>Un ciel bas sur la ville.</p>
+        <div class="utppHP_weatherAnomaly" data-anomaly="true" data-level="2">
+          <div class="utppHP_weatherAnomalyHeader">
+            <div class="utppHP_weatherAnomalyLabel"><i data-lucide="radio-tower"></i><span>Anomalie atmosphérique</span></div>
+            <div class="utppHP_weatherLevel">
+              <span class="utppHP_weatherLevelName">Niveau II</span>
+              <div class="utppHP_weatherLevelBars" aria-label="Niveau 2 sur 3">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
             </div>
-
-            <div class="utppHP_weatherTemperature">
-              <strong>14°</strong>
-              <span>Vent froid</span>
-            </div>
           </div>
-
-          <div class="utppHP_weatherFacts">
-            <span>
-              <i data-lucide="cloud-rain"></i>
-              Pluie continue
-            </span>
-            <span>
-              <i data-lucide="wind"></i>
-              Vent froid
-            </span>
-            <span>
-              <i data-lucide="cloud"></i>
-              Ciel couvert
-            </span>
+          <div class="utppHP_weatherAnomalyContent">
+            <span class="utppHP_weatherAnomalyTag">Phénomène inhabituel</span>
+            <h3>Des pluies de cendres</h3>
+            <p>Une poussière sombre, semblable à de la cendre, a été signalée dans plusieurs secteurs de la ville. Son origine demeure indéterminée et aucune explication météorologique ne permet, à ce stade, d'en rendre compte.</p>
           </div>
-
-          <p class="utppHP_weatherDescription">
-            La pluie s'attarde sur Philadelphie, brouillant les
-            silhouettes et noyant les bruits de la circulation
-            sous un voile gris. Les rues brillent d'un reflet
-            terne, tandis que l'humidité s'insinue partout.
-          </p>
+          <div class="utppHP_weatherAnomalyFooter"><i data-lucide="alert-triangle"></i><span>Restez attentifs aux prochains bulletins et aux évolutions locales.</span></div>
         </div>
 
-        <!-- ANOMALIE : AFFICHÉE SI NÉCESSAIRE -->
-        <div class="utppHP_weatherAnomaly" data-anomaly="true">
-          <div class="utppHP_weatherAnomalyLabel">
-            <i data-lucide="radio-tower"></i>
-            Phénomène inhabituel · Niveau II
-          </div>
-
-          <h3>Des pluies de cendres</h3>
-
-          <p>
-            Une fine poussière sombre se mêle aux précipitations.
-            Le phénomène reste localisé, mais son origine
-            demeure inexpliquée.
-          </p>
-
-          <div class="utppHP_weatherAnomalyFoot">
-            Vigilance narrative · Secteurs concernés à préciser
+        <div class="utppHP_weatherResidentNote">
+          <div class="utppHP_weatherNoteIcon"><i data-lucide="message-circle"></i></div>
+          <div>
+            <span class="utppHP_weatherEyebrow">Note aux habitants</span>
+            <p>En cas de phénomène inhabituel, privilégiez les lieux abrités et signalez tout événement difficile à expliquer aux services municipaux.</p>
           </div>
         </div>
-
-        <!-- NOTE AUX HABITANTS -->
-        <div class="utppHP_weatherSection utppHP_weatherNote">
-          <div class="utppHP_weatherSectionLabel">
-            <span>04.</span>
-            <span>Note aux habitants</span>
-          </div>
-
-          <p class="utppHP_weatherDescription">
-            Restez attentifs aux évolutions annoncées par les
-            autorités locales.
-          </p>
-        </div>
-
       </div>
 
-      <!-- COLONNE SECONDAIRE -->
-      <div class="utppHP_weatherSideColumn">
-
-        <div class="utppHP_weatherSideBlock">
-          <div class="utppHP_weatherSectionLabel">
-            <span>02.</span>
-            <span>Tendance</span>
+      <aside class="utppHP_weatherSidebar">
+        <div class="utppHP_weatherSideSection">
+          <span class="utppHP_weatherEyebrow">Tendance à venir</span>
+          <h3>Une journée sous tension</h3>
+          <div class="utppHP_weatherForecast">
+            <div class="utppHP_weatherForecastDay"><span>Aujourd'hui</span><i data-lucide="cloud-rain"></i><strong>14°</strong><small>Pluie</small></div>
+            <div class="utppHP_weatherForecastDay"><span>Demain</span><i data-lucide="cloud"></i><strong>16°</strong><small>Couvert</small></div>
+            <div class="utppHP_weatherForecastDay"><span>Après-demain</span><i data-lucide="cloud-lightning"></i><strong>12°</strong><small>Orages</small></div>
           </div>
-
-          <h3>Les prochaines heures</h3>
-
-          <p>
-            Les précipitations devraient se maintenir jusqu'en
-            soirée. Une accalmie reste possible, sans garantie.
-          </p>
         </div>
 
-        <div class="utppHP_weatherSideBlock">
-          <div class="utppHP_weatherSectionLabel">
-            <span>03.</span>
-            <span>À surveiller</span>
-          </div>
-
+        <div class="utppHP_weatherSideSection utppHP_weatherWatchlist">
+          <span class="utppHP_weatherEyebrow">Points de vigilance</span>
           <ul>
-            <li>Visibilité réduite</li>
-            <li>Chaussées glissantes</li>
-            <li>Évolution du phénomène signalé</li>
+            <li><span class="utppHP_weatherWatchDot"></span><span>Fortes précipitations localisées</span></li>
+            <li><span class="utppHP_weatherWatchDot"></span><span>Visibilité réduite en centre-ville</span></li>
+            <li><span class="utppHP_weatherWatchDot utppHP_weatherWatchDotAlert"></span><span>Signalements atmosphériques inexpliqués</span></li>
           </ul>
         </div>
 
-        <div class="utppHP_weatherStamp">
-          <span>Dernière mise à jour</span>
-          <strong>21.10.2026</strong>
-          <span>Bulletin narratif · UTPP</span>
+        <div class="utppHP_weatherSideStamp">
+          <i data-lucide="cloud-lightning"></i>
+          <span class="utppHP_weatherEyebrow">Bulletin municipal</span>
+          <strong>Le temps peut changer.</strong>
+          <p>Les relevés sont susceptibles d'évoluer rapidement en cas d'anomalie.</p>
         </div>
-
-      </div>
+      </aside>
     </div>
 
     <div class="utppHP_weatherFooter">
-      <span>Under The Paper Plane</span>
-      <span>Le ciel n'a pas toujours le dernier mot.</span>
+      <span>Philadelphia · Service météorologique</span>
+      <span>Les prévisions ne garantissent pas l'absence de phénomènes inexpliqués.</span>
     </div>
-
   </div>
 </div>
 
