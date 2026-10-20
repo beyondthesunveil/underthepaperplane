@@ -644,11 +644,9 @@
 }
 
 .utppHP_gazette {
-  margin: -35px 0;
-  padding-bottom: 8px;
-  height: 150px;
   border-bottom: 1px solid var(--hp-line);
 }
+
 .utppHP_gazette time {
   margin-top: 9px;
   display: block;
