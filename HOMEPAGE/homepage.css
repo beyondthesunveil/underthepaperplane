@@ -954,20 +954,31 @@
   translate: 3px -3px;
 }
 
-/* ========================================
+
+/* ==========================================
    UTPP — MODALE MÉTÉO ÉDITORIALE
-======================================== */
+   Fenêtre plein écran
+   ========================================== */
 
 .utppHP_weatherModal {
   position: fixed;
   inset: 0;
   z-index: 99999;
   display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
+  align-items: stretch;
+  justify-content: stretch;
+  width: 100%;
+  height: 100%;
+  padding: 0;
   color: #eee9e5;
-  font-family: Arial, sans-serif;
+  font-family: Georgia, serif;
+  box-sizing: border-box;
+}
+
+.utppHP_weatherModal *,
+.utppHP_weatherModal *::before,
+.utppHP_weatherModal *::after {
+  box-sizing: border-box;
 }
 
 .utppHP_weatherModal.is-open {
@@ -977,279 +988,340 @@
 .utppHP_weatherOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(5, 5, 5, 0.88);
-  backdrop-filter: blur(5px);
+  background: rgba(5, 7, 8, .92);
 }
 
 .utppHP_weatherWindow {
-  width: min(960px, 100%);
-  max-height: 90vh;
   position: relative;
   z-index: 1;
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
   overflow-x: hidden;
   overflow-y: auto;
   background: #111;
-  border: 1px solid #38302c;
-  box-shadow: 0 25px 90px rgba(0, 0, 0, 0.55);
-  scrollbar-color: #8b3d25 #171717;
+  border: 0;
+  box-shadow: none;
   scrollbar-width: thin;
-  animation: utppHP_weatherAppear 260ms ease both;
+  scrollbar-color: #625044 #171514;
+  animation: utppHP_weatherAppear .35s ease both;
+  overscroll-behavior: contain;
+}
+
+.utppHP_weatherWindow::-webkit-scrollbar {
+  width: 7px;
+}
+
+.utppHP_weatherWindow::-webkit-scrollbar-track {
+  background: #171514;
+}
+
+.utppHP_weatherWindow::-webkit-scrollbar-thumb {
+  background: #625044;
+}
+
+.utppHP_weatherWindow:focus {
+  outline: none;
+}
+
+.utppHP_weatherModal button {
+  font: inherit;
+}
+
+.utppHP_weatherModal button:focus-visible {
+  outline: 1px solid #d8c994;
+  outline-offset: 4px;
 }
 
 @keyframes utppHP_weatherAppear {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* CROIX */
+/* Fermeture */
 
 .utppHP_weatherClose {
-  width: 32px;
-  height: 32px;
-  position: absolute;
-  top: 13px;
-  right: 13px;
-  z-index: 5;
+  position: fixed;
+  top: 22px;
+  right: 24px;
+  z-index: 10;
   display: grid;
   place-items: center;
+  width: 42px;
+  height: 42px;
   padding: 0;
   color: #eee9e5;
-  background: rgba(17, 17, 17, 0.35);
-  border: 1px solid rgba(238, 233, 229, 0.35);
+  background: rgba(17, 17, 17, .72);
+  border: 1px solid rgba(238, 233, 229, .35);
+  border-radius: 0;
   cursor: pointer;
-  transition: color 180ms ease, background 180ms ease;
+  transition: color .2s ease, background .2s ease, border-color .2s ease;
 }
 
 .utppHP_weatherClose:hover {
   color: #fff;
   background: #8b3d25;
+  border-color: #b65b3a;
 }
 
 .utppHP_weatherClose svg {
-  width: 16px;
-  height: 16px;
+  width: 19px;
+  height: 19px;
 }
 
-/* EN-TÊTE */
+/* En-tête éditorial */
 
 .utppHP_weatherMasthead {
-  padding: 22px 28px 17px;
-  background: linear-gradient(110deg, #572619, #8b3d25 60%, #351a14);
-  border-bottom: 4px solid #111;
-}
-
-.utppHP_weatherMastMeta,
-.utppHP_weatherEdition {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
-  color: rgba(238, 233, 229, 0.75);
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  gap: 24px;
+  min-height: 86px;
+  padding: 20px clamp(24px, 5vw, 84px);
+  border-bottom: 1px solid rgba(238, 233, 229, .12);
 }
 
-.utppHP_weatherMastMeta span:first-child {
-  color: #eee9e5;
-}
-
-.utppHP_weatherMasthead h2 {
-  margin: 15px 38px 16px 0;
-  color: #eee9e5;
-  font: 700 clamp(26px, 4vw, 42px)/0.98
-    "Playfair Display SC", Georgia, serif;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
-}
-
-.utppHP_weatherEdition {
-  padding-top: 10px;
-  border-top: 1px solid rgba(238, 233, 229, 0.25);
-}
-
-/* IMAGE EN BANDEAU */
-
-.utppHP_weatherHero {
-  height: 220px;
-  margin: 0;
-  position: relative;
-  overflow: hidden;
-  background: #29201d;
-  border-bottom: 1px solid #303030;
-}
-
-.utppHP_weatherHero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    0deg,
-    rgba(17, 17, 17, 0.82),
-    transparent 65%
-  );
-  pointer-events: none;
-}
-
-.utppHP_weatherHero img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: center 55%;
-  filter: saturate(0.65) contrast(1.05);
-}
-
-.utppHP_weatherHero figcaption {
-  position: absolute;
-  right: 22px;
-  bottom: 15px;
-  left: 22px;
-  z-index: 1;
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  color: #eee9e5;
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-/* CORPS EN COLONNES */
-
-.utppHP_weatherBody {
-  padding: 26px 28px;
-  display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(190px, 0.8fr);
-  gap: 28px;
-}
-
-.utppHP_weatherMainColumn,
-.utppHP_weatherSideColumn {
-  min-width: 0;
-}
-
-.utppHP_weatherSection {
-  padding-bottom: 21px;
-  border-bottom: 1px solid #303030;
-}
-
-.utppHP_weatherSectionLabel {
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  color: #aaa29d;
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.utppHP_weatherSectionLabel span:first-child {
-  color: #b65b3a;
-}
-
-.utppHP_weatherSectionLabel::after {
-  content: "";
-  height: 1px;
-  flex: 1;
-  background: #38302c;
-}
-
-.utppHP_weatherHeadline {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.utppHP_weatherHeadline h3,
-.utppHP_weatherSideBlock h3 {
-  margin: 0;
-  color: #eee9e5;
-  font: 700 24px/1.05 "Playfair Display SC", Georgia, serif;
-  text-transform: uppercase;
-}
-
-.utppHP_weatherHeadline > div:first-child > p {
-  margin-top: 6px;
-  color: #aaa29d;
-  font-size: 11px;
-  font-style: italic;
-}
-
-.utppHP_weatherTemperature {
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 3px;
-}
-
-.utppHP_weatherTemperature strong {
-  color: #eee9e5;
-  font: 400 36px/1 "Playfair Display SC", Georgia, serif;
-}
-
-.utppHP_weatherTemperature span {
-  color: #d69a80;
-  font-size: 8px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.utppHP_weatherFacts {
-  margin: 17px 0;
-  padding: 10px 0;
+.utppHP_weatherMastheadBrand,
+.utppHP_weatherMastheadMeta {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 16px;
-  border-top: 1px solid #303030;
-  border-bottom: 1px solid #303030;
-}
-
-.utppHP_weatherFacts span {
-  display: flex;
   align-items: center;
-  gap: 6px;
-  color: #c8c2be;
-  font-size: 9px;
+  gap: 12px 22px;
 }
 
-.utppHP_weatherFacts svg {
+.utppHP_weatherMastheadBrand {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.utppHP_weatherEyebrow {
+  display: block;
+  color: #b65b3a;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.utppHP_weatherEdition,
+.utppHP_weatherMastheadMeta span {
+  color: #aaa29d;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: .04em;
+}
+
+.utppHP_weatherMastheadMeta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.utppHP_weatherMastheadMeta svg {
   width: 13px;
   height: 13px;
   color: #b65b3a;
-  stroke-width: 1.5;
 }
 
-.utppHP_weatherDescription,
-.utppHP_weatherSideBlock > p,
-.utppHP_weatherAnomaly > p {
+/* Grand bandeau illustré */
+
+.utppHP_weatherHero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 300px;
+  height: clamp(280px, 36vh, 440px);
+  overflow: hidden;
+  background: #25201e;
+}
+
+.utppHP_weatherHero > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 48%;
+  opacity: .72;
+}
+
+.utppHP_weatherHeroShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(10, 10, 10, .82), rgba(10, 10, 10, .32) 65%, rgba(10, 10, 10, .12)),
+              linear-gradient(0deg, rgba(10, 10, 10, .65), transparent 70%);
+}
+
+.utppHP_weatherHeroCaption {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1100px);
+  padding: 42px clamp(24px, 8vw, 130px);
+}
+
+.utppHP_weatherHeroLabel {
+  display: block;
+  margin-bottom: 15px;
+  color: #d8c994;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.utppHP_weatherHeroCaption h2 {
+  max-width: 850px;
   margin: 0;
-  color: #c8c2be;
-  font-size: 12px;
-  line-height: 1.75;
+  color: #f4f0ec;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 400;
+  line-height: 1.05;
 }
 
-/* ENCADRÉ D'ANOMALIE */
+.utppHP_weatherHeroCaption p {
+  max-width: 540px;
+  margin: 16px 0 0;
+  color: rgba(244, 240, 236, .82);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Corps en colonnes */
+
+.utppHP_weatherBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(260px, .8fr);
+  gap: clamp(30px, 5vw, 76px);
+  width: min(100%, 1440px);
+  margin: 0 auto;
+  padding: 46px clamp(24px, 8vw, 130px) 54px;
+}
+
+.utppHP_weatherMain,
+.utppHP_weatherSidebar {
+  min-width: 0;
+}
+
+.utppHP_weatherSectionHeading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 17px;
+  border-bottom: 1px solid rgba(238, 233, 229, .15);
+}
+
+.utppHP_weatherUpdated {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #aaa29d;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+}
+
+.utppHP_weatherUpdated svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* Conditions actuelles */
+
+.utppHP_weatherCurrent {
+  display: grid;
+  grid-template-columns: minmax(120px, .8fr) minmax(0, 1.2fr);
+  gap: 26px;
+  padding: 26px 0 32px;
+  border-bottom: 1px solid rgba(238, 233, 229, .15);
+}
+
+.utppHP_weatherTemperature {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.utppHP_weatherTempValue {
+  color: #eee9e5;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(54px, 7vw, 82px);
+  line-height: .95;
+}
+
+.utppHP_weatherTempDescription {
+  margin-top: 12px;
+  color: #eee9e5;
+  font-size: 15px;
+}
+
+.utppHP_weatherTempFeels {
+  margin-top: 7px;
+  color: #aaa29d;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+}
+
+.utppHP_weatherCurrentDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+
+.utppHP_weatherMetric {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(238, 233, 229, .08);
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+}
+
+.utppHP_weatherMetric:last-child {
+  border-bottom: 0;
+}
+
+.utppHP_weatherMetric svg {
+  width: 15px;
+  height: 15px;
+  color: #b65b3a;
+}
+
+.utppHP_weatherMetric span {
+  color: #aaa29d;
+}
+
+.utppHP_weatherMetric strong {
+  color: #eee9e5;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Anomalie atmosphérique */
 
 .utppHP_weatherAnomaly {
-  margin-top: 21px;
-  padding: 17px 18px 15px;
-  background:
-    linear-gradient(120deg, rgba(139, 61, 37, 0.34), transparent 85%),
-    #211613;
-  border: 1px solid #572619;
+  margin: 28px 0;
+  padding: 22px 24px 19px;
+  background: #211613;
+  border: 1px solid rgba(182, 91, 58, .48);
   border-left: 3px solid #a64e30;
 }
 
@@ -1257,183 +1329,413 @@
   display: none;
 }
 
+.utppHP_weatherAnomalyHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(182, 91, 58, .25);
+}
+
 .utppHP_weatherAnomalyLabel {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: #d69a80;
-  font-size: 8px;
+  gap: 9px;
+  color: #d8b3a5;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: .12em;
   text-transform: uppercase;
 }
 
 .utppHP_weatherAnomalyLabel svg {
+  width: 16px;
+  height: 16px;
+  color: #b65b3a;
+}
+
+/* Indicateur à trois niveaux */
+
+.utppHP_weatherLevel {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.utppHP_weatherLevelName {
+  color: #d8c994;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.utppHP_weatherLevelBars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 58px;
+}
+
+.utppHP_weatherLevelBars span {
+  display: block;
+  flex: 1;
+  height: 5px;
+  background: rgba(238, 233, 229, .17);
+  transition: background .2s ease;
+}
+
+/* Niveau I : une barre */
+
+.utppHP_weatherAnomaly[data-level="1"] .utppHP_weatherLevelBars span:nth-child(1) {
+  background: #d8c994;
+}
+
+/* Niveau II : deux barres */
+
+.utppHP_weatherAnomaly[data-level="2"] .utppHP_weatherLevelBars span:nth-child(-n+2) {
+  background: #b65b3a;
+}
+
+/* Niveau III : trois barres */
+
+.utppHP_weatherAnomaly[data-level="3"] .utppHP_weatherLevelBars span {
+  background: #d15e42;
+}
+
+.utppHP_weatherAnomalyContent {
+  padding: 19px 0 17px;
+}
+
+.utppHP_weatherAnomalyTag {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #c9876e;
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.utppHP_weatherAnomalyContent h3 {
+  margin: 0 0 10px;
+  color: #f0dfd7;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(23px, 2.5vw, 30px);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.utppHP_weatherAnomalyContent p {
+  margin: 0;
+  color: #c8b7af;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.utppHP_weatherAnomalyFooter {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(182, 91, 58, .25);
+  color: #d4a18d;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.utppHP_weatherAnomalyFooter svg {
+  flex: 0 0 auto;
   width: 14px;
   height: 14px;
-  flex: 0 0 auto;
+  margin-top: 1px;
 }
 
-.utppHP_weatherAnomaly h3 {
-  margin: 13px 0 8px;
+/* Note aux habitants */
+
+.utppHP_weatherResidentNote {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 15px;
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid rgba(238, 233, 229, .15);
+}
+
+.utppHP_weatherNoteIcon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  color: #d8c994;
+  border: 1px solid rgba(216, 201, 148, .3);
+}
+
+.utppHP_weatherNoteIcon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.utppHP_weatherResidentNote p {
+  margin: 8px 0 0;
+  color: #bcb4ae;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* Colonne latérale */
+
+.utppHP_weatherSidebar {
+  padding-left: clamp(20px, 3vw, 42px);
+  border-left: 1px solid rgba(238, 233, 229, .15);
+}
+
+.utppHP_weatherSideSection {
+  padding-bottom: 28px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid rgba(238, 233, 229, .15);
+}
+
+.utppHP_weatherSideSection h3 {
+  margin: 10px 0 22px;
   color: #eee9e5;
-  font: 700 21px/1.1 "Playfair Display SC", Georgia, serif;
-  text-transform: uppercase;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 1.25;
 }
 
-.utppHP_weatherAnomalyFoot {
-  margin-top: 14px;
-  padding-top: 10px;
-  color: #d69a80;
-  border-top: 1px solid rgba(214, 154, 128, 0.25);
-  font-size: 8px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+.utppHP_weatherForecast {
+  display: flex;
+  flex-direction: column;
 }
 
-/* COLONNE SECONDAIRE */
-
-.utppHP_weatherSideColumn {
-  padding-left: 21px;
-  border-left: 1px solid #303030;
-}
-
-.utppHP_weatherSideBlock {
-  margin-bottom: 25px;
-}
-
-.utppHP_weatherSideBlock h3 {
-  margin-bottom: 10px;
-  font-size: 18px;
-}
-
-.utppHP_weatherSideBlock > p {
+.utppHP_weatherForecastDay {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 22px 35px 65px;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 0;
+  border-top: 1px solid rgba(238, 233, 229, .09);
+  font-family: Arial, sans-serif;
   font-size: 11px;
 }
 
-.utppHP_weatherSideBlock ul {
-  margin: 0;
+.utppHP_weatherForecastDay > span,
+.utppHP_weatherForecastDay small {
+  color: #aaa29d;
+}
+
+.utppHP_weatherForecastDay svg {
+  width: 17px;
+  height: 17px;
+  color: #c9876e;
+}
+
+.utppHP_weatherForecastDay strong {
+  color: #eee9e5;
+  font-size: 12px;
+}
+
+.utppHP_weatherForecastDay small {
+  text-align: right;
+  font-size: 10px;
+}
+
+/* Points de vigilance */
+
+.utppHP_weatherWatchlist ul {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 18px 0 0;
   padding: 0;
   list-style: none;
 }
 
-.utppHP_weatherSideBlock li {
-  padding: 9px 0;
-  color: #c8c2be;
-  border-bottom: 1px solid #282828;
-  font-size: 10px;
-  line-height: 1.5;
+.utppHP_weatherWatchlist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #bcb4ae;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.7;
 }
 
-.utppHP_weatherSideBlock li::before {
-  content: "↗";
-  margin-right: 8px;
+.utppHP_weatherWatchDot {
+  flex: 0 0 auto;
+  width: 6px;
+  height: 6px;
+  margin-top: 5px;
+  background: #a99b75;
+  border-radius: 50%;
+}
+
+.utppHP_weatherWatchDotAlert {
+  background: #b65b3a;
+}
+
+/* Signature éditoriale */
+
+.utppHP_weatherSideStamp {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 24px;
+  background: #191716;
+  border-top: 2px solid #8b3d25;
+}
+
+.utppHP_weatherSideStamp > svg {
+  width: 25px;
+  height: 25px;
+  margin-bottom: 4px;
   color: #b65b3a;
 }
 
-.utppHP_weatherStamp {
-  margin-top: 30px;
-  padding: 13px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  border-top: 2px solid #8b3d25;
-  border-bottom: 1px solid #303030;
-}
-
-.utppHP_weatherStamp span {
-  color: #aaa29d;
-  font-size: 8px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.utppHP_weatherStamp strong {
+.utppHP_weatherSideStamp strong {
   color: #eee9e5;
-  font: 700 20px "Playfair Display SC", Georgia, serif;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.3;
 }
 
-/* NOTE ET PIED DE PAGE */
-
-.utppHP_weatherNote {
-  margin-top: 21px;
-  padding-bottom: 0;
-  border-bottom: 0;
+.utppHP_weatherSideStamp p {
+  margin: 0;
+  color: #aaa29d;
+  font-size: 11px;
+  line-height: 1.8;
 }
+
+/* Pied de modale */
 
 .utppHP_weatherFooter {
-  padding: 13px 28px;
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 8px;
-  color: #aaa29d;
-  background: #171717;
-  border-top: 1px solid #303030;
-  font-size: 8px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  gap: 12px 24px;
+  padding: 20px clamp(24px, 5vw, 84px);
+  color: #8f8781;
+  background: #0b0b0b;
+  border-top: 1px solid rgba(238, 233, 229, .12);
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: .04em;
+  line-height: 1.7;
 }
 
-/* PETITS ÉCRANS */
+/* Adaptation tablette */
 
-@media (max-width: 650px) {
-  .utppHP_weatherModal {
-    padding: 10px;
+@media (max-width: 900px) {
+  .utppHP_weatherBody {
+    grid-template-columns: minmax(0, 1fr) minmax(220px, .7fr);
+    gap: 28px;
+    padding-right: 30px;
+    padding-left: 30px;
   }
 
-  .utppHP_weatherWindow {
-    max-height: 94vh;
+  .utppHP_weatherSidebar {
+    padding-left: 22px;
   }
 
   .utppHP_weatherMasthead {
-    padding: 20px 18px 14px;
+    padding-right: 30px;
+    padding-left: 30px;
   }
 
-  .utppHP_weatherMasthead h2 {
-    font-size: 27px;
+  .utppHP_weatherHeroCaption {
+    padding-right: 40px;
+    padding-left: 40px;
   }
+}
 
-  .utppHP_weatherEdition {
+/* Adaptation mobile */
+
+@media (max-width: 650px) {
+  .utppHP_weatherMasthead {
     align-items: flex-start;
     flex-direction: column;
-    gap: 5px;
+    gap: 12px;
+    padding: 20px 22px;
+  }
+
+  .utppHP_weatherMastheadMeta {
+    gap: 8px 14px;
   }
 
   .utppHP_weatherHero {
-    height: 155px;
+    height: 300px;
+    min-height: 260px;
   }
 
-  .utppHP_weatherHero figcaption {
-    right: 15px;
-    left: 15px;
-    flex-direction: column;
-    gap: 5px;
+  .utppHP_weatherHeroCaption {
+    padding: 30px 22px;
+  }
+
+  .utppHP_weatherHeroCaption h2 {
+    font-size: clamp(30px, 9vw, 44px);
   }
 
   .utppHP_weatherBody {
-    padding: 21px 18px;
     grid-template-columns: minmax(0, 1fr);
-    gap: 23px;
+    gap: 35px;
+    padding: 30px 22px 38px;
   }
 
-  .utppHP_weatherSideColumn {
-    padding: 20px 0 0;
-    border-top: 1px solid #303030;
+  .utppHP_weatherSidebar {
+    padding-top: 30px;
+    padding-left: 0;
+    border-top: 1px solid rgba(238, 233, 229, .15);
     border-left: 0;
   }
 
-  .utppHP_weatherHeadline h3 {
-    font-size: 21px;
+  .utppHP_weatherCurrent {
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+    gap: 15px;
+  }
+
+  .utppHP_weatherAnomaly {
+    padding: 18px;
+  }
+
+  .utppHP_weatherAnomalyHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .utppHP_weatherClose {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    background: rgba(17, 17, 17, .85);
   }
 
   .utppHP_weatherFooter {
-    padding: 13px 18px;
+    flex-direction: column;
+    padding: 20px 22px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .utppHP_weatherWindow {
     animation: none;
+  }
+
+  .utppHP_weatherClose,
+  .utppHP_weatherLevelBars span {
+    transition: none;
   }
 }
